@@ -92,8 +92,10 @@ async def main():
         print(f"  {'PASS' if v else 'FAIL'}  {k}")
     allok = all(checks.values())
     print(f"\nSMOKE TEST {'PASSED — safe to start the full run' if allok else 'FAILED — do not start the full run; send this output'}")
-    sys.exit(0 if allok else 1)
+    await r.aclose()
+    await bb.aclose()
+    return allok
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    sys.exit(0 if asyncio.run(main()) else 1)

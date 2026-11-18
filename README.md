@@ -47,6 +47,20 @@ Results are written to `backend/paper/results/docker/`.
 * **Primary integrity service** (`integrity`): every 5 s re-hashes the primary ledger, publishes bundle roots and a fresh liveness nonce through the one-way stream and to the bulletin board.
 * **Forensic replica** (`replica`): write-once copy of every ballot; compares roots, localises tampering by Merkle bisection, raises the lockdown alert, answers liveness nonces. It sits on an isolated network that reaches only the broker and the bulletin board.
 * **Public bulletin board** (`bulletin`): election key, commitments, replica verdicts, alerts. Read via `/api/v1/audit/board`, `/audit/liveness`, `/audit/alerts`.
+* **Admission control**: each collector process accepts at most `LIMIT_CONCURRENCY` (default 64) concurrent requests and answers the rest with an immediate 503, before the ticket is touched, so overload is shed instead of building an unbounded queue.
+
+## Mobile app (`mobile/`, Expo / React Native)
+
+The phone does all voter-side cryptography itself, in TypeScript (`mobile/src/crypto/`), byte-compatible with the Python verifier:
+
+* **Registration**: after the liveness check, the phone creates an ECDSA P-256 key, keeps it in the OS keystore-backed secure storage, and sends only the public key with `/registration/verify-identity`; the returned one-time ticket is stored the same way.
+* **Ballot**: `GET /api/v1/election` gives the trustees' Paillier key and the candidate list. While the voter reads the ballot, the phone precomputes all full-size exponentiations; when they press *Submit* it finishes the one-hot encryption and ballot-validity proof, signs the package and sends it to `/vote/cast`. Transient failures are retried with a fresh timestamp; the ticket is deleted only after the server's receipt.
+* **Verification**: `/audit/proof/{receipt}` returns the Merkle path and the bundle root published by the replica; the phone recomputes the root from its own receipt.
+* **Device benchmark** (home screen link): times key generation, precomputation, proof completion, signing and the receipt check on the phone, for the paper.
+
+Run: `cd mobile && npm install && npx expo run:android` (a native rebuild is needed because the app now uses `expo-secure-store` and `react-native-get-random-values`). Set the server address in `app.json` → `extra.BASE_URL`.
+
+Interop check against a running stack: `cd mobile && npx esbuild scripts/interop-check.ts --bundle --platform=node --outfile=/tmp/ic.js && node /tmp/ic.js`, which casts real ballots built by the app's code and expects 201, then 409 for a replay and 422 for a proof bound to another ticket.
 
 ## Author
 

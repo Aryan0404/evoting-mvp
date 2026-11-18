@@ -55,6 +55,65 @@ async def check_inclusion(ballot_hash: str) -> dict[str, Any]:
     }
 
 
+async def inclusion_proof(ballot_hash: str) -> dict[str, Any]:
+    """
+    Merkle audit path for a receipt, checkable on the voter's own device.
+
+    The path is built from the primary ledger (PostgreSQL), over exactly the
+    first `count` leaves of the bundle that the air-gapped replica has
+    published a root for, and the response carries that replica root. The
+    device recomputes the root from its own receipt and the path and compares
+    it with the replica's root, so a ledger operator who altered or dropped the
+    voter's ballot cannot produce a path that matches. Leaves are re-hashed from
+    the stored payloads (as the integrity service does), never taken from the
+    stored ballot_hash column.
+    """
+    from sqlalchemy import text
+
+    from app.database import engine
+    from app.services.merkle_service import MerkleTree
+
+    async with engine.connect() as conn:
+        try:
+            seq = (await conn.execute(text("SELECT seq FROM vote_ledger WHERE ballot_hash = :h"),
+                                      {"h": ballot_hash})).scalar()
+        except Exception:
+            return {"included": False, "ballot_hash": ballot_hash, "reason": "LEDGER_NOT_READY"}
+        if seq is None:
+            return {"included": False, "ballot_hash": ballot_hash, "reason": "NOT_IN_LEDGER_YET"}
+        pos = (await conn.execute(text("SELECT count(*) FROM vote_ledger WHERE seq <= :s"), {"s": seq})).scalar()
+        b, idx = (pos - 1) // BUNDLE_SIZE, (pos - 1) % BUNDLE_SIZE
+
+        published = await (await get_bulletin()).get(f"replica:bundle:{b}:root")
+        if not published:
+            return {"included": True, "ballot_hash": ballot_hash, "ledger_position": pos, "bundle_id": b,
+                    "verified_by_replica": False, "reason": "REPLICA_NOT_CAUGHT_UP"}
+        count_s, replica_root = published.split(":", 1)
+        count = int(count_s)
+        if idx >= count:
+            return {"included": True, "ballot_hash": ballot_hash, "ledger_position": pos, "bundle_id": b,
+                    "verified_by_replica": False, "reason": "REPLICA_NOT_CAUGHT_UP"}
+        rows = await conn.execute(
+            text("SELECT sha256(convert_to(payload, 'UTF8')) FROM vote_ledger "
+                 "ORDER BY seq OFFSET :o LIMIT :l"),
+            {"o": b * BUNDLE_SIZE, "l": count})
+        leaves = [bytes(r[0]) for r in rows]
+
+    tree = MerkleTree(leaves)
+    return {
+        "included": True,
+        "ballot_hash": ballot_hash,
+        "ledger_position": pos,
+        "bundle_id": b,
+        "leaf_index": idx,
+        "bundle_count": count,
+        "path": [{"side": side, "hash": h} for side, h in tree.inclusion_proof(idx)],
+        "replica_root": replica_root,
+        "primary_root": tree.root_hex(),
+        "verified_by_replica": True,
+    }
+
+
 async def get_board() -> dict[str, Any]:
     """
     The public bulletin board: votes cast, the replica's verified count and

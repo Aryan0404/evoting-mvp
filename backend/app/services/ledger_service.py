@@ -15,6 +15,7 @@ recorded. No locks, no consensus round, O(1).
 
 from __future__ import annotations
 
+import os
 import hashlib
 import json
 import logging
@@ -34,7 +35,7 @@ BALLOT_TICKET_PREFIX = "ballot_ticket"
 # monotonic counter giving each accepted ballot a human-readable position
 LEDGER_SEQ_KEY = "ledger:seq"
 # ballots per Merkle bundle (paper: n = 10,000, tree depth 14)
-BUNDLE_SIZE = 10_000
+BUNDLE_SIZE = int(os.environ.get("BUNDLE_SIZE", "10000"))   # must match the workers and the replica
 
 
 class TicketInvalidError(Exception):
@@ -145,7 +146,6 @@ async def ingest_vote(
     Checks 1–4 run before the ticket is consumed, so a malformed or forged
     package can never burn a legitimate voter's ticket.
     """
-    import asyncio
     import time as _t
 
     from app.services import device_sig
@@ -170,9 +170,12 @@ async def ingest_vote(
         if pp is None or not zkp_proof:
             raise InvalidProofError()
         context = f"{settings.election_id}|{nullifier}"
-        loop = asyncio.get_running_loop()
-        ok = await loop.run_in_executor(
-            None, _verify_proof_sync, pp, ciphertext, zkp_proof, num_candidates, context)
+        # Verified inline on this worker's event loop, NOT in a thread pool.
+        # gmpy2 holds the GIL, so pool threads cannot run in parallel inside one
+        # process; they only contend with the event loop for the GIL (convoy
+        # effect), which under saturation cuts throughput instead of holding it.
+        # Parallelism comes from running one uvicorn worker process per core.
+        ok = _verify_proof_sync(pp, ciphertext, zkp_proof, num_candidates, context)
         if not ok:
             raise InvalidProofError()
 

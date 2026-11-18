@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Path
 
-from app.services.audit_service import check_inclusion, get_alerts, get_board, get_liveness
+from app.services.audit_service import check_inclusion, get_alerts, get_board, get_liveness, inclusion_proof
 
 router = APIRouter()
 
@@ -25,6 +25,24 @@ async def verify_receipt(
     ballot_hash: str = Path(..., min_length=64, max_length=64, pattern=r"^[0-9a-f]{64}$"),
 ):
     return await check_inclusion(ballot_hash)
+
+
+# ── GET /api/v1/audit/proof/{ballot_hash} ──────────────────────────────────
+
+
+@router.get(
+    "/audit/proof/{ballot_hash}",
+    summary="Merkle inclusion proof for a receipt, against the replica's published root",
+    description=(
+        "Returns the audit path (about log2(bundle size) sibling hashes) for the "
+        "ballot with this receipt, and the root the air-gapped replica published "
+        "for that bundle. The voter's device recomputes the root itself."
+    ),
+)
+async def receipt_proof(
+    ballot_hash: str = Path(..., min_length=64, max_length=64, pattern=r"^[0-9a-f]{64}$"),
+):
+    return await inclusion_proof(ballot_hash)
 
 
 # ── GET /api/v1/audit/board ────────────────────────────────────────────────

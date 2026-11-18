@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -12,15 +12,50 @@ import BallotCard from "../components/BallotCard";
 import VIDDisplay from "../components/VIDDisplay";
 import {
   useVotingStore,
-  MOCK_BALLOT,
   selectBallot,
   selectSelectedCandidate,
-  selectHasVoted,
   selectReceipt,
   selectVotingStatus,
   selectVotingError,
+  type BallotItem,
 } from "../store/votingStore";
 import { useAuthStore, selectVoter } from "../store/authStore";
+import { ApiError, castBallot, errorCode, fetchElection } from "../api/client";
+import {
+  prepareBallot, restampBallot, sealBallot,
+  type PreparedBallot, type SealedBallot,
+} from "../crypto/voterDevice";
+import { secrets } from "../crypto/secureStore";
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/** Transient failures where the ticket was NOT consumed, so resending is safe. */
+function isRetryable(err: unknown): boolean {
+  const status = (err as ApiError)?.status;
+  const code = errorCode(err);
+  if (status === undefined) return true;                       // network error / timeout
+  if (status === 503 && code !== "FORENSIC_LOCKDOWN") return true;  // ledger down or server busy
+  if (status === 400 && code === "STALE_TIMESTAMP") return true;    // clock drift: restamp
+  return false;
+}
+
+function explain(err: unknown): string {
+  const status = (err as ApiError)?.status;
+  switch (errorCode(err)) {
+    case "FORENSIC_LOCKDOWN":
+      return "Voting is paused while an integrity alert is investigated. Your ticket is still valid — please try again later.";
+    case "TICKET_INVALID_OR_USED":
+      return "This phone's ballot ticket has already been used or has expired. A ticket can cast exactly one ballot.";
+    case "INVALID_PROOF":
+      return "The server could not verify the ballot proof. Nothing was recorded and your ticket is still valid.";
+    case "INVALID_SIGNATURE":
+      return "The device signature was rejected. Nothing was recorded. Register again on this phone.";
+    case "LEDGER_UNAVAILABLE":
+      return "The ledger is temporarily unavailable. Your vote was NOT recorded and your ticket is still valid.";
+  }
+  if (status === undefined) return "Could not reach the server. Your vote was not recorded — please try again.";
+  return (err as Error)?.message ?? "Something went wrong. Please try again.";
+}
 
 export default function BallotScreen() {
   const router = useRouter();
@@ -30,9 +65,9 @@ export default function BallotScreen() {
   const status            = useVotingStore(selectVotingStatus);
   const ballot            = useVotingStore(selectBallot);
   const selectedCandidate = useVotingStore(selectSelectedCandidate);
-  const hasVoted          = useVotingStore(selectHasVoted);
   const receipt           = useVotingStore(selectReceipt);
   const errorMessage      = useVotingStore(selectVotingError);
+  const progress          = useVotingStore((s) => s.precomputeProgress);
   const voter             = useAuthStore(selectVoter);
 
   const {
@@ -43,35 +78,91 @@ export default function BallotScreen() {
     setSubmitting,
     setSubmitted,
     setError,
+    setPrecomputeProgress,
+    reset,
   } = useVotingStore();
+
+  /* Background precomputation: started as soon as the ballot is shown, so
+     the expensive exponentiations run while the voter reads the candidates. */
+  const prepared = useRef<Promise<PreparedBallot> | null>(null);
+  const [hasTicket, setHasTicket] = useState<boolean | null>(null);
+  const [timing, setTiming] = useState<{ pre: number; seal: number } | null>(null);
+  const [submitNote, setSubmitNote] = useState("");
+
+  const loadBallot = useCallback(async () => {
+    setBallotLoading();
+    setPrecomputeProgress(0);
+    try {
+      setHasTicket(!!(await secrets.getTicket()));
+      const election = await fetchElection();
+      const items: BallotItem[] = election.candidates.map((c) => ({
+        position: c.position,
+        candidate: {
+          id:           c.id,
+          name:         c.name,
+          party:        c.party,
+          partySymbol:  c.symbol,
+          constituency: election.election_id,
+        },
+      }));
+      setBallot(items);
+      prepared.current = prepareBallot(election, setPrecomputeProgress);
+      prepared.current.catch(() => {});
+    } catch (err) {
+      setError(explain(err));
+    }
+  }, []);
 
   /* ── Load ballot on mount ── */
   useEffect(() => {
-    if (status !== "idle") return;
-      setBallotLoading();
-      // Placeholder: simulate fetch — replace with real API in production
-      setTimeout(() => {
-        setBallot(MOCK_BALLOT);
-      }, 800);
-    
+    if (status === "idle") loadBallot();
   }, [status]);
 
   /* ── Submit vote ── */
   const handleSubmit = useCallback(async () => {
-    if (!selectedCandidate) return;
+    if (!selectedCandidate || !prepared.current) return;
+    const item = ballot.find((b) => b.candidate.id === selectedCandidate.id);
+    if (!item) return;
     setSubmitting();
+    setSubmitNote("Encrypting your choice on this phone…");
+    try {
+      const prep = await prepared.current;
+      let sealed: SealedBallot = await sealBallot(prep, item.position - 1);
+      setSubmitNote("Sending the sealed ballot…");
 
-    // Placeholder: simulate backend vote submission
-    await new Promise((res) => setTimeout(res, 1500));
-
-    // TODO (Step 6 integration): replace with submitVote() from api/client.ts
-    setSubmitted({
-      vid:            `VID-${Date.now()}`,
-      votedAt:        new Date().toISOString(),
-      constituencyId: "central-district",
-      receiptHash:    `sha256-${Math.random().toString(36).slice(2, 18)}`,
-    });
-  }, [selectedCandidate]);
+      let lastErr: unknown;
+      for (let attempt = 0; attempt < 4; attempt++) {
+        try {
+          if (attempt > 0) {
+            setSubmitNote(`Retrying (${attempt}/3)…`);
+            await sleep(1000 * 2 ** (attempt - 1));
+            sealed = await restampBallot(prep, sealed);
+          }
+          const { uti, ...body } = sealed;
+          const r = await castBallot({ uti, ciphertext: body.ciphertext, zkp_proof: body.zkp_proof,
+                                       num_candidates: body.num_candidates, ts: body.ts, signature: body.signature });
+          const rec = {
+            ballotHash: r.ballot_hash,
+            ballotId:   r.ballot_id,
+            sequenceNo: r.sequence_no,
+            castAt:     r.cast_at,
+            electionId: prep.election.election_id,
+          };
+          await secrets.setReceipt(rec);
+          await secrets.clearTicket();          // spent: one ticket, one ballot
+          setTiming({ pre: prep.precomputeMs, seal: sealed.sealMs });
+          setSubmitted(rec);
+          return;
+        } catch (err) {
+          lastErr = err;
+          if (!isRetryable(err)) break;
+        }
+      }
+      throw lastErr;
+    } catch (err) {
+      setError(explain(err));
+    }
+  }, [selectedCandidate, ballot]);
 
   /* ══════════════════════════════════════
      Render
@@ -103,12 +194,33 @@ export default function BallotScreen() {
               Select one candidate and tap Submit.
             </Text>
 
-            {/* Constituency badge */}
-            <View className="bg-slate-800 rounded-full px-4 py-1.5 self-start mb-6 border border-slate-700">
+            {/* Election badge */}
+            <View className="bg-slate-800 rounded-full px-4 py-1.5 self-start mb-4 border border-slate-700">
               <Text className="text-slate-300 text-xs font-semibold">
-                📍 Central District
+                🗳 {ballot[0]?.candidate.constituency ?? ""}
               </Text>
             </View>
+
+            {/* On-device encryption status */}
+            <View className="bg-slate-800 rounded-xl px-4 py-3 mb-4 border border-slate-700">
+              <Text className="text-slate-300 text-xs">
+                {progress < 1
+                  ? `🔐 Preparing encryption on this phone… ${Math.round(progress * 100)}%`
+                  : "🔐 Ready. Your choice will be encrypted on this phone before it is sent."}
+              </Text>
+              <View className="h-1 bg-slate-700 rounded-full mt-2 overflow-hidden">
+                <View className="h-1 bg-blue-500" style={{ width: `${Math.round(progress * 100)}%` }} />
+              </View>
+            </View>
+
+            {hasTicket === false && (
+              <View className="bg-amber-950 border border-amber-800 rounded-xl px-4 py-3 mb-4">
+                <Text className="text-amber-300 text-xs">
+                  This phone has no ballot ticket. Complete registration (face check) first — you can
+                  view the ballot, but casting needs the ticket issued at registration.
+                </Text>
+              </View>
+            )}
 
             {/* Voter ID badge */}
             {(params.voterId || voter?.voterId) && (
@@ -174,7 +286,7 @@ export default function BallotScreen() {
             Recording Your Vote…
           </Text>
           <Text className="text-slate-400 text-sm mt-2 text-center">
-            Please do not close the app.
+            {submitNote || "Please do not close the app."}
           </Text>
         </View>
       )}
@@ -195,11 +307,18 @@ export default function BallotScreen() {
               Vote Recorded!
             </Text>
             <Text className="text-slate-400 text-sm text-center mb-8 leading-relaxed">
-              Your vote has been securely recorded on the ledger.
-              Save your VID to verify at any time.
+              Your encrypted ballot is in the ledger. Nobody, including the
+              operator, can see your choice.
             </Text>
 
             <VIDDisplay receipt={receipt} />
+
+            {timing && (
+              <Text className="text-slate-600 text-xs mt-3 text-center">
+                On this phone: precomputation {timing.pre} ms (while you read the ballot),
+                sealing {timing.seal} ms after you pressed Submit.
+              </Text>
+            )}
 
             <TouchableOpacity
               className="w-full bg-blue-600 rounded-2xl py-4 items-center mt-8 active:bg-blue-700"
@@ -234,7 +353,7 @@ export default function BallotScreen() {
           </Text>
           <TouchableOpacity
             className="w-full bg-blue-600 rounded-2xl py-4 items-center active:bg-blue-700"
-            onPress={() => setBallot(MOCK_BALLOT)}
+            onPress={() => { reset(); }}
             activeOpacity={0.85}
           >
             <Text className="text-white text-base font-bold">Try Again</Text>

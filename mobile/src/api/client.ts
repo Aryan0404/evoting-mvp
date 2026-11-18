@@ -273,59 +273,108 @@ export async function submitLiveness(
 // Use submitLiveness() from this file directly.
 // The old endpoint /auth/liveness no longer exists.
 
-/* ── Fetch ballot ── */
-export type BallotResponse = {
-  constituency_id: string;
-  candidates: Array<{
-    id:           string;
-    name:         string;
-    party:        string;
-    party_symbol: string;
-    constituency: string;
-    position:     number;
-  }>;
+/* ── Complete registration: face match + device key → one-time ticket ── */
+export type VerifyIdentityResponse = {
+  registration_status: "active";
+  uti:                 string;   // one-time ballot ticket — stored in secure storage only
+  voter_ref_id:        string;
+  message:             string;
 };
 
-export async function fetchBallot(
-  constituencyId: string
-): Promise<BallotResponse> {
-  const res = await apiClient.get<BallotResponse>(`/ballot/${constituencyId}`);
+export async function verifyIdentity(args: {
+  session_id:        string;
+  aadhaar_id:        string;
+  voter_id:          string;
+  image_uri:         string;
+  device_public_key: string;   // compressed P-256 point, hex
+}): Promise<VerifyIdentityResponse> {
+  const form = new FormData();
+  form.append("session_id", args.session_id);
+  form.append("aadhaar_id", args.aadhaar_id);
+  form.append("voter_id", args.voter_id);
+  form.append("device_public_key", args.device_public_key);
+  const filename = args.image_uri.split("/").pop() ?? "live.jpg";
+  const ext = (/\.(\w+)$/.exec(filename)?.[1] ?? "jpeg").toLowerCase();
+  form.append("live_image", {
+    uri:  args.image_uri,
+    name: filename,
+    type: ext === "png" ? "image/png" : "image/jpeg",
+  } as any);
+  const res = await apiClient.post<VerifyIdentityResponse>("/registration/verify-identity", form, {
+    headers: { "Content-Type": "multipart/form-data" },
+    timeout: 30_000,
+  });
   return res.data;
 }
 
-/* ── Submit vote ── */
-export type VotePayload = {
-  voter_id:     string;
-  candidate_id: string;
-  session_token: string;
-};
+/* ── Public election parameters (key, candidates, clock) ── */
+export type { ElectionInfo } from "../crypto/voterDevice";
+import type { ElectionInfo } from "../crypto/voterDevice";
 
-export type VoteResponse = {
-  vid:             string;
-  voted_at:        string;
-  constituency_id: string;
-  receipt_hash:    string;
-  message:         string;
-};
-
-export async function submitVote(
-  payload: VotePayload
-): Promise<VoteResponse> {
-  const res = await apiClient.post<VoteResponse>("/vote/submit", payload);
+export async function fetchElection(): Promise<ElectionInfo> {
+  const res = await apiClient.get<ElectionInfo>("/election");
   return res.data;
 }
 
-/* ── Verify vote by VID ── */
-export type VerifyResponse = {
-  vid:             string;
-  voted_at:        string;
-  constituency_id: string;
-  candidate_name:  string;
-  party:           string;
-  receipt_hash:    string;
+/* ── Cast an encrypted, proven, signed ballot (Algorithm 1) ── */
+export type CastBallotPayload = {
+  uti:            string;
+  ciphertext:     string;
+  zkp_proof:      string;
+  num_candidates: number;
+  ts:             number;
+  signature:      string;
 };
 
-export async function verifyVote(vid: string): Promise<VerifyResponse> {
-  const res = await apiClient.get<VerifyResponse>(`/vote/verify/${vid}`);
+export type CastBallotResponse = {
+  ballot_id:         string;
+  ballot_hash:       string;   // the receipt (Merkle leaf)
+  sequence_no:       number;
+  ledger_message_id: string;
+  cast_at:           string;
+  message:           string;
+};
+
+export async function castBallot(payload: CastBallotPayload): Promise<CastBallotResponse> {
+  const res = await apiClient.post<CastBallotResponse>("/vote/cast", payload, { timeout: 30_000 });
+  return res.data;
+}
+
+/** Server error code from a FastAPI detail body, e.g. "FORENSIC_LOCKDOWN". */
+export function errorCode(err: unknown): string | undefined {
+  const p = (err as ApiError)?.payload as any;
+  return p?.detail?.error ?? p?.error;
+}
+
+/* ── Receipt check: Merkle path + the replica's published root ── */
+export type ReceiptProofResponse = {
+  included:            boolean;
+  ballot_hash:         string;
+  reason?:             "NOT_IN_LEDGER_YET" | "REPLICA_NOT_CAUGHT_UP" | "LEDGER_NOT_READY";
+  ledger_position?:    number;
+  bundle_id?:          number;
+  leaf_index?:         number;
+  bundle_count?:       number;
+  path?:               { side: "L" | "R"; hash: string }[];
+  replica_root?:       string;
+  primary_root?:       string;
+  verified_by_replica?: boolean;
+};
+
+export async function fetchReceiptProof(ballotHash: string): Promise<ReceiptProofResponse> {
+  const res = await apiClient.get<ReceiptProofResponse>(`/audit/proof/${ballotHash}`);
+  return res.data;
+}
+
+export type BoardResponse = {
+  total_votes_cast:         number;
+  replica_ballots_verified: number;
+  replica_status:           string | null;
+  liveness:                 { status?: string } | null;
+  alert:                    unknown;
+};
+
+export async function fetchBoard(): Promise<BoardResponse> {
+  const res = await apiClient.get<BoardResponse>("/audit/board");
   return res.data;
 }

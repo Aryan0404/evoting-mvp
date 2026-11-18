@@ -25,10 +25,11 @@ export type BallotItem = {
 };
 
 export type VoteReceipt = {
-  vid: string;           // Voter ID token returned by backend
-  votedAt: string;       // ISO timestamp
-  constituencyId: string;
-  receiptHash: string;   // verification hash
+  ballotHash: string;    // receipt = SHA-256 of the sealed ballot = Merkle leaf
+  ballotId:   string;
+  sequenceNo: number;
+  castAt:     string;    // ISO timestamp
+  electionId: string;
 };
 
 export type VotingState = {
@@ -38,6 +39,7 @@ export type VotingState = {
   selectedCandidateId: string | null;
   receipt: VoteReceipt | null;
   errorMessage: string;
+  precomputeProgress: number;   // 0..1, background proof precomputation
 
   /* ── Actions ── */
   setBallotLoading: () => void;
@@ -47,54 +49,10 @@ export type VotingState = {
   setSubmitting: () => void;
   setSubmitted: (receipt: VoteReceipt) => void;
   setError: (message: string) => void;
+  setPrecomputeProgress: (f: number) => void;
+  setReceipt: (receipt: VoteReceipt) => void;
   reset: () => void;
 };
-
-/* ══════════════════════════════════════
-   Mock ballot (placeholder until API)
-══════════════════════════════════════ */
-export const MOCK_BALLOT: BallotItem[] = [
-  {
-    position: 1,
-    candidate: {
-      id: "cand_001",
-      name: "Arjun Mehta",
-      party: "National Progress Party",
-      partySymbol: "🌾",
-      constituency: "Central District",
-    },
-  },
-  {
-    position: 2,
-    candidate: {
-      id: "cand_002",
-      name: "Priya Nair",
-      party: "United Democratic Front",
-      partySymbol: "✋",
-      constituency: "Central District",
-    },
-  },
-  {
-    position: 3,
-    candidate: {
-      id: "cand_003",
-      name: "Rajesh Kumar",
-      party: "People's Alliance",
-      partySymbol: "⚙️",
-      constituency: "Central District",
-    },
-  },
-  {
-    position: 4,
-    candidate: {
-      id: "cand_004",
-      name: "Sunita Rao",
-      party: "Green Future Party",
-      partySymbol: "🌿",
-      constituency: "Central District",
-    },
-  },
-];
 
 /* ══════════════════════════════════════
    Initial state
@@ -105,6 +63,7 @@ const INITIAL_STATE = {
   selectedCandidateId: null,
   receipt:             null,
   errorMessage:        "",
+  precomputeProgress:  0,
 };
 
 /* ══════════════════════════════════════
@@ -155,6 +114,16 @@ export const useVotingStore = create<VotingState>((set, get) => ({
   /* ── Error ── */
   setError(message) {
     set({ status: "error", errorMessage: message });
+  },
+
+  /* ── Background precomputation progress ── */
+  setPrecomputeProgress(f) {
+    set({ precomputeProgress: f });
+  },
+
+  /* ── Receipt loaded from secure storage ── */
+  setReceipt(receipt) {
+    set({ receipt });
   },
 
   /* ── Full reset ── */

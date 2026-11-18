@@ -112,7 +112,17 @@ export default function HomeScreen() {
             activeOpacity={0.85}
           >
             <Text className="text-slate-400 text-sm font-medium">
-              View Ballot (Demo)
+              Cast My Vote
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="w-full bg-transparent rounded-2xl py-3 items-center"
+            onPress={() => router.push("/benchmark")}
+            activeOpacity={0.85}
+          >
+            <Text className="text-slate-500 text-xs font-medium">
+              Device benchmark (for the paper)
             </Text>
           </TouchableOpacity>
         </View>

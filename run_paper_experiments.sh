@@ -158,7 +158,7 @@ if has load; then
   run_step "5.6 offered-load sweep" load_sweep.txt be python -m tools.bench_load sweep --rates 50 100 150 200 250 300 400 --duration 30
   for W in 1 2 4 8; do
     reset_state
-    WORKERS=$W $C up -d backend >/dev/null
+    WORKERS=$W LIMIT_CONCURRENCY=256 $C up -d backend >/dev/null   # no shedding: this run measures raw scaling
     wait_for "backend with $W worker(s)" 180 curl -sf http://localhost:8000/docs
     sleep 3
     run_step "5.6 collectors = $W worker(s)" "load_closed_w$W.txt" be python -m tools.bench_load closed --votes 5000 --concurrency 100 --tag "w$W"

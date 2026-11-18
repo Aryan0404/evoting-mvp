@@ -10,7 +10,9 @@ import {
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import LivenessCamera, { type CaptureResult, type FrameData } from "../components/LivenessCamera";
-import { submitLiveness } from "../api/client";
+import { submitLiveness, verifyIdentity } from "../api/client";
+import { ensureDeviceKey } from "../crypto/voterDevice";
+import { secrets } from "../crypto/secureStore";
 
 /* ── Challenge types ─────────────────────────────────────────────── */
 export type ChallengeResult = {
@@ -383,6 +385,19 @@ export default function LivenessScreen() {
         return;
       }
 
+      // Complete registration: face match against the registry + bind this
+      // phone's signing key to the one-time ballot ticket. The private key is
+      // created on the phone and never leaves it; only the public key is sent.
+      const devicePublicKey = await ensureDeviceKey();
+      const identity = await verifyIdentity({
+        session_id:        params.sessionId ?? "",
+        aadhaar_id:        params.aadhaarId ?? "",
+        voter_id:          params.voterId ?? "",
+        image_uri:         capture.uri,
+        device_public_key: devicePublicKey,
+      });
+      await secrets.setTicket(identity.uti);
+
       setStep("success");
     } catch (err: any) {
       const msg = err?.message ?? "Network error during liveness check. Please retry.";
@@ -575,7 +590,8 @@ export default function LivenessScreen() {
           </View>
           <Text className="text-white text-2xl font-bold mb-2">Identity Verified</Text>
           <Text className="text-slate-400 text-sm text-center mb-10 leading-relaxed">
-            Liveness check passed. You may now proceed to cast your vote.
+            Liveness and face match passed. This phone now holds your one-time
+            ballot ticket and signing key, kept in its secure storage.
           </Text>
           <TouchableOpacity
             className="w-full bg-blue-600 rounded-2xl py-4 items-center active:bg-blue-700"

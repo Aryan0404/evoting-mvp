@@ -117,12 +117,15 @@ def main():
     w("## 5.6 Scalability under increasing load (real, open loop)\n")
     sw = load("load_sweep.json")
     if sw:
-        w("| Offered (votes/s) | Achieved (votes/s) | Accepted | Failed | p50 (ms) | p95 (ms) | p99 (ms) |")
-        w("|---|---|---|---|---|---|---|")
+        w("| Offered (votes/s) | Achieved (votes/s) | Accepted | Shed by admission control (503) | Other failures | p50 (ms) | p95 (ms) | p99 (ms) |")
+        w("|---|---|---|---|---|---|---|---|")
         for r in sw["rows"]:
             g = r["legit"]
-            w(f"| {r['offered_rate']:.0f} | {g['throughput_per_s']:.1f} | {g['accepted']:,} | {g['rejected_or_failed']:,} | "
+            shed = g["status_counts"].get("503", 0)
+            w(f"| {r['offered_rate']:.0f} | {g['throughput_per_s']:.1f} | {g['accepted']:,} | {shed:,} | {g['rejected_or_failed'] - shed:,} | "
               f"{ms(g['p50_ms'])} | {ms(g['p95_ms'])} | {ms(g['p99_ms'])} |")
+        w("\nLatency percentiles are over accepted votes. A shed request is refused before its ticket is touched, "
+          "so the voter's device can simply retry.")
     wk = sorted(glob.glob(os.path.join(OUT_DIR, "load_closed_w*.json")), key=lambda p: int(p.split("_w")[-1].split(".")[0]))
     if wk:
         w("\nHorizontal scaling of stateless vote collectors (API worker processes, closed loop 5,000 votes):\n")

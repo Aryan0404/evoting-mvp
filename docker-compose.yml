@@ -80,7 +80,10 @@ services:
     <<: *backend-image
     container_name: evoting_backend
     # Production mode: WORKERS uvicorn workers (default: one per CPU core).
-    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers $${WORKERS:-$$(nproc)}"
+    # Admission control: each worker serves at most LIMIT_CONCURRENCY open
+    # connections/requests and answers anything beyond that with an immediate
+    # 503, so overload is shed instead of queueing until the system collapses.
+    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers $${WORKERS:-$$(nproc)} --limit-concurrency $${LIMIT_CONCURRENCY:-64} --backlog 4096"
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/evoting
       REDIS_URL: redis://redis:6379/0
@@ -91,6 +94,7 @@ services:
       JWT_EXPIRY_MINUTES: 60
       LIVENESS_NONCE_TTL_SECONDS: 90
       WORKERS: ${WORKERS:-}
+      LIMIT_CONCURRENCY: ${LIMIT_CONCURRENCY:-64}
       BUNDLE_SIZE: "10000"
       INTEGRITY_INTERVAL: "5"
       LIVENESS_TAU: "15"

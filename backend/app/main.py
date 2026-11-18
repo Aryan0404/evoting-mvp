@@ -11,6 +11,7 @@ from app.pulsar_client import close_pulsar
 from app.routers import health
 from app.routers import voting
 from app.routers import audit
+from app.routers import election
 
 
 logger = logging.getLogger(__name__)
@@ -23,7 +24,11 @@ async def lifespan(app: FastAPI):
     # ── Phase 1: Infrastructure ───────────────────────────────────────────
     logger.info("Starting E-Voting backend ...")
 
+    # Several uvicorn workers start at once; serialise table creation with a
+    # PostgreSQL advisory lock so they do not race on a fresh database.
+    from sqlalchemy import text
     async with engine.begin() as conn:
+        await conn.execute(text("SELECT pg_advisory_xact_lock(727274)"))
         await conn.run_sync(Base.metadata.create_all)
     logger.info("Database tables initialised.")
 
@@ -83,3 +88,4 @@ app.include_router(health.router, prefix="/api/v1/health", tags=["health"])
 app.include_router(registration.router, prefix="/api/v1", tags=["registration"])
 app.include_router(voting.router, prefix="/api/v1", tags=["voting"])
 app.include_router(audit.router, prefix="/api/v1", tags=["audit"])
+app.include_router(election.router, prefix="/api/v1", tags=["election"])

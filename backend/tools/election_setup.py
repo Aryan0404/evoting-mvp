@@ -38,9 +38,17 @@ async def main():
     ap.add_argument("--threshold", type=int, default=3)
     ap.add_argument("--reuse", action="store_true",
                     help="republish the key from an earlier ceremony instead of generating a new one")
+    ap.add_argument("--candidates", default=None,
+                    help="JSON file with the ordered candidate list [{id, name, party, symbol}, ...]; "
+                         "slot i of the ballot is candidate i (default: four placeholder candidates)")
     args = ap.parse_args()
 
     bb = aioredis.from_url(os.environ.get("BULLETIN_URL", "redis://bulletin:6379/0"), decode_responses=True)
+    if args.candidates:
+        with open(args.candidates) as f:
+            cands = json.load(f)
+        await bb.set("election:candidates", json.dumps(cands))
+        print(f"Candidate list published ({len(cands)} candidates).")
     if args.reuse and os.path.exists(SHARES_PATH):
         with open(SHARES_PATH) as f:
             d = json.load(f)

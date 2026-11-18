@@ -1,3 +1,4 @@
+import "../crypto/polyfills";   // must be first: secure randomness for keys and ballots
 import "../../global.css";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -21,6 +22,7 @@ export default function RootLayout() {
         <Stack.Screen name="liveness" options={{ title: "Liveness Check" }} />
         <Stack.Screen name="ballot" options={{ title: "Cast Your Vote" }} />
         <Stack.Screen name="verify" options={{ title: "Verify Vote" }} />
+        <Stack.Screen name="benchmark" options={{ title: "Device Benchmark" }} />
       </Stack>
     </SafeAreaProvider>
   );

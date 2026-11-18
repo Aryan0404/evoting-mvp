@@ -42,10 +42,11 @@ export type BallotItem = {
 };
 
 export type VoteReceipt = {
-  vid:            string;
-  votedAt:        string;
-  constituencyId: string;
-  receiptHash:    string;
+  ballotHash: string;
+  ballotId:   string;
+  sequenceNo: number;
+  castAt:     string;
+  electionId: string;
 };
 
 export type VotingStatus =
@@ -59,10 +60,7 @@ export type VotingStatus =
 /* ══════════════════════════════════════
    API payloads
 ══════════════════════════════════════ */
-export type RegisterPayload = {
-  aadhaar_id: string;
-  voter_id:   string;
-};
+// API request/response types live in api/client.ts next to the calls.
 
 /**
  * LivenessPayload is defined in api/client.ts.
@@ -72,54 +70,23 @@ export type RegisterPayload = {
  */
 export type { LivenessPayload } from "../api/client";
 
-export type VotePayload = {
-  voter_id:      string;
-  candidate_id:  string;
-  session_token: string;
-};
+
 
 /* ══════════════════════════════════════
    API responses
 ══════════════════════════════════════ */
-export type RegisterResponse = {
-  session_token: string;
-  voter_id:      string;
-  message:       string;
-};
+
 
 export type LivenessResponse = {
   liveness_passed: boolean;   // renamed — matches backend LivenessSubmitResponse
   session_id:      string;
 };
 
-export type BallotResponse = {
-  constituency_id: string;
-  candidates: Array<{
-    id:           string;
-    name:         string;
-    party:        string;
-    party_symbol: string;
-    constituency: string;
-    position:     number;
-  }>;
-};
 
-export type VoteResponse = {
-  vid:             string;
-  voted_at:        string;
-  constituency_id: string;
-  receipt_hash:    string;
-  message:         string;
-};
 
-export type VerifyResponse = {
-  vid:             string;
-  voted_at:        string;
-  constituency_id: string;
-  candidate_name:  string;
-  party:           string;
-  receipt_hash:    string;
-};
+
+
+
 
 /* ══════════════════════════════════════
    UI helpers

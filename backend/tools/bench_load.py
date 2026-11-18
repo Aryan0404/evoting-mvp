@@ -212,10 +212,11 @@ def main():
         print("\n" + "=" * 82)
         print("  SECTION 5.6 — THROUGHPUT AND LATENCY UNDER INCREASING LOAD (open loop, full Algorithm 1)")
         print("=" * 82)
-        print(f"  {'Offered/s':>10} {'Achieved/s':>11} {'Accepted':>10} {'Failed':>8} {'p50 ms':>9} {'p95 ms':>9} {'p99 ms':>9}")
+        print(f"  {'Offered/s':>10} {'Achieved/s':>11} {'Accepted':>10} {'Shed 503':>9} {'Other':>6} {'p50 ms':>9} {'p95 ms':>9} {'p99 ms':>9}")
         for r in rows:
             L = r["legit"]
-            print(f"  {r['offered_rate']:>10.0f} {L['throughput_per_s']:>11.1f} {L['accepted']:>10,} {L['rejected_or_failed']:>8,}"
+            shed = L["status_counts"].get("503", 0)
+            print(f"  {r['offered_rate']:>10.0f} {L['throughput_per_s']:>11.1f} {L['accepted']:>10,} {shed:>9,} {L['rejected_or_failed'] - shed:>6,}"
                   f" {str(L['p50_ms']):>9} {str(L['p95_ms']):>9} {str(L['p99_ms']):>9}")
         print("=" * 82)
         print("saved", save(f"load_sweep{tag}.json", {"duration_s": args.duration, "rows": rows}))
