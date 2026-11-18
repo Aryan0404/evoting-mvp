@@ -94,13 +94,24 @@ async def bench_pulsar(n: int = 20000) -> None:
     t0 = time.perf_counter()
     for _ in range(n):
         producer.send_async(payload, on_done)
-    await fut_all
+    try:
+        await asyncio.wait_for(fut_all, timeout=90)
+    except asyncio.TimeoutError:
+        pass
     dt = time.perf_counter() - t0
 
-    producer.close()
-    client.close()
-    print(f"[Pulsar]  {n:,} async publishes in {dt:.2f}s  ->  {n/dt:,.0f} writes/sec "
-          f"(failed={fail})")
+    if fail == 0 and done == n:
+        print(f"[Pulsar]  {n:,} async publishes in {dt:.2f}s  ->  {n/dt:,.0f} writes/sec "
+              f"(failed=0)", flush=True)
+    else:
+        print(f"[Pulsar]  PROBLEM: {done:,} acknowledged, {fail:,} failed, "
+              f"{n - done - fail:,} unanswered after {dt:.0f}s — the broker is not "
+              f"accepting writes; check: docker compose logs --tail 100 pulsar", flush=True)
+    for close in (producer.close, client.close):
+        try:
+            close()
+        except Exception:
+            pass
 
 
 async def main() -> None:
