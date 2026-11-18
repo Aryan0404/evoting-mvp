@@ -16,7 +16,7 @@ cd "$(dirname "$0")"
 C="docker compose -f docker-compose.yml -f docker-compose.cluster.yml"
 OUT="backend/paper/results/docker"
 REPEATS="${REPEATS:-5}"
-ALL="smoke crypto zkp tally load sweep locust adversarial integrity fault stress summary"
+ALL="smoke crypto zkp tally load sweep scaling locust adversarial integrity fault stress summary"
 STEPS="${*:-$ALL}"
 FAILED=""
 # A full run starts from an empty results folder; earlier results are archived, never mixed in.
@@ -80,6 +80,11 @@ start_stack() {
 }
 
 reset_state() {  # identical clean start for an experiment
+  # Restart the collectors FIRST: after an overload run they can still be
+  # draining queued requests, and ballots they append after the ledger is
+  # cleared would leak into the next experiment.
+  $C restart backend >/dev/null
+  wait_for "backend (drained)" 180 curl -sf http://localhost:8000/docs || exit 1
   $C stop replica ledger-worker integrity >/dev/null 2>&1
   for sub in ledger-worker forensic-replica; do
     $C exec -T pulsar bin/pulsar-admin topics skip-all persistent://public/default/ballots -s "$sub" >/dev/null 2>&1 || true
@@ -159,6 +164,9 @@ fi
 if has sweep; then
   reset_state
   run_step "5.6 offered-load sweep" load_sweep.txt be python -m tools.bench_load sweep --rates 50 100 150 200 250 300 400 --duration 30
+fi
+
+if has scaling; then
   for W in 1 2 4 8; do
     reset_state
     WORKERS=$W LIMIT_CONCURRENCY=256 $C up -d backend >/dev/null   # no shedding: this run measures raw scaling

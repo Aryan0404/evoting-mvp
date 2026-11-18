@@ -66,6 +66,7 @@ def summarise(lat, statuses, wall, accepted):
         "p95_ms": round(pct(lat, .95) * 1000, 1) if lat else None,
         "p99_ms": round(pct(lat, .99) * 1000, 1) if lat else None,
         "max_ms": round(max(lat) * 1000, 1) if lat else None,
+        "errors": dict(ERROR_CODES),
     }
 
 
@@ -92,19 +93,34 @@ def client(conns):
     )
 
 
+ERROR_CODES: dict = {}   # "503 FORENSIC_LOCKDOWN" -> count, so every failure is explained
+
+
 async def post(c, body):
     t0 = time.perf_counter()
     try:
         async with c.post("/api/v1/vote/cast", json=body) as resp:
-            await resp.read()
+            raw = await resp.read()
             code = resp.status
-    except Exception:
+        if code != 201:
+            try:
+                d = json.loads(raw)
+                d = d.get("detail", d)
+                reason = d.get("error") if isinstance(d, dict) else str(d)[:40]
+            except Exception:
+                reason = raw[:40].decode(errors="replace") or "-"
+            key = f"{code} {reason}"
+            ERROR_CODES[key] = ERROR_CODES.get(key, 0) + 1
+    except Exception as e:
         code = 0
+        key = f"0 {type(e).__name__}"
+        ERROR_CODES[key] = ERROR_CODES.get(key, 0) + 1
     return code, time.perf_counter() - t0
 
 
 # ── closed loop ─────────────────────────────────────────────────────────────
 async def closed(votes, concurrency, k):
+    ERROR_CODES.clear()
     pkgs = await prepare(votes, k)
     sem = asyncio.Semaphore(concurrency)
     lat, st = [], []
@@ -123,6 +139,7 @@ async def closed(votes, concurrency, k):
 
 # ── open loop ───────────────────────────────────────────────────────────────
 async def open_loop(rate, duration, k, invalid_frac=0.0, pkgs=None):
+    ERROR_CODES.clear()
     n_legit = int(rate * duration)
     pkgs = pkgs or await prepare(n_legit + 50, k)
     legit, spare = pkgs[:n_legit], pkgs[n_legit:]
@@ -205,12 +222,16 @@ def main():
         print(f"\nCLOSED LOOP  {args.votes:,} votes @ concurrency {args.concurrency}:  "
               f"{r['accepted']:,} accepted, {r['throughput_per_s']} votes/s, "
               f"p50 {r['p50_ms']} ms, p95 {r['p95_ms']} ms, p99 {r['p99_ms']} ms  {r['status_counts']}")
+        if r["errors"]:
+            print("  failures by reason:", r["errors"])
         print("saved", save(f"load_closed{tag}.json", {"votes": args.votes, "concurrency": args.concurrency, **r}))
     elif args.mode == "open":
         r = asyncio.run(open_loop(args.rate, args.duration, k))
         L = r["legit"]
         print(f"\nOPEN LOOP  {args.rate}/s for {args.duration}s:  {L['accepted']:,}/{L['attempted']:,} accepted, "
               f"{L['throughput_per_s']} votes/s, p50 {L['p50_ms']} ms, p95 {L['p95_ms']} ms, p99 {L['p99_ms']} ms")
+        if L["errors"]:
+            print("  failures by reason:", L["errors"])
         print("saved", save(f"load_open{tag}.json", r))
     elif args.mode == "sweep":
         rows = []
