@@ -28,6 +28,21 @@ The script builds and starts the full stack, then runs:
 All results, plus a `setup.txt` describing the host machine and Docker
 allocation, are written to `backend/paper/results/docker/`.
 
+### Fault tolerance (Section 5.5)
+
+```bash
+./fault_tolerance.sh            # RATE=150 DURATION=180 ./fault_tolerance.sh to vary load
+```
+
+Runs the ledger as a local 4-node BookKeeper cluster (ensemble 3, write quorum 2,
+ack quorum 2) using `docker-compose.cluster.yml`, keeps an election running at a
+steady rate, kills one storage node at 30 s and the forensic replica at 60 s,
+restarts the replica at 75 s, and then — with the storage node still down —
+reads every ballot back from the ledger and checks it against the server's
+count and the replica (same ballots, same Merkle root). Results are written to
+`backend/paper/results/docker/ft_*`. Return to the single-node setup with
+`docker compose up -d --remove-orphans`.
+
 The cryptographic suite can also be run without Docker:
 
 ```bash

@@ -1,0 +1,122 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  Multi-node ledger: replaces Pulsar "standalone" (one storage node) with a
+#  real local cluster — ZooKeeper + 4 BookKeeper storage nodes (bookies) +
+#  one Pulsar broker — so the replication quorum described in the paper
+#  actually runs:  Ensemble = 3, Write quorum = 2, Ack quorum = 2.
+#
+#  Four bookies, not three: with E = 3 a failed bookie must be replaced by a
+#  spare for writes to continue; production deployments always run > E.
+#
+#  Use together with the base file:
+#    docker compose -f docker-compose.yml -f docker-compose.cluster.yml up -d
+#  Used by ./fault_tolerance.sh (Section 5.5).
+# ─────────────────────────────────────────────────────────────────────────────
+
+x-bookie: &bookie
+  image: apachepulsar/pulsar:3.1.0
+  restart: "no"            # a killed bookie must stay down during the experiment
+  command: bash -c "bin/apply-config-from-env.py conf/bookkeeper.conf && exec bin/pulsar bookie"
+  depends_on:
+    zookeeper:
+      condition: service_healthy
+    pulsar-init:
+      condition: service_completed_successfully
+
+x-bookie-env: &bookie-env
+  clusterName: evoting
+  zkServers: zookeeper:2181
+  metadataServiceUri: metadata-store:zk:zookeeper:2181
+  BOOKIE_MEM: "-Xms256m -Xmx512m -XX:MaxDirectMemorySize=256m"
+
+services:
+
+  zookeeper:
+    image: apachepulsar/pulsar:3.1.0
+    container_name: evoting_zookeeper
+    restart: "no"
+    environment:
+      metadataStoreUrl: zk:zookeeper:2181
+      PULSAR_MEM: "-Xms128m -Xmx256m -XX:MaxDirectMemorySize=128m"
+    command: >
+      bash -c "bin/apply-config-from-env.py conf/zookeeper.conf &&
+               bin/generate-zookeeper-config.sh conf/zookeeper.conf &&
+               exec bin/pulsar zookeeper"
+    healthcheck:
+      test: ["CMD", "bin/pulsar-zookeeper-ruok.sh"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  pulsar-init:
+    image: apachepulsar/pulsar:3.1.0
+    container_name: evoting_pulsar_init
+    command: >
+      bin/pulsar initialize-cluster-metadata
+        --cluster evoting
+        --zookeeper zookeeper:2181
+        --configuration-store zookeeper:2181
+        --web-service-url http://pulsar:8080
+        --broker-service-url pulsar://pulsar:6650
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+
+  bookie1:
+    <<: *bookie
+    container_name: evoting_bookie1
+    environment:
+      <<: *bookie-env
+      advertisedAddress: bookie1
+
+  bookie2:
+    <<: *bookie
+    container_name: evoting_bookie2
+    environment:
+      <<: *bookie-env
+      advertisedAddress: bookie2
+
+  bookie3:
+    <<: *bookie
+    container_name: evoting_bookie3
+    environment:
+      <<: *bookie-env
+      advertisedAddress: bookie3
+
+  bookie4:
+    <<: *bookie
+    container_name: evoting_bookie4
+    environment:
+      <<: *bookie-env
+      advertisedAddress: bookie4
+
+  # The service keeps the name "pulsar" so the backend and replica connect to
+  # pulsar://pulsar:6650 exactly as before — only the storage behind it changes.
+  pulsar:
+    command: bash -c "bin/apply-config-from-env.py conf/broker.conf && exec bin/pulsar broker"
+    environment:
+      clusterName: evoting
+      metadataStoreUrl: zk:zookeeper:2181
+      configurationMetadataStoreUrl: zk:zookeeper:2181
+      zookeeperServers: zookeeper:2181
+      advertisedAddress: pulsar
+      managedLedgerDefaultEnsembleSize: "3"
+      managedLedgerDefaultWriteQuorum: "2"
+      managedLedgerDefaultAckQuorum: "2"
+      brokerDeleteInactiveTopicsEnabled: "false"
+      PULSAR_MEM: "-Xms512m -Xmx1g -XX:MaxDirectMemorySize=512m"
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+      pulsar-init:
+        condition: service_completed_successfully
+      bookie1:
+        condition: service_started
+      bookie2:
+        condition: service_started
+      bookie3:
+        condition: service_started
+      bookie4:
+        condition: service_started
+
+  replica:
+    restart: "no"          # the experiment crashes and restarts it on purpose
