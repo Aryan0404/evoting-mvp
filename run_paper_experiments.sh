@@ -69,7 +69,7 @@ EOF
 
 start_stack() {
   log "Starting a fresh replicated ledger (ZooKeeper + 4 bookies + broker) and the full stack"
-  $C rm -sf zookeeper pulsar-init bookie1 bookie2 bookie3 bookie4 pulsar >/dev/null 2>&1 || true
+  $C rm -sf bulletin zookeeper pulsar-init bookie1 bookie2 bookie3 bookie4 pulsar >/dev/null 2>&1 || true
   $C up -d --build --remove-orphans || { log "stack failed to start"; exit 1; }
   wait_for "broker + storage nodes" 300 $C exec -T pulsar curl -sf http://localhost:8080/admin/v2/brokers/health || exit 1
   $C exec -T pulsar bin/pulsar-admin namespaces set-persistence public/default \
