@@ -6,6 +6,12 @@ Algorithm 1 package (ballot, validity proof bound to its ticket, fresh
 timestamp, device signature). Each simulated voter waits 1–2 s between
 submissions (≈130 votes/s offered at 200 users).
 
+Realism of the client (so that the test measures the server, not Locust):
+  * every vote opens a fresh connection ("Connection: close"), as a phone
+    casting one ballot would; a kept-alive connection would pin a simulated
+    voter to one server process and overload it while others sit idle;
+  * FastHttpUser (geventhttpclient) keeps the client's own CPU cost low.
+
   locust -f tools/locustfile.py --headless -u 200 -r 20 -t 120s \
          --host http://localhost:8000 --only-summary
 """
@@ -15,7 +21,8 @@ import queue
 import sys
 
 import redis
-from locust import HttpUser, between, events, task
+from locust import between, events, task
+from locust.contrib.fasthttp import FastHttpUser
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from tools import ballot_factory as bf   # noqa: E402
@@ -58,7 +65,7 @@ def summary(environment, **_kw):
         print(f"  threshold {k:<18} {'MET' if v else 'NOT MET'}")
 
 
-class Voter(HttpUser):
+class Voter(FastHttpUser):
     wait_time = between(1, 2)
 
     @task
@@ -67,7 +74,8 @@ class Voter(HttpUser):
             p = PACKAGES.get_nowait()
         except queue.Empty:
             return
-        with self.client.post("/api/v1/vote/cast", json=p.body(), name="cast", catch_response=True) as resp:
+        with self.client.post("/api/v1/vote/cast", json=p.body(), name="cast", catch_response=True,
+                              headers={"Connection": "close"}) as resp:
             if resp.status_code == 201:
                 resp.success()
             else:
