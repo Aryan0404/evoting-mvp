@@ -41,6 +41,20 @@ timestamp and an ECDSA P-256 device signature, all checked by the server.
 
 Results are written to `backend/paper/results/docker/`.
 
+### Literature-matched benchmarks
+
+`./run_paper_experiments.sh lit` runs the system under the same scenarios as the compared papers (about 2 hours; each `lit-*` step can also run on its own). Results are summarised in `lit_results.md`.
+
+| Step | Scenario |
+|---|---|
+| `lit-wr` | Burst (all votes in 5 s) and even (spread over 60 s) voting with 1,000–5,000 votes; write speed, then read speed: ledger read-back, primary-ledger scan, receipt lookups, Merkle audit paths, counting |
+| `lit-window` | 15-minute voting window, even and burst, plus a 5-minute tail: votes cast, durable and replica-verified at 0–20 min |
+| `lit-rates` | Send rates 50–250 votes/s, 1,000 votes per round, 5 rounds, no retries |
+| `lit-clients` | One sequential client (9,000 votes) and seven sequential clients |
+| `lit-concurrent` | 10,000 votes submitted at once, with voter-app retries |
+| `lit-ledger` | Replicated ledger offered 1,000–8,000 ballot records/s, read back and compared byte for byte |
+| `lit-crypto` | Verifying election records of 25–1,341 ballots (6 contests), per-operation costs for a 7-contest ballot, tally of 64 and 1,024 voters |
+
 ### Architecture as deployed by `docker compose`
 
 * **Vote collectors** (`backend`): Algorithm 1 — timestamp, one-time ticket, ballot-validity ZKP, device signature, then an atomic Redis `GETDEL` and the ledger append.

@@ -8,6 +8,9 @@
 #    ./run_paper_experiments.sh load integrity  # selected experiments
 #
 #  Steps: smoke crypto zkp tally load locust adversarial integrity fault stress summary
+#  Literature-matched benchmarks (not part of the full run; ~2 h for all of them):
+#    ./run_paper_experiments.sh lit             # every scenario below
+#    lit-crypto lit-wr lit-rates lit-clients lit-concurrent lit-ledger lit-window
 #  Results: backend/paper/results/docker/   (paper_results.md is the summary)
 # ─────────────────────────────────────────────────────────────────────────────
 set -uo pipefail
@@ -18,6 +21,8 @@ OUT="backend/paper/results/docker"
 REPEATS="${REPEATS:-5}"
 ALL="smoke crypto zkp tally load latency sweep scaling locust adversarial integrity fault stress summary"
 STEPS="${*:-$ALL}"
+LIT="lit-crypto lit-wr lit-rates lit-clients lit-concurrent lit-ledger lit-window"
+case " $STEPS " in *" lit "*) STEPS="$(echo " $STEPS " | sed "s/ lit / $LIT /" | xargs)" ;; esac
 FAILED=""
 # A full run starts from an empty results folder; earlier results are archived, never mixed in.
 if [ $# -eq 0 ] && [ -d "$OUT" ] && [ -n "$(ls -A "$OUT" 2>/dev/null)" ]; then
@@ -94,6 +99,11 @@ reset_state() {  # identical clean start for an experiment
     $C exec -T pulsar bin/pulsar-admin topics skip-all persistent://public/default/ballots -s "$sub" >/dev/null 2>&1 || true
   done
   $C exec -T pulsar bin/pulsar-admin topics skip-all persistent://public/default/diode-primary -s forensic-replica-diode >/dev/null 2>&1 || true
+  if [ "${DROP_BALLOT_TOPIC:-0}" = 1 ]; then
+    # literature runs: start each from an empty ballot topic so the storage
+    # nodes can reclaim the space of earlier runs (retention is unlimited)
+    $C exec -T pulsar bin/pulsar-admin topics delete -f persistent://public/default/ballots >/dev/null 2>&1 || true
+  fi
   be python -m tools.reset_state || { log "reset failed"; exit 1; }
   be python -m tools.election_setup --reuse || { log "key ceremony failed"; exit 1; }
   $C start ledger-worker integrity replica >/dev/null
@@ -301,6 +311,54 @@ if has stress; then
   wait "$ST"; cat "$OUT/ledger_stress_sustained.txt" | quiet
   fi
 fi
+
+# ── Literature-matched benchmarks (same scenarios as the compared papers) ───
+free_gb() { df -Pk "$PWD" | awk 'NR==2 {printf "%d", $4/1048576}'; }
+lit_disk_ok() {  # lit_disk_ok <GB needed> <step>
+  local f; f=$(free_gb)
+  if [ "${f:-0}" -lt "$1" ]; then log "!! only ${f} GB free — $2 needs about $1 GB; skipping it"; FAILED="$FAILED $2(disk)"; return 1; fi
+  return 0
+}
+LB="python -m tools.bench_literature"
+if has lit-crypto; then
+  run_step "lit: ElectionGuard / MERGE / STARK scenarios (crypto)" lit_crypto.txt be $LB crypto
+fi
+export DROP_BALLOT_TOPIC=1
+if has lit-wr; then
+  for MODE in even burst; do
+    for N in 1000 2000 3000 4000 5000; do
+      reset_state
+      run_step "lit: $MODE voting, $N votes — write and read speed" "lit_wr_${MODE}_${N}.txt" be $LB wr --mode "$MODE" --votes "$N"
+    done
+  done
+fi
+if has lit-rates; then
+  reset_state
+  run_step "lit: Saeed et al. send rates 50–250/s, 1,000 votes x 5 rounds" lit_rates.txt be $LB rates
+fi
+if has lit-clients; then
+  reset_state
+  run_step "lit: Khan et al. case 1 — one sequential client, 9,000 votes" lit_clients_1.txt be $LB clients --clients 1 --votes 9000
+  reset_state
+  run_step "lit: Khan et al. case 3 — seven sequential clients, ${KHAN_VOTES:-22200} votes" lit_clients_7.txt be $LB clients --clients 7 --votes "${KHAN_VOTES:-22200}"
+fi
+if has lit-concurrent; then
+  reset_state
+  run_step "lit: ScalEVote — 10,000 votes submitted at once" lit_concurrent.txt be $LB concurrent --votes 10000
+fi
+if has lit-ledger && lit_disk_ok 8 lit-ledger; then
+  run_step "lit: Razaque Fig. 7 — ledger accuracy at 1,000–8,000 records/s" lit_ledger.txt be $LB ledger
+fi
+if has lit-window; then
+  for MODE in even burst; do
+    if lit_disk_ok 12 "lit-window-$MODE"; then
+      reset_state
+      run_step "lit: Razaque Figs. 5/8/9 — 15-minute $MODE voting window + 5-minute tail" "lit_window_${MODE}.txt" be $LB window --mode "$MODE"
+    fi
+  done
+fi
+export DROP_BALLOT_TOPIC=0
+case " $STEPS " in *" lit-"*) run_step "lit: summary table" lit_summary.txt be $LB summary ;; esac
 
 has summary && run_step "summary" summary.txt be python -m tools.summarise_results
 
