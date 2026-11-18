@@ -172,6 +172,41 @@ if has latency; then
   done
 fi
 
+if has growth; then
+  # Diagnostic: steady 100 votes/s for 180 s WITHOUT a reset, sampling every
+  # container's CPU every 5 s, to see which component's cost grows with the
+  # number of stored ballots.
+  reset_state
+  echo "epoch,container,cpu_pct,mem" > "$OUT/growth_cpu.csv"
+  be python -m tools.bench_load open --rate 100 --duration 180 --tag growth > "$OUT/growth_load.txt" 2>&1 &
+  GP=$!
+  log "→ growth diagnostic: 100 votes/s for 180 s, sampling container CPU"
+  while kill -0 "$GP" 2>/dev/null; do
+    T=$(now)
+    docker stats --no-stream --format '{{.Name}},{{.CPUPerc}},{{.MemUsage}}' | sed "s/^/$T,/; s/%//" >> "$OUT/growth_cpu.csv"
+    sleep 4
+  done
+  wait "$GP"; cat "$OUT/growth_load.txt" | quiet
+  python3 - "$OUT/growth_cpu.csv" <<'PY'
+import csv, sys, collections
+rows = list(csv.DictReader(open(sys.argv[1])))
+if not rows: sys.exit()
+t0 = float(rows[0]["epoch"])
+buckets = collections.defaultdict(lambda: collections.defaultdict(list))
+for r in rows:
+    try:
+        b = int((float(r["epoch"]) - t0) // 30) * 30
+        buckets[r["container"]][b].append(float(r["cpu_pct"]))
+    except ValueError:
+        pass
+cols = sorted({b for c in buckets.values() for b in c})
+print("\nCPU % by container, averaged per 30 s (ledger grows by ~3,000 ballots per column):")
+print(f"  {'container':<24}" + "".join(f"{f'{b}-{b+30}s':>11}" for b in cols))
+for name in sorted(buckets, key=lambda n: -sum(sum(v) for v in buckets[n].values())):
+    print(f"  {name:<24}" + "".join(f"{(sum(buckets[name][b]) / len(buckets[name][b]) if buckets[name][b] else 0):>11.0f}" for b in cols))
+PY
+fi
+
 if has sweep; then
   reset_state
   run_step "5.6 offered-load sweep" load_sweep.txt be python -m tools.bench_load sweep --rates 50 100 150 200 250 300 400 --duration 30

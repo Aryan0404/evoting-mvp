@@ -93,7 +93,8 @@ def client(conns):
     )
 
 
-ERROR_CODES: dict = {}   # "503 FORENSIC_LOCKDOWN" -> count, so every failure is explained
+ERROR_CODES: dict = {}
+TIMELINE: list = []      # (seconds since start, latency s, status) for legitimate votes   # "503 FORENSIC_LOCKDOWN" -> count, so every failure is explained
 
 
 async def post(c, body):
@@ -140,6 +141,7 @@ async def closed(votes, concurrency, k):
 # ── open loop ───────────────────────────────────────────────────────────────
 async def open_loop(rate, duration, k, invalid_frac=0.0, pkgs=None):
     ERROR_CODES.clear()
+    TIMELINE.clear()
     n_legit = int(rate * duration)
     pkgs = pkgs or await prepare(n_legit + 50, k)
     legit, spare = pkgs[:n_legit], pkgs[n_legit:]
@@ -169,9 +171,12 @@ async def open_loop(rate, duration, k, invalid_frac=0.0, pkgs=None):
                 q = random.choice(spare[1:] or legit)
                 body = q.body(tamper={"bad_proof": "proof", "bad_signature": "signature",
                                       "stale_timestamp": "timestamp"}[kind])
+            t_send = time.perf_counter() - t0
             code, dt = await post(c, body)
             res[kind][0].append(dt)
             res[kind][1].append(code)
+            if kind == "legit":
+                TIMELINE.append((t_send, dt, code))
 
         t0 = time.perf_counter()
         for j, (kind, p) in enumerate(events):
@@ -232,6 +237,14 @@ def main():
               f"{L['throughput_per_s']} votes/s, p50 {L['p50_ms']} ms, p95 {L['p95_ms']} ms, p99 {L['p99_ms']} ms")
         if L["errors"]:
             print("  failures by reason:", L["errors"])
+        if args.duration >= 120 and TIMELINE:
+            print("  latency of accepted votes by 30 s window (the ledger grows as the run goes on):")
+            for w in range(0, int(args.duration), 30):
+                xs = sorted(dt for t, dt, code in TIMELINE if w <= t < w + 30 and code == 201)
+                if xs:
+                    print(f"    {w:>4}-{w+30:<4}s  n={len(xs):>5}  p50 {pct(xs,.5)*1000:7.1f} ms  "
+                          f"p95 {pct(xs,.95)*1000:8.1f} ms  p99 {pct(xs,.99)*1000:8.1f} ms")
+            r["timeline"] = TIMELINE[:]
         print("saved", save(f"load_open{tag}.json", r))
     elif args.mode == "sweep":
         rows = []
