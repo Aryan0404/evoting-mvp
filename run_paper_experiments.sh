@@ -219,6 +219,15 @@ if has fault; then
   sleep 20; Q="$(second_victim evoting_bookie2)"
   ev "kill_quorum $Q (SIGKILL; storage now below the ensemble size)"; docker kill "$Q" >/dev/null
   sleep 15; ev "restore_quorum $Q"; docker start "$Q" >/dev/null
+  # Wait until the restarted node has actually re-registered (and restart it
+  # again if it gave up because its old session had not expired yet).
+  QB="${Q#evoting_}:3181"; T0=$(date +%s); BACK=0
+  while [ $(( $(date +%s) - T0 )) -lt 120 ]; do
+    if $C exec -T pulsar curl -sf http://localhost:8080/admin/v2/bookies/all 2>/dev/null | grep -q "\"$QB\""; then BACK=1; break; fi
+    [ "$(docker inspect -f '{{.State.Running}}' "$Q" 2>/dev/null)" = "true" ] || docker start "$Q" >/dev/null
+    sleep 1
+  done
+  if [ "$BACK" = 1 ]; then ev "quorum_registered $Q"; else ev "quorum_not_registered $Q (120 s)"; fi
   wait "$RUN"
   cat "$OUT/ft_run.txt" | quiet
   ensembles | tee "$OUT/ft_ensembles.txt"

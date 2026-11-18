@@ -30,6 +30,10 @@ x-bookie-env: &bookie-env
   # Keep disk use bounded on a laptop: the defaults keep up to 6 x 2 GB of
   # journal per storage node and garbage-collect deleted ledgers only every
   # 15 minutes, which let the stress test fill the host disk.
+  # A crashed storage node's ZooKeeper registration lives until its session
+  # times out; a restarted node cannot re-register before that and shuts down.
+  # 6 s (instead of the 30 s default) makes crash detection and restart fast.
+  zkTimeout: "6000"
   journalMaxSizeMB: "256"
   journalMaxBackups: "1"
   gcWaitTime: "60000"
