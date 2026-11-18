@@ -60,11 +60,23 @@ def make_payloads(size, n_hex, count=200):
     return out
 
 
+def drop_topic(topic):
+    """Delete the stress topic so the storage nodes can reclaim its space."""
+    import httpx
+    admin = os.environ.get("PULSAR_ADMIN_URL", "http://pulsar:8080")
+    try:
+        httpx.delete(f"{admin}/admin/v2/persistent/public/default/{topic}",
+                     params={"force": "true", "deleteSchema": "true"}, timeout=30)
+    except Exception as e:                      # space is reclaimed on the next fresh start anyway
+        print(f"  (could not delete {topic}: {e})", flush=True)
+
+
 def run(size, seconds, payloads, url):
     import pulsar
     client = pulsar.Client(url, operation_timeout_seconds=30)
+    topic = f"stress-{size}-{uuid.uuid4().hex[:6]}"
     producer = client.create_producer(
-        f"persistent://public/default/stress-{size}-{uuid.uuid4().hex[:6]}",
+        f"persistent://public/default/{topic}",
         batching_enabled=True, batching_max_publish_delay_ms=10, batching_max_messages=1000,
         block_if_queue_full=True, max_pending_messages=20000, compression_type=pulsar.CompressionType.LZ4)
     lock = threading.Lock()
@@ -96,6 +108,7 @@ def run(size, seconds, payloads, url):
     wall = time.time() - t0
     producer.close()
     client.close()
+    drop_topic(topic)
     secs = [per_sec.get(i, 0) for i in range(int(seconds))]
     lat.sort()
     return {"payload": size, "payload_bytes": len(payloads[0]), "seconds": seconds, "sent": sent,

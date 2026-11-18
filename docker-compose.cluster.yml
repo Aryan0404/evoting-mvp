@@ -27,6 +27,12 @@ x-bookie-env: &bookie-env
   zkServers: zookeeper:2181
   metadataServiceUri: metadata-store:zk:zookeeper:2181
   BOOKIE_MEM: "-Xms256m -Xmx512m -XX:MaxDirectMemorySize=256m"
+  # Keep disk use bounded on a laptop: the defaults keep up to 6 x 2 GB of
+  # journal per storage node and garbage-collect deleted ledgers only every
+  # 15 minutes, which let the stress test fill the host disk.
+  journalMaxSizeMB: "256"
+  journalMaxBackups: "1"
+  gcWaitTime: "60000"
 
 services:
 

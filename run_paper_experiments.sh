@@ -228,16 +228,23 @@ if has fault; then
 fi
 
 if has stress; then
-  run_step "5.12 ledger ceilings by payload size" ledger_stress.txt be python -m tools.bench_ledger_stress --sizes tiny k2 k5 --seconds 30
+  # The stress test writes several GB (every record twice, plus journals).
+  FREE_GB=$(df -Pk "$PWD" | awk 'NR==2 {printf "%d", $4/1048576}')
+  if [ "${FREE_GB:-0}" -lt 10 ]; then
+    log "!! only ${FREE_GB} GB free on this disk — the ledger stress test needs about 10 GB; skipping it"
+    FAILED="$FAILED stress(disk)"
+  else
+  run_step "5.12 ledger ceilings by payload size" ledger_stress.txt be python -m tools.bench_ledger_stress --sizes tiny k2 k5 --seconds 20
   echo "epoch,cpu_total_pct" > "$OUT/stress_docker_stats.csv"
-  be python -m tools.bench_ledger_stress --sizes k2 --seconds 120 --tag sustained > "$OUT/ledger_stress_sustained.txt" 2>&1 &
+  be python -m tools.bench_ledger_stress --sizes k2 --seconds 60 --tag sustained > "$OUT/ledger_stress_sustained.txt" 2>&1 &
   ST=$!
-  log "→ 5.12 sustained 120 s stress (sampling container CPU)"
+  log "→ 5.12 sustained 60 s stress (sampling container CPU)"
   while kill -0 "$ST" 2>/dev/null; do
     docker stats --no-stream --format '{{.CPUPerc}}' | awk -v t="$(now)" '{gsub("%",""); s+=$1} END {printf "%s,%.1f\n", t, s}' >> "$OUT/stress_docker_stats.csv"
     sleep 4
   done
   wait "$ST"; cat "$OUT/ledger_stress_sustained.txt" | quiet
+  fi
 fi
 
 has summary && run_step "summary" summary.txt be python -m tools.summarise_results
