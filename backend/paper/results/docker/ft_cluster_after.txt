@@ -1,0 +1,61 @@
+Read-write bookies:
+{
+  "bookies" : [ {
+    "bookieId" : "bookie1:3181"
+  }, {
+    "bookieId" : "bookie4:3181"
+  }, {
+    "bookieId" : "bookie2:3181"
+  }, {
+    "bookieId" : "bookie3:3181"
+  } ]
+}
+
+Ballot topic, internal ledger layout:
+{
+  "entriesAddedCounter" : 11848,
+  "numberOfEntries" : 11848,
+  "totalSize" : 5254820,
+  "currentLedgerEntries" : 11848,
+  "currentLedgerSize" : 5254820,
+  "lastLedgerCreatedTimestamp" : "2026-11-18T02:05:00.06Z",
+  "waitingCursorsCount" : 1,
+  "pendingAddEntriesCount" : 0,
+  "lastConfirmedEntry" : "0:11847",
+  "state" : "LedgerOpened",
+  "ledgers" : [ {
+    "ledgerId" : 0,
+    "entries" : 0,
+    "size" : 0,
+    "offloaded" : false,
+    "underReplicated" : false
+  } ],
+  "cursors" : {
+    "forensic-replica" : {
+      "markDeletePosition" : "0:11847",
+      "readPosition" : "0:11848",
+      "waitingReadOp" : true,
+      "pendingReadOps" : 0,
+      "messagesConsumedCounter" : 11848,
+      "cursorLedger" : 5,
+      "cursorLedgerLastEntry" : 1013,
+      "individuallyDeletedMessages" : "[]",
+      "lastLedgerSwitchTimestamp" : "2026-11-18T02:05:00.174Z",
+      "state" : "Open",
+      "active" : true,
+      "numberOfEntriesSinceFirstNotAckedMessage" : 1,
+      "totalNonContiguousDeletedMessagesRange" : 0,
+      "subscriptionHavePendingRead" : true,
+      "subscriptionHavePendingReplayRead" : false,
+      "properties" : { }
+    }
+  },
+  "schemaLedgers" : [ ],
+  "compactedLedger" : {
+    "ledgerId" : -1,
+    "entries" : -1,
+    "size" : -1,
+    "offloaded" : false,
+    "underReplicated" : false
+  }
+}

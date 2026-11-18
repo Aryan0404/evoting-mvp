@@ -1,0 +1,8 @@
+host: Apple M2, 16 GB RAM; Docker allocation: 8 CPUs, 11.8 GB
+ledger: 4-bookie cluster, E=3/Qw=2/Qa=2
+date_utc: 2026-11-18T02:01:47Z
+git_commit: 8cb6c0bf0e8c20c323eef1f7f5095a11924ecf2b
+docker: 29.9.3
+compose: 5.7.0
+repeats: 5
+loadtest_votes: 20000

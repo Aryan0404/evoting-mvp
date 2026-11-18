@@ -1,0 +1,13 @@
+Seeding 20,000 tickets into Redis ...
+Casting 20,000 votes at concurrency 100 ...
+
+================ RESULTS ================
+votes attempted     : 20,000
+accepted (201)      : 20,000
+failed/rejected     : 0
+wall time           : 88.30 s
+THROUGHPUT          : 227 votes/sec
+latency p50         : 251.7 ms
+latency p95         : 1454.2 ms
+latency p99         : 2927.3 ms
+=========================================

@@ -1,0 +1,629 @@
+{
+  "setup": {
+    "captured_at_utc": "2026-11-18T01:33:25+00:00",
+    "host_label": "Apple M2, 16 GB RAM; Docker allocation: 8 CPUs, 11.8 GB",
+    "in_docker_container": true,
+    "hostname": "4f1151e12154",
+    "os": "Linux 7.0.14-linuxkit",
+    "python": "3.11.18",
+    "cpu_model": "aarch64",
+    "logical_cores": 8,
+    "ram_gb": 11.8,
+    "libraries": {
+      "phe": "1.5.0",
+      "ecdsa": "0.19.2",
+      "gmpy2": "2.3.2",
+      "gmpy2_accelerated_paillier": true
+    }
+  },
+  "config": {
+    "voters": 5000,
+    "candidates": 4,
+    "tally_ballots": 5000,
+    "zkp_samples": 500,
+    "bundle_size": 10000,
+    "key_bits": 2048,
+    "repeats": 5
+  },
+  "summary": {
+    "zkp_gen_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 0.29031999999999997,
+      "sd": 0.009713238388920558,
+      "min": 0.2802,
+      "max": 0.301,
+      "values": [
+        0.2994,
+        0.2895,
+        0.301,
+        0.2802,
+        0.2815
+      ]
+    },
+    "zkp_verify_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 1.2344,
+      "sd": 0.03353736721926757,
+      "min": 1.2026,
+      "max": 1.2736,
+      "values": [
+        1.266,
+        1.2247,
+        1.2736,
+        1.2051,
+        1.2026
+      ]
+    },
+    "count_sec": {
+      "unit": "s",
+      "n": 5,
+      "mean": 0.2675866,
+      "sd": 0.002941334442051765,
+      "min": 0.265323,
+      "max": 0.272541,
+      "values": [
+        0.26554,
+        0.266745,
+        0.265323,
+        0.26778399999999997,
+        0.272541
+      ]
+    },
+    "tally_sec": {
+      "unit": "s",
+      "n": 5,
+      "mean": 0.25586,
+      "sd": 0.0029711950457686144,
+      "min": 0.2536,
+      "max": 0.2608,
+      "values": [
+        0.2536,
+        0.2551,
+        0.2536,
+        0.2562,
+        0.2608
+      ]
+    },
+    "tally_rate": {
+      "unit": "ballots/s",
+      "n": 5,
+      "mean": 19543.84,
+      "sd": 224.63355270306442,
+      "min": 19173.1,
+      "max": 19718.4,
+      "values": [
+        19718.4,
+        19598.2,
+        19717.0,
+        19512.5,
+        19173.1
+      ]
+    },
+    "decrypt_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 11.726600000000001,
+      "sd": 0.13486400557598677,
+      "min": 11.584000000000001,
+      "max": 11.94,
+      "values": [
+        11.94,
+        11.645000000000001,
+        11.723,
+        11.584000000000001,
+        11.741
+      ]
+    },
+    "merkle_build_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 6.2,
+      "sd": 0.0,
+      "min": 6.2,
+      "max": 6.2,
+      "values": [
+        6.2,
+        6.2,
+        6.2,
+        6.2,
+        6.2
+      ]
+    },
+    "locate_1_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 45.1352,
+      "sd": 0.5887594585227485,
+      "min": 44.435,
+      "max": 46.009,
+      "values": [
+        44.435,
+        45.34,
+        44.848,
+        45.044,
+        46.009
+      ]
+    },
+    "locate_10_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 85.9492,
+      "sd": 4.583765831715231,
+      "min": 81.365,
+      "max": 92.141,
+      "values": [
+        88.252,
+        86.417,
+        81.571,
+        81.365,
+        92.141
+      ]
+    },
+    "locate_100_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 140.3908,
+      "sd": 1.907088277977716,
+      "min": 137.974,
+      "max": 143.221,
+      "values": [
+        140.903,
+        143.221,
+        139.872,
+        137.974,
+        139.984
+      ]
+    },
+    "election_encrypt_sec": {
+      "unit": "s",
+      "n": 5,
+      "mean": 56.922000000000004,
+      "sd": 4.134044024922812,
+      "min": 53.39,
+      "max": 63.85,
+      "values": [
+        55.31,
+        63.85,
+        54.67,
+        53.39,
+        57.39
+      ]
+    },
+    "election_merge_sec": {
+      "unit": "s",
+      "n": 5,
+      "mean": 0.0574,
+      "sd": 0.003286335345030997,
+      "min": 0.052,
+      "max": 0.06,
+      "values": [
+        0.052,
+        0.058,
+        0.057,
+        0.06,
+        0.06
+      ]
+    },
+    "election_seal_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 4.2,
+      "sd": 0.4472135954999579,
+      "min": 4.0,
+      "max": 5.0,
+      "values": [
+        4.0,
+        4.0,
+        4.0,
+        4.0,
+        5.0
+      ]
+    },
+    "all_correct": true,
+    "zkp_proof_size_bytes": 65
+  },
+  "runs": [
+    {
+      "zkp": {
+        "scheme": "schnorr-NIST-P256",
+        "n_samples": 500,
+        "proof_size_bytes": 65,
+        "gen_time_ms": {
+          "mean": 0.2994,
+          "median": 0.2908,
+          "p99": 0.5227
+        },
+        "verify_time_ms": {
+          "mean": 1.266,
+          "median": 1.2299,
+          "p99": 1.851
+        },
+        "all_valid": true,
+        "forged_rejected": true
+      },
+      "tally": {
+        "num_ballots": 5000,
+        "num_candidates": 4,
+        "key_bits": 2048,
+        "encrypt_sec": 203.5177,
+        "tally_sec": 0.2536,
+        "decrypt_sec": 0.01194,
+        "tally_rate_votes_per_sec": 19718.4,
+        "totals": [
+          1275,
+          1253,
+          1247,
+          1225
+        ],
+        "expected": [
+          1275,
+          1253,
+          1247,
+          1225
+        ],
+        "correct": true
+      },
+      "merkle": {
+        "bundle_size": 10000,
+        "build_root_sec": 0.0062,
+        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
+        "tamper_localization": {
+          "1": {
+            "located": 1,
+            "correct": true,
+            "time_ms": 44.435
+          },
+          "10": {
+            "located": 10,
+            "correct": true,
+            "time_ms": 88.252
+          },
+          "100": {
+            "located": 100,
+            "correct": true,
+            "time_ms": 140.903
+          }
+        }
+      },
+      "election": {
+        "voters": 5000,
+        "candidates": 4,
+        "cast": 5000,
+        "vote_encrypt_sec": 55.31,
+        "count_sec": 0.052,
+        "seal_sec": 0.004,
+        "tally": [
+          1236,
+          1247,
+          1213,
+          1304
+        ],
+        "winner": 3,
+        "correct": true,
+        "root": "5dab1f9501938b76782983baaa4b78e130de252fb366407a1b6d92079b5bb411"
+      }
+    },
+    {
+      "zkp": {
+        "scheme": "schnorr-NIST-P256",
+        "n_samples": 500,
+        "proof_size_bytes": 65,
+        "gen_time_ms": {
+          "mean": 0.2895,
+          "median": 0.2855,
+          "p99": 0.4272
+        },
+        "verify_time_ms": {
+          "mean": 1.2247,
+          "median": 1.2149,
+          "p99": 1.477
+        },
+        "all_valid": true,
+        "forged_rejected": true
+      },
+      "tally": {
+        "num_ballots": 5000,
+        "num_candidates": 4,
+        "key_bits": 2048,
+        "encrypt_sec": 199.3695,
+        "tally_sec": 0.2551,
+        "decrypt_sec": 0.011645,
+        "tally_rate_votes_per_sec": 19598.2,
+        "totals": [
+          1223,
+          1248,
+          1266,
+          1263
+        ],
+        "expected": [
+          1223,
+          1248,
+          1266,
+          1263
+        ],
+        "correct": true
+      },
+      "merkle": {
+        "bundle_size": 10000,
+        "build_root_sec": 0.0062,
+        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
+        "tamper_localization": {
+          "1": {
+            "located": 1,
+            "correct": true,
+            "time_ms": 45.34
+          },
+          "10": {
+            "located": 10,
+            "correct": true,
+            "time_ms": 86.417
+          },
+          "100": {
+            "located": 100,
+            "correct": true,
+            "time_ms": 143.221
+          }
+        }
+      },
+      "election": {
+        "voters": 5000,
+        "candidates": 4,
+        "cast": 5000,
+        "vote_encrypt_sec": 63.85,
+        "count_sec": 0.058,
+        "seal_sec": 0.004,
+        "tally": [
+          1236,
+          1247,
+          1213,
+          1304
+        ],
+        "winner": 3,
+        "correct": true,
+        "root": "492eb43bfdc7c216624c74212b8ef8145945c8e23db2998315edc6e5d6d75a94"
+      }
+    },
+    {
+      "zkp": {
+        "scheme": "schnorr-NIST-P256",
+        "n_samples": 500,
+        "proof_size_bytes": 65,
+        "gen_time_ms": {
+          "mean": 0.301,
+          "median": 0.2848,
+          "p99": 0.7206
+        },
+        "verify_time_ms": {
+          "mean": 1.2736,
+          "median": 1.2103,
+          "p99": 2.6948
+        },
+        "all_valid": true,
+        "forged_rejected": true
+      },
+      "tally": {
+        "num_ballots": 5000,
+        "num_candidates": 4,
+        "key_bits": 2048,
+        "encrypt_sec": 200.1916,
+        "tally_sec": 0.2536,
+        "decrypt_sec": 0.011723,
+        "tally_rate_votes_per_sec": 19717.0,
+        "totals": [
+          1261,
+          1288,
+          1255,
+          1196
+        ],
+        "expected": [
+          1261,
+          1288,
+          1255,
+          1196
+        ],
+        "correct": true
+      },
+      "merkle": {
+        "bundle_size": 10000,
+        "build_root_sec": 0.0062,
+        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
+        "tamper_localization": {
+          "1": {
+            "located": 1,
+            "correct": true,
+            "time_ms": 44.848
+          },
+          "10": {
+            "located": 10,
+            "correct": true,
+            "time_ms": 81.571
+          },
+          "100": {
+            "located": 100,
+            "correct": true,
+            "time_ms": 139.872
+          }
+        }
+      },
+      "election": {
+        "voters": 5000,
+        "candidates": 4,
+        "cast": 5000,
+        "vote_encrypt_sec": 54.67,
+        "count_sec": 0.057,
+        "seal_sec": 0.004,
+        "tally": [
+          1236,
+          1247,
+          1213,
+          1304
+        ],
+        "winner": 3,
+        "correct": true,
+        "root": "1132e9f4a575d9f8640dfe675d6cd491818938242f42f825ff5897378a17358a"
+      }
+    },
+    {
+      "zkp": {
+        "scheme": "schnorr-NIST-P256",
+        "n_samples": 500,
+        "proof_size_bytes": 65,
+        "gen_time_ms": {
+          "mean": 0.2802,
+          "median": 0.2793,
+          "p99": 0.3253
+        },
+        "verify_time_ms": {
+          "mean": 1.2051,
+          "median": 1.2005,
+          "p99": 1.2975
+        },
+        "all_valid": true,
+        "forged_rejected": true
+      },
+      "tally": {
+        "num_ballots": 5000,
+        "num_candidates": 4,
+        "key_bits": 2048,
+        "encrypt_sec": 202.2922,
+        "tally_sec": 0.2562,
+        "decrypt_sec": 0.011584,
+        "tally_rate_votes_per_sec": 19512.5,
+        "totals": [
+          1231,
+          1222,
+          1286,
+          1261
+        ],
+        "expected": [
+          1231,
+          1222,
+          1286,
+          1261
+        ],
+        "correct": true
+      },
+      "merkle": {
+        "bundle_size": 10000,
+        "build_root_sec": 0.0062,
+        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
+        "tamper_localization": {
+          "1": {
+            "located": 1,
+            "correct": true,
+            "time_ms": 45.044
+          },
+          "10": {
+            "located": 10,
+            "correct": true,
+            "time_ms": 81.365
+          },
+          "100": {
+            "located": 100,
+            "correct": true,
+            "time_ms": 137.974
+          }
+        }
+      },
+      "election": {
+        "voters": 5000,
+        "candidates": 4,
+        "cast": 5000,
+        "vote_encrypt_sec": 53.39,
+        "count_sec": 0.06,
+        "seal_sec": 0.004,
+        "tally": [
+          1236,
+          1247,
+          1213,
+          1304
+        ],
+        "winner": 3,
+        "correct": true,
+        "root": "615bb3ef40b59416562840ee836d2e4ceedc7a1551e9131cf673f8a8dbadf656"
+      }
+    },
+    {
+      "zkp": {
+        "scheme": "schnorr-NIST-P256",
+        "n_samples": 500,
+        "proof_size_bytes": 65,
+        "gen_time_ms": {
+          "mean": 0.2815,
+          "median": 0.28,
+          "p99": 0.348
+        },
+        "verify_time_ms": {
+          "mean": 1.2026,
+          "median": 1.1988,
+          "p99": 1.2933
+        },
+        "all_valid": true,
+        "forged_rejected": true
+      },
+      "tally": {
+        "num_ballots": 5000,
+        "num_candidates": 4,
+        "key_bits": 2048,
+        "encrypt_sec": 204.0949,
+        "tally_sec": 0.2608,
+        "decrypt_sec": 0.011741,
+        "tally_rate_votes_per_sec": 19173.1,
+        "totals": [
+          1249,
+          1268,
+          1275,
+          1208
+        ],
+        "expected": [
+          1249,
+          1268,
+          1275,
+          1208
+        ],
+        "correct": true
+      },
+      "merkle": {
+        "bundle_size": 10000,
+        "build_root_sec": 0.0062,
+        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
+        "tamper_localization": {
+          "1": {
+            "located": 1,
+            "correct": true,
+            "time_ms": 46.009
+          },
+          "10": {
+            "located": 10,
+            "correct": true,
+            "time_ms": 92.141
+          },
+          "100": {
+            "located": 100,
+            "correct": true,
+            "time_ms": 139.984
+          }
+        }
+      },
+      "election": {
+        "voters": 5000,
+        "candidates": 4,
+        "cast": 5000,
+        "vote_encrypt_sec": 57.39,
+        "count_sec": 0.06,
+        "seal_sec": 0.005,
+        "tally": [
+          1236,
+          1247,
+          1213,
+          1304
+        ],
+        "winner": 3,
+        "correct": true,
+        "root": "a8af1de5b23e7fe372340e5f4ccef2c90011ea42d6cc47ef86c174b4eeea8bcf"
+      }
+    }
+  ]
+}

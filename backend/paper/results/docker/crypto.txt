@@ -1,0 +1,85 @@
+Run 1/5: ZKP, tally, Merkle, election ...
+
+==========================================================
+  ELECTION SIMULATION  (consensus-free, no blockchain)
+==========================================================
+  Eligible voters (generated dataset): 5,000
+  Candidates                         : 4
+  Encryption                         : Paillier 2048-bit (real)
+  Trustee keygen                     : 0.06s
+
+  Votes cast + sealed + encrypted    : 55.31s (90 ballots/sec, 8 cores)
+  Homomorphic count (tally+decrypt)  : 0.052s
+  Merkle seal over all ballots       : 0.004s
+  Integrity root                     : 5dab1f9501938b76782983baaa4b78e1...
+
+  ----------------------------------------
+  OFFICIAL RESULT
+  ----------------------------------------
+  Candidate          Votes     Share
+  Candidate A        1,236     24.7%
+  Candidate B        1,247     24.9%
+  Candidate C        1,213     24.3%
+  Candidate D        1,304     26.1%  <= WINNER
+  ----------------------------------------
+  Total              5,000
+
+  Count matches ground truth exactly : True
+  Tamper-evident (Merkle committed)  : yes
+==========================================================
+
+  done in 260s
+Run 2/5: ZKP, tally, Merkle, election ...
+  done in 265s
+Run 3/5: ZKP, tally, Merkle, election ...
+  done in 256s
+Run 4/5: ZKP, tally, Merkle, election ...
+  done in 257s
+Run 5/5: ZKP, tally, Merkle, election ...
+  done in 263s
+
+============================================================================
+  CONSOLIDATED BENCHMARK  —  single documented machine
+============================================================================
+
+  EXPERIMENTAL SETUP (report this as the paper's setup table)
+  ------------------------------------------------------------------------
+  Host machine       : Apple M2, 16 GB RAM; Docker allocation: 8 CPUs, 11.8 GB
+  Environment        : Docker container
+  CPU (as seen)      : aarch64
+  Logical cores      : 8
+  RAM (as seen)      : 11.8 GB
+  OS                 : Linux 7.0.14-linuxkit
+  Python             : 3.11.18
+  Crypto libs        : phe 1.5.0, ecdsa 0.19.2, gmpy2 2.3.2 (Paillier accel: True)
+  Workload           : 5,000 voters, 4 candidates, Paillier 2048-bit, 500 ZKP samples/run, bundle 10,000
+  Repeats            : 5 full run(s)
+  Captured (UTC)     : 2026-11-18T01:33:25+00:00
+
+  RESULTS  (mean ± SD over 5 runs)
+  ------------------------------------------------------------------------
+  Metric                                                             Value
+  ------------------------------------------------------------------------
+  ZKP proof generation (mean of samples)                  0.290 ± 0.010 ms
+  ZKP proof verification (mean of samples)                1.234 ± 0.034 ms
+  COUNT N votes: tally + decrypt (1 core)                  0.268 ± 0.003 s
+    homomorphic tally (sequential)                         0.256 ± 0.003 s
+    tally rate                                      19,544 ± 225 ballots/s
+    decrypt K totals                                       11.73 ± 0.13 ms
+  Merkle root over bundle                                   6.20 ± 0.00 ms
+    locate 1 tampered ballot                                 45.1 ± 0.6 ms
+    locate 10 tampered ballots                               85.9 ± 4.6 ms
+    locate 100 tampered ballots                             140.4 ± 1.9 ms
+  Election: vote + encrypt + seal (all cores)               56.92 ± 4.13 s
+  Election: merge partial tallies + decrypt                0.057 ± 0.003 s
+  Election: Merkle seal over all ballots                      4.2 ± 0.4 ms
+  ZKP proof size                                                  65 bytes
+  All correctness checks passed (every run)                           True
+  ------------------------------------------------------------------------
+  Headline 'count N votes' = the COUNT row (sequential, one core).
+  The election 'merge' row excludes per-ballot additions done in the
+  parallel workers, so it is not a counting time.
+============================================================================
+
+  Machine-readable results written to: /app/paper/results/docker/crypto.json
+

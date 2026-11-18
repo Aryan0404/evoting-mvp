@@ -1,0 +1,5 @@
+=== Component ceilings on THIS machine (no API in the path) ===
+[SHA256]  100,000 ballot hashes in 0.07s  ->  1,372,881 hashes/sec
+[Redis ]  20,000 GETDEL ops in 0.15s  ->  134,457 ops/sec
+[Pulsar]  20,000 async publishes in 0.41s  ->  48,973 writes/sec (failed=0)
+The slowest line is the ceiling the whole system is pinned to.

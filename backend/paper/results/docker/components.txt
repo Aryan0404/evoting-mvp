@@ -1,0 +1,19 @@
+2026-11-18 01:55:07.368 INFO  [281473340515520] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-18 01:55:07.368 INFO  [281473340515520] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-18 01:55:07.369 INFO  [281473274868096] ClientConnection:404 | [172.18.0.5:47364 -> 172.18.0.2:6650] Connected to broker
+2026-11-18 01:55:07.373 INFO  [281473274868096] HandlerBase:83 | [persistent://public/default/bench, ] Getting connection from pool
+2026-11-18 01:55:07.377 INFO  [281473274868096] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/bench, lookup-broker-url pulsar://localhost:6650, from [172.18.0.5:47364 -> 172.18.0.2:6650] 
+2026-11-18 01:55:07.378 INFO  [281473274868096] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-18 01:55:07.378 INFO  [281473274868096] ConnectionPool:114 | Created connection for pulsar://localhost:6650-0
+2026-11-18 01:55:07.378 INFO  [281473274868096] ClientConnection:406 | [172.18.0.5:47374 -> 172.18.0.2:6650] Connected to broker through proxy. Logical broker: pulsar://localhost:6650
+2026-11-18 01:55:07.394 INFO  [281473274868096] ProducerImpl:212 | [persistent://public/default/bench, ] Created producer on broker [172.18.0.5:47374 -> 172.18.0.2:6650] 
+2026-11-18 01:55:37.686 INFO  [281473340515520] ProducerImpl:795 | [persistent://public/default/bench, standalone-14-0] Closing producer for topic persistent://public/default/bench
+2026-11-18 01:56:07.687 ERROR [281473274868096] ProducerImpl:762 | [persistent://public/default/bench, standalone-14-0] Failed to close producer: TimeOut
+=== Component ceilings on THIS machine (no API in the path) ===
+[SHA256]  100,000 ballot hashes in 0.07s  ->  1,416,769 hashes/sec
+[Redis ]  20,000 GETDEL ops in 0.16s  ->  125,309 ops/sec
+2026-11-18 01:56:07.774 INFO  [281473340515520] ProducerImpl:749 | Producer - [persistent://public/default/bench, standalone-14-0] , [batchMessageContainer = { BatchMessageContainer [size = 0] [bytes = 0] [maxSize = 1000] [maxBytes = 131072] [topicName = persistent://public/default/bench] [numberOfBatchesSent_ = 62] [averageBatchSize_ = 0] }]
+2026-11-18 01:56:07.775 INFO  [281473340515520] ClientConnection:1325 | [172.18.0.5:47374 -> 172.18.0.2:6650] Connection disconnected (refCnt: 1)
+2026-11-18 01:56:07.775 INFO  [281473340515520] ClientConnection:1325 | [172.18.0.5:47364 -> 172.18.0.2:6650] Connection disconnected (refCnt: 2)
+2026-11-18 01:56:07.775 INFO  [281473340515520] ClientConnection:274 | [172.18.0.5:47364 -> 172.18.0.2:6650] Destroyed connection to pulsar://pulsar:6650-0
+2026-11-18 01:56:07.775 INFO  [281473340515520] ClientConnection:274 | [172.18.0.5:47374 -> 172.18.0.2:6650] Destroyed connection to pulsar://localhost:6650-0
