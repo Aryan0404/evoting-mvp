@@ -71,7 +71,7 @@ class Replica:
         self.nonces = []             # pending (round, N, upto)
         self.alert_key = None
         self.cache = []              # local leaves, in ledger order
-        self.cache_n = 0
+        self.last_seq = 0            # highest store row already in the cache
 
     # ── storage ────────────────────────────────────────────────────────────
     def store(self, payloads):
@@ -83,12 +83,14 @@ class Replica:
         self.conn.commit()
 
     def leaves(self):
-        n = self.conn.execute("SELECT COUNT(*) FROM ballots").fetchone()[0]
-        if n != self.cache_n:
-            rows = self.conn.execute("SELECT ballot_hash FROM ballots WHERE seq > ? ORDER BY seq",
-                                     (self.cache_n,)).fetchall()
-            self.cache.extend(bytes.fromhex(r[0]) for r in rows)
-            self.cache_n = len(self.cache)
+        # Follow the store by its own row number, never by a count: row numbers
+        # can have gaps (a crash or a redelivered ballot), and using the count as
+        # the cursor would re-read rows and shift every later leaf.
+        rows = self.conn.execute("SELECT seq, ballot_hash FROM ballots WHERE seq > ? ORDER BY seq",
+                                 (self.last_seq,)).fetchall()
+        if rows:
+            self.cache.extend(bytes.fromhex(h) for _, h in rows)
+            self.last_seq = rows[-1][0]
         return self.cache
 
     # ── diode input ────────────────────────────────────────────────────────
