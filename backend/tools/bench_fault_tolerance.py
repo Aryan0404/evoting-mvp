@@ -78,11 +78,12 @@ async def run(args):
 
     bb = aioredis.from_url(BULLETIN_URL, decode_responses=True)
     pkgs = bf.make_packages(await bf.election_n_hex(bb), n, k=2)
-    await bb.aclose()
     await bf.seed_tickets(r, pkgs)
 
+    # ledger:seq lives in the collectors' store; replica:count is published by
+    # the replica on the public bulletin board.
     seq0 = int(await r.get("ledger:seq") or 0)
-    rep0 = int(await r.get("replica:count") or 0)
+    rep0 = int(await bb.get("replica:count") or 0)
     start = time.time()
     meta = {"run_start_epoch": start, "seq0": seq0, "rep0": rep0,
             "rate": args.rate, "duration": args.duration, "votes_planned": n}
@@ -97,7 +98,7 @@ async def run(args):
     async def sampler():
         while sending or time.time() - start < args.duration + args.grace:
             seq = int(await r.get("ledger:seq") or 0)
-            rep = int(await r.get("replica:count") or 0)
+            rep = int(await bb.get("replica:count") or 0)
             samples.append((time.time(), seq - seq0, rep - rep0))
             await asyncio.sleep(0.5)
 
@@ -159,6 +160,7 @@ async def run(args):
     acc = sum(1 for x in results if x[2] != "failed")
     print(f"Voting finished: {acc:,}/{n:,} accepted.", flush=True)
     await r.aclose()
+    await bb.aclose()
 
 
 # ─────────────────────────────────────────────────────────────────────────────
