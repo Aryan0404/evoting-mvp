@@ -16,7 +16,7 @@ cd "$(dirname "$0")"
 C="docker compose -f docker-compose.yml -f docker-compose.cluster.yml"
 OUT="backend/paper/results/docker"
 REPEATS="${REPEATS:-5}"
-ALL="smoke crypto zkp tally load locust adversarial integrity fault stress summary"
+ALL="smoke crypto zkp tally load sweep locust adversarial integrity fault stress summary"
 STEPS="${*:-$ALL}"
 FAILED=""
 # A full run starts from an empty results folder; earlier results are archived, never mixed in.
@@ -154,6 +154,9 @@ if has load; then
   for r in 1 2 3; do
     run_step "5.3 latency at 100 votes/s, run $r" "load_open_r$r.txt" be python -m tools.bench_load open --rate 100 --duration 60 --tag "r$r"
   done
+fi
+
+if has sweep; then
   reset_state
   run_step "5.6 offered-load sweep" load_sweep.txt be python -m tools.bench_load sweep --rates 50 100 150 200 250 300 400 --duration 30
   for W in 1 2 4 8; do

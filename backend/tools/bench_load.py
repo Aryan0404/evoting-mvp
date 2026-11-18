@@ -37,7 +37,7 @@ import secrets
 import sys
 import time
 
-import httpx
+import aiohttp
 import redis.asyncio as aioredis
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -81,15 +81,23 @@ async def prepare(count, k):
 
 
 def client(conns):
-    return httpx.AsyncClient(base_url=BASE, timeout=30.0,
-                             limits=httpx.Limits(max_connections=conns, max_keepalive_connections=conns))
+    """aiohttp, not httpx: httpx's connection pool assigns queued requests to
+    connections by scanning both lists, which becomes quadratic with thousands
+    of in-flight requests and stalled the 400 votes/s sweep on the client side.
+    Every request has a 30 s total timeout and counts as status 0 if it fails."""
+    return aiohttp.ClientSession(
+        base_url=BASE,
+        connector=aiohttp.TCPConnector(limit=conns, limit_per_host=conns),
+        timeout=aiohttp.ClientTimeout(total=30.0),
+    )
 
 
 async def post(c, body):
     t0 = time.perf_counter()
     try:
-        resp = await c.post("/api/v1/vote/cast", json=body)
-        code = resp.status_code
+        async with c.post("/api/v1/vote/cast", json=body) as resp:
+            await resp.read()
+            code = resp.status
     except Exception:
         code = 0
     return code, time.perf_counter() - t0
