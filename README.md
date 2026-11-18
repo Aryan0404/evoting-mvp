@@ -29,7 +29,8 @@ timestamp and an ECDSA P-256 device signature, all checked by the server.
 | `crypto` | 5.4, 5.9 | full election (5,000 voters, ballot proofs, threshold decryption), Merkle receipts, bisection — mean ± SD over 5 runs | `crypto.json` |
 | `zkp` | 5.8 | ballot-validity proof (k = 2, 5), Schnorr, ECDSA; verification capacity per core count | `zkp.json` |
 | `tally` | 5.9 | homomorphic tally of 100K / 1M / 10M ballots, sequential vs parallel, memory, 3-of-5 decryption | `tally.json` |
-| `load` | 5.3 | throughput ceiling (closed loop), latency at 100 votes/s (open loop) | `load_closed_*.json`, `load_open_*.json` |
+| `load` | 5.3 | throughput ceiling (closed loop, 3 runs) | `load_closed_*.json` |
+| `latency` | 5.3 | latency at a steady 100 votes/s (open loop, 3 independent runs) | `load_open_*.json` |
 | `sweep` | 5.6 | offered-load sweep 50–400 votes/s with admission control, collector scaling 1–8 workers | `load_sweep.json`, `load_closed_w*.json` |
 | `locust` | 5.3 | 200 users, ramp 20/s, 120 s | `locust.json` |
 | `adversarial` | 5.10 | 1,000 replays, five forgery types, double voting, 10% / 50% invalid traffic | `adversarial.json`, `load_mix.json` |

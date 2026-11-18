@@ -16,7 +16,7 @@ cd "$(dirname "$0")"
 C="docker compose -f docker-compose.yml -f docker-compose.cluster.yml"
 OUT="backend/paper/results/docker"
 REPEATS="${REPEATS:-5}"
-ALL="smoke crypto zkp tally load sweep scaling locust adversarial integrity fault stress summary"
+ALL="smoke crypto zkp tally load latency sweep scaling locust adversarial integrity fault stress summary"
 STEPS="${*:-$ALL}"
 FAILED=""
 # A full run starts from an empty results folder; earlier results are archived, never mixed in.
@@ -155,8 +155,15 @@ if has load; then
     reset_state
     run_step "5.3 ceiling, run $r" "load_closed_r$r.txt" be python -m tools.bench_load closed --votes 20000 --concurrency 100 --tag "r$r"
   done
-  reset_state
+fi
+
+if has latency; then
+  # Each run starts from the same empty ledger, like the ceiling runs. Without
+  # the reset, run 3 would start with 12,000 ballots already stored, and the
+  # integrity cycle (which re-hashes the whole ledger every 5 s) would take
+  # more CPU from the collectors than in run 1.
   for r in 1 2 3; do
+    reset_state
     run_step "5.3 latency at 100 votes/s, run $r" "load_open_r$r.txt" be python -m tools.bench_load open --rate 100 --duration 60 --tag "r$r"
   done
 fi
