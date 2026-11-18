@@ -8,7 +8,6 @@ import {
   Dimensions,
 } from "react-native";
 import { CameraView, CameraType, useCameraPermissions } from "expo-camera"; 
-import * as FaceDetector from "expo-face-detector";
 import { isValidFrame } from "../utils/faceSignals";
 import { WebView, WebViewMessageEvent } from "react-native-webview";
 import { CameraCapturedPicture } from "expo-camera";
