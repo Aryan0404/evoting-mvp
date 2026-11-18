@@ -80,6 +80,12 @@ echo "== [4/6] Cluster state with one storage node down =="
   echo; echo "Ballot topic, internal ledger layout:"
   $C exec -T pulsar bin/pulsar-admin topics stats-internal persistent://public/default/ballots
 } > "$OUT/ft_cluster_after.txt" 2>&1 || true
+# Which storage nodes held the ballots, and where BookKeeper swapped in the spare
+for id in $($C exec -T pulsar bin/pulsar-admin topics stats-internal persistent://public/default/ballots \
+            | grep -o '"ledgerId" : [0-9]*' | grep -o '[0-9]*$'); do
+  echo "ledger $id: $(docker exec evoting_bookie1 bin/bookkeeper shell ledgermetadata -ledgerid "$id" 2>/dev/null \
+                      | grep -o 'ensembles={[^}]*}')"
+done | tee "$OUT/ft_ensembles.txt"
 
 echo "== [5/6] Verifying every vote (storage node still down) =="
 set +e
