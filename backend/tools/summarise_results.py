@@ -63,6 +63,8 @@ def main():
           f"threshold {crypto['config']['threshold']}-of-{crypto['config']['trustees']}")
     if setup:
         for line in setup.splitlines():
+            if line.split(":", 1)[0].strip() in ("host", "ledger"):   # already stated above
+                continue
             w(f"- {line}")
     w("- Ledger: Apache Pulsar 3.1.0 broker + 4 BookKeeper storage nodes, ensemble 3 / write quorum 2 / ack quorum 2\n")
 
