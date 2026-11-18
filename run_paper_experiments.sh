@@ -74,8 +74,12 @@ start_stack() {
   wait_for "broker + storage nodes" 300 $C exec -T pulsar curl -sf http://localhost:8080/admin/v2/brokers/health || exit 1
   $C exec -T pulsar bin/pulsar-admin namespaces set-persistence public/default \
     --bookkeeper-ensemble 3 --bookkeeper-write-quorum 2 --bookkeeper-ack-quorum 2 --ml-mark-delete-max-rate 0
+  # An election ledger is never trimmed: keep every ballot even after all
+  # consumers have read it (Pulsar's default deletes fully-consumed segments).
+  $C exec -T pulsar bin/pulsar-admin namespaces set-retention public/default --size -1 --time -1
   { echo "Read-write bookies:"; $C exec -T pulsar bin/pulsar-admin bookies list-bookies
     echo; echo "Persistence policy:"; $C exec -T pulsar bin/pulsar-admin namespaces get-persistence public/default
+    echo; echo "Retention policy:"; $C exec -T pulsar bin/pulsar-admin namespaces get-retention public/default
   } > "$OUT/cluster.txt" 2>&1
 }
 
