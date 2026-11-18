@@ -50,7 +50,7 @@ import redis.asyncio as aioredis
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from app.services.audit_service import classify_round        # noqa: E402
-from app.workers.common import pg_dsn                         # noqa: E402
+from app.workers.common import CYCLE_SECONDS, pg_dsn          # noqa: E402
 from tools import ballot_factory as bf                        # noqa: E402
 from tools.bench_load import open_loop                        # noqa: E402
 
@@ -120,9 +120,15 @@ async def tamper(args):
                 while time.time() - t_tamper < 60:
                     a = await bb.get("alert:active")
                     if a:
-                        alert = json.loads(a)
-                        if all(b.get("located") for b in alert["bundles"]):
-                            break
+                        cand = json.loads(a)
+                        # Only an alert raised AFTER this tampering counts. A
+                        # replica cycle that was already running when the previous
+                        # trial was restored can publish one late, and it must not
+                        # be mistaken for this trial's detection.
+                        if cand.get("detected_at", 0) >= t_tamper:
+                            alert = cand
+                            if all(b.get("located") for b in alert["bundles"]):
+                                break
                     await asyncio.sleep(0.05)
                 t_detect = (alert["detected_at"] - t_tamper) if alert else None
                 located = sorted({s for b in (alert or {}).get("bundles", []) if b.get("located")
@@ -139,7 +145,12 @@ async def tamper(args):
                 await bb.delete("alert:active")
                 t_clear0 = time.time()
                 cleared = await wait_status(bb, "PASS", timeout=60)
-                still_alert = bool(await bb.get("alert:active"))
+                # a comparison that was in flight during the restore may re-raise
+                # the alert just after the delete: wait one more cycle, then clear
+                await asyncio.sleep(CYCLE_SECONDS + 1)
+                late = await bb.get("alert:active")
+                still_alert = bool(late) and json.loads(late).get("detected_at", 0) > t_clear0 + CYCLE_SECONDS
+                await bb.delete("alert:active")
                 rows.append({"tampered": m, "trial": trial + 1, "detect_s": t_detect,
                              "located_exact": located == seqs, "located": len(located),
                              "bisection_comparisons": comps, "lockdown_enforced": lockdown,

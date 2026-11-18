@@ -43,7 +43,7 @@ import sys
 import time
 from datetime import datetime
 
-import httpx
+import aiohttp
 import redis.asyncio as aioredis
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -101,16 +101,21 @@ async def run(args):
             samples.append((time.time(), seq - seq0, rep - rep0))
             await asyncio.sleep(0.5)
 
-    limits = httpx.Limits(max_connections=400, max_keepalive_connections=400)
-    async with httpx.AsyncClient(base_url=BASE, timeout=45.0, limits=limits) as client:
+    # aiohttp: httpx's pool stalls with thousands of requests queued, which is
+    # exactly what happens while storage is below quorum and votes are retrying.
+    async with aiohttp.ClientSession(
+            base_url=BASE,
+            connector=aiohttp.TCPConnector(limit=400, limit_per_host=400),
+            timeout=aiohttp.ClientTimeout(total=45.0)) as client:
 
         async def vote(i):
             first_send = time.time()
             statuses = []
             for attempt in range(MAX_ATTEMPTS):
                 try:
-                    resp = await client.post("/api/v1/vote/cast", json=pkgs[i].body())
-                    code = resp.status_code
+                    async with client.post("/api/v1/vote/cast", json=pkgs[i].body()) as resp:
+                        await resp.read()
+                        code = resp.status
                 except Exception:
                     code = 0            # timeout / connection error
                 statuses.append(code)
