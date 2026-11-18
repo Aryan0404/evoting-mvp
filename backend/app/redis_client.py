@@ -31,3 +31,26 @@ async def close_redis():
     if _redis_pool is not None:
         await _redis_pool.aclose()
         _redis_pool = None
+
+# ── Public bulletin board (separate Redis instance) ─────────────────────────
+_bulletin_pool: aioredis.Redis | None = None
+
+
+async def get_bulletin() -> aioredis.Redis:
+    """Shared async connection to the public bulletin board store."""
+    global _bulletin_pool
+    if _bulletin_pool is None:
+        _bulletin_pool = aioredis.from_url(
+            settings.bulletin_url,
+            encoding="utf-8",
+            decode_responses=True,
+            max_connections=50,
+        )
+    return _bulletin_pool
+
+
+async def close_bulletin():
+    global _bulletin_pool
+    if _bulletin_pool is not None:
+        await _bulletin_pool.aclose()
+        _bulletin_pool = None

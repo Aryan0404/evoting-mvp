@@ -48,16 +48,17 @@ import redis.asyncio as aioredis
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from app.services.merkle_service import MerkleTree  # noqa: E402
+from tools import ballot_factory as bf              # noqa: E402
+
+BULLETIN_URL = os.environ.get("BULLETIN_URL", "redis://bulletin:6379/0")
 
 BASE = os.environ.get("LOADTEST_URL", "http://localhost:8000")
 REDIS_URL = os.environ.get("REDIS_URL", "redis://redis:6379/0")
 PULSAR_URL = os.environ.get("PULSAR_URL", "pulsar://pulsar:6650")
 TOPIC = "persistent://public/default/ballots"
 REPLICA_DB = os.environ.get("REPLICA_DB", "/app/replica_data/replica.db")
-CIPHERTEXT = "RmF1bHRUb2xlcmFuY2VCYWxsb3Q="
-
-MAX_ATTEMPTS = 10           # a voter's app gives up after this many tries
-BACKOFF = [0.25, 0.5, 1, 1, 2, 2, 3, 3, 5, 5]
+MAX_ATTEMPTS = 12           # a voter's app gives up after this many tries (~60 s)
+BACKOFF = [0.25, 0.5, 1, 1, 2, 3, 5, 5, 8, 10, 12, 12]
 
 
 def pct(xs, p):
@@ -75,11 +76,10 @@ async def run(args):
     r = aioredis.from_url(REDIS_URL, decode_responses=True)
     n = int(args.rate * args.duration)
 
-    utis = [secrets.token_hex(32) for _ in range(n)]
-    pipe = r.pipeline(transaction=False)
-    for u in utis:
-        pipe.set(f"ballot_ticket:{u}", "1", ex=3600)
-    await pipe.execute()
+    bb = aioredis.from_url(BULLETIN_URL, decode_responses=True)
+    pkgs = bf.make_packages(await bf.election_n_hex(bb), n, k=2)
+    await bb.aclose()
+    await bf.seed_tickets(r, pkgs)
 
     seq0 = int(await r.get("ledger:seq") or 0)
     rep0 = int(await r.get("replica:count") or 0)
@@ -102,15 +102,14 @@ async def run(args):
             await asyncio.sleep(0.5)
 
     limits = httpx.Limits(max_connections=400, max_keepalive_connections=400)
-    async with httpx.AsyncClient(base_url=BASE, timeout=20.0, limits=limits) as client:
+    async with httpx.AsyncClient(base_url=BASE, timeout=45.0, limits=limits) as client:
 
         async def vote(i):
             first_send = time.time()
             statuses = []
             for attempt in range(MAX_ATTEMPTS):
                 try:
-                    resp = await client.post("/api/v1/vote/cast", json={
-                        "uti": utis[i], "ciphertext": CIPHERTEXT, "num_candidates": 2})
+                    resp = await client.post("/api/v1/vote/cast", json=pkgs[i].body())
                     code = resp.status_code
                 except Exception:
                     code = 0            # timeout / connection error
@@ -215,6 +214,21 @@ async def verify(args):
 
     server_accepted = int(await r.get("ledger:seq") or 0) - seq0
 
+    # integrity alerts and liveness verdicts during the run (bulletin board)
+    from app.services.audit_service import classify_round
+    bbd = aioredis.from_url(BULLETIN_URL, decode_responses=True)
+    run_end = start + meta["duration"] + args.grace
+    alerts = [json.loads(a) for a in await bbd.lrange("alerts:log", 0, -1)]
+    false_alarms = sum(1 for a in alerts if start <= a.get("detected_at", 0) <= run_end + 60)
+    verdicts = {"LIVE": 0, "STALE": 0, "DIVERGED": 0, "PENDING": 0, "UNKNOWN": 0}
+    latest = int(await bbd.get("liveness:latest") or 0)
+    now_v = time.time()
+    for rnd in range(1, latest + 1):
+        rr = await bbd.hgetall(f"liveness:round:{rnd}")
+        if rr and start <= float(rr.get("t_primary", 0)) <= run_end:
+            verdicts[classify_round(rr, now_v)] += 1
+    await bbd.aclose()
+
     # wait for the replica to finish catching up (it publishes every 5 s)
     print("Waiting for the replica to catch up ...", flush=True)
     last, stable_since = -1, time.time()
@@ -294,6 +308,26 @@ async def verify(args):
                         round(p50 * 1000, 1) if p50 is not None else "",
                         round(p99 * 1000, 1) if p99 is not None else ""])
 
+    kill_q = ev.get("kill_quorum")
+    rest_q = ev.get("restore_quorum")
+    quorum = None
+    if kill_q and rest_q:
+        in_out = [v for v in votes if kill_q <= float(v["send_epoch"]) < rest_q]
+        ok_out = [v for v in in_out if v["outcome"] != "failed"]
+        first_after = min((float(v["send_epoch"]) + float(v["latency_s"]) for v in votes
+                           if v["outcome"] != "failed" and float(v["send_epoch"]) + float(v["latency_s"]) >= rest_q),
+                          default=None)
+        accepted_during = sum(1 for t in done_times if kill_q + 2 < t < rest_q)
+        lat_out = sorted(float(v["latency_s"]) for v in ok_out)
+        quorum = {"outage_s": round(rest_q - kill_q, 1),
+                  "votes_cast_during_outage": len(in_out),
+                  "eventually_accepted": len(ok_out),
+                  "needed_retry": sum(1 for v in ok_out if int(v["attempts"]) > 1),
+                  "accepted_while_quorum_lost": accepted_during,
+                  "max_latency_s": round(lat_out[-1], 2) if lat_out else None,
+                  "p50_latency_s": round(lat_out[len(lat_out) // 2], 2) if lat_out else None,
+                  "first_acceptance_after_restore_s": round(first_after - rest_q, 2) if first_after else None}
+
     before = window_lat(start, kill_b) if kill_b else (None, None, 0)
     during = window_lat(kill_b, kill_b + 10) if kill_b else (None, None, 0)
     after = window_lat(kill_b + 10, start + meta["duration"]) if kill_b else (None, None, 0)
@@ -323,19 +357,23 @@ async def verify(args):
         "replica_downtime_s": round(rest_r - kill_r, 1) if (kill_r and rest_r) else None,
         "replica_catch_up_s_after_restart": round(catch_up, 1) if catch_up is not None else None,
         "events": [{"t_rel_s": round(t - start, 2), "event": label} for t, label in events],
+        "quorum_loss": quorum,
+        "integrity_alerts_during_faults": false_alarms,
+        "liveness_rounds": verdicts,
     }
     with open(os.path.join(args.out_dir, "ft_summary.json"), "w") as f:
         json.dump(summary, f, indent=2)
 
     ok = (summary["lost_votes_server_vs_ledger"] == 0
           and summary["replica_matches_ledger_exactly"]
-          and summary["merkle_roots_equal"])
+          and summary["merkle_roots_equal"]
+          and false_alarms == 0)
 
     def fmt(v):
         return "—" if v is None else v
 
     print("\n" + "=" * 70)
-    print("  SECTION 5.5 — FAULT TOLERANCE (4 bookies, E=3 / Qw=2 / Qa=2)")
+    print("  SECTION 5.7 — FAULT TOLERANCE (4 bookies, E=3 / Qw=2 / Qa=2)")
     print("=" * 70)
     for e in summary["events"]:
         print(f"  t = {e['t_rel_s']:>6.1f} s   {e['event']}")
@@ -359,7 +397,19 @@ async def verify(args):
         ("Latency p50/p99 after recovery", f"{fmt(summary['latency_p50_p99_ms_after_recovery'][0])} / {fmt(summary['latency_p50_p99_ms_after_recovery'][1])} ms"),
         ("Replica downtime", f"{fmt(summary['replica_downtime_s'])} s"),
         ("Replica back in sync after restart", f"{fmt(summary['replica_catch_up_s_after_restart'])} s"),
+        ("Integrity alerts during faults (false +)", false_alarms),
     ]
+    if quorum:
+        rows += [
+            ("QUORUM LOSS: storage below ensemble for", f"{quorum['outage_s']} s"),
+            ("  votes cast during the outage", quorum["votes_cast_during_outage"]),
+            ("  eventually accepted (voter app retries)", quorum["eventually_accepted"]),
+            ("  accepted while quorum was lost", quorum["accepted_while_quorum_lost"]),
+            ("  first acceptance after restore", f"{fmt(quorum['first_acceptance_after_restore_s'])} s"),
+            ("  max latency of an outage vote", f"{fmt(quorum['max_latency_s'])} s"),
+        ]
+    rows.append(("Liveness rounds LIVE / STALE / DIVERGED",
+                 f"{verdicts['LIVE']} / {verdicts['STALE']} / {verdicts['DIVERGED']}"))
     for k, v in rows:
         print(f"  {k:<44}{str(v):>22}")
     print("  " + "-" * 66)

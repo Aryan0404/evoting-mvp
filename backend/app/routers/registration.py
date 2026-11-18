@@ -263,6 +263,12 @@ async def verify_identity(
         ...,
         description="Live face image — JPEG or PNG, max 2 MB",
     ),
+    device_public_key: Optional[str] = Form(
+        default=None,
+        description="Device signing key generated in the phone's secure hardware "
+                    "(compressed P-256 point, hex). Bound to the voter's ticket.",
+        pattern=r"^(02|03)[0-9a-fA-F]{64}$",
+    ),
     db: AsyncSession = Depends(get_db),
 ) -> VerifyIdentityResponse:
     """
@@ -395,6 +401,7 @@ async def verify_identity(
     uti_hash, _ = await generate_and_store_uti(
         voter_id=voter_id,
         aadhaar_id=aadhaar_id,
+        device_public_key=device_public_key,
     )
 
     # ── 7. Activate voter in PostgreSQL ───────────────────────────────────

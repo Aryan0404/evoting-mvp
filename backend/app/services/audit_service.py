@@ -9,16 +9,26 @@ operator:
   • board        — total votes + the current Merkle roots published by the
                    air-gapped replica (the tamper-proof fingerprints)
 
-Everything here only READS state that the ingestion path and the forensic
-replica already wrote to Redis; it never mutates the ledger.
+  • liveness     — Algorithm 5 verifier: compares the primary's commitment C
+                   with the replica's C' for each nonce round
+  • alerts       — integrity alerts raised by the replica (with the ledger
+                   positions it localised)
+
+The replica's outputs live on the bulletin board, a store separate from the
+primary system; everything here only READS.
 """
 
 from __future__ import annotations
 
+import json
+import os
+import time
 from typing import Any
 
-from app.redis_client import get_redis
+from app.redis_client import get_bulletin, get_redis
 from app.services.ledger_service import BUNDLE_SIZE
+
+LIVENESS_TAU = float(os.environ.get("LIVENESS_TAU", "15"))
 
 
 async def check_inclusion(ballot_hash: str) -> dict[str, Any]:
@@ -34,7 +44,7 @@ async def check_inclusion(ballot_hash: str) -> dict[str, Any]:
 
     seq = int(seq)
     bundle_id = (seq - 1) // BUNDLE_SIZE
-    bundle_root = await redis.get(f"bundle:{bundle_id}:root")
+    bundle_root = await (await get_bulletin()).get(f"bundle:{bundle_id}:root")
     return {
         "included": True,
         "ballot_hash": ballot_hash,
@@ -47,39 +57,69 @@ async def check_inclusion(ballot_hash: str) -> dict[str, Any]:
 
 async def get_board() -> dict[str, Any]:
     """
-    The public bulletin board: total votes cast, the replica's current root
-    over the whole ledger, and the per-bundle Merkle roots it has sealed.
+    The public bulletin board: votes cast, the replica's verified count and
+    state commitment, its status, sealed bundle roots, liveness and alerts.
     """
     redis = await get_redis()
-
-    total = await redis.get("ledger:seq")
-    total = int(total) if total else 0
-
-    replica_root = await redis.get("replica:root")
-    replica_count = await redis.get("replica:count")
-    last_check = await redis.get("replica:last_check")
-
-    # Collect every sealed bundle root (bundle:<id>:root). Few keys in practice.
-    bundles: list[dict[str, Any]] = []
+    bb = await get_bulletin()
+    total = int(await redis.get("ledger:seq") or 0)
+    bundles = []
     cursor = 0
     while True:
-        cursor, keys = await redis.scan(cursor, match="bundle:*:root", count=200)
+        cursor, keys = await bb.scan(cursor, match="bundle:*:root", count=200)
         for k in keys:
             try:
-                bid = int(k.split(":")[1])
+                bundles.append({"bundle_id": int(k.split(":")[1]), "root": await bb.get(k)})
             except (IndexError, ValueError):
                 continue
-            bundles.append({"bundle_id": bid, "root": await redis.get(k)})
         if cursor == 0:
             break
     bundles.sort(key=lambda b: b["bundle_id"])
-
+    alert = await bb.get("alert:active")
     return {
         "total_votes_cast": total,
-        "replica_ballots_verified": int(replica_count) if replica_count else 0,
-        "replica_current_root": replica_root,
-        "replica_last_check": last_check,
+        "primary_ballots_committed": int(await bb.get("primary:count") or 0),
+        "replica_ballots_verified": int(await bb.get("replica:count") or 0),
+        "replica_state": await bb.get("replica:state"),
+        "replica_status": await bb.get("replica:status"),
+        "replica_last_check": await bb.get("replica:last_check"),
         "bundle_size": BUNDLE_SIZE,
         "sealed_bundles": bundles,
-        "integrity": "ok" if (replica_root is not None or total == 0) else "pending",
+        "liveness": await get_liveness(),
+        "alert": json.loads(alert) if alert else None,
     }
+
+
+def classify_round(r: dict, now: float, tau: float = LIVENESS_TAU) -> str:
+    """Algorithm 5, lines 6–13, for one nonce round."""
+    if not r or "C" not in r:
+        return "UNKNOWN"
+    if "Cp" in r:
+        return "LIVE" if r["Cp"] == r["C"] else "DIVERGED"
+    return "STALE" if now - float(r["t_primary"]) > tau else "PENDING"
+
+
+async def get_liveness(window: int = 6) -> dict[str, Any]:
+    """
+    Status of the most recent nonce rounds. The replica is reported STALE when
+    the newest round older than τ has no matching C', DIVERGED when C' ≠ C.
+    """
+    bb = await get_bulletin()
+    latest = int(await bb.get("liveness:latest") or 0)
+    now = time.time()
+    rounds = []
+    for rnd in range(max(1, latest - window + 1), latest + 1):
+        r = await bb.hgetall(f"liveness:round:{rnd}")
+        if r:
+            rounds.append({"round": rnd, "status": classify_round(r, now),
+                           "age_s": round(now - float(r["t_primary"]), 1)})
+    decided = [r for r in rounds if r["status"] != "PENDING"]
+    current = decided[-1]["status"] if decided else ("PENDING" if rounds else "UNKNOWN")
+    return {"status": current, "tau_s": LIVENESS_TAU, "rounds": rounds}
+
+
+async def get_alerts() -> dict[str, Any]:
+    bb = await get_bulletin()
+    active = await bb.get("alert:active")
+    log = [json.loads(x) for x in await bb.lrange("alerts:log", -20, -1)]
+    return {"active": json.loads(active) if active else None, "recent": log}

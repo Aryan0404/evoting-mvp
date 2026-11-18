@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from fastapi import APIRouter, Path
 
-from app.services.audit_service import check_inclusion, get_board
+from app.services.audit_service import check_inclusion, get_alerts, get_board, get_liveness
 
 router = APIRouter()
 
@@ -41,3 +41,25 @@ async def verify_receipt(
 )
 async def bulletin_board():
     return await get_board()
+
+
+# ── GET /api/v1/audit/liveness ─────────────────────────────────────────────
+
+
+@router.get(
+    "/audit/liveness",
+    summary="Replica liveness (nonce-bound protocol, Algorithm 5)",
+    description="LIVE when the replica's commitment C' matches the primary's C for the "
+                "latest decided nonce round, STALE when C' is missing after τ seconds, "
+                "DIVERGED when C' differs.",
+)
+async def replica_liveness():
+    return await get_liveness()
+
+
+# ── GET /api/v1/audit/alerts ───────────────────────────────────────────────
+
+
+@router.get("/audit/alerts", summary="Forensic integrity alerts raised by the replica")
+async def integrity_alerts():
+    return await get_alerts()

@@ -1,31 +1,36 @@
 #!/usr/bin/env python3
 # backend/app/replica/forensic_replica.py
 """
-Algorithm 3 — Continuous Integrity Verification (the air-gapped replica).
-────────────────────────────────────────────────────────────────────────
+The air-gapped forensic replica — Algorithms 3, 4 and 5.
+───────────────────────────────────────────────────────────────────────────────
 
-An independent process that trusts nobody and re-derives the truth from the
-append-only ledger itself:
+Inputs (one-way only, the data-diode side):
+  • the ballot stream — every ballot, in ledger order, copied into a
+    write-once store (SQLite here; WORM media in deployment);
+  • the primary's diode stream — each cycle's bundle roots, the leaf hashes
+    of bundles that changed, and a fresh liveness nonce N.
 
-  1. Subscribes to the Pulsar ledger and copies every ballot into its own
-     write-once SQLite store (a stand-in for WORM storage).
-  2. Every 5 seconds, recomputes the SHA-256 Merkle root over the ballots it
-     has seen and publishes the per-bundle roots to the bulletin board (Redis).
-  3. A bundle, once full (10,000 ballots), is sealed and never recomputed; if a
-     later recomputation of a *sealed* bundle ever produces a different root,
-     that means the stored data was tampered with — and the replica raises a
-     loud alert (and could run Merkle bisection to localise the altered ballot).
+Every time primary roots arrive (and at least every cycle):
+  Algorithm 3  recompute this replica's root for every bundle over exactly the
+               ballots the primary covered, and compare.
+  Algorithm 4  on a mismatch, descend both Merkle trees to the altered leaves,
+               map them to ledger positions, and raise the forensic alert
+               (which places the collectors in lockdown).
+  Algorithm 5  for each nonce N covering `upto` ballots, compute
+               C' = H(S' ∥ N) over this replica's first `upto` ballots and
+               publish C' — any observer compares it with the primary's C.
 
-In a real deployment this runs behind a one-way data diode on isolated
-hardware, so even a fully compromised primary cannot forge its verdict. Here it
-runs as its own container, reading the same ledger.
+Outputs go only to the public bulletin board (a separate store). Nothing is
+ever sent back to the primary system. In deployment the one-way property is
+enforced by a hardware data diode; in the prototype it is a read-only
+subscription — the replica holds no producer and no write access upstream.
 
-Run (inside its own container):  python -m app.replica.forensic_replica
+Run:  python -m app.replica.forensic_replica
 """
 
 from __future__ import annotations
 
-import hashlib
+import json
 import logging
 import os
 import sqlite3
@@ -33,19 +38,15 @@ import time
 
 import redis as redis_sync
 
-from app.services.merkle_service import MerkleTree
+from app.services.merkle_service import MerkleTree, bisect_trees
+from app.workers.common import (BALLOT_TOPIC, BUNDLE_SIZE, CYCLE_SECONDS, DIODE_TOPIC,
+                                bundle_roots, nonce_commitment, state_commitment)
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [replica] %(levelname)s %(message)s",
-)
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [replica] %(levelname)s %(message)s")
 log = logging.getLogger(__name__)
 
 PULSAR_URL = os.environ.get("PULSAR_URL", "pulsar://pulsar:6650")
-REDIS_URL = os.environ.get("REDIS_URL", "redis://redis:6379/0")
-TOPIC = "persistent://public/default/ballots"
-BUNDLE_SIZE = int(os.environ.get("BUNDLE_SIZE", "10000"))
-CHECK_INTERVAL_SEC = int(os.environ.get("REPLICA_CHECK_INTERVAL", "5"))
+BULLETIN_URL = os.environ.get("BULLETIN_URL", "redis://bulletin:6379/0")
 DB_PATH = os.environ.get("REPLICA_DB", "/app/replica_data/replica.db")
 
 
@@ -62,96 +63,159 @@ def _setup_db() -> sqlite3.Connection:
     return conn
 
 
-def _recompute_and_publish(conn, r, sealed_roots: dict[int, str]) -> None:
-    """Recompute per-bundle Merkle roots and publish them; detect tampering."""
-    rows = conn.execute("SELECT ballot_hash FROM ballots ORDER BY seq").fetchall()
-    hashes = [row[0] for row in rows]
-    n = len(hashes)
-    if n == 0:
-        return
+class Replica:
+    def __init__(self, conn, bb):
+        self.conn = conn
+        self.bb = bb
+        self.primary = {}            # bundle -> {"count", "root", "leaves": [bytes] | None}
+        self.nonces = []             # pending (round, N, upto)
+        self.alert_key = None
+        self.cache = []              # local leaves, in ledger order
+        self.cache_n = 0
 
-    # overall root over the whole ledger
-    overall = MerkleTree([bytes.fromhex(h) for h in hashes]).root_hex()
-    r.set("replica:root", overall)
-    r.set("replica:count", n)
-    r.set("replica:last_check", time.time())
+    # ── storage ────────────────────────────────────────────────────────────
+    def store(self, payloads):
+        import hashlib
+        now = time.time()
+        self.conn.executemany(
+            "INSERT OR IGNORE INTO ballots (ballot_hash, received_at) VALUES (?, ?)",
+            [(hashlib.sha256(p).hexdigest(), now) for p in payloads])
+        self.conn.commit()
 
-    # per-bundle roots
-    num_bundles = (n + BUNDLE_SIZE - 1) // BUNDLE_SIZE
-    for b in range(num_bundles):
-        chunk = hashes[b * BUNDLE_SIZE : (b + 1) * BUNDLE_SIZE]
-        full = len(chunk) == BUNDLE_SIZE
-        # a sealed (full) bundle is cached and never recomputed — unless we must
-        # check it for tampering
-        root = MerkleTree([bytes.fromhex(h) for h in chunk]).root_hex()
+    def leaves(self):
+        n = self.conn.execute("SELECT COUNT(*) FROM ballots").fetchone()[0]
+        if n != self.cache_n:
+            rows = self.conn.execute("SELECT ballot_hash FROM ballots WHERE seq > ? ORDER BY seq",
+                                     (self.cache_n,)).fetchall()
+            self.cache.extend(bytes.fromhex(r[0]) for r in rows)
+            self.cache_n = len(self.cache)
+        return self.cache
 
-        if b in sealed_roots:
-            if sealed_roots[b] != root:
-                log.error(
-                    "*** TAMPER DETECTED in sealed bundle %s: root changed "
-                    "%s -> %s ***", b, sealed_roots[b], root,
-                )
-                r.set(f"bundle:{b}:tampered", "1")
-            continue  # already sealed and verified; skip re-publish
+    # ── diode input ────────────────────────────────────────────────────────
+    def on_primary_cycle(self, msg):
+        for e in msg["bundles"]:
+            prev = self.primary.get(e["b"], {})
+            lv = e.get("leaves")
+            leaves = ([bytes.fromhex(lv[i:i + 64]) for i in range(0, len(lv), 64)] if lv is not None
+                      else (prev.get("leaves") if prev.get("count") == e["count"] and prev.get("root") == e["root"] else None))
+            self.primary[e["b"]] = {"count": e["count"], "root": e["root"], "leaves": leaves}
+        for b in [b for b in self.primary if b >= len(msg["bundles"])]:
+            del self.primary[b]
+        self.nonces.append((msg["round"], msg["N"], msg["upto"]))
 
-        r.set(f"bundle:{b}:root", root)
-        if full:
-            sealed_roots[b] = root
-            log.info("Sealed bundle %s (%d ballots) root=%s",
-                     b, BUNDLE_SIZE, root[:16])
+    # ── Algorithm 5 ────────────────────────────────────────────────────────
+    def answer_nonces(self, leaves):
+        keep = []
+        for rnd, N, upto in self.nonces:
+            if upto > len(leaves):
+                keep.append((rnd, N, upto))          # not yet received that many ballots
+                continue
+            Cp = nonce_commitment(state_commitment(leaves[:upto]), N)
+            self.bb.hset(f"liveness:round:{rnd}", mapping={"Cp": Cp, "t_replica": time.time()})
+        self.nonces = keep
 
-    log.info("Integrity check: %d ballots, overall root=%s", n, overall[:16])
+    # ── Algorithms 3 and 4 ─────────────────────────────────────────────────
+    def compare(self, leaves):
+        diverged, pending = [], 0
+        for b, p in sorted(self.primary.items()):
+            mine = leaves[b * BUNDLE_SIZE: b * BUNDLE_SIZE + p["count"]]
+            if len(mine) < p["count"]:
+                pending += 1
+                continue
+            tree_r = MerkleTree(mine)
+            if tree_r.root_hex() == p["root"]:
+                continue
+            located = None
+            if p["leaves"] is not None and len(p["leaves"]) == p["count"]:
+                positions, comps = bisect_trees(MerkleTree(p["leaves"]), tree_r)
+                located = {"positions": positions, "ledger_seq": [b * BUNDLE_SIZE + i + 1 for i in positions],
+                           "comparisons": comps}
+            diverged.append({"bundle": b, "primary_root": p["root"], "replica_root": tree_r.root_hex(),
+                             "count": p["count"], "located": located})
+        return diverged, pending
+
+    def publish(self, leaves, diverged, pending):
+        now = time.time()
+        pipe = self.bb.pipeline(transaction=False)
+        pipe.set("replica:count", len(leaves))
+        pipe.set("replica:state", state_commitment(leaves))
+        pipe.set("replica:last_check", now)
+        pipe.set("replica:status", "FAIL" if diverged else ("PENDING" if pending else "PASS"))
+        for e in bundle_roots(leaves):
+            pipe.set(f"replica:bundle:{e['b']}:root", f"{e['count']}:{e['root']}")
+            if e["count"] == BUNDLE_SIZE:
+                pipe.set(f"bundle:{e['b']}:root", e["root"])     # sealed bundle, for voter receipts
+        pipe.execute()
+        if diverged:
+            key = json.dumps([(d["bundle"], d["primary_root"]) for d in diverged])
+            if key != self.alert_key or not self.bb.exists("alert:active"):
+                alert = {"detected_at": now, "bundles": diverged}
+                self.bb.set("alert:active", json.dumps(alert))
+                self.bb.rpush("alerts:log", json.dumps(alert))
+                self.alert_key = key
+                log.error("*** TAMPER DETECTED in bundle(s) %s; located ledger positions %s ***",
+                          [d["bundle"] for d in diverged],
+                          [d["located"]["ledger_seq"][:20] if d["located"] else "pending" for d in diverged])
+        else:
+            self.alert_key = None
 
 
 def main() -> None:
     import pulsar
 
     conn = _setup_db()
-    r = redis_sync.from_url(REDIS_URL, decode_responses=True)
-
+    bb = redis_sync.from_url(BULLETIN_URL, decode_responses=True)
     client = pulsar.Client(PULSAR_URL, operation_timeout_seconds=30)
-    consumer = client.subscribe(
-        TOPIC,
-        subscription_name="forensic-replica",
-        consumer_type=pulsar.ConsumerType.Exclusive,
-        initial_position=pulsar.InitialPosition.Earliest,
-    )
-    log.info("Forensic replica started. Ledger=%s check=%ss bundle=%d",
-             TOPIC, CHECK_INTERVAL_SEC, BUNDLE_SIZE)
-
-    sealed_roots: dict[int, str] = {}
+    ballots = client.subscribe(BALLOT_TOPIC, subscription_name="forensic-replica",
+                               consumer_type=pulsar.ConsumerType.Exclusive,
+                               initial_position=pulsar.InitialPosition.Earliest)
+    diode = client.subscribe(DIODE_TOPIC, subscription_name="forensic-replica-diode",
+                             consumer_type=pulsar.ConsumerType.Exclusive,
+                             initial_position=pulsar.InitialPosition.Earliest)
+    rep = Replica(conn, bb)
+    log.info("Forensic replica started. ballots=%s diode=%s cycle=%.1fs bundle=%d",
+             BALLOT_TOPIC, DIODE_TOPIC, CYCLE_SECONDS, BUNDLE_SIZE)
     last_check = 0.0
-
     try:
         while True:
-            # drain whatever ballots are available
-            try:
-                msg = consumer.receive(timeout_millis=500)
-                ballot_hash = hashlib.sha256(msg.data()).hexdigest()
+            batch = []
+            t_end = time.monotonic() + 0.2
+            while len(batch) < 2000 and time.monotonic() < t_end:
                 try:
-                    conn.execute(
-                        "INSERT OR IGNORE INTO ballots (ballot_hash, received_at)"
-                        " VALUES (?, ?)",
-                        (ballot_hash, time.time()),
-                    )
-                    conn.commit()
+                    m = ballots.receive(timeout_millis=50)
+                except Exception:
+                    break
+                batch.append(m)
+            if batch:
+                rep.store([m.data() for m in batch])
+                for m in batch:
+                    ballots.acknowledge(m)
+
+            got_cycle = False
+            while True:
+                try:
+                    m = diode.receive(timeout_millis=1)
+                except Exception:
+                    break
+                try:
+                    rep.on_primary_cycle(json.loads(m.data()))
+                    got_cycle = True
                 finally:
-                    consumer.acknowledge(msg)
-            except Exception:
-                # receive timeout (no new ballots) — fall through to the check
-                pass
+                    diode.acknowledge(m)
 
             now = time.time()
-            if now - last_check >= CHECK_INTERVAL_SEC:
-                try:
-                    _recompute_and_publish(conn, r, sealed_roots)
-                except Exception as exc:
-                    log.error("integrity check failed: %s", exc)
-                last_check = now
+            if got_cycle or rep.nonces or now - last_check >= CYCLE_SECONDS:
+                leaves = rep.leaves()
+                rep.answer_nonces(leaves)
+                if got_cycle or now - last_check >= CYCLE_SECONDS:
+                    diverged, pending = rep.compare(leaves)
+                    rep.publish(leaves, diverged, pending)
+                    last_check = now
     except KeyboardInterrupt:
         log.info("Forensic replica shutting down.")
     finally:
-        consumer.close()
+        ballots.close()
+        diode.close()
         client.close()
         conn.close()
 

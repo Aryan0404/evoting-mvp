@@ -6,7 +6,7 @@ import logging
 from app.models.voter import Voter
 from app.models.citizen_registry import CitizenRegistry
 from app.database import engine, Base
-from app.redis_client import close_redis
+from app.redis_client import close_bulletin, close_redis
 from app.pulsar_client import close_pulsar
 from app.routers import health
 from app.routers import voting
@@ -57,6 +57,7 @@ async def lifespan(app: FastAPI):
     # ── Shutdown ──────────────────────────────────────────────────────────
     logger.info("Shutting down E-Voting backend ...")
     await close_pulsar()
+    await close_bulletin()
     await engine.dispose()
     logger.info("Database engine disposed.")
 

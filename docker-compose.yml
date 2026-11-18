@@ -1,4 +1,17 @@
 
+# Primary system (online): postgres, redis, pulsar, backend, ledger-worker, integrity
+# Public bulletin board: bulletin
+# Air-gapped forensic replica: replica — attached ONLY to the "diode" network,
+# where it can reach the ledger broker (read-only subscription) and the bulletin
+# board, but not the primary's Redis, PostgreSQL or API.
+
+x-backend-image: &backend-image
+  build:
+    context: ./backend
+    dockerfile: Dockerfile
+  volumes:
+    - ./backend:/app
+
 services:
 
   postgres:
@@ -22,7 +35,7 @@ services:
   redis:
     image: redis:7-alpine
     container_name: evoting_redis
-    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru
+    command: redis-server --maxmemory 1gb --maxmemory-policy noeviction --save ""
     ports:
       - "6379:6379"
     healthcheck:
@@ -30,6 +43,20 @@ services:
       interval: 10s
       timeout: 3s
       retries: 5
+    restart: unless-stopped
+
+  bulletin:
+    image: redis:7-alpine
+    container_name: evoting_bulletin
+    command: redis-server --maxmemory 512mb --maxmemory-policy noeviction --appendonly yes
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    networks: [default, diode]
     restart: unless-stopped
 
   pulsar:
@@ -46,24 +73,27 @@ services:
       interval: 20s
       timeout: 10s
       retries: 10
+    networks: [default, diode]
     restart: unless-stopped
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    <<: *backend-image
     container_name: evoting_backend
-    # Production mode: one uvicorn worker per CPU core (no --reload).
-    # Overrides the image CMD so it applies on `up` without a rebuild.
-    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers $$(nproc)"
+    # Production mode: WORKERS uvicorn workers (default: one per CPU core).
+    command: sh -c "uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers $${WORKERS:-$$(nproc)}"
     environment:
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/evoting
       REDIS_URL: redis://redis:6379/0
+      BULLETIN_URL: redis://bulletin:6379/0
       PULSAR_URL: pulsar://pulsar:6650
       SECRET_KEY: ${SECRET_KEY}
       JWT_ALGORITHM: HS256
       JWT_EXPIRY_MINUTES: 60
       LIVENESS_NONCE_TTL_SECONDS: 90
+      WORKERS: ${WORKERS:-}
+      BUNDLE_SIZE: "10000"
+      INTEGRITY_INTERVAL: "5"
+      LIVENESS_TAU: "15"
     ports:
       - "8000:8000"
     depends_on:
@@ -71,30 +101,66 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      bulletin:
+        condition: service_healthy
       pulsar:
         condition: service_healthy
-    volumes:
-      - ./backend:/app
+    restart: unless-stopped
+
+  ledger-worker:
+    <<: *backend-image
+    container_name: evoting_ledger_worker
+    command: python -m app.workers.ledger_worker
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/evoting
+      PULSAR_URL: pulsar://pulsar:6650
+    depends_on:
+      postgres:
+        condition: service_healthy
+      pulsar:
+        condition: service_healthy
+    restart: unless-stopped
+
+  integrity:
+    <<: *backend-image
+    container_name: evoting_integrity
+    command: python -m app.workers.primary_integrity
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/evoting
+      PULSAR_URL: pulsar://pulsar:6650
+      BULLETIN_URL: redis://bulletin:6379/0
+      BUNDLE_SIZE: "10000"
+      INTEGRITY_INTERVAL: "5"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      bulletin:
+        condition: service_healthy
+      pulsar:
+        condition: service_healthy
     restart: unless-stopped
 
   replica:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    <<: *backend-image
     container_name: evoting_replica
     command: python -m app.replica.forensic_replica
     environment:
-      REDIS_URL: redis://redis:6379/0
       PULSAR_URL: pulsar://pulsar:6650
+      BULLETIN_URL: redis://bulletin:6379/0
       BUNDLE_SIZE: "10000"
+      INTEGRITY_INTERVAL: "5"
+    networks: [diode]
     depends_on:
-      redis:
+      bulletin:
         condition: service_healthy
       pulsar:
         condition: service_healthy
-    volumes:
-      - ./backend:/app
     restart: unless-stopped
+
+networks:
+  default: {}
+  diode:
+    internal: true
 
 volumes:
   postgres_data:

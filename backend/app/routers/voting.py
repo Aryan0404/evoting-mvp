@@ -14,6 +14,10 @@ from app.services.ledger_service import (
     ingest_vote,
     TicketInvalidError,
     LedgerUnavailableError,
+    StaleTimestampError,
+    InvalidProofError,
+    InvalidSignatureError,
+    LockdownError,
 )
 
 router = APIRouter()
@@ -48,11 +52,10 @@ async def cast_vote(body: CastVoteRequest) -> CastVoteResponse:
     """
     Vote Casting Flow (Algorithm 1 — Atomic Vote Ingestion)
     ───────────────────────────────────────────────────────
-    1. Atomically consume the one-time ticket (Redis GETDEL). If it is missing
-       or already used, the vote is rejected with 409 — this is the double-vote
-       defence.
-    2. Seal the ballot (anonymous) and append it to the Pulsar ledger.
-    3. Return the receipt: ballot_id, ballot_hash, sequence_no.
+    Checks timestamp freshness (400), ticket validity (409), the ballot-validity
+    ZKP (422) and the device signature (422) before atomically consuming the
+    ticket with Redis GETDEL and appending the anonymous ballot to the Pulsar
+    ledger. Returns the receipt: ballot_id, ballot_hash, sequence_no.
     """
     try:
         receipt = await ingest_vote(
@@ -60,6 +63,32 @@ async def cast_vote(body: CastVoteRequest) -> CastVoteResponse:
             ciphertext=body.ciphertext,
             zkp_proof=body.zkp_proof,
             num_candidates=body.num_candidates,
+            ts=body.ts,
+            signature=body.signature,
+        )
+    except StaleTimestampError:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail={"error": "STALE_TIMESTAMP",
+                    "message": "Ballot timestamp is outside the permitted skew."},
+        )
+    except InvalidProofError:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={"error": "INVALID_PROOF",
+                    "message": "The ballot-validity proof does not verify."},
+        )
+    except InvalidSignatureError:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail={"error": "INVALID_SIGNATURE",
+                    "message": "The device signature does not verify for this ticket."},
+        )
+    except LockdownError:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail={"error": "FORENSIC_LOCKDOWN",
+                    "message": "Ingestion is halted while a forensic integrity alert is investigated."},
         )
     except TicketInvalidError:
         raise HTTPException(

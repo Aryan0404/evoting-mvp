@@ -306,6 +306,7 @@ async def generate_and_store_uti(
     voter_id: str,
     aadhaar_id: str,
     election_id: str = "mvp-election-2024",
+    device_public_key: str | None = None,
 ) -> tuple[str, str]:
     """
     Generate a Unique Ticket Identifier (UTI) per design doc Section 3.2.1.
@@ -333,6 +334,13 @@ async def generate_and_store_uti(
     # the secret ticket itself — never a voter_id. This preserves ballot secrecy
     # (no identity is sent when voting) and stops anyone from burning a victim's
     # ticket by guessing their voter_id.
-    await redis.set(f"ballot_ticket:{uti_hash}", "1", ex=settings.uti_ttl_seconds)
+    # The ticket's value is the device public key registered at enrolment
+    # (compressed P-256 point, hex). Algorithm 1 verifies the ballot package's
+    # signature against it before the ticket is consumed.
+    await redis.set(
+        f"ballot_ticket:{uti_hash}",
+        (device_public_key or "1").lower(),
+        ex=settings.uti_ttl_seconds,
+    )
 
     return uti_hash, uti_hash  # both the stored value and what's returned to voter

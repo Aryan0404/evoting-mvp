@@ -30,6 +30,15 @@ class Settings(BaseSettings):
     # Liveness
     liveness_nonce_ttl_seconds: int = 90
 
+    # Public bulletin board (separate store; the replica writes only here)
+    bulletin_url: str = "redis://bulletin:6379/0"
+
+    # Election + Algorithm 1 ingestion checks
+    election_id: str = "election-2026"
+    ballot_max_skew_seconds: int = 120          # Δ: permitted timestamp skew
+    verify_ballot_proofs: bool = True           # step 3: ballot-validity ZKP
+    verify_device_signatures: bool = True       # step 4: device ECDSA signature
+
     model_config = {
         "env_file": ".env",
         "env_file_encoding": "utf-8",

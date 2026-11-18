@@ -53,8 +53,8 @@ from datetime import datetime, timezone
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.services.zkp_service import run_zkp_benchmark            # noqa: E402
-from app.services.tally_service import run_tally_benchmark        # noqa: E402
-from app.services.merkle_service import MerkleTree, locate_tampered_leaves  # noqa: E402
+from app.services.merkle_service import MerkleTree, bisect_trees, verify_inclusion  # noqa: E402
+from app.services import threshold_paillier as tp                 # noqa: E402
 from tools.election_simulation import run as run_election         # noqa: E402
 
 BACKEND_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -126,80 +126,84 @@ def capture_setup(host_label: str) -> dict:
 # ─────────────────────────────────────────────────────────────────────────────
 #  C. Merkle sealing + tamper localization
 # ─────────────────────────────────────────────────────────────────────────────
-def bench_merkle(bundle_size: int = 10_000) -> dict:
+def bench_merkle(bundle_size: int = 10_000, bisect_bundle: int = 5_000) -> dict:
+    """5.4 + 5.10: build a bundle, verify a voter receipt, localise tampering."""
     leaves = [hashlib.sha256(f"ballot-{i}".encode()).digest() for i in range(bundle_size)]
-
     t0 = time.perf_counter()
-    root = MerkleTree(leaves).root_hex()
+    tree = MerkleTree(leaves)
     t_build = time.perf_counter() - t0
 
-    hexes = [leaf.hex() for leaf in leaves]
-    locate = {}
-    for k in (1, 10, 100):
-        tampered = list(hexes)
-        idx = sorted(random.sample(range(bundle_size), k))
-        for i in idx:
-            tampered[i] = hashlib.sha256(f"TAMPER-{i}".encode()).hexdigest()
-        t0 = time.perf_counter()
-        found = locate_tampered_leaves(hexes, tampered)
-        locate[k] = {
-            "located": len(found),
-            "correct": found == idx,
-            "time_ms": round((time.perf_counter() - t0) * 1000, 3),
-        }
+    # voter receipt check: one inclusion proof (depth hashes), averaged over 1,000 leaves
+    idx = random.sample(range(bundle_size), 1000)
+    proofs = [(leaves[i].hex(), tree.inclusion_proof(i)) for i in idx]
+    root = tree.root_hex()
+    t0 = time.perf_counter()
+    ok = all(verify_inclusion(h, pr, root) for h, pr in proofs)
+    t_verify = (time.perf_counter() - t0) / len(proofs)
 
-    return {
-        "bundle_size": bundle_size,
-        "build_root_sec": round(t_build, 4),
-        "root_prefix": root[:32],
-        "tamper_localization": locate,
-    }
+    # Algorithm 4 on a bundle of `bisect_bundle` votes (manuscript Table 10)
+    base = [hashlib.sha256(f"b-{i}".encode()).digest() for i in range(bisect_bundle)]
+    tb = MerkleTree(base)
+    loc = {}
+    for k in (1, 10, 100, 1000):
+        tidx = sorted(random.sample(range(bisect_bundle), k))
+        rep = list(base)
+        for i in tidx:
+            rep[i] = hashlib.sha256(f"TAMPER-{i}".encode()).digest()
+        tr = MerkleTree(rep)
+        t0 = time.perf_counter()
+        found, comps = bisect_trees(tb, tr)
+        loc[k] = {"correct": found == tidx, "time_ms": (time.perf_counter() - t0) * 1000,
+                  "comparisons": comps, "depth": tb.depth}
+    return {"bundle_size": bundle_size, "depth": tree.depth, "build_root_sec": t_build,
+            "receipt_hashes": len(proofs[0][1]), "receipt_verify_ms": t_verify * 1000,
+            "receipts_ok": ok, "bisect_bundle": bisect_bundle, "tamper_localization": loc}
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 #  One full pass of A–D
 # ─────────────────────────────────────────────────────────────────────────────
-def one_pass(args, quiet: bool) -> dict:
+def one_pass(args, key, quiet: bool) -> dict:
     zkp = run_zkp_benchmark(n_samples=args.zkp_samples)
-    tally = run_tally_benchmark(
-        num_ballots=args.tally_ballots, num_candidates=args.candidates, n_length=args.key_bits
-    )
     merkle = bench_merkle(bundle_size=args.bundle_size)
     sink = io.StringIO() if quiet else sys.stdout
     with contextlib.redirect_stdout(sink):
         election = run_election(voters=args.voters, candidates=args.candidates,
-                                procs=os.cpu_count(), key_bits=args.key_bits)
-    return {"zkp": zkp, "tally": tally, "merkle": merkle, "election": election}
+                                procs=os.cpu_count(), key_bits=args.key_bits,
+                                trustees=args.trustees, threshold=args.threshold, key=key)
+    return {"zkp": zkp, "merkle": merkle, "election": election}
 
 
 # Metrics reported in the summary: key -> (label, unit, extractor, decimals)
 METRICS = [
-    ("zkp_gen_ms",        "ZKP proof generation (mean of samples)",  "ms",
+    ("zkp_gen_ms",        "Schnorr credential proof: generate",      "ms",
      lambda r: r["zkp"]["gen_time_ms"]["mean"], 3),
-    ("zkp_verify_ms",     "ZKP proof verification (mean of samples)", "ms",
+    ("zkp_verify_ms",     "Schnorr credential proof: verify",        "ms",
      lambda r: r["zkp"]["verify_time_ms"]["mean"], 3),
-    ("count_sec",         "COUNT N votes: tally + decrypt (1 core)", "s",
-     lambda r: r["tally"]["tally_sec"] + r["tally"]["decrypt_sec"], 3),
-    ("tally_sec",         "  homomorphic tally (sequential)",        "s",
-     lambda r: r["tally"]["tally_sec"], 3),
-    ("tally_rate",        "  tally rate",                            "ballots/s",
-     lambda r: r["tally"]["tally_rate_votes_per_sec"], 0),
-    ("decrypt_ms",        "  decrypt K totals",                      "ms",
-     lambda r: r["tally"]["decrypt_sec"] * 1000, 2),
-    ("merkle_build_ms",   "Merkle root over bundle",                 "ms",
+    ("device_ms",         "Voter device: encrypt + ballot ZKP",      "ms",
+     lambda r: r["election"]["device_encrypt_prove_ms_mean"], 1),
+    ("verify_wall_s",     "Server: verify all N ballot proofs",      "s",
+     lambda r: r["election"]["verify_wall_s"], 2),
+    ("count_sec",         "COUNT N votes: tally + threshold decrypt", "s",
+     lambda r: r["election"]["count_s"], 3),
+    ("tally_sec",         "  homomorphic tally (1 core)",            "s",
+     lambda r: r["election"]["tally_s"], 3),
+    ("decrypt_ms",        "  threshold decryption (t of K)",         "ms",
+     lambda r: r["election"]["decrypt_s"] * 1000, 1),
+    ("seal_ms",           "Merkle seal over all N ballots",          "ms",
+     lambda r: r["election"]["seal_s"] * 1000, 2),
+    ("merkle_build_ms",   "Merkle root over a 10,000-vote bundle",   "ms",
      lambda r: r["merkle"]["build_root_sec"] * 1000, 2),
-    ("locate_1_ms",       "  locate 1 tampered ballot",              "ms",
-     lambda r: r["merkle"]["tamper_localization"][1]["time_ms"], 1),
-    ("locate_10_ms",      "  locate 10 tampered ballots",            "ms",
-     lambda r: r["merkle"]["tamper_localization"][10]["time_ms"], 1),
-    ("locate_100_ms",     "  locate 100 tampered ballots",           "ms",
-     lambda r: r["merkle"]["tamper_localization"][100]["time_ms"], 1),
-    ("election_encrypt_sec", "Election: vote + encrypt + seal (all cores)", "s",
-     lambda r: r["election"]["vote_encrypt_sec"], 2),
-    ("election_merge_sec",   "Election: merge partial tallies + decrypt", "s",
-     lambda r: r["election"]["count_sec"], 3),
-    ("election_seal_ms",     "Election: Merkle seal over all ballots", "ms",
-     lambda r: r["election"]["seal_sec"] * 1000, 1),
+    ("receipt_ms",        "Voter receipt check (inclusion proof)",   "ms",
+     lambda r: r["merkle"]["receipt_verify_ms"], 4),
+    ("locate_1_ms",       "Bisection: 1 tampered in 5,000",          "ms",
+     lambda r: r["merkle"]["tamper_localization"][1]["time_ms"], 3),
+    ("locate_10_ms",      "Bisection: 10 tampered in 5,000",         "ms",
+     lambda r: r["merkle"]["tamper_localization"][10]["time_ms"], 3),
+    ("locate_100_ms",     "Bisection: 100 tampered in 5,000",        "ms",
+     lambda r: r["merkle"]["tamper_localization"][100]["time_ms"], 3),
+    ("locate_1000_ms",    "Bisection: 1,000 tampered in 5,000",      "ms",
+     lambda r: r["merkle"]["tamper_localization"][1000]["time_ms"], 3),
 ]
 
 
@@ -218,11 +222,14 @@ def summarise(runs: list) -> dict:
         }
     out["all_correct"] = all(
         r["zkp"]["all_valid"] and r["zkp"]["forged_rejected"]
-        and r["tally"]["correct"] and r["election"]["correct"]
+        and r["election"]["correct"] and r["merkle"]["receipts_ok"]
         and all(v["correct"] for v in r["merkle"]["tamper_localization"].values())
         for r in runs
     )
     out["zkp_proof_size_bytes"] = runs[0]["zkp"]["proof_size_bytes"]
+    out["bisection_comparisons"] = {k: v["comparisons"] for k, v in runs[0]["merkle"]["tamper_localization"].items()}
+    out["receipt_hashes"] = runs[0]["merkle"]["receipt_hashes"]
+    out["election_result"] = runs[0]["election"]["tally"]
     return out
 
 
@@ -250,8 +257,9 @@ def render(setup: dict, cfg: dict, summary: dict) -> str:
     w(f"  Crypto libs        : phe {libs.get('phe')}, ecdsa {libs.get('ecdsa')}, "
       f"gmpy2 {libs.get('gmpy2')} (Paillier accel: {libs.get('gmpy2_accelerated_paillier')})")
     w(f"  Workload           : {cfg['voters']:,} voters, {cfg['candidates']} candidates, "
-      f"Paillier {cfg['key_bits']}-bit, {cfg['zkp_samples']} ZKP samples/run, "
-      f"bundle {cfg['bundle_size']:,}")
+      f"Paillier {cfg['key_bits']}-bit, {cfg['threshold']}-of-{cfg['trustees']} trustees, "
+      f"{cfg['zkp_samples']} Schnorr samples/run, bundle {cfg['bundle_size']:,}")
+    w(f"  Key ceremony       : {cfg['keygen_s']:.1f} s (one-off)")
     w(f"  Repeats            : {n} full run(s)")
     w(f"  Captured (UTC)     : {setup['captured_at_utc']}")
 
@@ -266,12 +274,14 @@ def render(setup: dict, cfg: dict, summary: dict) -> str:
         else:
             val = f"{s['mean']:.{d}f}" + (f" ± {s['sd']:.{d}f}" if n > 1 else "")
         w(f"  {label:<46}{val + ' ' + unit:>26}")
-    w(f"  {'ZKP proof size':<46}{str(summary['zkp_proof_size_bytes']) + ' bytes':>26}")
+    w(f"  {'Schnorr proof size':<46}{str(summary['zkp_proof_size_bytes']) + ' bytes':>26}")
+    w(f"  {'Voter receipt = hashes per inclusion proof':<46}{summary['receipt_hashes']:>26}")
+    w(f"  {'Bisection comparisons (1/10/100/1000)':<46}{'/'.join(str(v) for v in summary['bisection_comparisons'].values()):>26}")
+    w(f"  {'Election result (run 1)':<46}{str(summary['election_result']):>26}")
     w(f"  {'All correctness checks passed (every run)':<46}{str(summary['all_correct']):>26}")
     w("  " + "-" * 72)
-    w("  Headline 'count N votes' = the COUNT row (sequential, one core).")
-    w("  The election 'merge' row excludes per-ballot additions done in the")
-    w("  parallel workers, so it is not a counting time.")
+    w("  COUNT = sequential homomorphic tally on one core + threshold decryption")
+    w("  (trustees decrypt in parallel). Key ceremony is a one-off, reported above.")
     w("=" * 76 + "\n")
     return "\n".join(L)
 
@@ -280,7 +290,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--voters", type=int, default=5000)
     ap.add_argument("--candidates", type=int, default=4)
-    ap.add_argument("--tally-ballots", type=int, default=5000)
+    ap.add_argument("--trustees", type=int, default=5)
+    ap.add_argument("--threshold", type=int, default=3)
     ap.add_argument("--zkp-samples", type=int, default=500)
     ap.add_argument("--bundle-size", type=int, default=10000)
     ap.add_argument("--key-bits", type=int, default=2048)
@@ -292,14 +303,19 @@ def main():
     args = ap.parse_args()
 
     setup = capture_setup(args.host_label)
+    print(f"Threshold key ceremony ({args.threshold} of {args.trustees}, {args.key_bits}-bit) ...", flush=True)
+    t0 = time.perf_counter()
+    key = tp.keygen(args.key_bits, K=args.trustees, t=args.threshold)
+    keygen_s = time.perf_counter() - t0
     cfg = {k: getattr(args, k) for k in
-           ("voters", "candidates", "tally_ballots", "zkp_samples", "bundle_size", "key_bits", "repeats")}
+           ("voters", "candidates", "trustees", "threshold", "zkp_samples", "bundle_size", "key_bits", "repeats")}
+    cfg["keygen_s"] = keygen_s
 
     runs = []
     for i in range(args.repeats):
         print(f"Run {i + 1}/{args.repeats}: ZKP, tally, Merkle, election ...", flush=True)
         t0 = time.perf_counter()
-        runs.append(one_pass(args, quiet=(i > 0)))
+        runs.append(one_pass(args, key, quiet=(i > 0)))
         print(f"  done in {time.perf_counter() - t0:.0f}s", flush=True)
 
     summary = summarise(runs)

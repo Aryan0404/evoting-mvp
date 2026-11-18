@@ -45,6 +45,22 @@ class LedgerUnavailableError(Exception):
     """The durable ledger append failed; the vote must be refused."""
 
 
+class StaleTimestampError(Exception):
+    """|now − ts| exceeds the permitted skew Δ (Algorithm 1, step 1)."""
+
+
+class InvalidProofError(Exception):
+    """The ballot-validity zero-knowledge proof does not verify (step 3)."""
+
+
+class InvalidSignatureError(Exception):
+    """The device signature does not verify against the ticket's key (step 4)."""
+
+
+class LockdownError(Exception):
+    """The forensic replica raised an integrity alert; ingestion is halted."""
+
+
 def _ticket_key(uti: str) -> str:
     return f"{BALLOT_TICKET_PREFIX}:{uti}"
 
@@ -72,36 +88,108 @@ async def consume_ticket(uti: str) -> bool:
     return consumed is not None
 
 
+_LOCKDOWN_CACHE = {"t": 0.0, "active": False}
+
+
+async def _lockdown_active() -> bool:
+    """Read the forensic-lockdown flag from the bulletin board (cached 0.5 s)."""
+    import time as _t
+    now = _t.monotonic()
+    if now - _LOCKDOWN_CACHE["t"] > 0.5:
+        try:
+            from app.redis_client import get_bulletin
+            bb = await get_bulletin()
+            _LOCKDOWN_CACHE["active"] = bool(await bb.exists("alert:active"))
+        except Exception:
+            pass                       # bulletin unreachable: keep last known state
+        _LOCKDOWN_CACHE["t"] = now
+    return _LOCKDOWN_CACHE["active"]
+
+
+def _verify_proof_sync(pp, ciphertext: str, zkp_proof: str, num_candidates: int, context: str) -> bool:
+    from app.services import ballot_proof
+    try:
+        cts, proof = ballot_proof.decode(ciphertext, zkp_proof)
+    except Exception:
+        return False
+    if len(cts) != num_candidates:
+        return False
+    return ballot_proof.verify_ballot(pp, cts, proof, context)
+
+
 async def ingest_vote(
     uti: str,
     ciphertext: str,
     zkp_proof: Optional[str],
     num_candidates: int,
+    ts: Optional[float] = None,
+    signature: Optional[str] = None,
 ) -> dict[str, Any]:
     """
-    Full atomic vote ingestion pipeline.
+    Algorithm 1 — Atomic Vote Ingestion, in the order the manuscript specifies.
 
-    1. Atomically consume the one-time ticket (GETDEL). Reject if already used.
-    2. Build the ANONYMOUS sealed ballot — no voter identity is attached.
-       A nullifier (hash of the ticket) lets downstream stages prove the same
-       ticket is never counted twice, without revealing who voted.
-    3. Compute the ballot hash (SHA-256 of the canonical bytes) — this is both
-       the voter's receipt and the Merkle leaf.
-    4. Append the ballot to the Pulsar append-only ledger (durable).
-    5. Only AFTER a confirmed append, assign a ledger sequence number and record
-       the inclusion index. Assigning the number last means a failed append
-       leaves no gap in the ledger.
+    1. Timestamp freshness: reject if |now − ts| > Δ.
+    2. Ticket check: the ticket must exist and be unused (Redis GET). Its value
+       is the device public key registered at enrolment.
+    3. VerifyZKP: the ballot-validity proof must verify for this ballot,
+       bound to the election and to this ticket's nullifier.
+    4. VerifySig: the device signature over the package must verify against
+       the ticket's registered key.
+       (Plus: refuse new ballots while a forensic lockdown is active.)
+    5. Atomic commit: GETDEL consumes the ticket — exactly one concurrent
+       request can win it — then the ballot is appended to the ledger. If the
+       append fails, the ticket is re-issued with the same key, so an
+       infrastructure fault never disenfranchises a voter.
+    6. Sequence number and receipt (VID) are assigned only after the append.
 
-    On ledger failure the ticket is re-issued so the voter is never
-    disenfranchised by a transient infrastructure problem.
+    Checks 1–4 run before the ticket is consumed, so a malformed or forged
+    package can never burn a legitimate voter's ticket.
     """
-    # ── 1. Atomic one-time ticket ─────────────────────────────────────────
-    if not await consume_ticket(uti):
-        raise TicketInvalidError()
+    import asyncio
+    import time as _t
+
+    from app.services import device_sig
+    from app.services.election_keys import get_public_params
 
     redis = await get_redis()
+    nullifier = hashlib.sha256(uti.encode()).hexdigest()
 
-    # ── 2. Build the anonymous sealed ballot (the Pulsar payload) ─────────
+    # ── 1. Timestamp freshness ────────────────────────────────────────────
+    now = _t.time()
+    if ts is None or abs(now - ts) > settings.ballot_max_skew_seconds:
+        raise StaleTimestampError()
+
+    # ── 2. Ticket must exist and be unused ────────────────────────────────
+    device_pk = await redis.get(_ticket_key(uti))
+    if device_pk is None:
+        raise TicketInvalidError()
+
+    # ── 3. Ballot-validity zero-knowledge proof ───────────────────────────
+    if settings.verify_ballot_proofs:
+        pp = await get_public_params()
+        if pp is None or not zkp_proof:
+            raise InvalidProofError()
+        context = f"{settings.election_id}|{nullifier}"
+        loop = asyncio.get_running_loop()
+        ok = await loop.run_in_executor(
+            None, _verify_proof_sync, pp, ciphertext, zkp_proof, num_candidates, context)
+        if not ok:
+            raise InvalidProofError()
+
+    # ── 4. Device signature ───────────────────────────────────────────────
+    if settings.verify_device_signatures:
+        msg = device_sig.package_bytes(settings.election_id, uti, num_candidates,
+                                       ciphertext, zkp_proof or "", ts)
+        if device_pk == "1" or not signature or not device_sig.verify(device_pk, signature, msg):
+            raise InvalidSignatureError()
+
+    if await _lockdown_active():
+        raise LockdownError()
+
+    # ── 5. Atomic commit: consume the ticket exactly once ─────────────────
+    if not await consume_ticket(uti):
+        raise TicketInvalidError()       # a concurrent duplicate won the ticket
+
     ballot_id = uuid.uuid4()
     cast_at = datetime.now(tz=timezone.utc)
     ballot_core = {
@@ -109,40 +197,26 @@ async def ingest_vote(
         "ciphertext": ciphertext,
         "zkp_proof": zkp_proof,
         "num_candidates": num_candidates,
+        "ts": ts,
         "cast_at": cast_at.isoformat(),
-        "nullifier": hashlib.sha256(uti.encode()).hexdigest(),
+        "nullifier": nullifier,
     }
     payload = canonical_ballot_bytes(ballot_core)
+    ballot_hash = hashlib.sha256(payload).hexdigest()   # receipt = VID = Merkle leaf
 
-    # ── 3. Ballot hash = receipt = Merkle leaf (deterministic from payload) ─
-    ballot_hash = hashlib.sha256(payload).hexdigest()
-
-    # ── 4. Durable append to the append-only ledger ───────────────────────
     try:
-        message_id = await pulsar_client.publish_ballot(
-            payload, partition_key=ballot_hash
-        )
+        message_id = await pulsar_client.publish_ballot(payload, partition_key=ballot_hash)
     except Exception as exc:
         logger.error("Ledger append failed for ballot %s: %s", ballot_id, exc)
-        # Re-issue the ticket so the voter can retry — never lose a vote.
-        await redis.set(
-            _ticket_key(uti), "1", ex=settings.uti_ttl_seconds
-        )
+        await redis.set(_ticket_key(uti), device_pk, ex=settings.uti_ttl_seconds)
         raise LedgerUnavailableError() from exc
 
-    # ── 5. Assign sequence number + record inclusion index (post-append) ──
+    # ── 6. Sequence number + inclusion index (post-append) ────────────────
     sequence_no = await redis.incr(LEDGER_SEQ_KEY)
-    # ballot_hash -> sequence_no, so an auditor can later prove inclusion.
-    await redis.set(
-        f"ballot:{ballot_hash}", sequence_no, ex=settings.uti_ttl_seconds
-    )
+    await redis.set(f"ballot:{ballot_hash}", sequence_no, ex=settings.uti_ttl_seconds)
+    logger.info("Ballot %s appended (seq=%s, bundle=%s)", ballot_id, sequence_no,
+                (sequence_no - 1) // BUNDLE_SIZE)
 
-    logger.info(
-        "Ballot %s appended (seq=%s, bundle=%s)",
-        ballot_id,
-        sequence_no,
-        (sequence_no - 1) // BUNDLE_SIZE,
-    )
     return {
         "ballot_id": ballot_id,
         "ballot_hash": ballot_hash,

@@ -37,16 +37,27 @@ class CastVoteRequest(BaseModel):
     ciphertext: str = Field(
         ...,
         min_length=1,
-        max_length=8192,
-        description="Base64 Paillier-encrypted ballot. Opaque to the server.",
+        max_length=262144,
+        description="JSON list of k hex Paillier ciphertexts (one-hot ballot). Opaque to the server.",
     )
     zkp_proof: Optional[str] = Field(
         default=None,
-        max_length=8192,
+        max_length=1048576,
         description=(
-            "Base64 zero-knowledge proof that the ciphertext is a well-formed "
-            "ballot (exactly one candidate selected). Optional in the MVP."
+            "Ballot-validity zero-knowledge proof (JSON, hex integers): each slot "
+            "encrypts 0 or 1 and exactly one slot is 1. Bound to the election and "
+            "to this ticket's nullifier."
         ),
+    )
+    ts: Optional[float] = Field(
+        default=None,
+        description="Device timestamp (Unix seconds). Rejected if |now − ts| > Δ.",
+    )
+    signature: Optional[str] = Field(
+        default=None,
+        max_length=200,
+        pattern=r"^[0-9a-f]+$",
+        description="ECDSA P-256 signature (DER, hex) by the device key registered with the ticket.",
     )
     num_candidates: int = Field(
         default=2,
@@ -98,3 +109,17 @@ class LedgerUnavailableError(BaseModel):
         "The vote ledger is temporarily unavailable. Your vote was NOT "
         "recorded and your ticket is still valid — please retry."
     )
+
+
+class BallotRejected(BaseModel):
+    """POST /api/v1/vote/cast — 400/422 response (Algorithm 1 checks)."""
+
+    error: Literal["STALE_TIMESTAMP", "INVALID_PROOF", "INVALID_SIGNATURE"]
+    message: str
+
+
+class LockdownErrorSchema(BaseModel):
+    """POST /api/v1/vote/cast — 503 while a forensic integrity alert is active."""
+
+    error: Literal["FORENSIC_LOCKDOWN"] = "FORENSIC_LOCKDOWN"
+    message: str = "Ingestion is halted while a forensic integrity alert is investigated."

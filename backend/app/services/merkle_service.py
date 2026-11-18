@@ -131,44 +131,50 @@ def build_bundle_root(ballot_hashes_hex: List[str]) -> str:
 # ── Algorithm 4 — Tamper Localization via Merkle Bisection ─────────────────
 
 
+def bisect_trees(primary: "MerkleTree", replica: "MerkleTree") -> Tuple[List[int], int]:
+    """
+    Algorithm 4 on two already-built trees of the same bundle size.
+
+    Starts at the roots and descends only into children whose stored hashes
+    differ, exactly as in the paper: no hashing is redone, so each tampered
+    leaf costs at most 2·depth node comparisons — O(m · log n) for m tampered
+    leaves. Returns (sorted tampered leaf indices, number of node comparisons).
+    """
+    if len(primary.leaves) != len(replica.leaves):
+        raise ValueError("bundles must contain the same number of leaves")
+    if not primary.leaves:
+        return [], 0
+    top = primary.depth
+    comparisons = 1
+    if primary.layers[top][0] == replica.layers[top][0]:
+        return [], comparisons
+    frontier = [0]                      # indices at the current level that differ
+    for level in range(top, 0, -1):
+        child_p = primary.layers[level - 1]
+        child_r = replica.layers[level - 1]
+        nxt = []
+        for idx in frontier:
+            for c in (2 * idx, 2 * idx + 1):
+                if c >= len(child_p):  # odd-duplicated node: same as its sibling
+                    continue
+                comparisons += 1
+                if child_p[c] != child_r[c]:
+                    nxt.append(c)
+        frontier = nxt
+    return sorted(frontier), comparisons
+
+
 def locate_tampered_leaves(
     authoritative: List[str], replica: List[str]
 ) -> List[int]:
     """
-    Compare two versions of the same bundle (as ballot-hash hex lists) and
-    return the indices whose leaves differ, found by Merkle bisection in
-    O(k · log n) subtree-root comparisons rather than an O(n) linear scan.
-
-    Used by the forensic replica: if its recomputed bundle root does not match
-    the authoritative root, this pinpoints exactly which ballots were altered.
+    Convenience wrapper: build both trees once (O(n)) from ballot-hash hex
+    lists, then run the O(m · log n) descent of `bisect_trees`.
     """
-    n = max(len(authoritative), len(replica))
-    if n == 0:
+    if len(authoritative) != len(replica):
+        raise ValueError("bundles must contain the same number of leaves")
+    if not authoritative:
         return []
-
-    # pad the shorter side so index ranges line up
-    a = authoritative + [""] * (n - len(authoritative))
-    b = replica + [""] * (n - len(replica))
-
-    def subtree_root(leaves: List[str], lo: int, hi: int) -> bytes:
-        chunk = [
-            bytes.fromhex(x) if x else b"\x00" * 32 for x in leaves[lo : hi + 1]
-        ]
-        return MerkleTree(chunk).root
-
-    found: List[int] = []
-
-    def bisect(lo: int, hi: int) -> None:
-        if lo > hi:
-            return
-        if subtree_root(a, lo, hi) == subtree_root(b, lo, hi):
-            return  # whole range is clean — skip it entirely
-        if lo == hi:
-            found.append(lo)
-            return
-        mid = (lo + hi) // 2
-        bisect(lo, mid)
-        bisect(mid + 1, hi)
-
-    bisect(0, n - 1)
-    return found
+    tp = MerkleTree([bytes.fromhex(x) for x in authoritative])
+    tr = MerkleTree([bytes.fromhex(x) for x in replica])
+    return bisect_trees(tp, tr)[0]

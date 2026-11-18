@@ -1,154 +1,133 @@
 #!/usr/bin/env python3
 # backend/tools/bench_adversarial.py
 """
-Section 5.8 — Adversarial benchmarks (real, against the live system).
-─────────────────────────────────────────────────────────────────────
+Section 5.10 — Adversarial tests against the live system (all measured).
+───────────────────────────────────────────────────────────────────────────────
 
-Three things an attacker would try, and how the system holds up:
+  1. REPLAY       one valid ballot is accepted, then the identical package is
+                  re-submitted 1,000 times. Every replay must be rejected (409).
+  2. FORGERIES    100 submissions of each forgery type, each built from an
+                  otherwise valid package:
+                    unknown ticket · proof made for another ticket ·
+                    tampered proof · signature by the wrong device key ·
+                    stale timestamp
+                  Every one must be rejected, and the voter's real ticket must
+                  remain usable afterwards.
+  3. DOUBLE VOTE  50 simultaneous submissions of one ticket: exactly one wins.
 
-  1. REPLAY      — reuse a ticket that was already spent. Must be rejected,
-                   and rejected *fast* (cheap to say no).
-  2. FLOOD       — mix a large share of bogus ballots (invalid/forged tickets)
-                   into the stream. The bogus ones must be rejected without
-                   dragging down the throughput of the legitimate votes.
-  3. TAMPER      — alter ballots inside a sealed bundle. Merkle bisection must
-                   locate exactly which ones changed, in O(log n).
+Mixed adversarial load (10% / 50% invalid traffic against a fixed legitimate
+rate) is measured by `tools.bench_load mix`; offline Merkle bisection by
+`tools.run_all_benchmarks_real`; live tamper detection by `tools.bench_integrity`.
 
-Run inside the backend container:
-    docker compose exec backend python tools/bench_adversarial.py
+Run inside the backend container:  python -m tools.bench_adversarial
 """
 
 from __future__ import annotations
 
 import asyncio
-import hashlib
+import json
 import os
-import random
 import secrets
+import sys
 import time
 
 import httpx
 import redis.asyncio as aioredis
 
-import sys
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from app.services.merkle_service import locate_tampered_leaves
+from tools import ballot_factory as bf   # noqa: E402
 
 BASE = os.environ.get("LOADTEST_URL", "http://localhost:8000")
-CIPHERTEXT = "QWR2ZXJzYXJpYWxCYWxsb3Q="
+REDIS_URL = os.environ.get("REDIS_URL", "redis://redis:6379/0")
+BULLETIN_URL = os.environ.get("BULLETIN_URL", "redis://bulletin:6379/0")
+OUT_DIR = os.environ.get("RESULTS_DIR", "/app/paper/results/docker")
 
 
 def pct(xs, p):
     xs = sorted(xs)
-    return xs[min(len(xs) - 1, int(len(xs) * p))] * 1000 if xs else 0.0
+    return xs[min(len(xs) - 1, int(len(xs) * p))] * 1000 if xs else None
 
 
-async def _seed(redis, utis):
-    pipe = redis.pipeline(transaction=False)
-    for u in utis:
-        pipe.set(f"ballot_ticket:{u}", "1")
-    await pipe.execute()
-
-
-async def cast(client, uti):
+async def cast(client, body):
     t0 = time.perf_counter()
-    r = await client.post(
-        "/api/v1/vote/cast",
-        json={"uti": uti, "ciphertext": CIPHERTEXT, "num_candidates": 2},
-    )
+    r = await client.post("/api/v1/vote/cast", json=body)
     return r.status_code, time.perf_counter() - t0
 
 
-async def test_replay(client, redis):
-    print("\n[1] REPLAY ATTACK")
-    uti = secrets.token_hex(32)
-    await _seed(redis, [uti])
-    s1, _ = await cast(client, uti)   # first use: accepted
-    # now hammer the same (spent) ticket
-    lat = []
-    rejected = 0
-    for _ in range(500):
-        s, dt = await cast(client, uti)
-        lat.append(dt)
-        if s == 409:
-            rejected += 1
-    print(f"    first cast status        : {s1} (201 = accepted)")
-    print(f"    replays rejected         : {rejected}/500")
-    print(f"    replay rejection latency : mean {sum(lat)/len(lat)*1000:.2f} ms, "
-          f"p99 {pct(lat,0.99):.2f} ms")
-    print(f"    all replays blocked      : {rejected == 500}")
-
-
-async def test_flood(client, redis, valid=3000, adversarial_ratio=0.5):
-    print(f"\n[2] ADVERSARIAL FLOOD ({int(adversarial_ratio*100)}% bogus tickets)")
-    valid_utis = [secrets.token_hex(32) for _ in range(valid)]
-    await _seed(redis, valid_utis)   # only the valid ones exist in Redis
-    n_bogus = int(valid * adversarial_ratio / (1 - adversarial_ratio))
-    bogus_utis = [secrets.token_hex(32) for _ in range(n_bogus)]  # never seeded
-
-    jobs = [(u, True) for u in valid_utis] + [(u, False) for u in bogus_utis]
-    random.shuffle(jobs)
-
-    sem = asyncio.Semaphore(100)
-    good_ok = bad_rejected = 0
-    good_lat = []
-    bad_lat = []
-
-    async def one(uti, is_valid):
-        nonlocal good_ok, bad_rejected
-        async with sem:
-            s, dt = await cast(client, uti)
-            if is_valid:
-                good_lat.append(dt)
-                if s == 201:
-                    good_ok += 1
-            else:
-                bad_lat.append(dt)
-                if s == 409:
-                    bad_rejected += 1
-
-    t0 = time.perf_counter()
-    await asyncio.gather(*[one(u, v) for u, v in jobs])
-    wall = time.perf_counter() - t0
-
-    print(f"    legitimate accepted      : {good_ok}/{valid}")
-    print(f"    bogus rejected           : {bad_rejected}/{n_bogus}")
-    print(f"    legit throughput         : {good_ok/wall:,.0f} votes/sec "
-          f"(amid {n_bogus:,} attacks)")
-    print(f"    bogus rejection latency  : mean {sum(bad_lat)/len(bad_lat)*1000:.2f} ms "
-          f"(cheap to say no)")
-    print(f"    legit latency unaffected : p99 {pct(good_lat,0.99):.1f} ms")
-
-
-def test_tamper():
-    print("\n[3] TAMPER LOCALIZATION (Merkle bisection)")
-    bundle = [hashlib.sha256(f"b{i}".encode()).hexdigest() for i in range(10000)]
-    for k in (1, 10, 100):
-        replica = list(bundle)
-        idx = sorted(random.sample(range(10000), k))
-        for i in idx:
-            replica[i] = hashlib.sha256(f"TAMPER{i}".encode()).hexdigest()
-        t0 = time.perf_counter()
-        found = locate_tampered_leaves(bundle, replica)
-        dt = (time.perf_counter() - t0) * 1000
-        print(f"    {k:>4} tampered in 10,000 -> located {len(found)} "
-              f"(correct: {found == idx}) in {dt:.1f} ms")
-
-
 async def main():
-    redis = aioredis.from_url(
-        os.environ.get("REDIS_URL", "redis://redis:6379/0"), decode_responses=True
-    )
-    print("=== Section 5.8 — Adversarial benchmarks (live system) ===")
-    async with httpx.AsyncClient(
-        base_url=BASE, timeout=60.0,
-        limits=httpx.Limits(max_connections=150, max_keepalive_connections=150),
-    ) as client:
-        await test_replay(client, redis)
-        await test_flood(client, redis)
-    test_tamper()
-    await redis.aclose()
-    print("\nAll adversarial defences held.")
+    r = aioredis.from_url(REDIS_URL, decode_responses=True)
+    bb = aioredis.from_url(BULLETIN_URL, decode_responses=True)
+    pkgs = bf.make_packages(await bf.election_n_hex(bb), 700, k=2)
+    await bf.seed_tickets(r, pkgs)
+    report = {}
+    print("=== Section 5.10 — Adversarial tests (live system, full Algorithm 1) ===")
+    async with httpx.AsyncClient(base_url=BASE, timeout=30.0,
+                                 limits=httpx.Limits(max_connections=100, max_keepalive_connections=100)) as c:
+        # 1. replay
+        p = pkgs[0]
+        body = p.body()
+        first, _ = await cast(c, body)
+        lat, rej = [], 0
+        for _ in range(1000):
+            s, dt = await cast(c, body)
+            lat.append(dt)
+            rej += s == 409
+        report["replay"] = {"first_status": first, "attempts": 1000, "rejected": rej,
+                            "mean_ms": sum(lat) / len(lat) * 1000, "p50_ms": pct(lat, .5), "p99_ms": pct(lat, .99)}
+        print(f"\n[1] REPLAY: first cast {first}; replays rejected {rej}/1000; "
+              f"latency mean {report['replay']['mean_ms']:.2f} ms, p99 {report['replay']['p99_ms']:.2f} ms")
+
+        # 2. forgeries (100 each), victims' real tickets must survive
+        print("\n[2] FORGERIES (100 of each type)")
+        victims = pkgs[1:101]
+        donors = pkgs[101:201]
+        types = {
+            "unknown_ticket": lambda v, d: {**v.body(), "uti": secrets.token_hex(32)},
+            "proof_for_other_ticket": lambda v, d: {**d.body(), "uti": v.uti},
+            "tampered_proof": lambda v, d: v.body(tamper="proof"),
+            "wrong_device_key": lambda v, d: v.body(tamper="signature"),
+            "stale_timestamp": lambda v, d: v.body(tamper="timestamp"),
+        }
+        report["forgeries"] = {}
+        for name, build in types.items():
+            lat, codes = [], []
+            for v, d in zip(victims, donors):
+                s, dt = await cast(c, build(v, d))
+                lat.append(dt)
+                codes.append(s)
+            rejected = sum(s in (400, 409, 422) for s in codes)
+            report["forgeries"][name] = {"sent": 100, "rejected": rejected,
+                                         "status_counts": {str(s): codes.count(s) for s in set(codes)},
+                                         "mean_ms": sum(lat) / len(lat) * 1000, "p99_ms": pct(lat, .99)}
+            print(f"    {name:<24} rejected {rejected}/100   mean {sum(lat)/len(lat)*1000:6.2f} ms   "
+                  f"codes {report['forgeries'][name]['status_counts']}")
+        ok = 0
+        for v in victims:
+            s, _ = await cast(c, v.body())
+            ok += s == 201
+        report["victims_could_still_vote"] = ok
+        print(f"    real tickets still usable after all forgeries: {ok}/100")
+
+        # 3. concurrent double vote
+        p = pkgs[300]
+        body = p.body()
+        results = await asyncio.gather(*[cast(c, dict(body)) for _ in range(50)])
+        wins = sum(s == 201 for s, _ in results)
+        report["double_vote"] = {"concurrent": 50, "accepted": wins,
+                                 "rejected_409": sum(s == 409 for s, _ in results)}
+        print(f"\n[3] DOUBLE VOTE: 50 simultaneous submissions of one ticket -> {wins} accepted, "
+              f"{report['double_vote']['rejected_409']} rejected")
+
+    allok = (report["replay"]["rejected"] == 1000 and report["replay"]["first_status"] == 201
+             and all(v["rejected"] == 100 for v in report["forgeries"].values())
+             and report["victims_could_still_vote"] == 100 and report["double_vote"]["accepted"] == 1)
+    report["all_defences_held"] = allok
+    os.makedirs(OUT_DIR, exist_ok=True)
+    with open(os.path.join(OUT_DIR, "adversarial.json"), "w") as f:
+        json.dump(report, f, indent=2)
+    print(f"\n{'All adversarial defences held.' if allok else 'CHECK: a defence did not hold — see adversarial.json'}")
+    await r.aclose()
+    await bb.aclose()
 
 
 if __name__ == "__main__":
