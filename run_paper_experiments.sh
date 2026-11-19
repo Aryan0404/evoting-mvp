@@ -356,6 +356,7 @@ lit_disk_ok() {  # lit_disk_ok <GB needed> <step>
 }
 LB="python -m tools.bench_literature"
 if has lit-crypto; then
+  reset_state   # runs the trustee key ceremony; on a fresh stack no earlier step has done it
   run_step "lit: ElectionGuard / MERGE / STARK scenarios (crypto)" lit_crypto.txt be $LB crypto
 fi
 export DROP_BALLOT_TOPIC=1
