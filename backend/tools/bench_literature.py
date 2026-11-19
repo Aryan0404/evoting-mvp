@@ -52,6 +52,7 @@ import resource
 import statistics
 import sys
 import time
+from collections import Counter
 from concurrent.futures import ProcessPoolExecutor
 
 import aiohttp
@@ -201,6 +202,10 @@ class Vote:
         return None if self.t_done is None else self.t_done - self.t_first
 
 
+ATTEMPT_CODES = Counter()     # every HTTP status seen, per attempt (0 = no reply / client time-out)
+ERROR_BODIES = {}             # first response body seen for each non-201 status, for diagnosis
+
+
 async def cast(c, pkg, v: Vote, retry=True, max_attempts=12):
     v.t_first = time.perf_counter()
     while True:
@@ -208,9 +213,16 @@ async def cast(c, pkg, v: Vote, retry=True, max_attempts=12):
         try:
             async with c.post("/api/v1/vote/cast", json=pkg.body()) as resp:
                 code = resp.status
-                data = await resp.json(content_type=None) if code == 201 else None
-        except Exception:
+                if code == 201:
+                    data = await resp.json(content_type=None)
+                else:
+                    data = None
+                    if code not in ERROR_BODIES:
+                        ERROR_BODIES[code] = (await resp.text())[:300]
+        except Exception as exc:
             code, data = 0, None
+            ERROR_BODIES.setdefault(0, f"{type(exc).__name__}: {exc}"[:300])
+        ATTEMPT_CODES[code] += 1
         if v.first_code is None:
             v.first_code = code
         if code == 0:
@@ -445,13 +457,28 @@ async def run_window(mode, rate, minutes, tail_min, k, every_s, burst_s):
     samples, vs = [], []
     stop = asyncio.Event()
 
+    diag = []                 # every 10 s: status codes so far, lockdown flag, replica status
+    ATTEMPT_CODES.clear(); ERROR_BODIES.clear()
+
     async def sampler(t0):
+        bb = aioredis.from_url(BULLETIN_URL, decode_responses=True)
+        i = 0
         while not stop.is_set():
             seq = await ledger_seq()
             p, rc = await board_counts()
             acc = sum(1 for v in vs if v.accepted)
-            samples.append((round(time.perf_counter() - t0, 1), len(vs), acc, seq - seq0, p, rc))
+            t = round(time.perf_counter() - t0, 1)
+            samples.append((t, len(vs), acc, seq - seq0, p, rc))
+            if i % 10 == 0:
+                try:
+                    alert, rstat = bool(await bb.exists("alert:active")), await bb.get("replica:status")
+                except Exception:
+                    alert, rstat = None, None
+                diag.append({"t": t, "durable": seq - seq0, "codes": dict(ATTEMPT_CODES), "lockdown": alert,
+                             "replica_status": rstat, "in_flight": sum(1 for v in vs if v.t_done is None)})
+            i += 1
             await asyncio.sleep(1.0)
+        await bb.aclose()
 
     async with http(2000) as c:
         buf = await stream.take()
@@ -505,7 +532,13 @@ async def run_window(mode, rate, minutes, tail_min, k, every_s, burst_s):
             "latency_incl_retries": lat_stats([v.latency for v in acc]),
             "replica_verified_all_at_s": t_all,
             "replica_lag_after_last_vote_s": round(t_all - t_votes, 1) if t_all else None,
-            "marks": marks, "per_minute": per_min, "samples": samples}
+            "marks": marks, "per_minute": per_min, "samples": samples,
+            "final_codes": {str(k): n for k, n in Counter(v.code for v in vs).items()},
+            "attempt_codes": {str(k): n for k, n in ATTEMPT_CODES.items()},
+            "error_bodies": {str(k): b for k, b in ERROR_BODIES.items()},
+            "ledger_last_growth_s": next((samples[i][0] for i in range(len(samples) - 1, 0, -1)
+                                          if samples[i][3] > samples[i - 1][3]), None),
+            "diagnostics": diag}
 
 
 def print_window(r):
@@ -515,6 +548,15 @@ def print_window(r):
     for m in r["marks"]:
         print(f"  {m['minute']:>4} {m['accepted']:>9,} {m['durable']:>9,} {str(m['durable_pct']):>7} {m['replica_verified']:>9,} {str(m['verified_pct']):>7}")
     print(f"  replica had verified every vote {r['replica_lag_after_last_vote_s']} s after the last vote")
+    if "final_codes" in r:
+        print(f"  final status per vote: {r['final_codes']}")
+        print(f"  status per attempt:    {r['attempt_codes']}")
+        print(f"  ledger last grew at {r['ledger_last_growth_s']} s")
+        for k, b in r["error_bodies"].items():
+            print(f"  first {k} reply: {b}")
+        for d in r["diagnostics"][::6]:
+            print(f"   t={d['t']:>6} s durable {d['durable']:>7,} in flight {d['in_flight']:>6,} lockdown {d['lockdown']} "
+                  f"replica {d['replica_status']} codes {d['codes']}")
 
 
 # ═════════════════════════════════════════════════════════════════════════════

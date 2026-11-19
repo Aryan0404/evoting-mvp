@@ -385,11 +385,34 @@ fi
 if has lit-ledger && lit_disk_ok 8 lit-ledger; then
   run_step "lit: Razaque Fig. 7 — ledger accuracy at 1,000–8,000 records/s" lit_ledger.txt be $LB ledger
 fi
+# host-side record of every container during a long step: CPU, memory, and any
+# container that is not running (crashed / killed for memory), every 10 s
+monitor() {  # monitor <file>   (run in the background; stop with kill)
+  while :; do
+    { echo "== $(date '+%H:%M:%S')"
+      docker stats --no-stream --format '{{.Name}} cpu {{.CPUPerc}} mem {{.MemUsage}}' 2>/dev/null
+      docker ps -a --filter name=evoting_ --format '{{.Names}} {{.Status}}' 2>/dev/null | grep -v ' Up ' | sed 's/^/NOT RUNNING: /'
+    } >> "$1"
+    sleep 10
+  done
+}
+dump_logs() {  # dump_logs <prefix>: last lines of each service, and whether it was killed for memory
+  local c
+  for c in backend pulsar bookie1 bookie2 bookie3 bookie4 ledger_worker integrity replica postgres redis bulletin; do
+    { echo "== evoting_$c: $(docker inspect -f 'status={{.State.Status}} oom_killed={{.State.OOMKilled}} exit={{.State.ExitCode}} restarts={{.RestartCount}}' "evoting_$c" 2>/dev/null)"
+      docker logs --tail 150 "evoting_$c" 2>&1 | grep -v -E ' INFO .*Ballot .* appended| "POST /api/v1/vote/cast HTTP/1.1" (201|503)' | tail -80
+    } >> "$1_logs.txt"
+  done
+}
 if has lit-window; then
-  for MODE in even burst; do
+  for MODE in ${LIT_WINDOW_MODES:-even burst}; do
     if lit_disk_ok 12 "lit-window-$MODE"; then
       reset_state
+      rm -f "$OUT/lit_window_${MODE}_monitor.txt" "$OUT/lit_window_${MODE}_logs.txt"
+      monitor "$OUT/lit_window_${MODE}_monitor.txt" & MON=$!
       run_step "lit: Razaque Figs. 5/8/9 — 15-minute $MODE voting window + 5-minute tail" "lit_window_${MODE}.txt" be $LB window --mode "$MODE"
+      kill "$MON" 2>/dev/null; wait "$MON" 2>/dev/null
+      dump_logs "$OUT/lit_window_${MODE}"
     fi
   done
 fi
