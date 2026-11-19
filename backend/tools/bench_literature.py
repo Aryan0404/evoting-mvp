@@ -685,14 +685,17 @@ async def run_concurrent(votes, k, max_conns):
     vs = [Vote(p.choice) for p in pkgs]
     async with http(max_conns, timeout=60.0) as c:
         t0 = time.perf_counter()
-        await asyncio.gather(*[cast(c, p, v, max_attempts=20) for p, v in zip(pkgs, vs)])
+        # every voter app keeps retrying (fresh timestamp, back-off) until its vote is in, for up to 10 min
+        await asyncio.gather(*[cast(c, p, v, deadline_s=600) for p, v in zip(pkgs, vs)])
         wall = time.perf_counter() - t0
     acc = [v for v in vs if v.accepted]
     L = [v.latency for v in acc]
     return {"votes": votes, "client_connections": max_conns, "accepted": len(acc), "failed": votes - len(acc),
             "first_attempt_accepted": sum(1 for v in vs if v.first_code == 201),
             "retries": sum(v.attempts - 1 for v in vs), "completion_s": round(wall, 1),
-            "votes_per_s": round(len(acc) / wall, 1), "latency_incl_retries": lat_stats(L)}
+            "votes_per_s": round(len(acc) / wall, 1), "latency_incl_retries": lat_stats(L),
+            "retry_policy": "voter app retries on no reply or 429/502/503/504 for up to 600 s",
+            "final_codes": {str(k): n for k, n in Counter(v.code for v in vs).items()}}
 
 
 # ═════════════════════════════════════════════════════════════════════════════
