@@ -1,4 +1,0 @@
-
-OPEN LOOP  100.0/s for 60.0s:  5,739/6,000 accepted, 94.4 votes/s, p50 1122.3 ms, p95 6831.4 ms, p99 8034.3 ms
-  failures by reason: {'503 Service Unavailable': 261}
-saved /app/paper/results/docker/load_open_r1.json
