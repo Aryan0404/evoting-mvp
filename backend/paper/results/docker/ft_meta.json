@@ -1,8 +1,8 @@
 {
-  "run_start_epoch": 1794967526.7642426,
-  "seq0": 137770,
-  "rep0": 86079,
+  "run_start_epoch": 1795012023.098014,
+  "seq0": 0,
+  "rep0": 0,
   "rate": 100.0,
-  "duration": 120.0,
-  "votes_planned": 12000
+  "duration": 150.0,
+  "votes_planned": 15000
 }

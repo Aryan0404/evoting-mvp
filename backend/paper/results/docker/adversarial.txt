@@ -1,0 +1,15 @@
+=== Section 5.10 — Adversarial tests (live system, full Algorithm 1) ===
+
+[1] REPLAY: first cast 201; replays rejected 1000/1000; latency mean 0.95 ms, p99 1.35 ms
+
+[2] FORGERIES (100 of each type)
+    unknown_ticket           rejected 100/100   mean   0.94 ms   codes {'409': 100}
+    proof_for_other_ticket   rejected 100/100   mean   1.16 ms   codes {'422': 100}
+    tampered_proof           rejected 100/100   mean   4.03 ms   codes {'422': 100}
+    wrong_device_key         rejected 100/100   mean  20.33 ms   codes {'422': 100}
+    stale_timestamp          rejected 100/100   mean   0.81 ms   codes {'400': 100}
+    real tickets still usable after all forgeries: 100/100
+
+[3] DOUBLE VOTE: 50 simultaneous submissions of one ticket -> 1 accepted, 49 rejected
+
+All adversarial defences held.

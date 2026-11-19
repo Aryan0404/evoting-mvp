@@ -1,0 +1,21 @@
+  k2: preparing payloads ...
+  k2: 10,297-byte records, driving the ledger for 60s ...
+2026-11-18 13:29:53.441 INFO  [281473876190400] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-18 13:29:53.441 INFO  [281473876190400] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-18 13:29:53.452 INFO  [281473816260992] ClientConnection:404 | [172.18.0.11:42164 -> 172.18.0.10:6650] Connected to broker
+2026-11-18 13:29:53.460 INFO  [281473816260992] HandlerBase:83 | [persistent://public/default/stress-k2-64895d, ] Getting connection from pool
+2026-11-18 13:29:53.519 INFO  [281473816260992] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/stress-k2-64895d, lookup-broker-url pulsar://pulsar:6650, from [172.18.0.11:42164 -> 172.18.0.10:6650] 
+2026-11-18 13:29:53.573 INFO  [281473816260992] ProducerImpl:212 | [persistent://public/default/stress-k2-64895d, ] Created producer on broker [172.18.0.11:42164 -> 172.18.0.10:6650] 
+2026-11-18 13:31:00.259 INFO  [281473876190400] ProducerImpl:795 | [persistent://public/default/stress-k2-64895d, evoting-0-17] Closing producer for topic persistent://public/default/stress-k2-64895d
+2026-11-18 13:31:00.261 INFO  [281473816260992] ProducerImpl:759 | [persistent://public/default/stress-k2-64895d, evoting-0-17] Closed producer 0
+2026-11-18 13:31:00.261 INFO  [281473876190400] ClientImpl:611 | Closing Pulsar client with 0 producers and 0 consumers
+2026-11-18 13:31:00.262 INFO  [281473701638528] ClientConnection:1325 | [172.18.0.11:42164 -> 172.18.0.10:6650] Connection disconnected (refCnt: 1)
+2026-11-18 13:31:00.262 INFO  [281473701638528] ClientConnection:274 | [172.18.0.11:42164 -> 172.18.0.10:6650] Destroyed connection to pulsar://pulsar:6650-0
+2026-11-18 13:31:00.755 INFO  [281473876190400] ProducerImpl:749 | Producer - [persistent://public/default/stress-k2-64895d, evoting-0-17] , [batchMessageContainer = { BatchMessageContainer [size = 0] [bytes = 0] [maxSize = 1000] [maxBytes = 131072] [topicName = persistent://public/default/stress-k2-64895d] [numberOfBatchesSent_ = 29548] [averageBatchSize_ = 0] }]
+
+========================================================================================================
+  SECTION 5.12 — SUSTAINED LEDGER STRESS  (Pulsar + 4 BookKeeper nodes, E=3 / Qw=2 / Qa=2, every write on 2 nodes)
+========================================================================================================
+  Payload     Bytes  Seconds       Acked  Failed    Mean/s    Min/s    Max/s    MB/s   Ack p50   Ack p99
+  k2         10,297       60     354,189       0     5,574      153    9,850    54.7  3316.2ms  6698.3ms
+========================================================================================================

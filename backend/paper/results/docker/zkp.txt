@@ -1,0 +1,18 @@
+Ballot-validity proof, k = 2 (1000 gen / 2000 verify) ...
+Ballot-validity proof, k = 5 (1000 gen / 2000 verify) ...
+Schnorr P-256 credential proof ...
+ECDSA P-256 device signature ...
+Verification capacity (k = 5 ballot proofs) ...
+
+====================================================================================================
+  SECTION 5.8 — PROOF OVERHEAD  (Paillier 2048-bit; 1000 generations, 2000 verifications each)
+====================================================================================================
+  Scheme                                           Generate (ms)               Verify (ms)      Size
+  Ballot validity, k = 2 (incl. encrypt)  71.15 ± 0.28 (p99 72.08)  18.57 ± 0.13 (p99 18.84)    3902 B
+  Ballot validity, k = 5 (incl. encrypt)162.72 ± 0.72 (p99 164.36)  29.05 ± 0.18 (p99 29.45)    8605 B
+  Schnorr PoK, P-256 (credential)         0.28 ± 0.02 (p99 0.37)    1.20 ± 0.03 (p99 1.27)      65 B
+  ECDSA P-256 device signature            0.04 ± 0.02 (p99 0.06)    0.10 ± 0.01 (p99 0.12)      72 B
+  ------------------------------------------------------------------------------------------------
+  Ballot-proof verification capacity (k = 5): 1 proc: 34/s, 2 proc: 68/s, 4 proc: 107/s, 8 proc: 127/s
+  Results written to /app/paper/results/docker/zkp.json
+====================================================================================================

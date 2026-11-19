@@ -1,0 +1,4 @@
+
+CLOSED LOOP  20,000 votes @ concurrency 100:  19,960 accepted, 128.5 votes/s, p50 434.5 ms, p95 2210.8 ms, p99 2791.6 ms  {'201': 19960, '503': 40}
+  failures by reason: {'503 Service Unavailable': 40}
+saved /app/paper/results/docker/load_closed_r1.json

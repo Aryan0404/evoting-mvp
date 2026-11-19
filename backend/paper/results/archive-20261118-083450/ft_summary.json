@@ -1,0 +1,52 @@
+{
+  "votes_attempted": 12000,
+  "accepted_client_view": 12000,
+  "accepted_after_retry": 0,
+  "accepted_reply_lost": 0,
+  "failed_after_all_retries": 0,
+  "server_accepted_ledger_seq_delta": 12000,
+  "ledger_messages_read_back": 12000,
+  "ledger_unique_ballots": 12000,
+  "ledger_read_back_seconds": 1.05,
+  "replica_ballots_this_run": 12000,
+  "lost_votes_server_vs_ledger": 0,
+  "ledger_duplicates": 0,
+  "replica_matches_ledger_exactly": true,
+  "merkle_root_ledger": "b71569f6f2435dba01b45e6c11f6ca02ffddaa89e07fb0a652fd35f2cf8ad7b1",
+  "merkle_root_replica": "b71569f6f2435dba01b45e6c11f6ca02ffddaa89e07fb0a652fd35f2cf8ad7b1",
+  "merkle_roots_equal": true,
+  "longest_gap_without_acceptance_s": 0.142,
+  "latency_p50_p99_ms_before_fault": [
+    15.0,
+    33.6
+  ],
+  "latency_p50_p99_ms_first_10s_after_fault": [
+    15.1,
+    20.2
+  ],
+  "latency_p50_p99_ms_after_recovery": [
+    15.1,
+    349.4
+  ],
+  "max_latency_ms": 1942.7,
+  "replica_downtime_s": 15.4,
+  "replica_catch_up_s_after_restart": 10.8,
+  "events": [
+    {
+      "t_rel_s": 2.65,
+      "event": "run_started"
+    },
+    {
+      "t_rel_s": 32.71,
+      "event": "kill_bookie evoting_bookie2 (SIGKILL)"
+    },
+    {
+      "t_rel_s": 62.97,
+      "event": "kill_replica (SIGKILL)"
+    },
+    {
+      "t_rel_s": 78.4,
+      "event": "restart_replica"
+    }
+  ]
+}

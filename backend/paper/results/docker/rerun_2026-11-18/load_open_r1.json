@@ -1,0 +1,23 @@
+{
+  "offered_rate": 100.0,
+  "duration_s": 60.0,
+  "invalid_fraction": 0.0,
+  "legit": {
+    "attempted": 6000,
+    "accepted": 5739,
+    "rejected_or_failed": 261,
+    "status_counts": {
+      "201": 5739,
+      "503": 261
+    },
+    "wall_s": 60.82,
+    "throughput_per_s": 94.4,
+    "p50_ms": 1122.3,
+    "p95_ms": 6831.4,
+    "p99_ms": 8034.3,
+    "max_ms": 10496.5,
+    "errors": {
+      "503 Service Unavailable": 261
+    }
+  }
+}

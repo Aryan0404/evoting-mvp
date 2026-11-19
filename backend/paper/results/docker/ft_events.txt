@@ -1,5 +1,8 @@
-1794967529.411 run_started
-1794967559.471 kill_bookie evoting_bookie2 (SIGKILL)
-1794967589.739 kill_replica (SIGKILL)
-1794967605.162 restart_replica
-1794967673.129 restart_bookie evoting_bookie2
+1795012011.462 run_started
+1795012041.551 kill_bookie evoting_bookie2 (SIGKILL; stays down)
+1795012072.317 kill_replica (SIGKILL)
+1795012087.620 restart_replica
+1795012120.217 kill_quorum evoting_bookie3 (SIGKILL; storage now below the ensemble size)
+1795012136.220 restore_quorum evoting_bookie3
+1795012136.623 quorum_registered evoting_bookie3
+1795012209.076 restart_bookie evoting_bookie2

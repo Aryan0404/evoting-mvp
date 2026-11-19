@@ -1,0 +1,46 @@
+
+=== SMOKE TEST ===
+  PASS  300 valid votes accepted
+  PASS  replay rejected (409)
+  PASS  forged proof rejected (422)
+  PASS  primary and replica agree (PASS)
+  PASS  liveness LIVE
+  PASS  tamper detected
+  PASS  tamper localised to ledger position 123
+  PASS  lockdown refuses new votes (503)
+  PASS  back to PASS after restore
+  PASS  voting resumes after lockdown cleared
+
+SMOKE TEST PASSED — safe to start the full run
+Exception ignored in: <function AbstractConnection.__del__ at 0xffff842ecfe0>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/redis/asyncio/connection.py", line 216, in __del__
+    self._close()
+  File "/usr/local/lib/python3.11/site-packages/redis/asyncio/connection.py", line 223, in _close
+    self._writer.close()
+  File "/usr/local/lib/python3.11/asyncio/streams.py", line 358, in close
+    return self._transport.close()
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/selector_events.py", line 864, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 762, in call_soon
+    self._check_closed()
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 520, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+Exception ignored in: <function AbstractConnection.__del__ at 0xffff842ecfe0>
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/redis/asyncio/connection.py", line 216, in __del__
+    self._close()
+  File "/usr/local/lib/python3.11/site-packages/redis/asyncio/connection.py", line 223, in _close
+    self._writer.close()
+  File "/usr/local/lib/python3.11/asyncio/streams.py", line 358, in close
+    return self._transport.close()
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/selector_events.py", line 864, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 762, in call_soon
+    self._check_closed()
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 520, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed

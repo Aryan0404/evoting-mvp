@@ -1,0 +1,2 @@
+Filled ledger: 23,615/25,000 votes accepted at 140.4/s
+Replica and primary agree on all 23,615 ballots (PASS) after 2.8s

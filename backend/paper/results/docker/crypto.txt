@@ -1,42 +1,45 @@
+Threshold key ceremony (3 of 5, 2048-bit) ...
 Run 1/5: ZKP, tally, Merkle, election ...
 
-==========================================================
-  ELECTION SIMULATION  (consensus-free, no blockchain)
-==========================================================
+==============================================================
+  ELECTION  (consensus-free; full cryptographic pipeline)
+==============================================================
   Eligible voters (generated dataset): 5,000
   Candidates                         : 4
-  Encryption                         : Paillier 2048-bit (real)
-  Trustee keygen                     : 0.06s
+  Encryption                         : Paillier 2048-bit + ballot-validity ZKP
+  Decryption                         : threshold, 3 of 5 trustees
 
-  Votes cast + sealed + encrypted    : 55.31s (90 ballots/sec, 8 cores)
-  Homomorphic count (tally+decrypt)  : 0.052s
-  Merkle seal over all ballots       : 0.004s
-  Integrity root                     : 5dab1f9501938b76782983baaa4b78e1...
+  Voters' devices: encrypt + prove     : 223.60s wall (8 workers), 356 ms per voter
+  Server: verify all ballot proofs     : 41.24s wall, 5,000/5,000 valid
+  Merkle seal over all ballots         : 0.085s
+  Homomorphic tally (1 core)           : 0.129s
+  Threshold decryption (3 of 5)      : 82 ms
+  COUNT = tally + decryption           : 0.211s
+  Integrity root                       : 803d795c339439fb552de2c58fa0ab3f...
 
   ----------------------------------------
   OFFICIAL RESULT
   ----------------------------------------
   Candidate          Votes     Share
-  Candidate A        1,236     24.7%
-  Candidate B        1,247     24.9%
-  Candidate C        1,213     24.3%
-  Candidate D        1,304     26.1%  <= WINNER
+  Candidate A        1,268     25.4%
+  Candidate B        1,189     23.8%
+  Candidate C        1,307     26.1%  <= WINNER
+  Candidate D        1,236     24.7%
   ----------------------------------------
   Total              5,000
 
-  Count matches ground truth exactly : True
-  Tamper-evident (Merkle committed)  : yes
-==========================================================
+  Result matches ground truth exactly : True
+==============================================================
 
-  done in 260s
+  done in 267s
 Run 2/5: ZKP, tally, Merkle, election ...
-  done in 265s
+  done in 273s
 Run 3/5: ZKP, tally, Merkle, election ...
-  done in 256s
+  done in 225s
 Run 4/5: ZKP, tally, Merkle, election ...
-  done in 257s
+  done in 244s
 Run 5/5: ZKP, tally, Merkle, election ...
-  done in 263s
+  done in 211s
 
 ============================================================================
   CONSOLIDATED BENCHMARK  —  single documented machine
@@ -52,33 +55,37 @@ Run 5/5: ZKP, tally, Merkle, election ...
   OS                 : Linux 7.0.14-linuxkit
   Python             : 3.11.18
   Crypto libs        : phe 1.5.0, ecdsa 0.19.2, gmpy2 2.3.2 (Paillier accel: True)
-  Workload           : 5,000 voters, 4 candidates, Paillier 2048-bit, 500 ZKP samples/run, bundle 10,000
+  Workload           : 5,000 voters, 4 candidates, Paillier 2048-bit, 3-of-5 trustees, 500 Schnorr samples/run, bundle 10,000
+  Key ceremony       : 11.6 s (one-off)
   Repeats            : 5 full run(s)
-  Captured (UTC)     : 2026-11-18T01:33:25+00:00
+  Captured (UTC)     : 2026-11-18T03:06:52+00:00
 
   RESULTS  (mean ± SD over 5 runs)
   ------------------------------------------------------------------------
   Metric                                                             Value
   ------------------------------------------------------------------------
-  ZKP proof generation (mean of samples)                  0.290 ± 0.010 ms
-  ZKP proof verification (mean of samples)                1.234 ± 0.034 ms
-  COUNT N votes: tally + decrypt (1 core)                  0.268 ± 0.003 s
-    homomorphic tally (sequential)                         0.256 ± 0.003 s
-    tally rate                                      19,544 ± 225 ballots/s
-    decrypt K totals                                       11.73 ± 0.13 ms
-  Merkle root over bundle                                   6.20 ± 0.00 ms
-    locate 1 tampered ballot                                 45.1 ± 0.6 ms
-    locate 10 tampered ballots                               85.9 ± 4.6 ms
-    locate 100 tampered ballots                             140.4 ± 1.9 ms
-  Election: vote + encrypt + seal (all cores)               56.92 ± 4.13 s
-  Election: merge partial tallies + decrypt                0.057 ± 0.003 s
-  Election: Merkle seal over all ballots                      4.2 ± 0.4 ms
-  ZKP proof size                                                  65 bytes
+  Schnorr credential proof: generate                      0.292 ± 0.007 ms
+  Schnorr credential proof: verify                        1.242 ± 0.027 ms
+  Voter device: encrypt + ballot ZKP                       323.4 ± 35.5 ms
+  Server: verify all N ballot proofs                        39.08 ± 4.11 s
+  COUNT N votes: tally + threshold decrypt                 0.213 ± 0.002 s
+    homomorphic tally (1 core)                             0.130 ± 0.002 s
+    threshold decryption (t of K)                            82.3 ± 0.4 ms
+  Merkle seal over all N ballots                         104.98 ± 32.05 ms
+  Merkle root over a 10,000-vote bundle                     6.51 ± 0.44 ms
+  Voter receipt check (inclusion proof)                 0.0109 ± 0.0006 ms
+  Bisection: 1 tampered in 5,000                          0.019 ± 0.003 ms
+  Bisection: 10 tampered in 5,000                         0.040 ± 0.004 ms
+  Bisection: 100 tampered in 5,000                        0.186 ± 0.019 ms
+  Bisection: 1,000 tampered in 5,000                      0.824 ± 0.063 ms
+  Schnorr proof size                                              65 bytes
+  Voter receipt = hashes per inclusion proof                            14
+  Bisection comparisons (1/10/100/1000)                   27/183/1105/5613
+  Election result (run 1)                         [1268, 1189, 1307, 1236]
   All correctness checks passed (every run)                           True
   ------------------------------------------------------------------------
-  Headline 'count N votes' = the COUNT row (sequential, one core).
-  The election 'merge' row excludes per-ballot additions done in the
-  parallel workers, so it is not a counting time.
+  COUNT = sequential homomorphic tally on one core + threshold decryption
+  (trustees decrypt in parallel). Key ceremony is a one-off, reported above.
 ============================================================================
 
   Machine-readable results written to: /app/paper/results/docker/crypto.json

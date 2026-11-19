@@ -1,0 +1,20 @@
+Read-write bookies:
+{
+  "bookies" : [ {
+    "bookieId" : "bookie1:3181"
+  }, {
+    "bookieId" : "bookie4:3181"
+  }, {
+    "bookieId" : "bookie2:3181"
+  }, {
+    "bookieId" : "bookie3:3181"
+  } ]
+}
+
+Persistence policy:
+{
+  "bookkeeperEnsemble" : 3,
+  "bookkeeperWriteQuorum" : 2,
+  "bookkeeperAckQuorum" : 2,
+  "managedLedgerMaxMarkDeleteRate" : 0.0
+}

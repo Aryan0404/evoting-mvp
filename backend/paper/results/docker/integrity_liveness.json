@@ -1,0 +1,9 @@
+{
+  "tau_s": 15.0,
+  "cycle_s": 5.0,
+  "paused_for_s": 30.149999856948853,
+  "live_before_pause_share": 1.0,
+  "stale_reported_after_pause_s": 17.514999866485596,
+  "live_again_after_resume_s": 0.30100011825561523,
+  "diverged_samples": 0
+}

@@ -1,9 +1,9 @@
 {
   "setup": {
-    "captured_at_utc": "2026-11-18T01:33:25+00:00",
+    "captured_at_utc": "2026-11-18T03:06:52+00:00",
     "host_label": "Apple M2, 16 GB RAM; Docker allocation: 8 CPUs, 11.8 GB",
     "in_docker_container": true,
-    "hostname": "4f1151e12154",
+    "hostname": "afe39b597ee9",
     "os": "Linux 7.0.14-linuxkit",
     "python": "3.11.18",
     "cpu_model": "aarch64",
@@ -19,210 +19,240 @@
   "config": {
     "voters": 5000,
     "candidates": 4,
-    "tally_ballots": 5000,
+    "trustees": 5,
+    "threshold": 3,
     "zkp_samples": 500,
     "bundle_size": 10000,
     "key_bits": 2048,
-    "repeats": 5
+    "repeats": 5,
+    "keygen_s": 11.631020628999977
   },
   "summary": {
     "zkp_gen_ms": {
       "unit": "ms",
       "n": 5,
-      "mean": 0.29031999999999997,
-      "sd": 0.009713238388920558,
-      "min": 0.2802,
-      "max": 0.301,
+      "mean": 0.2921,
+      "sd": 0.006877136031808587,
+      "min": 0.2876,
+      "max": 0.3039,
       "values": [
-        0.2994,
-        0.2895,
-        0.301,
-        0.2802,
-        0.2815
+        0.2877,
+        0.2924,
+        0.2889,
+        0.3039,
+        0.2876
       ]
     },
     "zkp_verify_ms": {
       "unit": "ms",
       "n": 5,
-      "mean": 1.2344,
-      "sd": 0.03353736721926757,
-      "min": 1.2026,
-      "max": 1.2736,
+      "mean": 1.2420200000000001,
+      "sd": 0.026988553129058204,
+      "min": 1.2192,
+      "max": 1.2849,
       "values": [
-        1.266,
-        1.2247,
-        1.2736,
-        1.2051,
-        1.2026
+        1.2192,
+        1.2512,
+        1.232,
+        1.2849,
+        1.2228
+      ]
+    },
+    "device_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 323.4259460660784,
+      "sd": 35.471252671712996,
+      "min": 280.73206830858834,
+      "max": 360.85376134400286,
+      "values": [
+        356.03645395359604,
+        360.85376134400286,
+        296.11689935619836,
+        323.3905473680064,
+        280.73206830858834
+      ]
+    },
+    "verify_wall_s": {
+      "unit": "s",
+      "n": 5,
+      "mean": 39.08493876779994,
+      "sd": 4.114583464250622,
+      "min": 33.06946647299992,
+      "max": 44.11997768600031,
+      "values": [
+        41.23602439499973,
+        44.11997768600031,
+        37.84033964199989,
+        39.15888564299985,
+        33.06946647299992
       ]
     },
     "count_sec": {
       "unit": "s",
       "n": 5,
-      "mean": 0.2675866,
-      "sd": 0.002941334442051765,
-      "min": 0.265323,
-      "max": 0.272541,
+      "mean": 0.21261940019958275,
+      "sd": 0.002126151617460755,
+      "min": 0.21086204199946224,
+      "max": 0.21623175000058836,
       "values": [
-        0.26554,
-        0.266745,
-        0.265323,
-        0.26778399999999997,
-        0.272541
+        0.21086204199946224,
+        0.21623175000058836,
+        0.21243595899977663,
+        0.21229058299923054,
+        0.21127666699885594
       ]
     },
     "tally_sec": {
       "unit": "s",
       "n": 5,
-      "mean": 0.25586,
-      "sd": 0.0029711950457686144,
-      "min": 0.2536,
-      "max": 0.2608,
+      "mean": 0.13034432519980327,
+      "sd": 0.0018901269099222467,
+      "min": 0.12892987499981245,
+      "max": 0.13365587499993126,
       "values": [
-        0.2536,
-        0.2551,
-        0.2536,
-        0.2562,
-        0.2608
-      ]
-    },
-    "tally_rate": {
-      "unit": "ballots/s",
-      "n": 5,
-      "mean": 19543.84,
-      "sd": 224.63355270306442,
-      "min": 19173.1,
-      "max": 19718.4,
-      "values": [
-        19718.4,
-        19598.2,
-        19717.0,
-        19512.5,
-        19173.1
+        0.12892987499981245,
+        0.13365587499993126,
+        0.12980291700023372,
+        0.1299022919993149,
+        0.12943066699972405
       ]
     },
     "decrypt_ms": {
       "unit": "ms",
       "n": 5,
-      "mean": 11.726600000000001,
-      "sd": 0.13486400557598677,
-      "min": 11.584000000000001,
-      "max": 11.94,
+      "mean": 82.27507499977946,
+      "sd": 0.3650788027495292,
+      "min": 81.84599999913189,
+      "max": 82.63304199954291,
       "values": [
-        11.94,
-        11.645000000000001,
-        11.723,
-        11.584000000000001,
-        11.741
+        81.93216699964978,
+        82.5758750006571,
+        82.63304199954291,
+        82.38829099991563,
+        81.84599999913189
+      ]
+    },
+    "seal_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 104.9816914000985,
+      "sd": 32.05013961576413,
+      "min": 79.46479099973658,
+      "max": 159.02783300043666,
+      "values": [
+        84.72395799981314,
+        94.05758400043851,
+        107.6342910000676,
+        159.02783300043666,
+        79.46479099973658
       ]
     },
     "merkle_build_ms": {
       "unit": "ms",
       "n": 5,
-      "mean": 6.2,
-      "sd": 0.0,
-      "min": 6.2,
-      "max": 6.2,
+      "mean": 6.507174999933341,
+      "sd": 0.4377419366473872,
+      "min": 5.928042000050482,
+      "max": 7.016458000180137,
       "values": [
-        6.2,
-        6.2,
-        6.2,
-        6.2,
-        6.2
+        6.5408329992351355,
+        6.233791999875393,
+        6.8167500003255554,
+        7.016458000180137,
+        5.928042000050482
+      ]
+    },
+    "receipt_ms": {
+      "unit": "ms",
+      "n": 5,
+      "mean": 0.01094200859988632,
+      "sd": 0.0006484134331628309,
+      "min": 0.01044016699961503,
+      "max": 0.012015291999887268,
+      "values": [
+        0.010694833999878028,
+        0.010493249999854015,
+        0.011066500000197266,
+        0.012015291999887268,
+        0.01044016699961503
       ]
     },
     "locate_1_ms": {
       "unit": "ms",
       "n": 5,
-      "mean": 45.1352,
-      "sd": 0.5887594585227485,
-      "min": 44.435,
-      "max": 46.009,
+      "mean": 0.01898339996841969,
+      "sd": 0.0034903741830452292,
+      "min": 0.015541999346169177,
+      "max": 0.022917000023880973,
       "values": [
-        44.435,
-        45.34,
-        44.848,
-        45.044,
-        46.009
+        0.018000000636675395,
+        0.022416999854613096,
+        0.015541999346169177,
+        0.022917000023880973,
+        0.016040999980759807
       ]
     },
     "locate_10_ms": {
       "unit": "ms",
       "n": 5,
-      "mean": 85.9492,
-      "sd": 4.583765831715231,
-      "min": 81.365,
-      "max": 92.141,
+      "mean": 0.039541600017400924,
+      "sd": 0.004123877769339875,
+      "min": 0.0351250000676373,
+      "max": 0.044207999962964095,
       "values": [
-        88.252,
-        86.417,
-        81.571,
-        81.365,
-        92.141
+        0.036209000427334104,
+        0.038749999475840013,
+        0.044207999962964095,
+        0.043416000153229106,
+        0.0351250000676373
       ]
     },
     "locate_100_ms": {
       "unit": "ms",
       "n": 5,
-      "mean": 140.3908,
-      "sd": 1.907088277977716,
-      "min": 137.974,
-      "max": 143.221,
+      "mean": 0.1863416002379381,
+      "sd": 0.019160594743505902,
+      "min": 0.16650000088702654,
+      "max": 0.2132500003426685,
       "values": [
-        140.903,
-        143.221,
-        139.872,
-        137.974,
-        139.984
+        0.16650000088702654,
+        0.17133300025307108,
+        0.2132500003426685,
+        0.19716699989658082,
+        0.1834579998103436
       ]
     },
-    "election_encrypt_sec": {
-      "unit": "s",
-      "n": 5,
-      "mean": 56.922000000000004,
-      "sd": 4.134044024922812,
-      "min": 53.39,
-      "max": 63.85,
-      "values": [
-        55.31,
-        63.85,
-        54.67,
-        53.39,
-        57.39
-      ]
-    },
-    "election_merge_sec": {
-      "unit": "s",
-      "n": 5,
-      "mean": 0.0574,
-      "sd": 0.003286335345030997,
-      "min": 0.052,
-      "max": 0.06,
-      "values": [
-        0.052,
-        0.058,
-        0.057,
-        0.06,
-        0.06
-      ]
-    },
-    "election_seal_ms": {
+    "locate_1000_ms": {
       "unit": "ms",
       "n": 5,
-      "mean": 4.2,
-      "sd": 0.4472135954999579,
-      "min": 4.0,
-      "max": 5.0,
+      "mean": 0.8236914001827245,
+      "sd": 0.0628219730990466,
+      "min": 0.7523750000473228,
+      "max": 0.901000000339991,
       "values": [
-        4.0,
-        4.0,
-        4.0,
-        4.0,
-        5.0
+        0.7809999997334671,
+        0.8086660000117263,
+        0.901000000339991,
+        0.8754160007811151,
+        0.7523750000473228
       ]
     },
     "all_correct": true,
-    "zkp_proof_size_bytes": 65
+    "zkp_proof_size_bytes": 65,
+    "bisection_comparisons": {
+      "1": 27,
+      "10": 183,
+      "100": 1105,
+      "1000": 5613
+    },
+    "receipt_hashes": 14,
+    "election_result": [
+      1268,
+      1189,
+      1307,
+      1236
+    ]
   },
   "runs": [
     {
@@ -231,219 +261,50 @@
         "n_samples": 500,
         "proof_size_bytes": 65,
         "gen_time_ms": {
-          "mean": 0.2994,
-          "median": 0.2908,
-          "p99": 0.5227
+          "mean": 0.2877,
+          "median": 0.2836,
+          "p99": 0.3511
         },
         "verify_time_ms": {
-          "mean": 1.266,
-          "median": 1.2299,
-          "p99": 1.851
-        },
-        "all_valid": true,
-        "forged_rejected": true
-      },
-      "tally": {
-        "num_ballots": 5000,
-        "num_candidates": 4,
-        "key_bits": 2048,
-        "encrypt_sec": 203.5177,
-        "tally_sec": 0.2536,
-        "decrypt_sec": 0.01194,
-        "tally_rate_votes_per_sec": 19718.4,
-        "totals": [
-          1275,
-          1253,
-          1247,
-          1225
-        ],
-        "expected": [
-          1275,
-          1253,
-          1247,
-          1225
-        ],
-        "correct": true
-      },
-      "merkle": {
-        "bundle_size": 10000,
-        "build_root_sec": 0.0062,
-        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
-        "tamper_localization": {
-          "1": {
-            "located": 1,
-            "correct": true,
-            "time_ms": 44.435
-          },
-          "10": {
-            "located": 10,
-            "correct": true,
-            "time_ms": 88.252
-          },
-          "100": {
-            "located": 100,
-            "correct": true,
-            "time_ms": 140.903
-          }
-        }
-      },
-      "election": {
-        "voters": 5000,
-        "candidates": 4,
-        "cast": 5000,
-        "vote_encrypt_sec": 55.31,
-        "count_sec": 0.052,
-        "seal_sec": 0.004,
-        "tally": [
-          1236,
-          1247,
-          1213,
-          1304
-        ],
-        "winner": 3,
-        "correct": true,
-        "root": "5dab1f9501938b76782983baaa4b78e130de252fb366407a1b6d92079b5bb411"
-      }
-    },
-    {
-      "zkp": {
-        "scheme": "schnorr-NIST-P256",
-        "n_samples": 500,
-        "proof_size_bytes": 65,
-        "gen_time_ms": {
-          "mean": 0.2895,
-          "median": 0.2855,
-          "p99": 0.4272
-        },
-        "verify_time_ms": {
-          "mean": 1.2247,
-          "median": 1.2149,
-          "p99": 1.477
-        },
-        "all_valid": true,
-        "forged_rejected": true
-      },
-      "tally": {
-        "num_ballots": 5000,
-        "num_candidates": 4,
-        "key_bits": 2048,
-        "encrypt_sec": 199.3695,
-        "tally_sec": 0.2551,
-        "decrypt_sec": 0.011645,
-        "tally_rate_votes_per_sec": 19598.2,
-        "totals": [
-          1223,
-          1248,
-          1266,
-          1263
-        ],
-        "expected": [
-          1223,
-          1248,
-          1266,
-          1263
-        ],
-        "correct": true
-      },
-      "merkle": {
-        "bundle_size": 10000,
-        "build_root_sec": 0.0062,
-        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
-        "tamper_localization": {
-          "1": {
-            "located": 1,
-            "correct": true,
-            "time_ms": 45.34
-          },
-          "10": {
-            "located": 10,
-            "correct": true,
-            "time_ms": 86.417
-          },
-          "100": {
-            "located": 100,
-            "correct": true,
-            "time_ms": 143.221
-          }
-        }
-      },
-      "election": {
-        "voters": 5000,
-        "candidates": 4,
-        "cast": 5000,
-        "vote_encrypt_sec": 63.85,
-        "count_sec": 0.058,
-        "seal_sec": 0.004,
-        "tally": [
-          1236,
-          1247,
-          1213,
-          1304
-        ],
-        "winner": 3,
-        "correct": true,
-        "root": "492eb43bfdc7c216624c74212b8ef8145945c8e23db2998315edc6e5d6d75a94"
-      }
-    },
-    {
-      "zkp": {
-        "scheme": "schnorr-NIST-P256",
-        "n_samples": 500,
-        "proof_size_bytes": 65,
-        "gen_time_ms": {
-          "mean": 0.301,
-          "median": 0.2848,
-          "p99": 0.7206
-        },
-        "verify_time_ms": {
-          "mean": 1.2736,
+          "mean": 1.2192,
           "median": 1.2103,
-          "p99": 2.6948
+          "p99": 1.4738
         },
         "all_valid": true,
         "forged_rejected": true
       },
-      "tally": {
-        "num_ballots": 5000,
-        "num_candidates": 4,
-        "key_bits": 2048,
-        "encrypt_sec": 200.1916,
-        "tally_sec": 0.2536,
-        "decrypt_sec": 0.011723,
-        "tally_rate_votes_per_sec": 19717.0,
-        "totals": [
-          1261,
-          1288,
-          1255,
-          1196
-        ],
-        "expected": [
-          1261,
-          1288,
-          1255,
-          1196
-        ],
-        "correct": true
-      },
       "merkle": {
         "bundle_size": 10000,
-        "build_root_sec": 0.0062,
-        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
+        "depth": 14,
+        "build_root_sec": 0.0065408329992351355,
+        "receipt_hashes": 14,
+        "receipt_verify_ms": 0.010694833999878028,
+        "receipts_ok": true,
+        "bisect_bundle": 5000,
         "tamper_localization": {
           "1": {
-            "located": 1,
             "correct": true,
-            "time_ms": 44.848
+            "time_ms": 0.018000000636675395,
+            "comparisons": 27,
+            "depth": 13
           },
           "10": {
-            "located": 10,
             "correct": true,
-            "time_ms": 81.571
+            "time_ms": 0.036209000427334104,
+            "comparisons": 183,
+            "depth": 13
           },
           "100": {
-            "located": 100,
             "correct": true,
-            "time_ms": 139.872
+            "time_ms": 0.16650000088702654,
+            "comparisons": 1105,
+            "depth": 13
+          },
+          "1000": {
+            "correct": true,
+            "time_ms": 0.7809999997334671,
+            "comparisons": 5613,
+            "depth": 13
           }
         }
       },
@@ -451,18 +312,32 @@
         "voters": 5000,
         "candidates": 4,
         "cast": 5000,
-        "vote_encrypt_sec": 54.67,
-        "count_sec": 0.057,
-        "seal_sec": 0.004,
+        "trustees": 5,
+        "threshold": 3,
+        "keygen_s": 0.0,
+        "vote_encrypt_prove_wall_s": 223.60240414500004,
+        "device_encrypt_prove_ms_mean": 356.03645395359604,
+        "verify_wall_s": 41.23602439499973,
+        "valid_proofs": 5000,
+        "seal_s": 0.08472395799981314,
+        "tally_s": 0.12892987499981245,
+        "decrypt_s": 0.08193216699964978,
+        "count_s": 0.21086204199946224,
         "tally": [
-          1236,
-          1247,
-          1213,
-          1304
+          1268,
+          1189,
+          1307,
+          1236
         ],
-        "winner": 3,
+        "ground_truth": [
+          1268,
+          1189,
+          1307,
+          1236
+        ],
+        "winner": 2,
         "correct": true,
-        "root": "1132e9f4a575d9f8640dfe675d6cd491818938242f42f825ff5897378a17358a"
+        "root": "803d795c339439fb552de2c58fa0ab3fedfcf4631668537aa1f16d3f908096f3"
       }
     },
     {
@@ -471,59 +346,50 @@
         "n_samples": 500,
         "proof_size_bytes": 65,
         "gen_time_ms": {
-          "mean": 0.2802,
-          "median": 0.2793,
-          "p99": 0.3253
+          "mean": 0.2924,
+          "median": 0.2847,
+          "p99": 0.5218
         },
         "verify_time_ms": {
-          "mean": 1.2051,
-          "median": 1.2005,
-          "p99": 1.2975
+          "mean": 1.2512,
+          "median": 1.2129,
+          "p99": 2.1124
         },
         "all_valid": true,
         "forged_rejected": true
       },
-      "tally": {
-        "num_ballots": 5000,
-        "num_candidates": 4,
-        "key_bits": 2048,
-        "encrypt_sec": 202.2922,
-        "tally_sec": 0.2562,
-        "decrypt_sec": 0.011584,
-        "tally_rate_votes_per_sec": 19512.5,
-        "totals": [
-          1231,
-          1222,
-          1286,
-          1261
-        ],
-        "expected": [
-          1231,
-          1222,
-          1286,
-          1261
-        ],
-        "correct": true
-      },
       "merkle": {
         "bundle_size": 10000,
-        "build_root_sec": 0.0062,
-        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
+        "depth": 14,
+        "build_root_sec": 0.006233791999875393,
+        "receipt_hashes": 14,
+        "receipt_verify_ms": 0.010493249999854015,
+        "receipts_ok": true,
+        "bisect_bundle": 5000,
         "tamper_localization": {
           "1": {
-            "located": 1,
             "correct": true,
-            "time_ms": 45.044
+            "time_ms": 0.022416999854613096,
+            "comparisons": 27,
+            "depth": 13
           },
           "10": {
-            "located": 10,
             "correct": true,
-            "time_ms": 81.365
+            "time_ms": 0.038749999475840013,
+            "comparisons": 199,
+            "depth": 13
           },
           "100": {
-            "located": 100,
             "correct": true,
-            "time_ms": 137.974
+            "time_ms": 0.17133300025307108,
+            "comparisons": 1193,
+            "depth": 13
+          },
+          "1000": {
+            "correct": true,
+            "time_ms": 0.8086660000117263,
+            "comparisons": 5563,
+            "depth": 13
           }
         }
       },
@@ -531,18 +397,32 @@
         "voters": 5000,
         "candidates": 4,
         "cast": 5000,
-        "vote_encrypt_sec": 53.39,
-        "count_sec": 0.06,
-        "seal_sec": 0.004,
+        "trustees": 5,
+        "threshold": 3,
+        "keygen_s": 0.0,
+        "vote_encrypt_prove_wall_s": 226.6939791450004,
+        "device_encrypt_prove_ms_mean": 360.85376134400286,
+        "verify_wall_s": 44.11997768600031,
+        "valid_proofs": 5000,
+        "seal_s": 0.09405758400043851,
+        "tally_s": 0.13365587499993126,
+        "decrypt_s": 0.0825758750006571,
+        "count_s": 0.21623175000058836,
         "tally": [
-          1236,
-          1247,
-          1213,
-          1304
+          1268,
+          1189,
+          1307,
+          1236
         ],
-        "winner": 3,
+        "ground_truth": [
+          1268,
+          1189,
+          1307,
+          1236
+        ],
+        "winner": 2,
         "correct": true,
-        "root": "615bb3ef40b59416562840ee836d2e4ceedc7a1551e9131cf673f8a8dbadf656"
+        "root": "13f2ce7c6fa95bf0d8a38944900291f56c4b31205741b54960a089e2105ee14d"
       }
     },
     {
@@ -551,59 +431,50 @@
         "n_samples": 500,
         "proof_size_bytes": 65,
         "gen_time_ms": {
-          "mean": 0.2815,
-          "median": 0.28,
-          "p99": 0.348
+          "mean": 0.2889,
+          "median": 0.2854,
+          "p99": 0.3898
         },
         "verify_time_ms": {
-          "mean": 1.2026,
-          "median": 1.1988,
-          "p99": 1.2933
+          "mean": 1.232,
+          "median": 1.2195,
+          "p99": 1.4925
         },
         "all_valid": true,
         "forged_rejected": true
       },
-      "tally": {
-        "num_ballots": 5000,
-        "num_candidates": 4,
-        "key_bits": 2048,
-        "encrypt_sec": 204.0949,
-        "tally_sec": 0.2608,
-        "decrypt_sec": 0.011741,
-        "tally_rate_votes_per_sec": 19173.1,
-        "totals": [
-          1249,
-          1268,
-          1275,
-          1208
-        ],
-        "expected": [
-          1249,
-          1268,
-          1275,
-          1208
-        ],
-        "correct": true
-      },
       "merkle": {
         "bundle_size": 10000,
-        "build_root_sec": 0.0062,
-        "root_prefix": "0f25751918e82c62fb6af9f4560a141a",
+        "depth": 14,
+        "build_root_sec": 0.0068167500003255554,
+        "receipt_hashes": 14,
+        "receipt_verify_ms": 0.011066500000197266,
+        "receipts_ok": true,
+        "bisect_bundle": 5000,
         "tamper_localization": {
           "1": {
-            "located": 1,
             "correct": true,
-            "time_ms": 46.009
+            "time_ms": 0.015541999346169177,
+            "comparisons": 27,
+            "depth": 13
           },
           "10": {
-            "located": 10,
             "correct": true,
-            "time_ms": 92.141
+            "time_ms": 0.044207999962964095,
+            "comparisons": 183,
+            "depth": 13
           },
           "100": {
-            "located": 100,
             "correct": true,
-            "time_ms": 139.984
+            "time_ms": 0.2132500003426685,
+            "comparisons": 1171,
+            "depth": 13
+          },
+          "1000": {
+            "correct": true,
+            "time_ms": 0.901000000339991,
+            "comparisons": 5551,
+            "depth": 13
           }
         }
       },
@@ -611,18 +482,202 @@
         "voters": 5000,
         "candidates": 4,
         "cast": 5000,
-        "vote_encrypt_sec": 57.39,
-        "count_sec": 0.06,
-        "seal_sec": 0.005,
+        "trustees": 5,
+        "threshold": 3,
+        "keygen_s": 0.0,
+        "vote_encrypt_prove_wall_s": 185.79065612700015,
+        "device_encrypt_prove_ms_mean": 296.11689935619836,
+        "verify_wall_s": 37.84033964199989,
+        "valid_proofs": 5000,
+        "seal_s": 0.1076342910000676,
+        "tally_s": 0.12980291700023372,
+        "decrypt_s": 0.08263304199954291,
+        "count_s": 0.21243595899977663,
         "tally": [
-          1236,
-          1247,
-          1213,
-          1304
+          1268,
+          1189,
+          1307,
+          1236
         ],
-        "winner": 3,
+        "ground_truth": [
+          1268,
+          1189,
+          1307,
+          1236
+        ],
+        "winner": 2,
         "correct": true,
-        "root": "a8af1de5b23e7fe372340e5f4ccef2c90011ea42d6cc47ef86c174b4eeea8bcf"
+        "root": "eed378e92e6638613518e4a3109d9855b1a871fbb3080ccaf88713c41509f4d6"
+      }
+    },
+    {
+      "zkp": {
+        "scheme": "schnorr-NIST-P256",
+        "n_samples": 500,
+        "proof_size_bytes": 65,
+        "gen_time_ms": {
+          "mean": 0.3039,
+          "median": 0.2936,
+          "p99": 0.4104
+        },
+        "verify_time_ms": {
+          "mean": 1.2849,
+          "median": 1.2278,
+          "p99": 1.6055
+        },
+        "all_valid": true,
+        "forged_rejected": true
+      },
+      "merkle": {
+        "bundle_size": 10000,
+        "depth": 14,
+        "build_root_sec": 0.007016458000180137,
+        "receipt_hashes": 14,
+        "receipt_verify_ms": 0.012015291999887268,
+        "receipts_ok": true,
+        "bisect_bundle": 5000,
+        "tamper_localization": {
+          "1": {
+            "correct": true,
+            "time_ms": 0.022917000023880973,
+            "comparisons": 27,
+            "depth": 13
+          },
+          "10": {
+            "correct": true,
+            "time_ms": 0.043416000153229106,
+            "comparisons": 193,
+            "depth": 13
+          },
+          "100": {
+            "correct": true,
+            "time_ms": 0.19716699989658082,
+            "comparisons": 1153,
+            "depth": 13
+          },
+          "1000": {
+            "correct": true,
+            "time_ms": 0.8754160007811151,
+            "comparisons": 5573,
+            "depth": 13
+          }
+        }
+      },
+      "election": {
+        "voters": 5000,
+        "candidates": 4,
+        "cast": 5000,
+        "trustees": 5,
+        "threshold": 3,
+        "keygen_s": 0.0,
+        "vote_encrypt_prove_wall_s": 203.26910550899993,
+        "device_encrypt_prove_ms_mean": 323.3905473680064,
+        "verify_wall_s": 39.15888564299985,
+        "valid_proofs": 5000,
+        "seal_s": 0.15902783300043666,
+        "tally_s": 0.1299022919993149,
+        "decrypt_s": 0.08238829099991563,
+        "count_s": 0.21229058299923054,
+        "tally": [
+          1268,
+          1189,
+          1307,
+          1236
+        ],
+        "ground_truth": [
+          1268,
+          1189,
+          1307,
+          1236
+        ],
+        "winner": 2,
+        "correct": true,
+        "root": "a56a20a8aa81b939bd159f3dd7d0e736fcd2cbfb6e112521b30b3c7c7b2f4c51"
+      }
+    },
+    {
+      "zkp": {
+        "scheme": "schnorr-NIST-P256",
+        "n_samples": 500,
+        "proof_size_bytes": 65,
+        "gen_time_ms": {
+          "mean": 0.2876,
+          "median": 0.283,
+          "p99": 0.45
+        },
+        "verify_time_ms": {
+          "mean": 1.2228,
+          "median": 1.208,
+          "p99": 1.7254
+        },
+        "all_valid": true,
+        "forged_rejected": true
+      },
+      "merkle": {
+        "bundle_size": 10000,
+        "depth": 14,
+        "build_root_sec": 0.005928042000050482,
+        "receipt_hashes": 14,
+        "receipt_verify_ms": 0.01044016699961503,
+        "receipts_ok": true,
+        "bisect_bundle": 5000,
+        "tamper_localization": {
+          "1": {
+            "correct": true,
+            "time_ms": 0.016040999980759807,
+            "comparisons": 25,
+            "depth": 13
+          },
+          "10": {
+            "correct": true,
+            "time_ms": 0.0351250000676373,
+            "comparisons": 167,
+            "depth": 13
+          },
+          "100": {
+            "correct": true,
+            "time_ms": 0.1834579998103436,
+            "comparisons": 1169,
+            "depth": 13
+          },
+          "1000": {
+            "correct": true,
+            "time_ms": 0.7523750000473228,
+            "comparisons": 5589,
+            "depth": 13
+          }
+        }
+      },
+      "election": {
+        "voters": 5000,
+        "candidates": 4,
+        "cast": 5000,
+        "trustees": 5,
+        "threshold": 3,
+        "keygen_s": 0.0,
+        "vote_encrypt_prove_wall_s": 176.49919066300026,
+        "device_encrypt_prove_ms_mean": 280.73206830858834,
+        "verify_wall_s": 33.06946647299992,
+        "valid_proofs": 5000,
+        "seal_s": 0.07946479099973658,
+        "tally_s": 0.12943066699972405,
+        "decrypt_s": 0.08184599999913189,
+        "count_s": 0.21127666699885594,
+        "tally": [
+          1268,
+          1189,
+          1307,
+          1236
+        ],
+        "ground_truth": [
+          1268,
+          1189,
+          1307,
+          1236
+        ],
+        "winner": 2,
+        "correct": true,
+        "root": "5ff7757fd1a5177e0e7a98b7bab7a0170f23278b9d24158a6193496a0e155344"
       }
     }
   ]

@@ -1,0 +1,4 @@
+
+OPEN LOOP  100.0/s for 60.0s:  5,999/6,000 accepted, 98.6 votes/s, p50 82.3 ms, p95 578.6 ms, p99 1368.6 ms
+  failures by reason: {'0 ClientOSError': 1}
+saved /app/paper/results/docker/load_open_r2.json

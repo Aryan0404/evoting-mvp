@@ -1,0 +1,10 @@
+
+========================================================================
+  SECTION 5.5 — NONCE-BOUND LIVENESS (Algorithm 5)
+========================================================================
+  cycle 5 s, timeout τ = 15 s, replica paused for 30.1 s
+  LIVE before the pause                : 100% of samples
+  reported STALE after the pause       : 17.5 s
+  LIVE again after the replica resumed : 0.3 s
+  DIVERGED samples (should be 0)       : 0
+========================================================================

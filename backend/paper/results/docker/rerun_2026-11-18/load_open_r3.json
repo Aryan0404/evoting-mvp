@@ -1,0 +1,20 @@
+{
+  "offered_rate": 100.0,
+  "duration_s": 60.0,
+  "invalid_fraction": 0.0,
+  "legit": {
+    "attempted": 6000,
+    "accepted": 6000,
+    "rejected_or_failed": 0,
+    "status_counts": {
+      "201": 6000
+    },
+    "wall_s": 60.09,
+    "throughput_per_s": 99.9,
+    "p50_ms": 78.5,
+    "p95_ms": 470.9,
+    "p99_ms": 868.7,
+    "max_ms": 1362.5,
+    "errors": {}
+  }
+}

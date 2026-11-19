@@ -1,0 +1,5 @@
+[08:29:36] Host: Apple M2, 16 GB RAM; Docker allocation: 8 CPUs, 11.8 GB
+[08:29:36] Steps: smoke
+[08:29:36] Starting a fresh replicated ledger (ZooKeeper + 4 bookies + broker) and the full stack
+[08:31:03] → smoke test
+[08:31:26] ALL EXPERIMENTS FINISHED. Summary: backend/paper/results/docker/paper_results.md

@@ -1,0 +1,43 @@
+Waiting for the replica to catch up ...
+Reading every ballot of this run back from the ledger ...
+2026-11-18 02:07:51.714 INFO  [281473686205632] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-18 02:07:51.714 INFO  [281473686205632] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-18 02:07:51.715 INFO  [281473604055424] ClientConnection:404 | [172.18.0.10:38280 -> 172.18.0.11:6650] Connected to broker
+2026-11-18 02:07:51.719 INFO  [281473604055424] HandlerBase:83 | [persistent://public/default/ballots, reader-b3501d5aa7, 0] Getting connection from pool
+2026-11-18 02:07:51.720 INFO  [281473604055424] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/ballots, lookup-broker-url pulsar://pulsar:6650, from [172.18.0.10:38280 -> 172.18.0.11:6650] 
+2026-11-18 02:07:51.722 INFO  [281473604055424] ConsumerImpl:298 | [persistent://public/default/ballots, reader-b3501d5aa7, 0] Created consumer on broker [172.18.0.10:38280 -> 172.18.0.11:6650] 
+2026-11-18 02:07:52.770 INFO  [281473686205632] ConsumerImpl:1262 | [persistent://public/default/ballots, reader-b3501d5aa7, 0] Closing consumer for topic persistent://public/default/ballots
+2026-11-18 02:07:52.771 INFO  [281473604055424] ConsumerImpl:1246 | [persistent://public/default/ballots, reader-b3501d5aa7, 0] Closed consumer 0
+2026-11-18 02:07:52.772 INFO  [281473686205632] ClientImpl:611 | Closing Pulsar client with 0 producers and 0 consumers
+2026-11-18 02:07:52.772 INFO  [281473578692992] ClientConnection:1325 | [172.18.0.10:38280 -> 172.18.0.11:6650] Connection disconnected (refCnt: 1)
+2026-11-18 02:07:52.772 INFO  [281473578692992] ClientConnection:274 | [172.18.0.10:38280 -> 172.18.0.11:6650] Destroyed connection to pulsar://pulsar:6650-0
+
+======================================================================
+  SECTION 5.5 — FAULT TOLERANCE (4 bookies, E=3 / Qw=2 / Qa=2)
+======================================================================
+  t =    2.6 s   run_started
+  t =   32.7 s   kill_bookie evoting_bookie2 (SIGKILL)
+  t =   63.0 s   kill_replica (SIGKILL)
+  t =   78.4 s   restart_replica
+  ------------------------------------------------------------------
+  Votes attempted                                              12000
+  Accepted (client view)                                       12000
+    of which needed a retry                                        0
+    of which reply lost, then confirmed                            0
+  Failed after all retries                                         0
+  Accepted by server (ledger seq Δ)                            12000
+  Ballots read back from ledger (node down)                    12000
+  Ballots verified by replica                                  12000
+  LOST VOTES                                                       0
+  Duplicate ledger entries                                         0
+  Replica == ledger (same ballots)                              True
+  Merkle roots equal (ledger vs replica)                        True
+  Longest pause with no vote accepted                        0.142 s
+  Latency p50/p99 before fault                        15.0 / 33.6 ms
+  Latency p50/p99 first 10 s after fault              15.1 / 20.2 ms
+  Latency p50/p99 after recovery                     15.1 / 349.4 ms
+  Replica downtime                                            15.4 s
+  Replica back in sync after restart                          10.8 s
+  ------------------------------------------------------------------
+  RESULT: PASS — no vote lost, replica identical
+======================================================================

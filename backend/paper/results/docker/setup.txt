@@ -1,7 +1,5 @@
 host: Apple M2, 16 GB RAM; Docker allocation: 8 CPUs, 11.8 GB
-date_utc: 2026-11-18T01:33:24Z
-git_commit: 87ace528d51278ac51bf9f6efd4524e13c21237b
-docker: 29.9.3
-compose: 5.7.0
-repeats: 5
-loadtest_votes: 20000
+ledger: Apache Pulsar 3.1.0 + 4 BookKeeper nodes, E=3/Qw=2/Qa=2
+date_utc: 2026-11-18T14:33:36Z
+git_commit: 0969324
+docker: 29.9.3; compose: 5.7.0

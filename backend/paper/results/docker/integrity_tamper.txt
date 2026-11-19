@@ -1,0 +1,30 @@
+  m=    1 trial 1: detected in 3.90s, located 1/1 (exact: True), 27 comparisons, lockdown: True, PASS again after restore: True
+  m=    1 trial 2: detected in 3.74s, located 1/1 (exact: True), 29 comparisons, lockdown: True, PASS again after restore: True
+  m=    1 trial 3: detected in 3.96s, located 1/1 (exact: True), 29 comparisons, lockdown: True, PASS again after restore: True
+  m=    1 trial 4: detected in 3.82s, located 1/1 (exact: True), 29 comparisons, lockdown: True, PASS again after restore: True
+  m=    1 trial 5: detected in 3.89s, located 1/1 (exact: True), 29 comparisons, lockdown: True, PASS again after restore: True
+  m=   10 trial 1: detected in 3.81s, located 10/10 (exact: True), 237 comparisons, lockdown: True, PASS again after restore: True
+  m=   10 trial 2: detected in 3.88s, located 10/10 (exact: True), 235 comparisons, lockdown: True, PASS again after restore: True
+  m=   10 trial 3: detected in 3.91s, located 10/10 (exact: True), 217 comparisons, lockdown: True, PASS again after restore: True
+  m=   10 trial 4: detected in 3.78s, located 10/10 (exact: True), 231 comparisons, lockdown: True, PASS again after restore: True
+  m=   10 trial 5: detected in 3.90s, located 10/10 (exact: True), 223 comparisons, lockdown: True, PASS again after restore: True
+  m=  100 trial 1: detected in 3.87s, located 100/100 (exact: True), 1581 comparisons, lockdown: True, PASS again after restore: True
+  m=  100 trial 2: detected in 3.96s, located 100/100 (exact: True), 1611 comparisons, lockdown: True, PASS again after restore: True
+  m=  100 trial 3: detected in 3.78s, located 100/100 (exact: True), 1579 comparisons, lockdown: True, PASS again after restore: True
+  m=  100 trial 4: detected in 3.85s, located 100/100 (exact: True), 1613 comparisons, lockdown: True, PASS again after restore: True
+  m=  100 trial 5: detected in 3.69s, located 100/100 (exact: True), 1591 comparisons, lockdown: True, PASS again after restore: True
+  m= 1000 trial 1: detected in 3.54s, located 1000/1000 (exact: True), 9663 comparisons, lockdown: True, PASS again after restore: True
+  m= 1000 trial 2: detected in 3.54s, located 1000/1000 (exact: True), 9605 comparisons, lockdown: True, PASS again after restore: True
+  m= 1000 trial 3: detected in 3.39s, located 1000/1000 (exact: True), 9561 comparisons, lockdown: True, PASS again after restore: True
+  m= 1000 trial 4: detected in 3.49s, located 1000/1000 (exact: True), 9553 comparisons, lockdown: True, PASS again after restore: True
+  m= 1000 trial 5: detected in 3.45s, located 1000/1000 (exact: True), 9635 comparisons, lockdown: True, PASS again after restore: True
+
+====================================================================================================
+  SECTION 5.5 — LIVE TAMPER DETECTION  (insider edits the primary ledger; 23,615 ballots, bundles of 10000)
+====================================================================================================
+   Tampered  Detected   Latency mean ± SD (s)    Min–max (s)  Located exactly  Lockdown  Comparisons
+          1       5/5             3.86 ± 0.08      3.74–3.96              5/5       5/5           29
+         10       5/5             3.86 ± 0.06      3.78–3.91              5/5       5/5          229
+        100       5/5             3.83 ± 0.10      3.69–3.96              5/5       5/5         1595
+       1000       5/5             3.48 ± 0.06      3.39–3.54              5/5       5/5         9603
+====================================================================================================

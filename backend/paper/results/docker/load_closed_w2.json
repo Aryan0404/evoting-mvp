@@ -1,0 +1,17 @@
+{
+  "votes": 5000,
+  "concurrency": 100,
+  "attempted": 5000,
+  "accepted": 5000,
+  "rejected_or_failed": 0,
+  "status_counts": {
+    "201": 5000
+  },
+  "wall_s": 57.75,
+  "throughput_per_s": 86.6,
+  "p50_ms": 720.6,
+  "p95_ms": 2533.4,
+  "p99_ms": 2963.3,
+  "max_ms": 3346.4,
+  "errors": {}
+}

@@ -1,0 +1,64 @@
+{
+  "replay": {
+    "first_status": 201,
+    "attempts": 1000,
+    "rejected": 1000,
+    "mean_ms": 0.9488999999994121,
+    "p50_ms": 0.9138750001511653,
+    "p99_ms": 1.3530420001188759
+  },
+  "forgeries": {
+    "unknown_ticket": {
+      "sent": 100,
+      "rejected": 100,
+      "status_counts": {
+        "409": 100
+      },
+      "mean_ms": 0.9353512599500391,
+      "p99_ms": 1.2757499998770072
+    },
+    "proof_for_other_ticket": {
+      "sent": 100,
+      "rejected": 100,
+      "status_counts": {
+        "422": 100
+      },
+      "mean_ms": 1.161283760020524,
+      "p99_ms": 1.5808750003998284
+    },
+    "tampered_proof": {
+      "sent": 100,
+      "rejected": 100,
+      "status_counts": {
+        "422": 100
+      },
+      "mean_ms": 4.0273054899444105,
+      "p99_ms": 20.122249999985797
+    },
+    "wrong_device_key": {
+      "sent": 100,
+      "rejected": 100,
+      "status_counts": {
+        "422": 100
+      },
+      "mean_ms": 20.32521792996704,
+      "p99_ms": 21.980667000207177
+    },
+    "stale_timestamp": {
+      "sent": 100,
+      "rejected": 100,
+      "status_counts": {
+        "400": 100
+      },
+      "mean_ms": 0.8108137999988685,
+      "p99_ms": 0.9727090000524186
+    }
+  },
+  "victims_could_still_vote": 100,
+  "double_vote": {
+    "concurrent": 50,
+    "accepted": 1,
+    "rejected_409": 49
+  },
+  "all_defences_held": true
+}

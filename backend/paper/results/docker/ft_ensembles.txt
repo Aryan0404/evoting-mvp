@@ -1,1 +1,3 @@
-ledger 0: ensembles={0=[bookie4:3181, bookie2:3181, bookie1:3181], 3267=[bookie4:3181, bookie3:3181, bookie1:3181]}
+ledger 2: ensembles={0=[bookie3:3181, bookie4:3181, bookie1:3181]}
+ledger 13: ensembles={0=[bookie4:3181, bookie1:3181, bookie3:3181]}
+ledger 18: ensembles={0=[bookie1:3181, bookie3:3181, bookie4:3181]}

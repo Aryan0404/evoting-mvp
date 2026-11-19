@@ -1,0 +1,14 @@
+  invalid fraction 10% ...
+  invalid fraction 50% ...
+
+============================================================================================
+  SECTION 5.10 — ADVERSARIAL LOAD  (legitimate votes offered at 100.0/s)
+============================================================================================
+  Invalid share  Legit accepted/s  Drop vs baseline  Legit p50 ms  Legit p99 ms  Invalid rejected
+            0%              99.8              0.0%          55.4         318.9                 —
+           10%              99.2              0.6%          65.2         838.6           333/333
+           50%              99.4              0.4%         347.8        1931.5         3000/3000
+  rejection by type at 10%: unknown_ticket 67/67 (15.17 ms), replay 67/67 (14.87 ms), bad_proof 67/67 (22.03 ms), bad_signature 66/66 (65.76 ms), stale_timestamp 66/66 (18.54 ms)
+  rejection by type at 50%: unknown_ticket 600/600 (90.65 ms), replay 600/600 (81.14 ms), bad_proof 600/600 (163.16 ms), bad_signature 600/600 (211.09 ms), stale_timestamp 600/600 (65.18 ms)
+============================================================================================
+saved /app/paper/results/docker/load_mix.json

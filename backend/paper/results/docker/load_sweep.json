@@ -1,0 +1,143 @@
+{
+  "duration_s": 30.0,
+  "rows": [
+    {
+      "offered_rate": 50.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.0,
+      "legit": {
+        "attempted": 1500,
+        "accepted": 1500,
+        "rejected_or_failed": 0,
+        "status_counts": {
+          "201": 1500
+        },
+        "wall_s": 30.03,
+        "throughput_per_s": 49.9,
+        "p50_ms": 36.3,
+        "p95_ms": 44.1,
+        "p99_ms": 52.2,
+        "max_ms": 112.2
+      }
+    },
+    {
+      "offered_rate": 100.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.0,
+      "legit": {
+        "attempted": 3000,
+        "accepted": 3000,
+        "rejected_or_failed": 0,
+        "status_counts": {
+          "201": 3000
+        },
+        "wall_s": 30.05,
+        "throughput_per_s": 99.8,
+        "p50_ms": 58.2,
+        "p95_ms": 187.1,
+        "p99_ms": 389.6,
+        "max_ms": 565.5
+      }
+    },
+    {
+      "offered_rate": 150.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.0,
+      "legit": {
+        "attempted": 4500,
+        "accepted": 4500,
+        "rejected_or_failed": 0,
+        "status_counts": {
+          "201": 4500
+        },
+        "wall_s": 30.7,
+        "throughput_per_s": 146.6,
+        "p50_ms": 958.0,
+        "p95_ms": 1810.5,
+        "p99_ms": 2095.1,
+        "max_ms": 2858.9
+      }
+    },
+    {
+      "offered_rate": 200.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.0,
+      "legit": {
+        "attempted": 6000,
+        "accepted": 4596,
+        "rejected_or_failed": 1404,
+        "status_counts": {
+          "201": 4596,
+          "503": 1404
+        },
+        "wall_s": 31.69,
+        "throughput_per_s": 145.0,
+        "p50_ms": 3190.0,
+        "p95_ms": 5543.4,
+        "p99_ms": 6290.5,
+        "max_ms": 7276.1
+      }
+    },
+    {
+      "offered_rate": 250.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.0,
+      "legit": {
+        "attempted": 7500,
+        "accepted": 4577,
+        "rejected_or_failed": 2923,
+        "status_counts": {
+          "201": 4577,
+          "503": 2923
+        },
+        "wall_s": 31.81,
+        "throughput_per_s": 143.9,
+        "p50_ms": 3326.1,
+        "p95_ms": 14038.4,
+        "p99_ms": 16150.5,
+        "max_ms": 17437.4
+      }
+    },
+    {
+      "offered_rate": 300.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.0,
+      "legit": {
+        "attempted": 9000,
+        "accepted": 5643,
+        "rejected_or_failed": 3357,
+        "status_counts": {
+          "201": 5643,
+          "503": 3357
+        },
+        "wall_s": 38.54,
+        "throughput_per_s": 146.4,
+        "p50_ms": 5482.5,
+        "p95_ms": 21850.6,
+        "p99_ms": 24291.3,
+        "max_ms": 25049.4
+      }
+    },
+    {
+      "offered_rate": 400.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.0,
+      "legit": {
+        "attempted": 12000,
+        "accepted": 6613,
+        "rejected_or_failed": 5387,
+        "status_counts": {
+          "0": 3389,
+          "201": 6613,
+          "503": 1998
+        },
+        "wall_s": 60.48,
+        "throughput_per_s": 109.3,
+        "p50_ms": 12261.3,
+        "p95_ms": 24971.1,
+        "p99_ms": 29084.0,
+        "max_ms": 30935.5
+      }
+    }
+  ]
+}

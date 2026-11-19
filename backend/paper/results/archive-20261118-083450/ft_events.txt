@@ -1,0 +1,5 @@
+1794967529.411 run_started
+1794967559.471 kill_bookie evoting_bookie2 (SIGKILL)
+1794967589.739 kill_replica (SIGKILL)
+1794967605.162 restart_replica
+1794967673.129 restart_bookie evoting_bookie2

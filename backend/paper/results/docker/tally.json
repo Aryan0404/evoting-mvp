@@ -1,0 +1,120 @@
+{
+  "candidates": 5,
+  "key_bits": 2048,
+  "trustees": 5,
+  "threshold": 3,
+  "procs": 8,
+  "pool": 2000,
+  "keygen_ceremony_s": 22.7559592610005,
+  "pool_encrypt_s": 98.29002358700018,
+  "rows": [
+    {
+      "m": 100000,
+      "mode": "seq",
+      "seconds": 3.117898793999302,
+      "peak_rss_mb": 35.23828125,
+      "ballots_per_sec": 32072.881965399156,
+      "decrypt_partial_per_trustee_s": 0.09730504166661073,
+      "decrypt_combine_s": 0.0012726670001939056,
+      "decrypt_ceremony_parallel_trustees_s": 0.09873691700067866,
+      "result": [
+        20000,
+        20000,
+        20000,
+        20000,
+        20000
+      ],
+      "correct": true
+    },
+    {
+      "m": 100000,
+      "mode": "par",
+      "seconds": 0.6241233760001705,
+      "peak_rss_mb": 310.51953125,
+      "ballots_per_sec": 160224.7309512289,
+      "decrypt_partial_per_trustee_s": 0.09707755533327145,
+      "decrypt_combine_s": 0.001202082999952836,
+      "decrypt_ceremony_parallel_trustees_s": 0.09836970800006384,
+      "result": [
+        20000,
+        20000,
+        20000,
+        20000,
+        20000
+      ],
+      "correct": true
+    },
+    {
+      "m": 1000000,
+      "mode": "seq",
+      "seconds": 38.54017976799969,
+      "peak_rss_mb": 35.20703125,
+      "ballots_per_sec": 25946.9469530163,
+      "decrypt_partial_per_trustee_s": 0.09663174966681254,
+      "decrypt_combine_s": 0.0013471669999489677,
+      "decrypt_ceremony_parallel_trustees_s": 0.09828949999973702,
+      "result": [
+        200000,
+        200000,
+        200000,
+        200000,
+        200000
+      ],
+      "correct": true
+    },
+    {
+      "m": 1000000,
+      "mode": "par",
+      "seconds": 8.122537962000024,
+      "peak_rss_mb": 309.80078125,
+      "ballots_per_sec": 123114.2291582185,
+      "decrypt_partial_per_trustee_s": 0.0977682640001755,
+      "decrypt_combine_s": 0.0012350839997452567,
+      "decrypt_ceremony_parallel_trustees_s": 0.10158800099998189,
+      "result": [
+        200000,
+        200000,
+        200000,
+        200000,
+        200000
+      ],
+      "correct": true
+    },
+    {
+      "m": 10000000,
+      "mode": "seq",
+      "seconds": 307.7025553079993,
+      "peak_rss_mb": 35.21875,
+      "ballots_per_sec": 32498.91763164058,
+      "decrypt_partial_per_trustee_s": 0.09648940266652062,
+      "decrypt_combine_s": 0.0013566659999924013,
+      "decrypt_ceremony_parallel_trustees_s": 0.09797895700012305,
+      "result": [
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000
+      ],
+      "correct": true
+    },
+    {
+      "m": 10000000,
+      "mode": "par",
+      "seconds": 73.60811265900065,
+      "peak_rss_mb": 309.01953125,
+      "ballots_per_sec": 135854.5904624172,
+      "decrypt_partial_per_trustee_s": 0.10001416666636942,
+      "decrypt_combine_s": 0.0012110420002500177,
+      "decrypt_ceremony_parallel_trustees_s": 0.10887087599985534,
+      "result": [
+        2000000,
+        2000000,
+        2000000,
+        2000000,
+        2000000
+      ],
+      "correct": true
+    }
+  ]
+}

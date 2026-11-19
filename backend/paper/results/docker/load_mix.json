@@ -1,0 +1,147 @@
+{
+  "rate": 100.0,
+  "duration_s": 30.0,
+  "rows": [
+    {
+      "offered_rate": 100.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.0,
+      "legit": {
+        "attempted": 3000,
+        "accepted": 3000,
+        "rejected_or_failed": 0,
+        "status_counts": {
+          "201": 3000
+        },
+        "wall_s": 30.05,
+        "throughput_per_s": 99.8,
+        "p50_ms": 55.4,
+        "p95_ms": 219.8,
+        "p99_ms": 318.9,
+        "max_ms": 495.2
+      }
+    },
+    {
+      "offered_rate": 100.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.1,
+      "legit": {
+        "attempted": 3000,
+        "accepted": 3000,
+        "rejected_or_failed": 0,
+        "status_counts": {
+          "201": 3000
+        },
+        "wall_s": 30.24,
+        "throughput_per_s": 99.2,
+        "p50_ms": 65.2,
+        "p95_ms": 465.2,
+        "p99_ms": 838.6,
+        "max_ms": 1456.5
+      },
+      "invalid": {
+        "unknown_ticket": {
+          "sent": 67,
+          "rejected": 67,
+          "status_counts": {
+            "409": 67
+          },
+          "mean_ms": 15.17
+        },
+        "replay": {
+          "sent": 67,
+          "rejected": 67,
+          "status_counts": {
+            "409": 67
+          },
+          "mean_ms": 14.87
+        },
+        "bad_proof": {
+          "sent": 67,
+          "rejected": 67,
+          "status_counts": {
+            "422": 67
+          },
+          "mean_ms": 22.03
+        },
+        "bad_signature": {
+          "sent": 66,
+          "rejected": 66,
+          "status_counts": {
+            "422": 66
+          },
+          "mean_ms": 65.76
+        },
+        "stale_timestamp": {
+          "sent": 66,
+          "rejected": 66,
+          "status_counts": {
+            "400": 66
+          },
+          "mean_ms": 18.54
+        }
+      }
+    },
+    {
+      "offered_rate": 100.0,
+      "duration_s": 30.0,
+      "invalid_fraction": 0.5,
+      "legit": {
+        "attempted": 3000,
+        "accepted": 3000,
+        "rejected_or_failed": 0,
+        "status_counts": {
+          "201": 3000
+        },
+        "wall_s": 30.17,
+        "throughput_per_s": 99.4,
+        "p50_ms": 347.8,
+        "p95_ms": 1372.0,
+        "p99_ms": 1931.5,
+        "max_ms": 2464.0
+      },
+      "invalid": {
+        "unknown_ticket": {
+          "sent": 600,
+          "rejected": 600,
+          "status_counts": {
+            "409": 600
+          },
+          "mean_ms": 90.65
+        },
+        "replay": {
+          "sent": 600,
+          "rejected": 600,
+          "status_counts": {
+            "409": 600
+          },
+          "mean_ms": 81.14
+        },
+        "bad_proof": {
+          "sent": 600,
+          "rejected": 600,
+          "status_counts": {
+            "422": 600
+          },
+          "mean_ms": 163.16
+        },
+        "bad_signature": {
+          "sent": 600,
+          "rejected": 600,
+          "status_counts": {
+            "422": 600
+          },
+          "mean_ms": 211.09
+        },
+        "stale_timestamp": {
+          "sent": 600,
+          "rejected": 600,
+          "status_counts": {
+            "400": 600
+          },
+          "mean_ms": 65.18
+        }
+      }
+    }
+  ]
+}

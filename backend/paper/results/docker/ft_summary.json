@@ -1,52 +1,82 @@
 {
-  "votes_attempted": 12000,
-  "accepted_client_view": 12000,
-  "accepted_after_retry": 0,
+  "votes_attempted": 15000,
+  "accepted_client_view": 15000,
+  "accepted_after_retry": 3625,
   "accepted_reply_lost": 0,
   "failed_after_all_retries": 0,
-  "server_accepted_ledger_seq_delta": 12000,
-  "ledger_messages_read_back": 12000,
-  "ledger_unique_ballots": 12000,
-  "ledger_read_back_seconds": 1.05,
-  "replica_ballots_this_run": 12000,
+  "server_accepted_ledger_seq_delta": 15000,
+  "ledger_messages_read_back": 15000,
+  "ledger_unique_ballots": 15000,
+  "ledger_read_back_seconds": 2.52,
+  "replica_ballots_this_run": 15000,
   "lost_votes_server_vs_ledger": 0,
   "ledger_duplicates": 0,
   "replica_matches_ledger_exactly": true,
-  "merkle_root_ledger": "b71569f6f2435dba01b45e6c11f6ca02ffddaa89e07fb0a652fd35f2cf8ad7b1",
-  "merkle_root_replica": "b71569f6f2435dba01b45e6c11f6ca02ffddaa89e07fb0a652fd35f2cf8ad7b1",
+  "merkle_root_ledger": "f1be827914318ae38c98febd450dcb3ca804182b82ef1968136697974e46ad48",
+  "merkle_root_replica": "f1be827914318ae38c98febd450dcb3ca804182b82ef1968136697974e46ad48",
   "merkle_roots_equal": true,
-  "longest_gap_without_acceptance_s": 0.142,
+  "longest_gap_without_acceptance_s": 20.101,
   "latency_p50_p99_ms_before_fault": [
-    15.0,
-    33.6
+    50.4,
+    161.9
   ],
   "latency_p50_p99_ms_first_10s_after_fault": [
-    15.1,
-    20.2
+    74.6,
+    2784.2
   ],
   "latency_p50_p99_ms_after_recovery": [
-    15.1,
-    349.4
+    761.3,
+    67636.6
   ],
-  "max_latency_ms": 1942.7,
-  "replica_downtime_s": 15.4,
-  "replica_catch_up_s_after_restart": 10.8,
+  "max_latency_ms": 75659.9,
+  "replica_downtime_s": 15.3,
+  "replica_catch_up_s_after_restart": 2.5,
   "events": [
     {
-      "t_rel_s": 2.65,
+      "t_rel_s": -11.64,
       "event": "run_started"
     },
     {
-      "t_rel_s": 32.71,
-      "event": "kill_bookie evoting_bookie2 (SIGKILL)"
+      "t_rel_s": 18.45,
+      "event": "kill_bookie evoting_bookie2 (SIGKILL; stays down)"
     },
     {
-      "t_rel_s": 62.97,
+      "t_rel_s": 49.22,
       "event": "kill_replica (SIGKILL)"
     },
     {
-      "t_rel_s": 78.4,
+      "t_rel_s": 64.52,
       "event": "restart_replica"
+    },
+    {
+      "t_rel_s": 97.12,
+      "event": "kill_quorum evoting_bookie3 (SIGKILL; storage now below the ensemble size)"
+    },
+    {
+      "t_rel_s": 113.12,
+      "event": "restore_quorum evoting_bookie3"
+    },
+    {
+      "t_rel_s": 113.52,
+      "event": "quorum_registered evoting_bookie3"
     }
-  ]
+  ],
+  "quorum_loss": {
+    "outage_s": 16.0,
+    "votes_cast_during_outage": 1601,
+    "eventually_accepted": 1601,
+    "needed_retry": 1316,
+    "accepted_while_quorum_lost": 0,
+    "max_latency_s": 75.05,
+    "p50_latency_s": 43.24,
+    "first_acceptance_after_restore_s": 3.17
+  },
+  "integrity_alerts_during_faults": 0,
+  "liveness_rounds": {
+    "LIVE": 30,
+    "STALE": 0,
+    "DIVERGED": 0,
+    "PENDING": 0,
+    "UNKNOWN": 0
+  }
 }

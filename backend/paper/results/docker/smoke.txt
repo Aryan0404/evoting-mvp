@@ -1,0 +1,14 @@
+
+=== SMOKE TEST ===
+  PASS  300 valid votes accepted
+  PASS  replay rejected (409)
+  PASS  forged proof rejected (422)
+  PASS  primary and replica agree (PASS)
+  PASS  liveness LIVE
+  PASS  tamper detected
+  PASS  tamper localised to ledger position 123
+  PASS  lockdown refuses new votes (503)
+  PASS  back to PASS after restore
+  PASS  voting resumes after lockdown cleared
+
+SMOKE TEST PASSED — safe to start the full run

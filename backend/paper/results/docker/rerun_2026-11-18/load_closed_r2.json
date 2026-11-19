@@ -1,0 +1,20 @@
+{
+  "votes": 20000,
+  "concurrency": 100,
+  "attempted": 20000,
+  "accepted": 19986,
+  "rejected_or_failed": 14,
+  "status_counts": {
+    "201": 19986,
+    "503": 14
+  },
+  "wall_s": 164.28,
+  "throughput_per_s": 121.7,
+  "p50_ms": 656.3,
+  "p95_ms": 2179.2,
+  "p99_ms": 2653.9,
+  "max_ms": 3521.1,
+  "errors": {
+    "503 Service Unavailable": 14
+  }
+}
