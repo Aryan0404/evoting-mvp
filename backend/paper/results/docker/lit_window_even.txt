@@ -1,0 +1,33 @@
+
+  EVEN 80.0/s for 15.0 min: 72,000/72,000 accepted, 14,592 retries; latency p50 3598.7 / p99 59887.9 ms
+   min      cast   durable       %  verified       %
+     0         0         0    None         0    None
+     5    23,996    23,996   99.97    23,753   98.95
+    10    46,390    46,445   96.81    46,320   96.55
+    15    69,533    69,601   96.72    69,560   96.66
+    20    72,000    72,000   100.0    72,000   100.0
+  replica had verified every vote 1.1 s after the last vote
+  final status per vote: {'201': 72000}
+  status per attempt:    {'201': 72000, '503': 14592}
+  ledger last grew at 934.6 s
+  first 503 reply: Service Unavailable
+   t=   0.0 s durable       0 in flight      1 lockdown False replica PASS codes {}
+   t=  61.7 s durable   4,915 in flight     25 lockdown False replica PASS codes {201: 4915}
+   t= 123.2 s durable   9,840 in flight     20 lockdown False replica PASS codes {201: 9840}
+   t= 185.3 s durable  14,813 in flight     16 lockdown False replica PASS codes {201: 14812}
+   t= 247.7 s durable  19,768 in flight     48 lockdown False replica PASS codes {201: 19768}
+   t= 310.4 s durable  24,774 in flight     58 lockdown False replica PASS codes {201: 24776}
+   t= 373.4 s durable  29,836 in flight     34 lockdown False replica PASS codes {201: 29835}
+   t= 437.0 s durable  34,838 in flight    129 lockdown False replica PASS codes {201: 34831}
+   t= 507.9 s durable  39,656 in flight  1,078 lockdown False replica PASS codes {201: 39556, 503: 1214}
+   t= 577.2 s durable  44,701 in flight  1,567 lockdown False replica PASS codes {201: 44610, 503: 3238}
+   t= 648.2 s durable  49,950 in flight  1,956 lockdown False replica PASS codes {201: 49900, 503: 5443}
+   t= 721.0 s durable  55,493 in flight  2,190 lockdown False replica PASS codes {201: 55489, 503: 7632}
+   t= 793.9 s durable  61,165 in flight  2,421 lockdown False replica PASS codes {201: 61102, 503: 10172}
+   t= 864.3 s durable  66,869 in flight  2,353 lockdown False replica PASS codes {201: 66795, 503: 12468}
+   t= 940.7 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 14592}
+   t=1001.8 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 14592}
+   t=1062.7 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 14592}
+   t=1123.5 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 14592}
+   t=1184.4 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 14592}
+  saved /app/paper/results/docker/lit_window_even.json

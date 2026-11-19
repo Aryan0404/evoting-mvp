@@ -1,0 +1,7 @@
+[15:45:51] Host: Apple M2, 16 GB RAM; Docker allocation: 8 CPUs, 11.8 GB
+[15:45:51] Steps: lit-window
+[15:45:51] Starting a fresh replicated ledger (ZooKeeper + 4 bookies + broker) and the full stack
+[15:47:39] → lit: Razaque Figs. 5/8/9 — 15-minute even voting window + 5-minute tail
+[16:08:33] → lit: Razaque Figs. 5/8/9 — 15-minute burst voting window + 5-minute tail
+[16:28:43] → lit: summary table
+[16:28:44] ALL EXPERIMENTS FINISHED. Summary: backend/paper/results/docker/paper_results.md

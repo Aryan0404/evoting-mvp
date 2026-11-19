@@ -1,0 +1,94 @@
+{
+  "mode": "even",
+  "candidates": 4,
+  "write": {
+    "offered_rate": 66.7,
+    "window_s": 60.0,
+    "votes": 4000,
+    "accepted": 4000,
+    "first_attempt_accepted": 4000,
+    "retries": 0,
+    "failed": 0,
+    "durable_in_ledger": 4000,
+    "completion_s": 60.05,
+    "write_votes_per_s": 66.6,
+    "latency_incl_retries": {
+      "n": 4000,
+      "mean_ms": 61.4,
+      "sd_ms": 17.5,
+      "min_ms": 46.8,
+      "p50_ms": 59.9,
+      "p95_ms": 71.8,
+      "p99_ms": 119.8,
+      "max_ms": 423.8
+    }
+  },
+  "read": {
+    "ledger_readback": {
+      "records": 4000,
+      "scanned": 4000,
+      "seconds": 0.529,
+      "records_per_s": 7557.8,
+      "seek": "publish-time",
+      "match_receipts": 4000
+    },
+    "primary_scan": {
+      "records": 4000,
+      "seconds": 0.275,
+      "records_per_s": 14536.2,
+      "MB_per_s": 273.0,
+      "waited_s": 0.1,
+      "match_receipts": 4000
+    },
+    "receipt_lookup": {
+      "reads": 4000,
+      "ok": 4000,
+      "included": 4000,
+      "seconds": 0.817,
+      "reads_per_s": 4893.6,
+      "n": 4000,
+      "mean_ms": 9.3,
+      "sd_ms": 7.0,
+      "min_ms": 1.2,
+      "p50_ms": 7.5,
+      "p95_ms": 18.4,
+      "p99_ms": 43.9,
+      "max_ms": 61.5
+    },
+    "merkle_audit_path": {
+      "reads": 300,
+      "ok": 300,
+      "included": 300,
+      "seconds": 12.0,
+      "reads_per_s": 25.0,
+      "n": 300,
+      "mean_ms": 627.9,
+      "sd_ms": 237.2,
+      "min_ms": 240.3,
+      "p50_ms": 611.7,
+      "p95_ms": 1064.2,
+      "p99_ms": 1293.2,
+      "max_ms": 1614.8
+    },
+    "counting": {
+      "ballots": 4000,
+      "tally_s": 0.658,
+      "decrypt_s": 0.259,
+      "count_s": 0.917,
+      "totals": [
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "ground_truth": [
+        1000,
+        1000,
+        1000,
+        1000
+      ],
+      "correct": true,
+      "ballots_per_s": 4362.1
+    }
+  }
+}

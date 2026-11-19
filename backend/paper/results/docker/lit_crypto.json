@@ -1,0 +1,112 @@
+{
+  "cpu": "aarch64",
+  "processes": 8,
+  "electionguard_scenario": {
+    "contests": 6,
+    "options": 3,
+    "rows": [
+      {
+        "ballots": 25,
+        "runs": 3,
+        "total_s_mean": 1.693,
+        "total_s_sd": 0.083,
+        "proofs_s_mean": 0.622,
+        "all_valid": true,
+        "tally_correct": true
+      },
+      {
+        "ballots": 50,
+        "runs": 3,
+        "total_s_mean": 2.921,
+        "total_s_sd": 0.085,
+        "proofs_s_mean": 1.831,
+        "all_valid": true,
+        "tally_correct": true
+      },
+      {
+        "ballots": 100,
+        "runs": 3,
+        "total_s_mean": 4.908,
+        "total_s_sd": 0.04,
+        "proofs_s_mean": 3.799,
+        "all_valid": true,
+        "tally_correct": true
+      },
+      {
+        "ballots": 250,
+        "runs": 3,
+        "total_s_mean": 10.606,
+        "total_s_sd": 0.197,
+        "proofs_s_mean": 9.416,
+        "all_valid": true,
+        "tally_correct": true
+      },
+      {
+        "ballots": 500,
+        "runs": 3,
+        "total_s_mean": 19.695,
+        "total_s_sd": 0.121,
+        "proofs_s_mean": 18.363,
+        "all_valid": true,
+        "tally_correct": true
+      },
+      {
+        "ballots": 750,
+        "runs": 3,
+        "total_s_mean": 28.76,
+        "total_s_sd": 0.197,
+        "proofs_s_mean": 27.272,
+        "all_valid": true,
+        "tally_correct": true
+      },
+      {
+        "ballots": 1000,
+        "runs": 3,
+        "total_s_mean": 37.679,
+        "total_s_sd": 0.162,
+        "proofs_s_mean": 36.069,
+        "all_valid": true,
+        "tally_correct": true
+      },
+      {
+        "ballots": 1341,
+        "runs": 3,
+        "total_s_mean": 51.17,
+        "total_s_sd": 1.541,
+        "proofs_s_mean": 49.368,
+        "all_valid": true,
+        "tally_correct": true
+      }
+    ]
+  },
+  "merge_scenario": {
+    "ballot_shape": "7 contests x 4 selections",
+    "ballots": 10,
+    "encrypt_and_prove_ms_per_ballot": 925.5,
+    "verify_ms_per_ballot": 192.4,
+    "homomorphic_tally_ms_per_encryption": 0.0064,
+    "tally_decryption_ms_per_encryption_3_trustees": 58.61
+  },
+  "stark_scenario": [
+    {
+      "voters": 64,
+      "candidates": 4,
+      "tally_and_decrypt_wall_s": 0.2384,
+      "core_seconds": 0.2384,
+      "core_minutes": 0.00397,
+      "peak_rss_MB": 147.9,
+      "rss_before_tally_MB": 147.9,
+      "correct": true
+    },
+    {
+      "voters": 1024,
+      "candidates": 4,
+      "tally_and_decrypt_wall_s": 0.2616,
+      "core_seconds": 0.2616,
+      "core_minutes": 0.00436,
+      "peak_rss_MB": 149.6,
+      "rss_before_tally_MB": 149.6,
+      "correct": true
+    }
+  ]
+}

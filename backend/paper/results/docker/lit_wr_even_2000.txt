@@ -1,0 +1,5 @@
+
+  EVEN    2,000 votes in a 60 s window (offered 33.3/s)
+    WRITE  accepted 2,000/2,000 (2,000 first try, 0 retries), 33.3 votes/s, done in 60.04 s; latency p50 42.3 / p99 47.4 ms
+    READ   ledger read-back 2,000 at 5821.4/s (matches 2,000); primary scan 2,000 at 16312.8/s; receipt lookups 7062.9/s (2,000 included); audit paths 87.4/s (p99 529.1 ms, n=300); count 0.538 s, correct True
+  saved /app/paper/results/docker/lit_wr_even_2000.json

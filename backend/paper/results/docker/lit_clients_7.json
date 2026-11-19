@@ -1,0 +1,21 @@
+{
+  "clients": 7,
+  "votes": 22200,
+  "accepted": 22200,
+  "failed": 0,
+  "wall_s": 409.5,
+  "votes_per_s": 54.2,
+  "s_per_vote_per_client": 0.1288,
+  "peak_10s_votes_per_s": 60.2,
+  "worst_10s_votes_per_s": 46.0,
+  "latency": {
+    "n": 22200,
+    "mean_ms": 128.8,
+    "sd_ms": 31.7,
+    "min_ms": 49.7,
+    "p50_ms": 128.5,
+    "p95_ms": 183.6,
+    "p99_ms": 219.5,
+    "max_ms": 699.7
+  }
+}

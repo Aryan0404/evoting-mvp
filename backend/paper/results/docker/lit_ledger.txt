@@ -1,0 +1,10 @@
+  record size 18,780 B (4 candidates)
+    offered  1000/s: acked 2,000/2,000 at 998.8/s, ack p99 48.7 ms, read back 2,000 at 20681.2/s, identical 100.0%
+    offered  2000/s: acked 4,000/4,000 at 1997.7/s, ack p99 55.3 ms, read back 4,000 at 31892.4/s, identical 100.0%
+    offered  3000/s: acked 6,000/6,000 at 2880.8/s, ack p99 140.7 ms, read back 6,000 at 26438.1/s, identical 100.0%
+    offered  4000/s: acked 8,000/8,000 at 3993.7/s, ack p99 519.8 ms, read back 8,000 at 36143.8/s, identical 100.0%
+    offered  5000/s: acked 10,000/10,000 at 4806.7/s, ack p99 607.0 ms, read back 10,000 at 26489.9/s, identical 100.0%
+    offered  6000/s: acked 12,000/12,000 at 5984.4/s, ack p99 160.7 ms, read back 12,000 at 34990.1/s, identical 100.0%
+    offered  7000/s: acked 14,000/14,000 at 4893.7/s, ack p99 718.7 ms, read back 14,000 at 15436.8/s, identical 100.0%
+    offered  8000/s: acked 16,000/16,000 at 4350.9/s, ack p99 1171.1 ms, read back 16,000 at 16595.8/s, identical 100.0%
+  saved /app/paper/results/docker/lit_ledger_accuracy.json

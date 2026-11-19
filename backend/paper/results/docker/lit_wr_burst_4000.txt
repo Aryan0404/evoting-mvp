@@ -1,0 +1,5 @@
+
+  BURST   4,000 votes in a 5 s window (offered 800.0/s)
+    WRITE  accepted 4,000/4,000 (2,529 first try, 2,468 retries), 94.9 votes/s, done in 42.15 s; latency p50 18616.6 / p99 35317.4 ms
+    READ   ledger read-back 4,000 at 13669.1/s (matches 3,981); primary scan 4,000 at 15188.9/s; receipt lookups 5732.1/s (3,981 included); audit paths 30.6/s (p99 1171.5 ms, n=300); count 0.862 s, correct True
+  saved /app/paper/results/docker/lit_wr_burst_4000.json

@@ -1,0 +1,584 @@
+== evoting_backend: status=running oom_killed=false exit=0 restarts=0
+2026-11-19 10:37:46.521 INFO  [281472323416448] ProducerStatsImpl:85 | Producer [persistent://public/default/ballots, ] , ProducerStatsImpl (numMsgsSent_ = 3162, numBytesSent_ = 59385433, sendMap_ = {[Key: Ok, Value: 3168], }, latencyAccumulator_ = Latencies [ 50pct: 101.188ms, 90pct: 186.514ms, 99pct: 327.37ms, 99.9pct: 418.143ms], totalMsgsSent_ = 8925, totalBytesSent_ = 167620348, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 8925], }, totalLatencyAccumulator_ = Latencies [ 50pct: 84.8147ms, 90pct: 172.962ms, 99pct: 289.467ms, 99.9pct: 411.795ms])
+2026-11-19 10:37:46.533 INFO  [281473011609984] ProducerStatsImpl:85 | Producer [persistent://public/default/ballots, ] , ProducerStatsImpl (numMsgsSent_ = 3108, numBytesSent_ = 58371463, sendMap_ = {[Key: Ok, Value: 3109], }, latencyAccumulator_ = Latencies [ 50pct: 96.6523ms, 90pct: 186.564ms, 99pct: 264.637ms, 99.9pct: 360.364ms], totalMsgsSent_ = 8529, totalBytesSent_ = 160183580, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 8529], }, totalLatencyAccumulator_ = Latencies [ 50pct: 81.6591ms, 90pct: 170.796ms, 99pct: 260.149ms, 99.9pct: 391.608ms])
+2026-11-19 10:37:46.546 INFO  [281472319615360] ProducerStatsImpl:85 | Producer [persistent://public/default/ballots, ] , ProducerStatsImpl (numMsgsSent_ = 3181, numBytesSent_ = 59742453, sendMap_ = {[Key: Ok, Value: 3181], }, latencyAccumulator_ = Latencies [ 50pct: 93.167ms, 90pct: 193.82ms, 99pct: 306.721ms, 99.9pct: 403.849ms], totalMsgsSent_ = 8953, totalBytesSent_ = 168146538, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 8953], }, totalLatencyAccumulator_ = Latencies [ 50pct: 79.5254ms, 90pct: 172.243ms, 99pct: 291.192ms, 99.9pct: 401.886ms])
+2026-11-19 10:37:46.549 INFO  [281473118826880] ProducerStatsImpl:85 | Producer [persistent://public/default/ballots, ] , ProducerStatsImpl (numMsgsSent_ = 3209, numBytesSent_ = 60268207, sendMap_ = {[Key: Ok, Value: 3209], }, latencyAccumulator_ = Latencies [ 50pct: 96.4427ms, 90pct: 229.958ms, 99pct: 315.219ms, 99.9pct: 383.365ms], totalMsgsSent_ = 9402, totalBytesSent_ = 176579042, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 9402], }, totalLatencyAccumulator_ = Latencies [ 50pct: 81.141ms, 90pct: 177.014ms, 99pct: 288.844ms, 99.9pct: 381.776ms])
+2026-11-19 10:37:46.776 INFO  [281472642314624] ProducerStatsImpl:85 | Producer [persistent://public/default/ballots, ] , ProducerStatsImpl (numMsgsSent_ = 3224, numBytesSent_ = 60549852, sendMap_ = {[Key: Ok, Value: 3224], }, latencyAccumulator_ = Latencies [ 50pct: 99.1124ms, 90pct: 193.344ms, 99pct: 259.228ms, 99.9pct: 369.32ms], totalMsgsSent_ = 9283, totalBytesSent_ = 174344178, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 9283], }, totalLatencyAccumulator_ = Latencies [ 50pct: 86.6232ms, 90pct: 173.037ms, 99pct: 271.776ms, 99.9pct: 392.096ms])
+2026-11-19 10:37:46.776 INFO  [281472340521344] ProducerStatsImpl:85 | Producer [persistent://public/default/ballots, ] , ProducerStatsImpl (numMsgsSent_ = 3246, numBytesSent_ = 60963130, sendMap_ = {[Key: Ok, Value: 3246], }, latencyAccumulator_ = Latencies [ 50pct: 98.4995ms, 90pct: 199.079ms, 99pct: 360.234ms, 99.9pct: 421.63ms], totalMsgsSent_ = 8840, totalBytesSent_ = 166024185, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 8840], }, totalLatencyAccumulator_ = Latencies [ 50pct: 82.623ms, 90pct: 182.979ms, 99pct: 298.004ms, 99.9pct: 482.278ms])
+2026-11-19 10:37:46.780 INFO  [281472741732736] ProducerStatsImpl:85 | Producer [persistent://public/default/ballots, ] , ProducerStatsImpl (numMsgsSent_ = 3175, numBytesSent_ = 59629725, sendMap_ = {[Key: Ok, Value: 3175], }, latencyAccumulator_ = Latencies [ 50pct: 92.7237ms, 90pct: 185.025ms, 99pct: 306.936ms, 99.9pct: 511.069ms], totalMsgsSent_ = 9204, totalBytesSent_ = 172860520, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 9204], }, totalLatencyAccumulator_ = Latencies [ 50pct: 81.0408ms, 90pct: 171.013ms, 99pct: 275.886ms, 99.9pct: 444.937ms])
+2026-11-19 10:37:46.953 INFO  [281472829223296] ProducerStatsImpl:85 | Producer [persistent://public/default/ballots, ] , ProducerStatsImpl (numMsgsSent_ = 3116, numBytesSent_ = 58521624, sendMap_ = {[Key: Ok, Value: 3116], }, latencyAccumulator_ = Latencies [ 50pct: 88.0232ms, 90pct: 173.008ms, 99pct: 241.562ms, 99.9pct: 379.413ms], totalMsgsSent_ = 8864, totalBytesSent_ = 166474977, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 8864], }, totalLatencyAccumulator_ = Latencies [ 50pct: 79.1938ms, 90pct: 166.556ms, 99pct: 258.504ms, 99.9pct: 505.604ms])
+== evoting_pulsar: status=running oom_killed=false exit=0 restarts=0
+2026-11-19T10:24:13,188+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:24:16,460+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:24:31,099+0000 [pulsar-web-36-7] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:24:31 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 53
+2026-11-19T10:24:51,254+0000 [pulsar-web-36-6] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:24:51 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 33
+2026-11-19T10:25:11,428+0000 [pulsar-web-36-13] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:25:11 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 12
+2026-11-19T10:25:13,234+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:25:16,455+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:25:31,791+0000 [pulsar-web-36-1] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:25:31 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 112
+2026-11-19T10:25:52,002+0000 [pulsar-web-36-4] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:25:51 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 32
+2026-11-19T10:26:12,139+0000 [pulsar-web-36-14] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:26:12 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 20
+2026-11-19T10:26:13,263+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:26:16,449+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:26:16,539+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Writing local data to metadata store because maximum change 20.075242355036263% exceeded threshold 10%; time since last report written is 419.997 seconds
+2026-11-19T10:26:16,609+0000 [metadata-store-9-1] INFO  org.apache.pulsar.metadata.coordination.impl.ResourceLockImpl - Acquired resource lock on /loadbalance/brokers/pulsar:8080
+2026-11-19T10:26:32,417+0000 [pulsar-web-36-2] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:26:32 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 71
+2026-11-19T10:26:52,724+0000 [pulsar-web-36-12] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:26:52 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 62
+2026-11-19T10:27:12,874+0000 [pulsar-web-36-8] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:27:12 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 56
+2026-11-19T10:27:13,260+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:27:16,418+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:27:16,502+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Writing local data to metadata store because maximum change 10.731356402518681% exceeded threshold 10%; time since last report written is 59.963 seconds
+2026-11-19T10:27:16,562+0000 [metadata-store-9-1] INFO  org.apache.pulsar.metadata.coordination.impl.ResourceLockImpl - Acquired resource lock on /loadbalance/brokers/pulsar:8080
+2026-11-19T10:27:33,094+0000 [pulsar-web-36-5] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:27:33 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 34
+2026-11-19T10:27:53,274+0000 [pulsar-web-36-11] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:27:53 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 38
+2026-11-19T10:28:13,316+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:28:13,554+0000 [pulsar-web-36-16] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:28:13 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 48
+2026-11-19T10:28:16,459+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:28:33,770+0000 [pulsar-web-36-9] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:28:33 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 28
+2026-11-19T10:28:54,064+0000 [pulsar-web-36-3] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:28:53 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 117
+2026-11-19T10:29:13,344+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:29:14,191+0000 [pulsar-web-36-15] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:29:14 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 24
+2026-11-19T10:29:16,462+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:29:34,525+0000 [pulsar-web-36-7] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:29:34 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 88
+2026-11-19T10:29:54,837+0000 [pulsar-web-36-6] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:29:54 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 29
+2026-11-19T10:30:13,372+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:30:15,184+0000 [pulsar-web-36-16] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:30:15 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 20
+2026-11-19T10:30:16,468+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:30:35,470+0000 [pulsar-web-36-8] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:30:35 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 46
+2026-11-19T10:30:55,742+0000 [pulsar-web-36-3] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:30:55 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 24
+2026-11-19T10:31:13,395+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:31:15,914+0000 [pulsar-web-36-2] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:31:15 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 13
+2026-11-19T10:31:16,626+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:31:36,213+0000 [pulsar-web-36-1] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:31:36 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 37
+2026-11-19T10:31:56,499+0000 [pulsar-web-36-6] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:31:56 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 43
+2026-11-19T10:32:13,424+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:32:16,543+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Writing local data to metadata store because maximum change 14.721987161572766% exceeded threshold 10%; time since last report written is 300.04 seconds
+2026-11-19T10:32:16,635+0000 [metadata-store-9-1] INFO  org.apache.pulsar.metadata.coordination.impl.ResourceLockImpl - Acquired resource lock on /loadbalance/brokers/pulsar:8080
+2026-11-19T10:32:16,635+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:32:16,679+0000 [pulsar-web-36-16] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:32:16 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 11
+2026-11-19T10:32:36,827+0000 [pulsar-web-36-8] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:32:36 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 24
+2026-11-19T10:32:57,059+0000 [pulsar-web-36-11] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:32:57 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 45
+2026-11-19T10:33:13,479+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:33:16,546+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Writing local data to metadata store because maximum change 11.07176264213022% exceeded threshold 10%; time since last report written is 60.003 seconds
+2026-11-19T10:33:16,595+0000 [metadata-store-9-1] INFO  org.apache.pulsar.metadata.coordination.impl.ResourceLockImpl - Acquired resource lock on /loadbalance/brokers/pulsar:8080
+2026-11-19T10:33:16,645+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:33:17,157+0000 [pulsar-web-36-12] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:33:17 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 25
+2026-11-19T10:33:37,274+0000 [pulsar-web-36-4] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:33:37 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 10
+2026-11-19T10:33:57,347+0000 [pulsar-web-36-14] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:33:57 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 12
+2026-11-19T10:34:13,498+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:34:16,550+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Writing local data to metadata store because maximum change 91.86816673419223% exceeded threshold 10%; time since last report written is 60.004 seconds
+2026-11-19T10:34:16,583+0000 [metadata-store-9-1] INFO  org.apache.pulsar.metadata.coordination.impl.ResourceLockImpl - Acquired resource lock on /loadbalance/brokers/pulsar:8080
+2026-11-19T10:34:16,649+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:34:17,427+0000 [pulsar-web-36-7] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:34:17 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 13
+2026-11-19T10:34:37,475+0000 [pulsar-web-36-13] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:34:37 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 10
+2026-11-19T10:34:57,553+0000 [pulsar-web-36-9] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:34:57 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 26
+2026-11-19T10:35:13,508+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:35:16,549+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Writing local data to metadata store because maximum change 99.87923565025419% exceeded threshold 10%; time since last report written is 59.997 seconds
+2026-11-19T10:35:16,563+0000 [metadata-store-9-1] INFO  org.apache.pulsar.metadata.coordination.impl.ResourceLockImpl - Acquired resource lock on /loadbalance/brokers/pulsar:8080
+2026-11-19T10:35:16,649+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:35:17,610+0000 [pulsar-web-36-1] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:35:17 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 7
+2026-11-19T10:35:37,664+0000 [pulsar-web-36-15] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:35:37 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 10
+2026-11-19T10:35:57,714+0000 [pulsar-web-36-16] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:35:57 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 12
+2026-11-19T10:36:13,515+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:36:16,650+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:36:17,760+0000 [pulsar-web-36-2] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:36:17 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 8
+2026-11-19T10:36:37,823+0000 [pulsar-web-36-5] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:36:37 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 19
+2026-11-19T10:36:57,900+0000 [pulsar-web-36-6] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:36:57 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 10
+2026-11-19T10:37:13,519+0000 [pulsar-load-manager-1-1] WARN  org.apache.pulsar.broker.loadbalance.LinuxInfoUtils - [LinuxInfo] Failed to read /sys/class/net/bonding_masters NIC type, the detail is: /sys/class/net/bonding_masters/type: Not a directory
+2026-11-19T10:37:16,649+0000 [pulsar-load-manager-1-1] INFO  org.apache.pulsar.broker.loadbalance.impl.ModularLoadManagerImpl - Only 1 broker available: no load shedding will be performed
+2026-11-19T10:37:17,957+0000 [pulsar-web-36-3] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:37:17 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 8
+2026-11-19T10:37:38,018+0000 [pulsar-web-36-8] INFO  org.eclipse.jetty.server.RequestLog - 127.0.0.1 - - [19/Nov/2026:10:37:37 +0000] "GET /admin/v2/clusters HTTP/1.1" 200 11 "-" "curl/7.81.0" 18
+== evoting_bookie1: status=running oom_killed=false exit=0 restarts=0
+2026-11-19T10:16:12,729+0000 [main] INFO  org.apache.bookkeeper.stats.prometheus.PrometheusMetricsProvider - Started Prometheus stats endpoint at 0.0.0.0/<unresolved>:8000
+2026-11-19T10:16:12,753+0000 [main] INFO  org.apache.bookkeeper.bookie.Bookie - Finished replaying journal in 1 ms.
+2026-11-19T10:16:12,767+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.SyncThread - Flush ledger storage at checkpoint CheckpointList{checkpoints=[LogMark: logFileId - 0 , logFileOffset - 0]}.
+2026-11-19T10:16:12,774+0000 [main] INFO  org.apache.bookkeeper.bookie.Bookie - Finished reading journal, starting bookie
+2026-11-19T10:16:12,777+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.Journal - Starting journal on data/bookkeeper/journal/current
+2026-11-19T10:16:12,778+0000 [BookieStateManagerService-0] INFO  org.apache.bookkeeper.bookie.BookieStateManager - Re-registering the bookie
+2026-11-19T10:16:12,781+0000 [BookieStateManagerService-0] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationManager - RegisterBookie bookie1:3181 readOnly false info BookieServiceInfo{properties={}, endpoints=[EndpointInfo{id=bookie, port=3181, host=bookie1, protocol=bookie-rpc, auth=[], extensions=[]}]}
+2026-11-19T10:16:12,781+0000 [ForceWriteThread] INFO  org.apache.bookkeeper.bookie.Journal - ForceWrite Thread started
+2026-11-19T10:16:12,790+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e88ee.txn
+2026-11-19T10:16:12,801+0000 [metadata-store-1-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Bookie bookie1:3181 created. path: /ledgers/available/bookie1:3181
+2026-11-19T10:16:12,802+0000 [metadata-store-1-1] INFO  org.apache.pulsar.metadata.coordination.impl.ResourceLockImpl - Acquired resource lock on /ledgers/available/bookie1:3181
+2026-11-19T10:16:12,804+0000 [metadata-store-17-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Bookie bookie1:3181 created. path: /ledgers/available/bookie1:3181
+2026-11-19T10:16:12,808+0000 [main] INFO  org.apache.bookkeeper.bookie.UncleanShutdownDetectionImpl - Created dirty file in ledger dir: /pulsar/data/bookkeeper/ledgers/current
+2026-11-19T10:16:12,825+0000 [metadata-store-17-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Update BookieInfoCache (writable bookie) bookie1:3181 -> BookieServiceInfo{properties={}, endpoints=[EndpointInfo{id=bookie, port=3181, host=bookie1, protocol=bookie-rpc, auth=[], extensions=[]}]}
+2026-11-19T10:16:12,831+0000 [pulsar-registration-client-19-1] WARN  org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy - Failed to resolve network location for bookie1, using default rack for it : /default-rack.
+2026-11-19T10:16:12,835+0000 [pulsar-registration-client-19-1] INFO  org.apache.bookkeeper.net.NetworkTopologyImpl - Adding a new node: /default-rack/bookie1:3181
+2026-11-19T10:16:12,848+0000 [metadata-store-1-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Update BookieInfoCache (writable bookie) bookie1:3181 -> BookieServiceInfo{properties={}, endpoints=[EndpointInfo{id=bookie, port=3181, host=bookie1, protocol=bookie-rpc, auth=[], extensions=[]}]}
+2026-11-19T10:16:12,869+0000 [metadata-store-1-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Bookie bookie2:3181 created. path: /ledgers/available/bookie2:3181
+2026-11-19T10:16:12,871+0000 [metadata-store-17-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Bookie bookie2:3181 created. path: /ledgers/available/bookie2:3181
+2026-11-19T10:16:12,899+0000 [metadata-store-17-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Update BookieInfoCache (writable bookie) bookie2:3181 -> BookieServiceInfo{properties={}, endpoints=[EndpointInfo{id=bookie, port=3181, host=bookie2, protocol=bookie-rpc, auth=[], extensions=[]}]}
+2026-11-19T10:16:12,901+0000 [pulsar-registration-client-19-1] WARN  org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy - Failed to resolve network location for bookie2, using default rack for it : /default-rack.
+2026-11-19T10:16:12,902+0000 [pulsar-registration-client-19-1] INFO  org.apache.bookkeeper.net.NetworkTopologyImpl - Adding a new node: /default-rack/bookie2:3181
+2026-11-19T10:16:12,921+0000 [metadata-store-1-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Update BookieInfoCache (writable bookie) bookie2:3181 -> BookieServiceInfo{properties={}, endpoints=[EndpointInfo{id=bookie, port=3181, host=bookie2, protocol=bookie-rpc, auth=[], extensions=[]}]}
+2026-11-19T10:16:13,065+0000 [main] INFO  org.apache.bookkeeper.common.component.ComponentStarter - Started component bookie-server.
+2026-11-19T10:16:13,070+0000 [metadata-store-17-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarLedgerAuditorManager - Auditor leader election state: Following -- BookieId: bookie1:3181
+2026-11-19T10:16:30,128+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,128+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,130+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,152+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xb2e64fcc, L:/172.19.0.9:3181 - R:/172.19.0.10:40488]
+2026-11-19T10:16:30,153+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x60b32547, L:/172.19.0.9:3181 - R:/172.19.0.10:40484]
+2026-11-19T10:16:30,155+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x42a9abee, L:/172.19.0.9:3181 - R:/172.19.0.10:40518]
+2026-11-19T10:16:30,167+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,167+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,168+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x132ece5f, L:/172.19.0.9:3181 - R:/172.19.0.10:40544]
+2026-11-19T10:16:30,168+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,169+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,169+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xa062b9e3, L:/172.19.0.9:3181 - R:/172.19.0.10:40502]
+2026-11-19T10:16:30,169+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x9f8c59bc, L:/172.19.0.9:3181 - R:/172.19.0.10:40528]
+2026-11-19T10:16:30,166+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,169+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xc4a0b7b7, L:/172.19.0.9:3181 - R:/172.19.0.10:40536]
+2026-11-19T10:16:30,168+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xf521bff7, L:/172.19.0.9:3181 - R:/172.19.0.10:40478]
+2026-11-19T10:16:30,181+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,182+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x55bc2408, L:/172.19.0.9:3181 - R:/172.19.0.10:40552]
+2026-11-19T10:16:30,183+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,184+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x8216f2b7, L:/172.19.0.9:3181 - R:/172.19.0.10:40548]
+2026-11-19T10:16:30,184+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,184+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,185+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x1dd8e111, L:/172.19.0.9:3181 - R:/172.19.0.10:40554]
+2026-11-19T10:16:30,186+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,187+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xcb18d7c3, L:/172.19.0.9:3181 - R:/172.19.0.10:40568]
+2026-11-19T10:16:30,187+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x605fa3ec, L:/172.19.0.9:3181 - R:/172.19.0.10:40564]
+2026-11-19T10:16:30,188+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,189+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x5c8a21bd, L:/172.19.0.9:3181 - R:/172.19.0.10:40574]
+2026-11-19T10:16:30,201+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,201+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xaeb2dba4, L:/172.19.0.9:3181 - R:/172.19.0.10:40590]
+2026-11-19T10:16:30,201+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,202+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x5f9b2fe0, L:/172.19.0.9:3181 - R:/172.19.0.10:40604]
+2026-11-19T10:17:12,765+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.EntryLogManagerBase - Creating a new entry log file because current active log channel has not initialized yet
+2026-11-19T10:17:12,769+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.EntryLoggerAllocator - Created new entry log file data/bookkeeper/ledgers/current/0.log for logId 0.
+2026-11-19T10:17:12,771+0000 [pool-4-thread-1] INFO  org.apache.bookkeeper.bookie.EntryLoggerAllocator - Created new entry log file data/bookkeeper/ledgers/current/1.log for logId 1.
+2026-11-19T10:18:45,252+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:19:43,928+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:20:45,845+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:21:41,736+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e88ef.txn
+2026-11-19T10:21:43,268+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:22:45,733+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:23:44,365+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:24:46,204+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:25:53,216+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e88f0.txn
+2026-11-19T10:25:54,598+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:25:55,232+0000 [db-storage-6-1] INFO  org.apache.bookkeeper.bookie.Journal - garbage collected journal 1a1f34e88ee.txn
+2026-11-19T10:26:51,463+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:27:48,720+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:28:47,397+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:29:49,141+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:30:23,318+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e88f1.txn
+2026-11-19T10:30:45,044+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:30:45,375+0000 [db-storage-6-1] INFO  org.apache.bookkeeper.bookie.Journal - garbage collected journal 1a1f34e88ef.txn
+2026-11-19T10:31:46,266+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:32:47,806+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+== evoting_bookie2: status=running oom_killed=false exit=0 restarts=0
+2026-11-19T10:16:30,193+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,195+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,194+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,192+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,192+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,192+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,192+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,194+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,218+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x86a3ee7d, L:/172.19.0.8:3181 - R:/172.19.0.10:44782]
+2026-11-19T10:16:30,220+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x6d4319db, L:/172.19.0.8:3181 - R:/172.19.0.10:44792]
+2026-11-19T10:16:30,220+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xce57daaa, L:/172.19.0.8:3181 - R:/172.19.0.10:44766]
+2026-11-19T10:16:30,220+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x48e91ac3, L:/172.19.0.8:3181 - R:/172.19.0.10:44800]
+2026-11-19T10:16:30,221+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x852c8b09, L:/172.19.0.8:3181 - R:/172.19.0.10:44846]
+2026-11-19T10:16:30,222+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x40403644, L:/172.19.0.8:3181 - R:/172.19.0.10:44712]
+2026-11-19T10:16:30,223+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xd94f0f98, L:/172.19.0.8:3181 - R:/172.19.0.10:44812]
+2026-11-19T10:16:30,223+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x283b6bdf, L:/172.19.0.8:3181 - R:/172.19.0.10:44752]
+2026-11-19T10:16:30,223+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xe29c041c, L:/172.19.0.8:3181 - R:/172.19.0.10:44746]
+2026-11-19T10:16:30,224+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x0791a675, L:/172.19.0.8:3181 - R:/172.19.0.10:44786]
+2026-11-19T10:16:30,224+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x7dd67ef9, L:/172.19.0.8:3181 - R:/172.19.0.10:44718]
+2026-11-19T10:16:30,224+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x4ee32412, L:/172.19.0.8:3181 - R:/172.19.0.10:44826]
+2026-11-19T10:16:30,225+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xd8851428, L:/172.19.0.8:3181 - R:/172.19.0.10:44732]
+2026-11-19T10:16:30,225+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x5c026879, L:/172.19.0.8:3181 - R:/172.19.0.10:44832]
+2026-11-19T10:16:30,226+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xa4c56da9, L:/172.19.0.8:3181 - R:/172.19.0.10:44854]
+2026-11-19T10:16:30,268+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,270+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xa986f021, L:/172.19.0.8:3181 - R:/172.19.0.10:44864]
+2026-11-19T10:16:30,557+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,557+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x39233f05, L:/172.19.0.8:3181 - R:/172.19.0.10:44870]
+2026-11-19T10:16:30,562+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,564+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x71f9c832, L:/172.19.0.8:3181 - R:/172.19.0.10:44882]
+2026-11-19T10:16:30,563+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,564+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,564+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x1d7155e0, L:/172.19.0.8:3181 - R:/172.19.0.10:44906]
+2026-11-19T10:16:30,564+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x300d93a6, L:/172.19.0.8:3181 - R:/172.19.0.10:44898]
+2026-11-19T10:16:30,566+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,566+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x45cd78e2, L:/172.19.0.8:3181 - R:/172.19.0.10:44922]
+2026-11-19T10:16:30,566+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,567+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,567+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,568+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xd30b1b1e, L:/172.19.0.8:3181 - R:/172.19.0.10:44956]
+2026-11-19T10:16:30,568+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,567+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,568+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x08e1d0c9, L:/172.19.0.8:3181 - R:/172.19.0.10:44918]
+2026-11-19T10:16:30,566+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xc3f9c620, L:/172.19.0.8:3181 - R:/172.19.0.10:44934]
+2026-11-19T10:16:30,568+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x52c0e2b0, L:/172.19.0.8:3181 - R:/172.19.0.10:44924]
+2026-11-19T10:16:30,569+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x83c1a2f1, L:/172.19.0.8:3181 - R:/172.19.0.10:44946]
+2026-11-19T10:16:30,567+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,569+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xca408eb2, L:/172.19.0.8:3181 - R:/172.19.0.10:44950]
+2026-11-19T10:16:30,570+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,576+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xb6a2f409, L:/172.19.0.8:3181 - R:/172.19.0.10:44976]
+2026-11-19T10:16:30,569+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,577+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xd199ff42, L:/172.19.0.8:3181 - R:/172.19.0.10:44960]
+2026-11-19T10:16:30,571+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,578+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x12e05dad, L:/172.19.0.8:3181 - R:/172.19.0.10:44990]
+2026-11-19T10:16:30,570+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,579+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xae288a4e, L:/172.19.0.8:3181 - R:/172.19.0.10:44970]
+2026-11-19T10:16:30,652+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,652+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x15bc83d8, L:/172.19.0.8:3181 - R:/172.19.0.10:44996]
+2026-11-19T10:17:12,815+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.EntryLogManagerBase - Creating a new entry log file because current active log channel has not initialized yet
+2026-11-19T10:17:12,818+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.EntryLoggerAllocator - Created new entry log file data/bookkeeper/ledgers/current/0.log for logId 0.
+2026-11-19T10:17:12,819+0000 [pool-4-thread-1] INFO  org.apache.bookkeeper.bookie.EntryLoggerAllocator - Created new entry log file data/bookkeeper/ledgers/current/1.log for logId 1.
+2026-11-19T10:18:44,951+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:19:44,010+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:20:44,832+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:21:40,827+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e8921.txn
+2026-11-19T10:21:44,138+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:22:44,664+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:23:44,615+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:24:45,451+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:25:45,435+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e8922.txn
+2026-11-19T10:25:54,633+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:25:55,241+0000 [db-storage-6-1] INFO  org.apache.bookkeeper.bookie.Journal - garbage collected journal 1a1f34e8920.txn
+2026-11-19T10:26:51,332+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:27:46,245+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:28:46,930+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:29:49,026+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:30:12,658+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e8923.txn
+2026-11-19T10:30:46,802+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:30:47,188+0000 [db-storage-6-1] INFO  org.apache.bookkeeper.bookie.Journal - garbage collected journal 1a1f34e8921.txn
+2026-11-19T10:31:45,685+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:32:47,173+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+== evoting_bookie3: status=running oom_killed=false exit=0 restarts=0
+2026-11-19T10:16:12,825+0000 [pulsar-registration-client-19-1] WARN  org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy - Failed to resolve network location for bookie1, using default rack for it : /default-rack.
+2026-11-19T10:16:12,826+0000 [pulsar-registration-client-19-1] INFO  org.apache.bookkeeper.net.NetworkTopologyImpl - Adding a new node: /default-rack/bookie1:3181
+2026-11-19T10:16:12,869+0000 [metadata-store-1-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Bookie bookie2:3181 created. path: /ledgers/available/bookie2:3181
+2026-11-19T10:16:12,869+0000 [metadata-store-17-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Bookie bookie2:3181 created. path: /ledgers/available/bookie2:3181
+2026-11-19T10:16:12,879+0000 [metadata-store-1-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Update BookieInfoCache (writable bookie) bookie2:3181 -> BookieServiceInfo{properties={}, endpoints=[EndpointInfo{id=bookie, port=3181, host=bookie2, protocol=bookie-rpc, auth=[], extensions=[]}]}
+2026-11-19T10:16:12,895+0000 [metadata-store-17-1] INFO  org.apache.pulsar.metadata.bookkeeper.PulsarRegistrationClient - Update BookieInfoCache (writable bookie) bookie2:3181 -> BookieServiceInfo{properties={}, endpoints=[EndpointInfo{id=bookie, port=3181, host=bookie2, protocol=bookie-rpc, auth=[], extensions=[]}]}
+2026-11-19T10:16:12,898+0000 [pulsar-registration-client-19-1] WARN  org.apache.bookkeeper.client.TopologyAwareEnsemblePlacementPolicy - Failed to resolve network location for bookie2, using default rack for it : /default-rack.
+2026-11-19T10:16:12,900+0000 [pulsar-registration-client-19-1] INFO  org.apache.bookkeeper.net.NetworkTopologyImpl - Adding a new node: /default-rack/bookie2:3181
+2026-11-19T10:16:30,488+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,490+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,488+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,489+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,490+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,492+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,493+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,504+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,505+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,507+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x1b7f9fd6, L:/172.19.0.7:3181 - R:/172.19.0.10:43676]
+2026-11-19T10:16:30,508+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x607f80c2, L:/172.19.0.7:3181 - R:/172.19.0.10:43722]
+2026-11-19T10:16:30,507+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x1886312b, L:/172.19.0.7:3181 - R:/172.19.0.10:43658]
+2026-11-19T10:16:30,509+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xe12a48b8, L:/172.19.0.7:3181 - R:/172.19.0.10:43710]
+2026-11-19T10:16:30,509+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x025625fe, L:/172.19.0.7:3181 - R:/172.19.0.10:43686]
+2026-11-19T10:16:30,510+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x49403b00, L:/172.19.0.7:3181 - R:/172.19.0.10:43702]
+2026-11-19T10:16:30,512+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,513+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x23a9b4e3, L:/172.19.0.7:3181 - R:/172.19.0.10:43738]
+2026-11-19T10:16:30,513+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,513+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xf9864344, L:/172.19.0.7:3181 - R:/172.19.0.10:43732]
+2026-11-19T10:16:30,518+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x2e145211, L:/172.19.0.7:3181 - R:/172.19.0.10:43660]
+2026-11-19T10:16:30,519+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xaade8264, L:/172.19.0.7:3181 - R:/172.19.0.10:43638]
+2026-11-19T10:16:30,519+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xb5e4aeb1, L:/172.19.0.7:3181 - R:/172.19.0.10:43646]
+2026-11-19T10:16:30,523+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,524+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x912afa89, L:/172.19.0.7:3181 - R:/172.19.0.10:43748]
+2026-11-19T10:16:30,524+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,524+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xef8d8599, L:/172.19.0.7:3181 - R:/172.19.0.10:43750]
+2026-11-19T10:16:30,527+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,527+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x66666f28, L:/172.19.0.7:3181 - R:/172.19.0.10:43766]
+2026-11-19T10:16:30,530+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,530+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xabdae44f, L:/172.19.0.7:3181 - R:/172.19.0.10:43780]
+2026-11-19T10:16:30,531+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,531+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x19400f8e, L:/172.19.0.7:3181 - R:/172.19.0.10:43792]
+2026-11-19T10:16:30,673+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,673+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x65f708c1, L:/172.19.0.7:3181 - R:/172.19.0.10:43816]
+2026-11-19T10:16:30,676+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,676+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,677+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x8e689ee6, L:/172.19.0.7:3181 - R:/172.19.0.10:43842]
+2026-11-19T10:16:30,677+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,677+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xc3a11154, L:/172.19.0.7:3181 - R:/172.19.0.10:43802]
+2026-11-19T10:16:30,678+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,679+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xf583206f, L:/172.19.0.7:3181 - R:/172.19.0.10:43828]
+2026-11-19T10:16:30,680+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,680+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x9bacdd8c, L:/172.19.0.7:3181 - R:/172.19.0.10:43904]
+2026-11-19T10:16:30,682+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,682+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x9e2794a2, L:/172.19.0.7:3181 - R:/172.19.0.10:43930]
+2026-11-19T10:16:30,682+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,688+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x6d5eee1c, L:/172.19.0.7:3181 - R:/172.19.0.10:43916]
+2026-11-19T10:16:30,677+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xd9917da9, L:/172.19.0.7:3181 - R:/172.19.0.10:43868]
+2026-11-19T10:16:30,687+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,688+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x12cf3ce0, L:/172.19.0.7:3181 - R:/172.19.0.10:43922]
+2026-11-19T10:16:30,685+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,683+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,683+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,683+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,689+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x24b47894, L:/172.19.0.7:3181 - R:/172.19.0.10:43886]
+2026-11-19T10:16:30,689+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xd1e7824e, L:/172.19.0.7:3181 - R:/172.19.0.10:43940]
+2026-11-19T10:16:30,680+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,689+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,689+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xc15fdcb9, L:/172.19.0.7:3181 - R:/172.19.0.10:43902]
+2026-11-19T10:16:30,679+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,689+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x4e977166, L:/172.19.0.7:3181 - R:/172.19.0.10:43944]
+2026-11-19T10:16:30,689+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x9e6ae8a9, L:/172.19.0.7:3181 - R:/172.19.0.10:43858]
+2026-11-19T10:16:30,689+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x9e0bdbb8, L:/172.19.0.7:3181 - R:/172.19.0.10:43876]
+2026-11-19T10:16:30,690+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x8eb4df8e, L:/172.19.0.7:3181 - R:/172.19.0.10:43942]
+2026-11-19T10:17:11,907+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.EntryLogManagerBase - Creating a new entry log file because current active log channel has not initialized yet
+2026-11-19T10:17:11,911+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.EntryLoggerAllocator - Created new entry log file data/bookkeeper/ledgers/current/0.log for logId 0.
+2026-11-19T10:17:11,913+0000 [pool-4-thread-1] INFO  org.apache.bookkeeper.bookie.EntryLoggerAllocator - Created new entry log file data/bookkeeper/ledgers/current/1.log for logId 1.
+2026-11-19T10:29:15,357+0000 [metadata-store-zk-session-watcher-18-1] WARN  org.apache.pulsar.metadata.impl.ZKSessionWatcher - [72057602231435273] ZooKeeper client is disconnected. Waiting to reconnect, time remaining = 5.0 seconds
+2026-11-19T10:29:15,356+0000 [metadata-store-zk-session-watcher-23-1] WARN  org.apache.pulsar.metadata.impl.ZKSessionWatcher - [72057602231435274] ZooKeeper client is disconnected. Waiting to reconnect, time remaining = 5.0 seconds
+2026-11-19T10:29:15,769+0000 [metadata-store-zk-session-watcher-18-1] INFO  org.apache.pulsar.metadata.impl.ZKSessionWatcher - ZooKeeper client reconnection with server quorum. Current status: ConnectionLost
+2026-11-19T10:29:15,770+0000 [metadata-store-zk-session-watcher-23-1] INFO  org.apache.pulsar.metadata.impl.ZKSessionWatcher - ZooKeeper client reconnection with server quorum. Current status: ConnectionLost
+2026-11-19T10:29:15,809+0000 [metadata-store-coordination-service-20-1] INFO  org.apache.pulsar.metadata.coordination.impl.LockManagerImpl - Metadata store connection has been re-established. Revalidating locks that were pending.
+== evoting_bookie4: status=running oom_killed=false exit=0 restarts=0
+2026-11-19T10:16:30,515+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,516+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,517+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,507+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,518+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,519+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,520+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,528+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,527+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:30,536+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xa5d8c844, L:/172.19.0.6:3181 - R:/172.19.0.10:55316]
+2026-11-19T10:16:30,537+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xf9024f4b, L:/172.19.0.6:3181 - R:/172.19.0.10:55418]
+2026-11-19T10:16:30,537+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x37a4ca13, L:/172.19.0.6:3181 - R:/172.19.0.10:55330]
+2026-11-19T10:16:30,537+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xf7b542d7, L:/172.19.0.6:3181 - R:/172.19.0.10:55420]
+2026-11-19T10:16:30,538+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x417e1fbc, L:/172.19.0.6:3181 - R:/172.19.0.10:55408]
+2026-11-19T10:16:30,538+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x1964ec33, L:/172.19.0.6:3181 - R:/172.19.0.10:55386]
+2026-11-19T10:16:30,538+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xb1527318, L:/172.19.0.6:3181 - R:/172.19.0.10:55384]
+2026-11-19T10:16:30,539+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x22438bae, L:/172.19.0.6:3181 - R:/172.19.0.10:55326]
+2026-11-19T10:16:30,554+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xd05a099e, L:/172.19.0.6:3181 - R:/172.19.0.10:55308]
+2026-11-19T10:16:30,553+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x63500032, L:/172.19.0.6:3181 - R:/172.19.0.10:55338]
+2026-11-19T10:16:30,554+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x6ee342da, L:/172.19.0.6:3181 - R:/172.19.0.10:55362]
+2026-11-19T10:16:30,554+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x8d5fbcb5, L:/172.19.0.6:3181 - R:/172.19.0.10:55300]
+2026-11-19T10:16:30,554+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xa8c1d1c2, L:/172.19.0.6:3181 - R:/172.19.0.10:55378]
+2026-11-19T10:16:30,554+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x248b559f, L:/172.19.0.6:3181 - R:/172.19.0.10:55352]
+2026-11-19T10:16:30,556+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x0ead14cf, L:/172.19.0.6:3181 - R:/172.19.0.10:55350]
+2026-11-19T10:16:30,558+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xb529627a, L:/172.19.0.6:3181 - R:/172.19.0.10:55328]
+2026-11-19T10:16:35,029+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,030+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,029+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,030+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,030+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,030+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,031+0000 [bookie-io-10-7] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xf1d0ba83, L:/172.19.0.6:3181 - R:/172.19.0.10:55498]
+2026-11-19T10:16:35,031+0000 [bookie-io-10-6] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x0b14e8c3, L:/172.19.0.6:3181 - R:/172.19.0.10:55486]
+2026-11-19T10:16:35,031+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,031+0000 [bookie-io-10-2] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xdc8b61e2, L:/172.19.0.6:3181 - R:/172.19.0.10:55422]
+2026-11-19T10:16:35,030+0000 [bookie-io-10-5] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x32f8b84e, L:/172.19.0.6:3181 - R:/172.19.0.10:55472]
+2026-11-19T10:16:35,031+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,031+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,031+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,031+0000 [bookie-io-10-3] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xfe1f9666, L:/172.19.0.6:3181 - R:/172.19.0.10:55448]
+2026-11-19T10:16:35,031+0000 [bookie-io-10-9] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xa18d9d0d, L:/172.19.0.6:3181 - R:/172.19.0.10:55502]
+2026-11-19T10:16:35,031+0000 [bookie-io-10-10] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xa2415b8a, L:/172.19.0.6:3181 - R:/172.19.0.10:55508]
+2026-11-19T10:16:35,031+0000 [bookie-io-10-8] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x8e2c23fd, L:/172.19.0.6:3181 - R:/172.19.0.10:55500]
+2026-11-19T10:16:35,031+0000 [bookie-io-10-4] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x33604c18, L:/172.19.0.6:3181 - R:/172.19.0.10:55462]
+2026-11-19T10:16:35,030+0000 [bookie-io-10-1] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x2c9356c5, L:/172.19.0.6:3181 - R:/172.19.0.10:55432]
+2026-11-19T10:16:35,032+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,032+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,032+0000 [bookie-io-10-11] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x16884b75, L:/172.19.0.6:3181 - R:/172.19.0.10:55520]
+2026-11-19T10:16:35,032+0000 [bookie-io-10-12] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xa79fb501, L:/172.19.0.6:3181 - R:/172.19.0.10:55522]
+2026-11-19T10:16:35,032+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,032+0000 [bookie-io-10-16] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xc9c42b8a, L:/172.19.0.6:3181 - R:/172.19.0.10:55548]
+2026-11-19T10:16:35,032+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,033+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,033+0000 [bookie-io-10-13] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0x2054da92, L:/172.19.0.6:3181 - R:/172.19.0.10:55526]
+2026-11-19T10:16:35,032+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.AuthHandler - Authentication success on server side
+2026-11-19T10:16:35,033+0000 [bookie-io-10-15] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xe3e6a390, L:/172.19.0.6:3181 - R:/172.19.0.10:55542]
+2026-11-19T10:16:35,033+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.proto.BookieRequestHandler - Channel connected [id: 0xf67d51f1, L:/172.19.0.6:3181 - R:/172.19.0.10:55538]
+2026-11-19T10:17:11,903+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.EntryLogManagerBase - Creating a new entry log file because current active log channel has not initialized yet
+2026-11-19T10:17:11,909+0000 [SyncThread-9-1] INFO  org.apache.bookkeeper.bookie.EntryLoggerAllocator - Created new entry log file data/bookkeeper/ledgers/current/0.log for logId 0.
+2026-11-19T10:17:11,911+0000 [pool-4-thread-1] INFO  org.apache.bookkeeper.bookie.EntryLoggerAllocator - Created new entry log file data/bookkeeper/ledgers/current/1.log for logId 1.
+2026-11-19T10:18:44,613+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:19:42,902+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:20:44,671+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:21:41,532+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e8590.txn
+2026-11-19T10:21:43,371+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:22:45,488+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:23:44,675+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:24:44,478+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:25:48,084+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e8591.txn
+2026-11-19T10:25:53,200+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:25:53,448+0000 [db-storage-6-1] INFO  org.apache.bookkeeper.bookie.Journal - garbage collected journal 1a1f34e858f.txn
+2026-11-19T10:26:50,850+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:27:45,426+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:28:45,617+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:29:48,591+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:30:15,254+0000 [BookieJournal-3181] INFO  org.apache.bookkeeper.bookie.JournalChannel - Opening journal data/bookkeeper/journal/current/1a1f34e8592.txn
+2026-11-19T10:30:46,018+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:30:46,330+0000 [db-storage-6-1] INFO  org.apache.bookkeeper.bookie.Journal - garbage collected journal 1a1f34e8590.txn
+2026-11-19T10:31:43,525+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+2026-11-19T10:32:46,386+0000 [bookie-io-10-14] INFO  org.apache.bookkeeper.bookie.storage.ldb.SingleDirectoryDbLedgerStorage - Write cache is full, triggering flush
+== evoting_ledger_worker: status=running oom_killed=false exit=0 restarts=0
+2026-11-19 10:16:28.777 INFO  [281473476822208] Client:86 | Subscribing on Topic :persistent://public/default/ballots
+2026-11-19 10:16:28.778 INFO  [281473476822208] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-19 10:16:28.778 INFO  [281473476822208] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-19 10:16:28.779 INFO  [281473415180672] ClientConnection:404 | [172.19.0.11:41286 -> 172.19.0.10:6650] Connected to broker
+2026-11-19 10:16:29.038 INFO  [281473415180672] HandlerBase:83 | [persistent://public/default/ballots, ledger-worker, 0] Getting connection from pool
+2026-11-19 10:16:29.636 INFO  [281473415180672] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/ballots, lookup-broker-url pulsar://pulsar:6650, from [172.19.0.11:41286 -> 172.19.0.10:6650] 
+2026-11-19 10:16:30.110 INFO  [281473415180672] ConsumerImpl:298 | [persistent://public/default/ballots, ledger-worker, 0] Created consumer on broker [172.19.0.11:41286 -> 172.19.0.10:6650] 
+2026-11-19 10:16:30,110 ledger-worker INFO ledger worker started: persistent://public/default/ballots -> vote_ledger
+2026-11-19 10:17:25.800 INFO  [281473728472256] Client:86 | Subscribing on Topic :persistent://public/default/ballots
+2026-11-19 10:17:25.801 INFO  [281473728472256] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-19 10:17:25.801 INFO  [281473728472256] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-19 10:17:25.802 INFO  [281473666838912] ClientConnection:404 | [172.19.0.11:57160 -> 172.19.0.10:6650] Connected to broker
+2026-11-19 10:17:25.810 INFO  [281473666838912] HandlerBase:83 | [persistent://public/default/ballots, ledger-worker, 0] Getting connection from pool
+2026-11-19 10:17:25.811 INFO  [281473666838912] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/ballots, lookup-broker-url pulsar://pulsar:6650, from [172.19.0.11:57160 -> 172.19.0.10:6650] 
+2026-11-19 10:17:25.868 INFO  [281473666838912] ConsumerImpl:298 | [persistent://public/default/ballots, ledger-worker, 0] Created consumer on broker [172.19.0.11:57160 -> 172.19.0.10:6650] 
+2026-11-19 10:17:25,869 ledger-worker INFO ledger worker started: persistent://public/default/ballots -> vote_ledger
+2026-11-19 10:27:25.810 INFO  [281473666838912] ConsumerStatsImpl:64 | Consumer [persistent://public/default/ballots, ledger-worker, 0] , ConsumerStatsImpl (numBytesRecieved_ = 843982337, totalNumBytesRecieved_ = 843982337, receivedMsgMap_ = {[Key: Ok, Value: 44938], [Key: TimeOut, Value: 6244], }, ackedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 44917], }, totalReceivedMsgMap_ = {[Key: Ok, Value: 44938], [Key: TimeOut, Value: 6244], }, totalAckedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 44917], })
+2026-11-19 10:37:25.810 INFO  [281473666838912] ConsumerStatsImpl:64 | Consumer [persistent://public/default/ballots, ledger-worker, 0] , ConsumerStatsImpl (numBytesRecieved_ = 508251031, totalNumBytesRecieved_ = 1352233368, receivedMsgMap_ = {[Key: Ok, Value: 27062], [Key: TimeOut, Value: 3183], }, ackedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 27083], }, totalReceivedMsgMap_ = {[Key: Ok, Value: 72000], [Key: TimeOut, Value: 9427], }, totalAckedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 72000], })
+== evoting_integrity: status=running oom_killed=false exit=0 restarts=0
+2026-11-19 10:16:28.850 INFO  [281473530782912] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-19 10:16:28.850 INFO  [281473530782912] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-19 10:16:28.854 INFO  [281473466036608] ClientConnection:404 | [172.19.0.12:44420 -> 172.19.0.10:6650] Connected to broker
+2026-11-19 10:16:29.037 INFO  [281473466036608] HandlerBase:83 | [persistent://public/default/diode-primary, ] Getting connection from pool
+2026-11-19 10:16:29.617 INFO  [281473466036608] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/diode-primary, lookup-broker-url pulsar://pulsar:6650, from [172.19.0.12:44420 -> 172.19.0.10:6650] 
+2026-11-19 10:16:30.009 INFO  [281473466036608] ProducerImpl:212 | [persistent://public/default/diode-primary, ] Created producer on broker [172.19.0.12:44420 -> 172.19.0.10:6650] 
+2026-11-19 10:16:30,013 primary-integrity INFO primary integrity service started: cycle 5.0s, bundle 10000
+2026-11-19 10:17:26.029 INFO  [281473323480256] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-19 10:17:26.029 INFO  [281473323480256] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-19 10:17:26.030 INFO  [281473258746240] ClientConnection:404 | [172.19.0.12:58760 -> 172.19.0.10:6650] Connected to broker
+2026-11-19 10:17:26.032 INFO  [281473258746240] HandlerBase:83 | [persistent://public/default/diode-primary, ] Getting connection from pool
+2026-11-19 10:17:26.033 INFO  [281473258746240] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/diode-primary, lookup-broker-url pulsar://pulsar:6650, from [172.19.0.12:58760 -> 172.19.0.10:6650] 
+2026-11-19 10:17:26.036 INFO  [281473258746240] ProducerImpl:212 | [persistent://public/default/diode-primary, ] Created producer on broker [172.19.0.12:58760 -> 172.19.0.10:6650] 
+2026-11-19 10:17:26,038 primary-integrity INFO primary integrity service started: cycle 5.0s, bundle 10000
+2026-11-19 10:27:26.074 INFO  [281473258746240] ProducerStatsImpl:85 | Producer [persistent://public/default/diode-primary, ] , ProducerStatsImpl (numMsgsSent_ = 115, numBytesSent_ = 37008317, sendMap_ = {[Key: Ok, Value: 115], }, latencyAccumulator_ = Latencies [ 50pct: 35.9271ms, 90pct: 109.764ms, 99pct: 142.021ms, 99.9pct: 166.409ms], totalMsgsSent_ = 115, totalBytesSent_ = 37008317, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 115], }, totalLatencyAccumulator_ = Latencies [ 50pct: 35.9271ms, 90pct: 109.764ms, 99pct: 142.021ms, 99.9pct: 166.409ms])
+2026-11-19 10:37:26.077 INFO  [281473258746240] ProducerStatsImpl:85 | Producer [persistent://public/default/diode-primary, ] , ProducerStatsImpl (numMsgsSent_ = 96, numBytesSent_ = 17241954, sendMap_ = {[Key: Ok, Value: 96], }, latencyAccumulator_ = Latencies [ 50pct: 17.4331ms, 90pct: 81.2579ms, 99pct: 125.587ms, 99.9pct: 167.996ms], totalMsgsSent_ = 211, totalBytesSent_ = 54250271, totalAcksReceived_ = , totalSendMap_ = {[Key: Ok, Value: 211], }, totalLatencyAccumulator_ = Latencies [ 50pct: 27.1685ms, 90pct: 100.985ms, 99pct: 172.091ms, 99.9pct: 201.31ms])
+== evoting_replica: status=running oom_killed=false exit=0 restarts=0
+2026-11-19 10:16:28.972 INFO  [281472957383872] Client:86 | Subscribing on Topic :persistent://public/default/ballots
+2026-11-19 10:16:28.972 INFO  [281472957383872] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-19 10:16:28.972 INFO  [281472957383872] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-19 10:16:28.980 INFO  [281472903541120] ClientConnection:404 | [172.18.0.4:50330 -> 172.18.0.3:6650] Connected to broker
+2026-11-19 10:16:29.040 INFO  [281472903541120] HandlerBase:83 | [persistent://public/default/ballots, forensic-replica, 0] Getting connection from pool
+2026-11-19 10:16:29.626 INFO  [281472903541120] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/ballots, lookup-broker-url pulsar://pulsar:6650, from [172.18.0.4:50330 -> 172.18.0.3:6650] 
+2026-11-19 10:16:30.084 INFO  [281472903541120] ConsumerImpl:298 | [persistent://public/default/ballots, forensic-replica, 0] Created consumer on broker [172.18.0.4:50330 -> 172.18.0.3:6650] 
+2026-11-19 10:16:30.087 INFO  [281472957383872] Client:86 | Subscribing on Topic :persistent://public/default/diode-primary
+2026-11-19 10:16:30.133 INFO  [281472903541120] HandlerBase:83 | [persistent://public/default/diode-primary, forensic-replica-diode, 1] Getting connection from pool
+2026-11-19 10:16:30.140 INFO  [281472903541120] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/diode-primary, lookup-broker-url pulsar://pulsar:6650, from [172.18.0.4:50330 -> 172.18.0.3:6650] 
+2026-11-19 10:16:30.164 INFO  [281472903541120] ConsumerImpl:298 | [persistent://public/default/diode-primary, forensic-replica-diode, 1] Created consumer on broker [172.18.0.4:50330 -> 172.18.0.3:6650] 
+2026-11-19 10:16:30,164 [replica] INFO Forensic replica started. ballots=persistent://public/default/ballots diode=persistent://public/default/diode-primary cycle=5.0s bundle=10000
+2026-11-19 10:17:25.893 INFO  [281473699304640] Client:86 | Subscribing on Topic :persistent://public/default/ballots
+2026-11-19 10:17:25.893 INFO  [281473699304640] ClientConnection:190 | [<none> -> pulsar://pulsar:6650] Create ClientConnection, timeout=10000
+2026-11-19 10:17:25.893 INFO  [281473699304640] ConnectionPool:114 | Created connection for pulsar://pulsar:6650-0
+2026-11-19 10:17:25.894 INFO  [281473645474176] ClientConnection:404 | [172.18.0.4:50486 -> 172.18.0.3:6650] Connected to broker
+2026-11-19 10:17:25.900 INFO  [281473645474176] HandlerBase:83 | [persistent://public/default/ballots, forensic-replica, 0] Getting connection from pool
+2026-11-19 10:17:25.901 INFO  [281473645474176] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/ballots, lookup-broker-url pulsar://pulsar:6650, from [172.18.0.4:50486 -> 172.18.0.3:6650] 
+2026-11-19 10:17:25.911 INFO  [281473645474176] ConsumerImpl:298 | [persistent://public/default/ballots, forensic-replica, 0] Created consumer on broker [172.18.0.4:50486 -> 172.18.0.3:6650] 
+2026-11-19 10:17:25.911 INFO  [281473699304640] Client:86 | Subscribing on Topic :persistent://public/default/diode-primary
+2026-11-19 10:17:25.912 INFO  [281473645474176] HandlerBase:83 | [persistent://public/default/diode-primary, forensic-replica-diode, 1] Getting connection from pool
+2026-11-19 10:17:25.913 INFO  [281473645474176] BinaryProtoLookupService:86 | Lookup response for persistent://public/default/diode-primary, lookup-broker-url pulsar://pulsar:6650, from [172.18.0.4:50486 -> 172.18.0.3:6650] 
+2026-11-19 10:17:25.914 INFO  [281473645474176] ConsumerImpl:298 | [persistent://public/default/diode-primary, forensic-replica-diode, 1] Created consumer on broker [172.18.0.4:50486 -> 172.18.0.3:6650] 
+2026-11-19 10:17:25,915 [replica] INFO Forensic replica started. ballots=persistent://public/default/ballots diode=persistent://public/default/diode-primary cycle=5.0s bundle=10000
+2026-11-19 10:27:25.906 INFO  [281473645474176] ConsumerStatsImpl:64 | Consumer [persistent://public/default/ballots, forensic-replica, 0] , ConsumerStatsImpl (numBytesRecieved_ = 843494048, totalNumBytesRecieved_ = 843494048, receivedMsgMap_ = {[Key: Ok, Value: 44912], [Key: TimeOut, Value: 2838], }, ackedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 44912], }, totalReceivedMsgMap_ = {[Key: Ok, Value: 44912], [Key: TimeOut, Value: 2838], }, totalAckedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 44912], })
+2026-11-19 10:27:25.912 INFO  [281473645474176] ConsumerStatsImpl:64 | Consumer [persistent://public/default/diode-primary, forensic-replica-diode, 1] , ConsumerStatsImpl (numBytesRecieved_ = 37008317, totalNumBytesRecieved_ = 37008317, receivedMsgMap_ = {[Key: Ok, Value: 115], [Key: TimeOut, Value: 3328], }, ackedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 115], }, totalReceivedMsgMap_ = {[Key: Ok, Value: 115], [Key: TimeOut, Value: 3328], }, totalAckedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 115], })
+2026-11-19 10:37:25.906 INFO  [281473645474176] ConsumerStatsImpl:64 | Consumer [persistent://public/default/ballots, forensic-replica, 0] , ConsumerStatsImpl (numBytesRecieved_ = 508739320, totalNumBytesRecieved_ = 1352233368, receivedMsgMap_ = {[Key: Ok, Value: 27088], [Key: TimeOut, Value: 6770], }, ackedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 27088], }, totalReceivedMsgMap_ = {[Key: Ok, Value: 72000], [Key: TimeOut, Value: 9608], }, totalAckedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 72000], })
+2026-11-19 10:37:25.913 INFO  [281473645474176] ConsumerStatsImpl:64 | Consumer [persistent://public/default/diode-primary, forensic-replica-diode, 1] , ConsumerStatsImpl (numBytesRecieved_ = 17241954, totalNumBytesRecieved_ = 54250271, receivedMsgMap_ = {[Key: Ok, Value: 96], [Key: TimeOut, Value: 6788], }, ackedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 96], }, totalReceivedMsgMap_ = {[Key: Ok, Value: 211], [Key: TimeOut, Value: 10116], }, totalAckedMsgMap_ = {[Key: {Result: Ok, ackType: 0}, Value: 211], })
+== evoting_postgres: status=running oom_killed=false exit=0 restarts=0
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ... UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+sh: locale: not found
+2026-11-19 10:15:56.506 UTC [35] WARNING:  no usable system locales were found
+performing post-bootstrap initialization ... ok
+initdb: warning: enabling "trust" authentication for local connections
+initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+syncing data to disk ... ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+waiting for server to start....2026-11-19 10:15:57.038 UTC [41] LOG:  starting PostgreSQL 15.20 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-11-19 10:15:57.039 UTC [41] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-19 10:15:57.043 UTC [44] LOG:  database system was shut down at 2026-11-19 10:15:56 UTC
+2026-11-19 10:15:57.047 UTC [41] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+waiting for server to shut down....2026-11-19 10:15:57.182 UTC [41] LOG:  received fast shutdown request
+2026-11-19 10:15:57.185 UTC [41] LOG:  aborting any active transactions
+2026-11-19 10:15:57.189 UTC [41] LOG:  background worker "logical replication launcher" (PID 47) exited with exit code 1
+2026-11-19 10:15:57.189 UTC [42] LOG:  shutting down
+2026-11-19 10:15:57.191 UTC [42] LOG:  checkpoint starting: shutdown immediate
+2026-11-19 10:15:57.243 UTC [42] LOG:  checkpoint complete: wrote 931 buffers (5.7%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.020 s, sync=0.030 s, total=0.054 s; sync files=301, longest=0.007 s, average=0.001 s; distance=4320 kB, estimate=4320 kB
+2026-11-19 10:15:57.249 UTC [41] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+2026-11-19 10:15:57.303 UTC [1] LOG:  starting PostgreSQL 15.20 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+2026-11-19 10:15:57.303 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-11-19 10:15:57.303 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-11-19 10:15:57.305 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-11-19 10:15:57.308 UTC [57] LOG:  database system was shut down at 2026-11-19 10:15:57 UTC
+2026-11-19 10:15:57.313 UTC [1] LOG:  database system is ready to accept connections
+2026-11-19 10:20:57.802 UTC [55] LOG:  checkpoint starting: time
+2026-11-19 10:22:53.344 UTC [55] LOG:  checkpoint complete: wrote 51 buffers (0.3%); 0 WAL file(s) added, 0 removed, 19 recycled; write=114.765 s, sync=0.388 s, total=115.542 s; sync files=86, longest=0.071 s, average=0.005 s; distance=311152 kB, estimate=311152 kB
+2026-11-19 10:25:57.259 UTC [55] LOG:  checkpoint starting: time
+2026-11-19 10:27:00.064 UTC [55] LOG:  checkpoint complete: wrote 20 buffers (0.1%); 0 WAL file(s) added, 0 removed, 29 recycled; write=61.909 s, sync=0.107 s, total=62.806 s; sync files=16, longest=0.033 s, average=0.007 s; distance=471012 kB, estimate=471012 kB
+2026-11-19 10:30:57.451 UTC [55] LOG:  checkpoint starting: time
+2026-11-19 10:31:52.292 UTC [55] LOG:  checkpoint complete: wrote 22 buffers (0.1%); 0 WAL file(s) added, 0 removed, 28 recycled; write=54.062 s, sync=0.312 s, total=54.841 s; sync files=17, longest=0.092 s, average=0.019 s; distance=463148 kB, estimate=470225 kB
+2026-11-19 10:35:57.874 UTC [55] LOG:  checkpoint starting: time
+2026-11-19 10:35:57.994 UTC [55] LOG:  checkpoint complete: wrote 2 buffers (0.0%); 0 WAL file(s) added, 0 removed, 14 recycled; write=0.102 s, sync=0.003 s, total=0.121 s; sync files=15, longest=0.001 s, average=0.001 s; distance=227789 kB, estimate=445982 kB
+== evoting_redis: status=running oom_killed=false exit=0 restarts=0
+1:C 19 Nov 2026 10:15:56.116 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 19 Nov 2026 10:15:56.116 * Redis version=7.4.12, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 19 Nov 2026 10:15:56.116 * Configuration loaded
+1:M 19 Nov 2026 10:15:56.116 * monotonic clock: POSIX clock_gettime
+1:M 19 Nov 2026 10:15:56.117 * Running mode=standalone, port=6379.
+1:M 19 Nov 2026 10:15:56.117 * Server initialized
+1:M 19 Nov 2026 10:15:56.118 * Ready to accept connections tcp
+== evoting_bulletin: status=running oom_killed=false exit=0 restarts=0
+1:C 19 Nov 2026 10:15:56.223 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+1:C 19 Nov 2026 10:15:56.223 * Redis version=7.4.12, bits=64, commit=00000000, modified=0, pid=1, just started
+1:C 19 Nov 2026 10:15:56.223 * Configuration loaded
+1:M 19 Nov 2026 10:15:56.223 * monotonic clock: POSIX clock_gettime
+1:M 19 Nov 2026 10:15:56.224 * Running mode=standalone, port=6379.
+1:M 19 Nov 2026 10:15:56.224 * Server initialized
+1:M 19 Nov 2026 10:15:56.227 * Creating AOF base file appendonly.aof.1.base.rdb on server start
+1:M 19 Nov 2026 10:15:56.230 * Creating AOF incr file appendonly.aof.1.incr.aof on server start
+1:M 19 Nov 2026 10:15:56.230 * Ready to accept connections tcp
+1:M 19 Nov 2026 10:20:57.061 * 100 changes in 300 seconds. Saving...
+1:M 19 Nov 2026 10:20:57.063 * Background saving started by pid 183
+183:C 19 Nov 2026 10:20:57.074 * DB saved on disk
+183:C 19 Nov 2026 10:20:57.074 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+1:M 19 Nov 2026 10:20:57.164 * Background saving terminated with success
+1:M 19 Nov 2026 10:25:58.117 * 100 changes in 300 seconds. Saving...
+1:M 19 Nov 2026 10:25:58.119 * Background saving started by pid 362
+362:C 19 Nov 2026 10:25:58.179 * DB saved on disk
+362:C 19 Nov 2026 10:25:58.180 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+1:M 19 Nov 2026 10:25:58.220 * Background saving terminated with success
+1:M 19 Nov 2026 10:30:59.096 * 100 changes in 300 seconds. Saving...
+1:M 19 Nov 2026 10:30:59.099 * Background saving started by pid 531
+531:C 19 Nov 2026 10:30:59.207 * DB saved on disk
+531:C 19 Nov 2026 10:30:59.208 * Fork CoW for RDB: current 1 MB, peak 1 MB, average 0 MB
+1:M 19 Nov 2026 10:30:59.215 * Background saving terminated with success
+1:M 19 Nov 2026 10:36:00.087 * 100 changes in 300 seconds. Saving...
+1:M 19 Nov 2026 10:36:00.089 * Background saving started by pid 702
+702:C 19 Nov 2026 10:36:00.093 * DB saved on disk
+702:C 19 Nov 2026 10:36:00.094 * Fork CoW for RDB: current 0 MB, peak 0 MB, average 0 MB
+1:M 19 Nov 2026 10:36:00.192 * Background saving terminated with success

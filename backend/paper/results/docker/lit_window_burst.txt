@@ -1,0 +1,32 @@
+
+  BURST 80.0/s for 15.0 min: 72,000/72,000 accepted, 22,850 retries; latency p50 7598.2 / p99 54436.8 ms
+   min      cast   durable       %  verified       %
+     0         0         0    None         0    None
+     5    24,000    24,001   99.73    23,730    98.6
+    10    47,038    47,145   98.22    47,026   97.97
+    15    70,391    70,391   97.77    70,395   97.77
+    20    72,000    72,000   100.0    72,000   100.0
+  replica had verified every vote 5.1 s after the last vote
+  final status per vote: {'201': 72000}
+  status per attempt:    {'201': 72000, '503': 22850}
+  ledger last grew at 921.4 s
+  first 503 reply: Service Unavailable
+   t=   0.0 s durable       0 in flight      2 lockdown False replica PASS codes {}
+   t=  61.7 s durable   4,833 in flight    253 lockdown False replica PASS codes {201: 4816, 503: 664}
+   t= 125.0 s durable   9,891 in flight    585 lockdown False replica PASS codes {201: 9815, 503: 1413}
+   t= 188.5 s durable  14,982 in flight    263 lockdown False replica PASS codes {201: 14937, 503: 2125}
+   t= 252.1 s durable  20,030 in flight    310 lockdown False replica PASS codes {201: 20022, 503: 2860}
+   t= 317.9 s durable  25,220 in flight    439 lockdown False replica PASS codes {201: 25161, 503: 3816}
+   t= 384.1 s durable  30,492 in flight    590 lockdown False replica PASS codes {201: 30462, 503: 4758}
+   t= 452.7 s durable  35,747 in flight    789 lockdown False replica PASS codes {201: 35663, 503: 6222}
+   t= 522.4 s durable  41,306 in flight    790 lockdown False replica PASS codes {201: 41200, 503: 8477}
+   t= 594.2 s durable  46,771 in flight  1,217 lockdown False replica PASS codes {201: 46663, 503: 10795}
+   t= 667.8 s durable  52,268 in flight  1,434 lockdown False replica PASS codes {201: 52166, 503: 13128}
+   t= 769.4 s durable  59,279 in flight  2,420 lockdown False replica PASS codes {201: 59180, 503: 17441}
+   t= 840.0 s durable  65,331 in flight  1,915 lockdown False replica PASS codes {201: 65285, 503: 19903}
+   t= 913.5 s durable  71,493 in flight    552 lockdown False replica PASS codes {201: 71448, 503: 22787}
+   t= 975.2 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 22850}
+   t=1036.3 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 22850}
+   t=1097.3 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 22850}
+   t=1158.5 s durable  72,000 in flight      0 lockdown False replica PASS codes {201: 72000, 503: 22850}
+  saved /app/paper/results/docker/lit_window_burst.json

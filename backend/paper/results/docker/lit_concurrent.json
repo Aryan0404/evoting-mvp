@@ -1,0 +1,20 @@
+{
+  "votes": 10000,
+  "client_connections": 10000,
+  "accepted": 9914,
+  "failed": 86,
+  "first_attempt_accepted": 412,
+  "retries": 99389,
+  "completion_s": 153.8,
+  "votes_per_s": 64.5,
+  "latency_incl_retries": {
+    "n": 9914,
+    "mean_ms": 87547.1,
+    "sd_ms": 40925.8,
+    "min_ms": 8717.4,
+    "p50_ms": 91381.9,
+    "p95_ms": 145667.8,
+    "p99_ms": 148433.3,
+    "max_ms": 153341.4
+  }
+}

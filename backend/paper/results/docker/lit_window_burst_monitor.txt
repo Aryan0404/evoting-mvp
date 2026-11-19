@@ -1,0 +1,1425 @@
+== 16:08:33
+evoting_backend cpu 82.41% mem 612.5MiB / 11.82GiB
+evoting_integrity cpu 0.34% mem 21.91MiB / 11.82GiB
+evoting_ledger_worker cpu 0.16% mem 18.44MiB / 11.82GiB
+evoting_replica cpu 0.83% mem 20.52MiB / 11.82GiB
+evoting_pulsar cpu 2.88% mem 928.4MiB / 11.82GiB
+evoting_bookie2 cpu 1.57% mem 577.1MiB / 11.82GiB
+evoting_bookie4 cpu 1.85% mem 557MiB / 11.82GiB
+evoting_bookie1 cpu 1.50% mem 563MiB / 11.82GiB
+evoting_bookie3 cpu 1.55% mem 458.1MiB / 11.82GiB
+evoting_postgres cpu 0.07% mem 241.3MiB / 11.82GiB
+evoting_redis cpu 0.52% mem 47.09MiB / 11.82GiB
+evoting_bulletin cpu 0.61% mem 11.65MiB / 11.82GiB
+evoting_zookeeper cpu 1.52% mem 379.9MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 16 seconds ago
+== 16:08:45
+evoting_backend cpu 1033.29% mem 860.8MiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 22.04MiB / 11.82GiB
+evoting_ledger_worker cpu 4.75% mem 20.74MiB / 11.82GiB
+evoting_replica cpu 3.87% mem 21.71MiB / 11.82GiB
+evoting_pulsar cpu 10.12% mem 934.3MiB / 11.82GiB
+evoting_bookie2 cpu 2.35% mem 577.2MiB / 11.82GiB
+evoting_bookie4 cpu 6.34% mem 559.2MiB / 11.82GiB
+evoting_bookie1 cpu 4.88% mem 564.5MiB / 11.82GiB
+evoting_bookie3 cpu 4.27% mem 462.4MiB / 11.82GiB
+evoting_postgres cpu 13.22% mem 241.7MiB / 11.82GiB
+evoting_redis cpu 3.79% mem 50.17MiB / 11.82GiB
+evoting_bulletin cpu 3.01% mem 13.18MiB / 11.82GiB
+evoting_zookeeper cpu 1.25% mem 379.9MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 29 seconds ago
+== 16:08:58
+evoting_backend cpu 424.97% mem 986.2MiB / 11.82GiB
+evoting_integrity cpu 0.68% mem 23.66MiB / 11.82GiB
+evoting_ledger_worker cpu 0.61% mem 20.89MiB / 11.82GiB
+evoting_replica cpu 1.68% mem 21.87MiB / 11.82GiB
+evoting_pulsar cpu 3.33% mem 934.3MiB / 11.82GiB
+evoting_bookie2 cpu 1.55% mem 577.1MiB / 11.82GiB
+evoting_bookie4 cpu 2.07% mem 550.5MiB / 11.82GiB
+evoting_bookie1 cpu 1.84% mem 568.8MiB / 11.82GiB
+evoting_bookie3 cpu 1.79% mem 477.1MiB / 11.82GiB
+evoting_postgres cpu 10.41% mem 242.1MiB / 11.82GiB
+evoting_redis cpu 0.97% mem 50.85MiB / 11.82GiB
+evoting_bulletin cpu 0.70% mem 13.49MiB / 11.82GiB
+evoting_zookeeper cpu 1.52% mem 380.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 41 seconds ago
+== 16:09:10
+evoting_backend cpu 975.75% mem 1001MiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 23.36MiB / 11.82GiB
+evoting_ledger_worker cpu 2.01% mem 22.9MiB / 11.82GiB
+evoting_replica cpu 4.23% mem 23.73MiB / 11.82GiB
+evoting_pulsar cpu 8.13% mem 938.5MiB / 11.82GiB
+evoting_bookie2 cpu 7.45% mem 577.2MiB / 11.82GiB
+evoting_bookie4 cpu 5.62% mem 553.4MiB / 11.82GiB
+evoting_bookie1 cpu 12.97% mem 570.2MiB / 11.82GiB
+evoting_bookie3 cpu 4.18% mem 488.9MiB / 11.82GiB
+evoting_postgres cpu 14.30% mem 243.5MiB / 11.82GiB
+evoting_redis cpu 2.90% mem 51.22MiB / 11.82GiB
+evoting_bulletin cpu 4.14% mem 13.43MiB / 11.82GiB
+evoting_zookeeper cpu 2.00% mem 379.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 54 seconds ago
+== 16:09:23
+evoting_backend cpu 976.23% mem 1010MiB / 11.82GiB
+evoting_integrity cpu 5.30% mem 24.16MiB / 11.82GiB
+evoting_ledger_worker cpu 3.49% mem 21.77MiB / 11.82GiB
+evoting_replica cpu 10.09% mem 24.27MiB / 11.82GiB
+evoting_pulsar cpu 17.96% mem 934.3MiB / 11.82GiB
+evoting_bookie2 cpu 3.43% mem 576.3MiB / 11.82GiB
+evoting_bookie4 cpu 7.86% mem 555.1MiB / 11.82GiB
+evoting_bookie1 cpu 9.89% mem 570.4MiB / 11.82GiB
+evoting_bookie3 cpu 6.99% mem 501MiB / 11.82GiB
+evoting_postgres cpu 52.54% mem 243.5MiB / 11.82GiB
+evoting_redis cpu 2.47% mem 51.61MiB / 11.82GiB
+evoting_bulletin cpu 1.67% mem 13.93MiB / 11.82GiB
+evoting_zookeeper cpu 6.45% mem 380.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) About a minute ago
+== 16:09:36
+evoting_backend cpu 927.97% mem 1.025GiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 24.49MiB / 11.82GiB
+evoting_ledger_worker cpu 5.07% mem 22.66MiB / 11.82GiB
+evoting_replica cpu 3.93% mem 24.84MiB / 11.82GiB
+evoting_pulsar cpu 7.69% mem 935.6MiB / 11.82GiB
+evoting_bookie2 cpu 1.62% mem 577.1MiB / 11.82GiB
+evoting_bookie4 cpu 5.28% mem 555.4MiB / 11.82GiB
+evoting_bookie1 cpu 4.26% mem 570MiB / 11.82GiB
+evoting_bookie3 cpu 5.42% mem 513.6MiB / 11.82GiB
+evoting_postgres cpu 18.45% mem 244.5MiB / 11.82GiB
+evoting_redis cpu 3.53% mem 51.19MiB / 11.82GiB
+evoting_bulletin cpu 2.64% mem 13.42MiB / 11.82GiB
+evoting_zookeeper cpu 7.56% mem 380.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) About a minute ago
+== 16:09:49
+evoting_backend cpu 231.25% mem 1.062GiB / 11.82GiB
+evoting_integrity cpu 2.44% mem 25.05MiB / 11.82GiB
+evoting_ledger_worker cpu 0.53% mem 22.31MiB / 11.82GiB
+evoting_replica cpu 3.47% mem 25.05MiB / 11.82GiB
+evoting_pulsar cpu 3.36% mem 943.2MiB / 11.82GiB
+evoting_bookie2 cpu 2.00% mem 577.7MiB / 11.82GiB
+evoting_bookie4 cpu 2.49% mem 560.9MiB / 11.82GiB
+evoting_bookie1 cpu 1.80% mem 571.9MiB / 11.82GiB
+evoting_bookie3 cpu 3.10% mem 520.4MiB / 11.82GiB
+evoting_postgres cpu 17.18% mem 245.7MiB / 11.82GiB
+evoting_redis cpu 0.87% mem 50.93MiB / 11.82GiB
+evoting_bulletin cpu 0.87% mem 13.11MiB / 11.82GiB
+evoting_zookeeper cpu 1.87% mem 379.4MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) About a minute ago
+== 16:10:01
+evoting_backend cpu 958.87% mem 1.093GiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 26.39MiB / 11.82GiB
+evoting_ledger_worker cpu 2.34% mem 21.88MiB / 11.82GiB
+evoting_replica cpu 6.48% mem 26.35MiB / 11.82GiB
+evoting_pulsar cpu 6.25% mem 944.3MiB / 11.82GiB
+evoting_bookie2 cpu 2.86% mem 578MiB / 11.82GiB
+evoting_bookie4 cpu 2.50% mem 561.4MiB / 11.82GiB
+evoting_bookie1 cpu 13.65% mem 571.5MiB / 11.82GiB
+evoting_bookie3 cpu 2.99% mem 521MiB / 11.82GiB
+evoting_postgres cpu 20.85% mem 245.7MiB / 11.82GiB
+evoting_redis cpu 1.62% mem 50.99MiB / 11.82GiB
+evoting_bulletin cpu 3.76% mem 13.32MiB / 11.82GiB
+evoting_zookeeper cpu 1.95% mem 379.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) About a minute ago
+== 16:10:14
+evoting_backend cpu 923.30% mem 1.14GiB / 11.82GiB
+evoting_integrity cpu 7.08% mem 27.14MiB / 11.82GiB
+evoting_ledger_worker cpu 4.51% mem 22.2MiB / 11.82GiB
+evoting_replica cpu 19.82% mem 26.38MiB / 11.82GiB
+evoting_pulsar cpu 11.36% mem 943.6MiB / 11.82GiB
+evoting_bookie2 cpu 2.79% mem 577.8MiB / 11.82GiB
+evoting_bookie4 cpu 3.83% mem 560.7MiB / 11.82GiB
+evoting_bookie1 cpu 4.21% mem 570.8MiB / 11.82GiB
+evoting_bookie3 cpu 3.55% mem 521.4MiB / 11.82GiB
+evoting_postgres cpu 68.20% mem 246.4MiB / 11.82GiB
+evoting_redis cpu 5.52% mem 51.51MiB / 11.82GiB
+evoting_bulletin cpu 1.91% mem 13.56MiB / 11.82GiB
+evoting_zookeeper cpu 2.91% mem 379.8MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) About a minute ago
+== 16:10:27
+evoting_backend cpu 750.01% mem 1.142GiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 27.29MiB / 11.82GiB
+evoting_ledger_worker cpu 6.22% mem 22.35MiB / 11.82GiB
+evoting_replica cpu 6.10% mem 27.04MiB / 11.82GiB
+evoting_pulsar cpu 11.38% mem 943.8MiB / 11.82GiB
+evoting_bookie2 cpu 4.11% mem 577.4MiB / 11.82GiB
+evoting_bookie4 cpu 10.72% mem 560.6MiB / 11.82GiB
+evoting_bookie1 cpu 4.03% mem 571.4MiB / 11.82GiB
+evoting_bookie3 cpu 3.92% mem 521.2MiB / 11.82GiB
+evoting_postgres cpu 25.13% mem 249.4MiB / 11.82GiB
+evoting_redis cpu 4.35% mem 51.35MiB / 11.82GiB
+evoting_bulletin cpu 1.33% mem 13.07MiB / 11.82GiB
+evoting_zookeeper cpu 1.84% mem 379.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 2 minutes ago
+== 16:10:39
+evoting_backend cpu 473.44% mem 1.143GiB / 11.82GiB
+evoting_integrity cpu 2.64% mem 28.41MiB / 11.82GiB
+evoting_ledger_worker cpu 1.20% mem 22.04MiB / 11.82GiB
+evoting_replica cpu 6.69% mem 29.59MiB / 11.82GiB
+evoting_pulsar cpu 4.88% mem 943.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.67% mem 577.8MiB / 11.82GiB
+evoting_bookie4 cpu 3.09% mem 561.4MiB / 11.82GiB
+evoting_bookie1 cpu 2.46% mem 571.6MiB / 11.82GiB
+evoting_bookie3 cpu 2.14% mem 521.1MiB / 11.82GiB
+evoting_postgres cpu 5.07% mem 247.8MiB / 11.82GiB
+evoting_redis cpu 1.38% mem 51.4MiB / 11.82GiB
+evoting_bulletin cpu 1.08% mem 13.54MiB / 11.82GiB
+evoting_zookeeper cpu 1.30% mem 380.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 2 minutes ago
+== 16:10:52
+evoting_backend cpu 918.79% mem 1.154GiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 28.27MiB / 11.82GiB
+evoting_ledger_worker cpu 3.66% mem 22.98MiB / 11.82GiB
+evoting_replica cpu 5.61% mem 29.65MiB / 11.82GiB
+evoting_pulsar cpu 11.82% mem 943.8MiB / 11.82GiB
+evoting_bookie2 cpu 2.76% mem 577.8MiB / 11.82GiB
+evoting_bookie4 cpu 3.69% mem 561.9MiB / 11.82GiB
+evoting_bookie1 cpu 4.51% mem 572.2MiB / 11.82GiB
+evoting_bookie3 cpu 5.82% mem 523.3MiB / 11.82GiB
+evoting_postgres cpu 8.27% mem 247.8MiB / 11.82GiB
+evoting_redis cpu 2.00% mem 51.34MiB / 11.82GiB
+evoting_bulletin cpu 2.73% mem 13.31MiB / 11.82GiB
+evoting_zookeeper cpu 1.49% mem 379.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 2 minutes ago
+== 16:11:05
+evoting_backend cpu 926.85% mem 1.156GiB / 11.82GiB
+evoting_integrity cpu 4.35% mem 27.61MiB / 11.82GiB
+evoting_ledger_worker cpu 2.48% mem 22.62MiB / 11.82GiB
+evoting_replica cpu 19.45% mem 29.76MiB / 11.82GiB
+evoting_pulsar cpu 21.38% mem 944.1MiB / 11.82GiB
+evoting_bookie2 cpu 5.71% mem 578.5MiB / 11.82GiB
+evoting_bookie4 cpu 7.35% mem 562.3MiB / 11.82GiB
+evoting_bookie1 cpu 5.54% mem 572.5MiB / 11.82GiB
+evoting_bookie3 cpu 4.52% mem 523MiB / 11.82GiB
+evoting_postgres cpu 21.71% mem 248.7MiB / 11.82GiB
+evoting_redis cpu 3.02% mem 51.31MiB / 11.82GiB
+evoting_bulletin cpu 2.83% mem 13.49MiB / 11.82GiB
+evoting_zookeeper cpu 1.43% mem 379.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 2 minutes ago
+== 16:11:17
+evoting_backend cpu 739.31% mem 1.157GiB / 11.82GiB
+evoting_integrity cpu 0.02% mem 28.09MiB / 11.82GiB
+evoting_ledger_worker cpu 3.31% mem 23.23MiB / 11.82GiB
+evoting_replica cpu 10.24% mem 30.59MiB / 11.82GiB
+evoting_pulsar cpu 15.56% mem 943.3MiB / 11.82GiB
+evoting_bookie2 cpu 1.78% mem 577.7MiB / 11.82GiB
+evoting_bookie4 cpu 5.87% mem 562.7MiB / 11.82GiB
+evoting_bookie1 cpu 4.13% mem 574.2MiB / 11.82GiB
+evoting_bookie3 cpu 20.27% mem 524.4MiB / 11.82GiB
+evoting_postgres cpu 18.66% mem 249.7MiB / 11.82GiB
+evoting_redis cpu 3.96% mem 50.99MiB / 11.82GiB
+evoting_bulletin cpu 2.41% mem 13.97MiB / 11.82GiB
+evoting_zookeeper cpu 1.65% mem 378.9MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 3 minutes ago
+== 16:11:30
+evoting_backend cpu 608.04% mem 1.162GiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 28.48MiB / 11.82GiB
+evoting_ledger_worker cpu 1.49% mem 23.1MiB / 11.82GiB
+evoting_replica cpu 4.27% mem 30.97MiB / 11.82GiB
+evoting_pulsar cpu 4.02% mem 945.1MiB / 11.82GiB
+evoting_bookie2 cpu 3.07% mem 578MiB / 11.82GiB
+evoting_bookie4 cpu 3.14% mem 563.3MiB / 11.82GiB
+evoting_bookie1 cpu 7.78% mem 574.2MiB / 11.82GiB
+evoting_bookie3 cpu 4.04% mem 523.5MiB / 11.82GiB
+evoting_postgres cpu 5.75% mem 249.7MiB / 11.82GiB
+evoting_redis cpu 2.49% mem 51.36MiB / 11.82GiB
+evoting_bulletin cpu 1.29% mem 13.7MiB / 11.82GiB
+evoting_zookeeper cpu 0.98% mem 379.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 3 minutes ago
+== 16:11:42
+evoting_backend cpu 962.62% mem 1.164GiB / 11.82GiB
+evoting_integrity cpu 0.08% mem 29.9MiB / 11.82GiB
+evoting_ledger_worker cpu 4.77% mem 22.84MiB / 11.82GiB
+evoting_replica cpu 7.58% mem 30.57MiB / 11.82GiB
+evoting_pulsar cpu 8.96% mem 944.9MiB / 11.82GiB
+evoting_bookie2 cpu 1.78% mem 577.5MiB / 11.82GiB
+evoting_bookie4 cpu 4.81% mem 562.8MiB / 11.82GiB
+evoting_bookie1 cpu 13.62% mem 574.9MiB / 11.82GiB
+evoting_bookie3 cpu 13.80% mem 524.4MiB / 11.82GiB
+evoting_postgres cpu 18.09% mem 251MiB / 11.82GiB
+evoting_redis cpu 4.25% mem 51.1MiB / 11.82GiB
+evoting_bulletin cpu 2.28% mem 14.02MiB / 11.82GiB
+evoting_zookeeper cpu 2.47% mem 383.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 3 minutes ago
+== 16:11:55
+evoting_backend cpu 911.45% mem 1.166GiB / 11.82GiB
+evoting_integrity cpu 11.50% mem 30.34MiB / 11.82GiB
+evoting_ledger_worker cpu 3.94% mem 23.16MiB / 11.82GiB
+evoting_replica cpu 7.43% mem 31.23MiB / 11.82GiB
+evoting_pulsar cpu 10.89% mem 944.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.61% mem 577.8MiB / 11.82GiB
+evoting_bookie4 cpu 5.93% mem 564.3MiB / 11.82GiB
+evoting_bookie1 cpu 3.24% mem 574.7MiB / 11.82GiB
+evoting_bookie3 cpu 2.62% mem 525MiB / 11.82GiB
+evoting_postgres cpu 101.67% mem 251.1MiB / 11.82GiB
+evoting_redis cpu 3.58% mem 51.49MiB / 11.82GiB
+evoting_bulletin cpu 2.57% mem 14.32MiB / 11.82GiB
+evoting_zookeeper cpu 3.20% mem 383.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 3 minutes ago
+== 16:12:08
+evoting_backend cpu 20.99% mem 1.168GiB / 11.82GiB
+evoting_integrity cpu 1.02% mem 31.03MiB / 11.82GiB
+evoting_ledger_worker cpu 0.20% mem 22.43MiB / 11.82GiB
+evoting_replica cpu 0.35% mem 31.02MiB / 11.82GiB
+evoting_pulsar cpu 2.30% mem 944.8MiB / 11.82GiB
+evoting_bookie2 cpu 1.17% mem 577.8MiB / 11.82GiB
+evoting_bookie4 cpu 2.32% mem 564.2MiB / 11.82GiB
+evoting_bookie1 cpu 7.21% mem 575.1MiB / 11.82GiB
+evoting_bookie3 cpu 1.13% mem 525.3MiB / 11.82GiB
+evoting_postgres cpu 59.29% mem 252.2MiB / 11.82GiB
+evoting_redis cpu 0.64% mem 51.46MiB / 11.82GiB
+evoting_bulletin cpu 0.57% mem 13.4MiB / 11.82GiB
+evoting_zookeeper cpu 1.39% mem 383.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 3 minutes ago
+== 16:12:21
+evoting_backend cpu 888.76% mem 1.171GiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 31.42MiB / 11.82GiB
+evoting_ledger_worker cpu 1.43% mem 23.04MiB / 11.82GiB
+evoting_replica cpu 3.14% mem 31.79MiB / 11.82GiB
+evoting_pulsar cpu 4.72% mem 945.5MiB / 11.82GiB
+evoting_bookie2 cpu 3.38% mem 577.9MiB / 11.82GiB
+evoting_bookie4 cpu 5.71% mem 565.2MiB / 11.82GiB
+evoting_bookie1 cpu 2.86% mem 576.1MiB / 11.82GiB
+evoting_bookie3 cpu 3.18% mem 525.8MiB / 11.82GiB
+evoting_postgres cpu 10.88% mem 252.4MiB / 11.82GiB
+evoting_redis cpu 2.61% mem 51.81MiB / 11.82GiB
+evoting_bulletin cpu 1.59% mem 13.66MiB / 11.82GiB
+evoting_zookeeper cpu 10.08% mem 383.9MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 4 minutes ago
+== 16:12:33
+evoting_backend cpu 852.58% mem 1.174GiB / 11.82GiB
+evoting_integrity cpu 3.29% mem 30.2MiB / 11.82GiB
+evoting_ledger_worker cpu 3.09% mem 22.59MiB / 11.82GiB
+evoting_replica cpu 5.05% mem 31.8MiB / 11.82GiB
+evoting_pulsar cpu 9.38% mem 945.1MiB / 11.82GiB
+evoting_bookie2 cpu 1.75% mem 578MiB / 11.82GiB
+evoting_bookie4 cpu 5.08% mem 565.3MiB / 11.82GiB
+evoting_bookie1 cpu 6.20% mem 576.7MiB / 11.82GiB
+evoting_bookie3 cpu 5.02% mem 526.3MiB / 11.82GiB
+evoting_postgres cpu 11.78% mem 253.1MiB / 11.82GiB
+evoting_redis cpu 3.55% mem 51.74MiB / 11.82GiB
+evoting_bulletin cpu 1.78% mem 14.1MiB / 11.82GiB
+evoting_zookeeper cpu 3.86% mem 383.4MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 4 minutes ago
+== 16:12:46
+evoting_backend cpu 943.17% mem 1.187GiB / 11.82GiB
+evoting_integrity cpu 1.83% mem 32.03MiB / 11.82GiB
+evoting_ledger_worker cpu 3.79% mem 22.52MiB / 11.82GiB
+evoting_replica cpu 20.38% mem 32.17MiB / 11.82GiB
+evoting_pulsar cpu 8.26% mem 945MiB / 11.82GiB
+evoting_bookie2 cpu 2.84% mem 577.7MiB / 11.82GiB
+evoting_bookie4 cpu 8.86% mem 566.7MiB / 11.82GiB
+evoting_bookie1 cpu 4.88% mem 577.9MiB / 11.82GiB
+evoting_bookie3 cpu 4.10% mem 527.6MiB / 11.82GiB
+evoting_postgres cpu 36.10% mem 253.5MiB / 11.82GiB
+evoting_redis cpu 5.07% mem 52.78MiB / 11.82GiB
+evoting_bulletin cpu 2.16% mem 14.29MiB / 11.82GiB
+evoting_zookeeper cpu 8.60% mem 384.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 4 minutes ago
+== 16:12:59
+evoting_backend cpu 270.33% mem 1.189GiB / 11.82GiB
+evoting_integrity cpu 1.12% mem 30.89MiB / 11.82GiB
+evoting_ledger_worker cpu 1.22% mem 23.05MiB / 11.82GiB
+evoting_replica cpu 1.65% mem 32.71MiB / 11.82GiB
+evoting_pulsar cpu 4.52% mem 945.1MiB / 11.82GiB
+evoting_bookie2 cpu 1.96% mem 578.5MiB / 11.82GiB
+evoting_bookie4 cpu 2.57% mem 567.1MiB / 11.82GiB
+evoting_bookie1 cpu 2.40% mem 577.1MiB / 11.82GiB
+evoting_bookie3 cpu 1.83% mem 528MiB / 11.82GiB
+evoting_postgres cpu 103.52% mem 254.4MiB / 11.82GiB
+evoting_redis cpu 0.77% mem 51.52MiB / 11.82GiB
+evoting_bulletin cpu 1.01% mem 13.8MiB / 11.82GiB
+evoting_zookeeper cpu 4.48% mem 384.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 4 minutes ago
+== 16:13:12
+evoting_backend cpu 948.69% mem 1.19GiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 31.07MiB / 11.82GiB
+evoting_ledger_worker cpu 1.70% mem 22.99MiB / 11.82GiB
+evoting_replica cpu 1.96% mem 31.5MiB / 11.82GiB
+evoting_pulsar cpu 8.60% mem 945MiB / 11.82GiB
+evoting_bookie2 cpu 1.84% mem 578.3MiB / 11.82GiB
+evoting_bookie4 cpu 3.36% mem 567.8MiB / 11.82GiB
+evoting_bookie1 cpu 3.13% mem 578.1MiB / 11.82GiB
+evoting_bookie3 cpu 3.41% mem 528.8MiB / 11.82GiB
+evoting_postgres cpu 9.24% mem 254.8MiB / 11.82GiB
+evoting_redis cpu 3.46% mem 51.9MiB / 11.82GiB
+evoting_bulletin cpu 2.84% mem 13.73MiB / 11.82GiB
+evoting_zookeeper cpu 7.82% mem 384.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 4 minutes ago
+== 16:13:24
+evoting_backend cpu 825.47% mem 1.193GiB / 11.82GiB
+evoting_integrity cpu 2.41% mem 31.65MiB / 11.82GiB
+evoting_ledger_worker cpu 3.48% mem 23.1MiB / 11.82GiB
+evoting_replica cpu 7.30% mem 32.05MiB / 11.82GiB
+evoting_pulsar cpu 15.10% mem 945.5MiB / 11.82GiB
+evoting_bookie2 cpu 3.51% mem 578.1MiB / 11.82GiB
+evoting_bookie4 cpu 7.82% mem 568.1MiB / 11.82GiB
+evoting_bookie1 cpu 6.50% mem 578.1MiB / 11.82GiB
+evoting_bookie3 cpu 6.47% mem 529.2MiB / 11.82GiB
+evoting_postgres cpu 141.86% mem 255.9MiB / 11.82GiB
+evoting_redis cpu 3.28% mem 52.76MiB / 11.82GiB
+evoting_bulletin cpu 1.72% mem 14.3MiB / 11.82GiB
+evoting_zookeeper cpu 3.89% mem 382.9MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 5 minutes ago
+== 16:13:37
+evoting_backend cpu 348.11% mem 1.191GiB / 11.82GiB
+evoting_integrity cpu 0.00% mem 31.74MiB / 11.82GiB
+evoting_ledger_worker cpu 2.68% mem 22.43MiB / 11.82GiB
+evoting_replica cpu 5.27% mem 32.75MiB / 11.82GiB
+evoting_pulsar cpu 7.59% mem 947.1MiB / 11.82GiB
+evoting_bookie2 cpu 1.90% mem 578.1MiB / 11.82GiB
+evoting_bookie4 cpu 3.72% mem 568.2MiB / 11.82GiB
+evoting_bookie1 cpu 4.88% mem 578.8MiB / 11.82GiB
+evoting_bookie3 cpu 3.26% mem 529.4MiB / 11.82GiB
+evoting_postgres cpu 9.83% mem 256.1MiB / 11.82GiB
+evoting_redis cpu 2.48% mem 51.63MiB / 11.82GiB
+evoting_bulletin cpu 0.93% mem 13.77MiB / 11.82GiB
+evoting_zookeeper cpu 1.28% mem 384.4MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 5 minutes ago
+== 16:13:50
+evoting_backend cpu 930.73% mem 1.195GiB / 11.82GiB
+evoting_integrity cpu 5.83% mem 32.6MiB / 11.82GiB
+evoting_ledger_worker cpu 4.34% mem 23.54MiB / 11.82GiB
+evoting_replica cpu 6.57% mem 33.27MiB / 11.82GiB
+evoting_pulsar cpu 6.55% mem 945.3MiB / 11.82GiB
+evoting_bookie2 cpu 6.17% mem 577.8MiB / 11.82GiB
+evoting_bookie4 cpu 3.20% mem 568.9MiB / 11.82GiB
+evoting_bookie1 cpu 3.59% mem 579.7MiB / 11.82GiB
+evoting_bookie3 cpu 6.73% mem 530.1MiB / 11.82GiB
+evoting_postgres cpu 145.53% mem 256.8MiB / 11.82GiB
+evoting_redis cpu 2.77% mem 52.01MiB / 11.82GiB
+evoting_bulletin cpu 1.39% mem 13.92MiB / 11.82GiB
+evoting_zookeeper cpu 3.40% mem 383MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 5 minutes ago
+== 16:14:03
+evoting_backend cpu 935.70% mem 1.202GiB / 11.82GiB
+evoting_integrity cpu 0.28% mem 33.21MiB / 11.82GiB
+evoting_ledger_worker cpu 2.07% mem 22.93MiB / 11.82GiB
+evoting_replica cpu 2.96% mem 32.98MiB / 11.82GiB
+evoting_pulsar cpu 5.98% mem 944.9MiB / 11.82GiB
+evoting_bookie2 cpu 2.12% mem 579.6MiB / 11.82GiB
+evoting_bookie4 cpu 15.30% mem 578MiB / 11.82GiB
+evoting_bookie1 cpu 7.04% mem 580MiB / 11.82GiB
+evoting_bookie3 cpu 2.59% mem 535.2MiB / 11.82GiB
+evoting_postgres cpu 42.19% mem 257.4MiB / 11.82GiB
+evoting_redis cpu 3.14% mem 23.14MiB / 11.82GiB
+evoting_bulletin cpu 2.13% mem 14.02MiB / 11.82GiB
+evoting_zookeeper cpu 3.41% mem 383.3MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 5 minutes ago
+== 16:14:16
+evoting_backend cpu 847.92% mem 1.204GiB / 11.82GiB
+evoting_integrity cpu 0.77% mem 34.35MiB / 11.82GiB
+evoting_ledger_worker cpu 2.33% mem 23.55MiB / 11.82GiB
+evoting_replica cpu 12.21% mem 33.32MiB / 11.82GiB
+evoting_pulsar cpu 6.79% mem 945.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.83% mem 581.3MiB / 11.82GiB
+evoting_bookie4 cpu 8.94% mem 578.6MiB / 11.82GiB
+evoting_bookie1 cpu 3.43% mem 581.7MiB / 11.82GiB
+evoting_bookie3 cpu 5.32% mem 535.8MiB / 11.82GiB
+evoting_postgres cpu 140.33% mem 257.9MiB / 11.82GiB
+evoting_redis cpu 3.92% mem 22.68MiB / 11.82GiB
+evoting_bulletin cpu 4.59% mem 13.34MiB / 11.82GiB
+evoting_zookeeper cpu 1.06% mem 383.1MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 5 minutes ago
+== 16:14:29
+evoting_backend cpu 646.47% mem 1.206GiB / 11.82GiB
+evoting_integrity cpu 0.64% mem 34.56MiB / 11.82GiB
+evoting_ledger_worker cpu 1.33% mem 22.92MiB / 11.82GiB
+evoting_replica cpu 6.27% mem 33.79MiB / 11.82GiB
+evoting_pulsar cpu 7.03% mem 945.4MiB / 11.82GiB
+evoting_bookie2 cpu 1.71% mem 581.1MiB / 11.82GiB
+evoting_bookie4 cpu 4.35% mem 578.5MiB / 11.82GiB
+evoting_bookie1 cpu 4.48% mem 581.4MiB / 11.82GiB
+evoting_bookie3 cpu 3.18% mem 535.9MiB / 11.82GiB
+evoting_postgres cpu 124.42% mem 259MiB / 11.82GiB
+evoting_redis cpu 2.79% mem 22.7MiB / 11.82GiB
+evoting_bulletin cpu 1.97% mem 14.02MiB / 11.82GiB
+evoting_zookeeper cpu 1.47% mem 383.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 6 minutes ago
+== 16:14:41
+evoting_backend cpu 895.16% mem 1.21GiB / 11.82GiB
+evoting_integrity cpu 17.84% mem 34.95MiB / 11.82GiB
+evoting_ledger_worker cpu 1.05% mem 23.77MiB / 11.82GiB
+evoting_replica cpu 24.31% mem 34.17MiB / 11.82GiB
+evoting_pulsar cpu 13.23% mem 945.4MiB / 11.82GiB
+evoting_bookie2 cpu 5.60% mem 585.5MiB / 11.82GiB
+evoting_bookie4 cpu 4.28% mem 578.3MiB / 11.82GiB
+evoting_bookie1 cpu 5.93% mem 589.6MiB / 11.82GiB
+evoting_bookie3 cpu 3.48% mem 536.9MiB / 11.82GiB
+evoting_postgres cpu 68.29% mem 258.4MiB / 11.82GiB
+evoting_redis cpu 4.22% mem 23.24MiB / 11.82GiB
+evoting_bulletin cpu 2.18% mem 14.22MiB / 11.82GiB
+evoting_zookeeper cpu 4.54% mem 383.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 6 minutes ago
+== 16:14:54
+evoting_backend cpu 814.55% mem 1.212GiB / 11.82GiB
+evoting_integrity cpu 1.13% mem 34.38MiB / 11.82GiB
+evoting_ledger_worker cpu 2.52% mem 23.19MiB / 11.82GiB
+evoting_replica cpu 4.89% mem 33.09MiB / 11.82GiB
+evoting_pulsar cpu 15.09% mem 945.5MiB / 11.82GiB
+evoting_bookie2 cpu 3.37% mem 585.9MiB / 11.82GiB
+evoting_bookie4 cpu 3.18% mem 579.2MiB / 11.82GiB
+evoting_bookie1 cpu 4.38% mem 587.5MiB / 11.82GiB
+evoting_bookie3 cpu 3.45% mem 540.8MiB / 11.82GiB
+evoting_postgres cpu 126.73% mem 259.5MiB / 11.82GiB
+evoting_redis cpu 6.60% mem 23.45MiB / 11.82GiB
+evoting_bulletin cpu 5.91% mem 13.94MiB / 11.82GiB
+evoting_zookeeper cpu 2.22% mem 383.8MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 6 minutes ago
+== 16:15:07
+evoting_backend cpu 860.34% mem 1.214GiB / 11.82GiB
+evoting_integrity cpu 14.56% mem 33.88MiB / 11.82GiB
+evoting_ledger_worker cpu 2.10% mem 23.33MiB / 11.82GiB
+evoting_replica cpu 22.61% mem 34.18MiB / 11.82GiB
+evoting_pulsar cpu 5.94% mem 945.3MiB / 11.82GiB
+evoting_bookie2 cpu 2.70% mem 585.7MiB / 11.82GiB
+evoting_bookie4 cpu 4.11% mem 578.8MiB / 11.82GiB
+evoting_bookie1 cpu 3.16% mem 587.6MiB / 11.82GiB
+evoting_bookie3 cpu 5.19% mem 541MiB / 11.82GiB
+evoting_postgres cpu 62.14% mem 259.3MiB / 11.82GiB
+evoting_redis cpu 2.54% mem 23.5MiB / 11.82GiB
+evoting_bulletin cpu 2.21% mem 14.15MiB / 11.82GiB
+evoting_zookeeper cpu 1.16% mem 383.3MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 6 minutes ago
+== 16:15:20
+evoting_backend cpu 807.45% mem 1.22GiB / 11.82GiB
+evoting_integrity cpu 3.49% mem 34.59MiB / 11.82GiB
+evoting_ledger_worker cpu 3.18% mem 23.26MiB / 11.82GiB
+evoting_replica cpu 4.84% mem 34.2MiB / 11.82GiB
+evoting_pulsar cpu 14.80% mem 922.8MiB / 11.82GiB
+evoting_bookie2 cpu 4.05% mem 585.7MiB / 11.82GiB
+evoting_bookie4 cpu 6.15% mem 579.8MiB / 11.82GiB
+evoting_bookie1 cpu 3.81% mem 588.7MiB / 11.82GiB
+evoting_bookie3 cpu 5.23% mem 541.6MiB / 11.82GiB
+evoting_postgres cpu 141.05% mem 259.4MiB / 11.82GiB
+evoting_redis cpu 3.72% mem 23.43MiB / 11.82GiB
+evoting_bulletin cpu 2.72% mem 14MiB / 11.82GiB
+evoting_zookeeper cpu 4.19% mem 383.1MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 7 minutes ago
+== 16:15:33
+evoting_backend cpu 863.09% mem 1.22GiB / 11.82GiB
+evoting_integrity cpu 0.75% mem 35.07MiB / 11.82GiB
+evoting_ledger_worker cpu 4.12% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 5.82% mem 33.98MiB / 11.82GiB
+evoting_pulsar cpu 9.63% mem 922.8MiB / 11.82GiB
+evoting_bookie2 cpu 2.78% mem 585.9MiB / 11.82GiB
+evoting_bookie4 cpu 3.30% mem 579.6MiB / 11.82GiB
+evoting_bookie1 cpu 8.71% mem 588.6MiB / 11.82GiB
+evoting_bookie3 cpu 2.94% mem 541.6MiB / 11.82GiB
+evoting_postgres cpu 71.44% mem 262.4MiB / 11.82GiB
+evoting_redis cpu 2.65% mem 23.54MiB / 11.82GiB
+evoting_bulletin cpu 1.38% mem 14.16MiB / 11.82GiB
+evoting_zookeeper cpu 1.23% mem 383.8MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 7 minutes ago
+== 16:15:46
+evoting_backend cpu 734.19% mem 1.224GiB / 11.82GiB
+evoting_integrity cpu 11.88% mem 35.55MiB / 11.82GiB
+evoting_ledger_worker cpu 4.42% mem 23.45MiB / 11.82GiB
+evoting_replica cpu 13.48% mem 34.42MiB / 11.82GiB
+evoting_pulsar cpu 16.09% mem 922.8MiB / 11.82GiB
+evoting_bookie2 cpu 4.22% mem 585.4MiB / 11.82GiB
+evoting_bookie4 cpu 14.34% mem 579MiB / 11.82GiB
+evoting_bookie1 cpu 36.94% mem 589.9MiB / 11.82GiB
+evoting_bookie3 cpu 21.37% mem 541.7MiB / 11.82GiB
+evoting_postgres cpu 155.27% mem 260.3MiB / 11.82GiB
+evoting_redis cpu 10.64% mem 23.36MiB / 11.82GiB
+evoting_bulletin cpu 4.27% mem 14.28MiB / 11.82GiB
+evoting_zookeeper cpu 3.58% mem 385MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 7 minutes ago
+== 16:15:59
+evoting_backend cpu 763.04% mem 1.226GiB / 11.82GiB
+evoting_integrity cpu 8.28% mem 35.97MiB / 11.82GiB
+evoting_ledger_worker cpu 5.08% mem 23.43MiB / 11.82GiB
+evoting_replica cpu 20.95% mem 35.19MiB / 11.82GiB
+evoting_pulsar cpu 9.04% mem 923MiB / 11.82GiB
+evoting_bookie2 cpu 3.29% mem 584.8MiB / 11.82GiB
+evoting_bookie4 cpu 4.86% mem 579.1MiB / 11.82GiB
+evoting_bookie1 cpu 3.84% mem 589MiB / 11.82GiB
+evoting_bookie3 cpu 4.27% mem 542.2MiB / 11.82GiB
+evoting_postgres cpu 118.23% mem 260.8MiB / 11.82GiB
+evoting_redis cpu 4.90% mem 23.84MiB / 11.82GiB
+evoting_bulletin cpu 4.17% mem 15.87MiB / 11.82GiB
+evoting_zookeeper cpu 9.35% mem 384.4MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 7 minutes ago
+== 16:16:12
+evoting_backend cpu 793.86% mem 1.228GiB / 11.82GiB
+evoting_integrity cpu 1.33% mem 36.92MiB / 11.82GiB
+evoting_ledger_worker cpu 5.08% mem 23.35MiB / 11.82GiB
+evoting_replica cpu 4.08% mem 36.05MiB / 11.82GiB
+evoting_pulsar cpu 7.88% mem 922.8MiB / 11.82GiB
+evoting_bookie2 cpu 4.42% mem 584.9MiB / 11.82GiB
+evoting_bookie4 cpu 5.30% mem 580.1MiB / 11.82GiB
+evoting_bookie1 cpu 4.51% mem 588.8MiB / 11.82GiB
+evoting_bookie3 cpu 4.29% mem 543MiB / 11.82GiB
+evoting_postgres cpu 142.59% mem 260.9MiB / 11.82GiB
+evoting_redis cpu 4.27% mem 23.68MiB / 11.82GiB
+evoting_bulletin cpu 1.68% mem 14.31MiB / 11.82GiB
+evoting_zookeeper cpu 1.34% mem 383.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 7 minutes ago
+== 16:16:25
+evoting_backend cpu 807.97% mem 1.307GiB / 11.82GiB
+evoting_integrity cpu 1.66% mem 38.07MiB / 11.82GiB
+evoting_ledger_worker cpu 4.26% mem 23.6MiB / 11.82GiB
+evoting_replica cpu 6.87% mem 35.47MiB / 11.82GiB
+evoting_pulsar cpu 10.22% mem 922.9MiB / 11.82GiB
+evoting_bookie2 cpu 7.94% mem 584.9MiB / 11.82GiB
+evoting_bookie4 cpu 8.23% mem 579.7MiB / 11.82GiB
+evoting_bookie1 cpu 3.62% mem 588.4MiB / 11.82GiB
+evoting_bookie3 cpu 3.55% mem 543.3MiB / 11.82GiB
+evoting_postgres cpu 76.62% mem 261MiB / 11.82GiB
+evoting_redis cpu 4.73% mem 23.99MiB / 11.82GiB
+evoting_bulletin cpu 2.62% mem 14.93MiB / 11.82GiB
+evoting_zookeeper cpu 7.04% mem 292.1MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 8 minutes ago
+== 16:16:38
+evoting_backend cpu 800.66% mem 1.236GiB / 11.82GiB
+evoting_integrity cpu 0.76% mem 37.72MiB / 11.82GiB
+evoting_ledger_worker cpu 2.30% mem 23.39MiB / 11.82GiB
+evoting_replica cpu 5.72% mem 35.75MiB / 11.82GiB
+evoting_pulsar cpu 14.04% mem 923.2MiB / 11.82GiB
+evoting_bookie2 cpu 5.54% mem 583.9MiB / 11.82GiB
+evoting_bookie4 cpu 6.77% mem 579.7MiB / 11.82GiB
+evoting_bookie1 cpu 6.32% mem 588.7MiB / 11.82GiB
+evoting_bookie3 cpu 6.28% mem 541.9MiB / 11.82GiB
+evoting_postgres cpu 138.26% mem 262.5MiB / 11.82GiB
+evoting_redis cpu 6.57% mem 24.16MiB / 11.82GiB
+evoting_bulletin cpu 2.38% mem 14.74MiB / 11.82GiB
+evoting_zookeeper cpu 4.49% mem 291.8MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 8 minutes ago
+== 16:16:51
+evoting_backend cpu 849.92% mem 1.238GiB / 11.82GiB
+evoting_integrity cpu 2.43% mem 38.71MiB / 11.82GiB
+evoting_ledger_worker cpu 3.96% mem 23.28MiB / 11.82GiB
+evoting_replica cpu 38.49% mem 35.17MiB / 11.82GiB
+evoting_pulsar cpu 9.22% mem 922.9MiB / 11.82GiB
+evoting_bookie2 cpu 6.30% mem 584.1MiB / 11.82GiB
+evoting_bookie4 cpu 4.62% mem 580MiB / 11.82GiB
+evoting_bookie1 cpu 6.44% mem 589.2MiB / 11.82GiB
+evoting_bookie3 cpu 2.67% mem 543MiB / 11.82GiB
+evoting_postgres cpu 95.07% mem 262.7MiB / 11.82GiB
+evoting_redis cpu 2.98% mem 23.88MiB / 11.82GiB
+evoting_bulletin cpu 1.52% mem 14.51MiB / 11.82GiB
+evoting_zookeeper cpu 1.16% mem 291.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 8 minutes ago
+== 16:17:04
+evoting_backend cpu 793.44% mem 1.248GiB / 11.82GiB
+evoting_integrity cpu 1.31% mem 37.63MiB / 11.82GiB
+evoting_ledger_worker cpu 3.03% mem 23.08MiB / 11.82GiB
+evoting_replica cpu 5.31% mem 36.04MiB / 11.82GiB
+evoting_pulsar cpu 5.71% mem 923.4MiB / 11.82GiB
+evoting_bookie2 cpu 1.81% mem 583.4MiB / 11.82GiB
+evoting_bookie4 cpu 4.02% mem 579.4MiB / 11.82GiB
+evoting_bookie1 cpu 4.37% mem 589.7MiB / 11.82GiB
+evoting_bookie3 cpu 13.23% mem 542.7MiB / 11.82GiB
+evoting_postgres cpu 134.09% mem 263.8MiB / 11.82GiB
+evoting_redis cpu 1.92% mem 24.3MiB / 11.82GiB
+evoting_bulletin cpu 3.71% mem 13.95MiB / 11.82GiB
+evoting_zookeeper cpu 1.27% mem 291.9MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 8 minutes ago
+== 16:17:17
+evoting_backend cpu 790.24% mem 1.242GiB / 11.82GiB
+evoting_integrity cpu 0.84% mem 38.19MiB / 11.82GiB
+evoting_ledger_worker cpu 5.50% mem 23.38MiB / 11.82GiB
+evoting_replica cpu 6.92% mem 35.6MiB / 11.82GiB
+evoting_pulsar cpu 12.71% mem 922.3MiB / 11.82GiB
+evoting_bookie2 cpu 3.90% mem 583.2MiB / 11.82GiB
+evoting_bookie4 cpu 7.43% mem 579.2MiB / 11.82GiB
+evoting_bookie1 cpu 6.89% mem 589.8MiB / 11.82GiB
+evoting_bookie3 cpu 3.98% mem 543.5MiB / 11.82GiB
+evoting_postgres cpu 123.59% mem 264.4MiB / 11.82GiB
+evoting_redis cpu 8.77% mem 24.09MiB / 11.82GiB
+evoting_bulletin cpu 11.29% mem 13.8MiB / 11.82GiB
+evoting_zookeeper cpu 2.05% mem 292MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 9 minutes ago
+== 16:17:30
+evoting_backend cpu 785.63% mem 1.242GiB / 11.82GiB
+evoting_integrity cpu 0.87% mem 38.42MiB / 11.82GiB
+evoting_ledger_worker cpu 3.32% mem 23.91MiB / 11.82GiB
+evoting_replica cpu 5.81% mem 36.12MiB / 11.82GiB
+evoting_pulsar cpu 6.49% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.70% mem 583.2MiB / 11.82GiB
+evoting_bookie4 cpu 41.70% mem 585.4MiB / 11.82GiB
+evoting_bookie1 cpu 2.83% mem 589.7MiB / 11.82GiB
+evoting_bookie3 cpu 3.26% mem 544.1MiB / 11.82GiB
+evoting_postgres cpu 125.30% mem 266.8MiB / 11.82GiB
+evoting_redis cpu 2.13% mem 24.21MiB / 11.82GiB
+evoting_bulletin cpu 1.47% mem 14.44MiB / 11.82GiB
+evoting_zookeeper cpu 1.19% mem 291.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 9 minutes ago
+== 16:17:42
+evoting_backend cpu 868.84% mem 1.246GiB / 11.82GiB
+evoting_integrity cpu 1.93% mem 38.59MiB / 11.82GiB
+evoting_ledger_worker cpu 4.49% mem 23.39MiB / 11.82GiB
+evoting_replica cpu 3.92% mem 36.39MiB / 11.82GiB
+evoting_pulsar cpu 9.99% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 2.83% mem 583MiB / 11.82GiB
+evoting_bookie4 cpu 13.61% mem 585.7MiB / 11.82GiB
+evoting_bookie1 cpu 7.58% mem 589MiB / 11.82GiB
+evoting_bookie3 cpu 6.33% mem 543.9MiB / 11.82GiB
+evoting_postgres cpu 142.50% mem 265MiB / 11.82GiB
+evoting_redis cpu 2.91% mem 23.93MiB / 11.82GiB
+evoting_bulletin cpu 3.34% mem 14.41MiB / 11.82GiB
+evoting_zookeeper cpu 5.65% mem 292MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 9 minutes ago
+== 16:17:56
+evoting_backend cpu 769.11% mem 1.248GiB / 11.82GiB
+evoting_integrity cpu 0.83% mem 39.04MiB / 11.82GiB
+evoting_ledger_worker cpu 5.90% mem 23.94MiB / 11.82GiB
+evoting_replica cpu 6.67% mem 36.84MiB / 11.82GiB
+evoting_pulsar cpu 16.74% mem 923.4MiB / 11.82GiB
+evoting_bookie2 cpu 1.94% mem 582.1MiB / 11.82GiB
+evoting_bookie4 cpu 7.05% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 10.72% mem 590.5MiB / 11.82GiB
+evoting_bookie3 cpu 5.20% mem 543.2MiB / 11.82GiB
+evoting_postgres cpu 142.98% mem 265.7MiB / 11.82GiB
+evoting_redis cpu 5.43% mem 24.62MiB / 11.82GiB
+evoting_bulletin cpu 2.70% mem 14.06MiB / 11.82GiB
+evoting_zookeeper cpu 4.95% mem 291.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 9 minutes ago
+== 16:18:09
+evoting_backend cpu 842.48% mem 1.257GiB / 11.82GiB
+evoting_integrity cpu 0.85% mem 39.55MiB / 11.82GiB
+evoting_ledger_worker cpu 4.00% mem 23.32MiB / 11.82GiB
+evoting_replica cpu 7.32% mem 36.79MiB / 11.82GiB
+evoting_pulsar cpu 11.46% mem 922.9MiB / 11.82GiB
+evoting_bookie2 cpu 3.08% mem 581.6MiB / 11.82GiB
+evoting_bookie4 cpu 3.99% mem 572.8MiB / 11.82GiB
+evoting_bookie1 cpu 3.15% mem 590.9MiB / 11.82GiB
+evoting_bookie3 cpu 5.11% mem 542.5MiB / 11.82GiB
+evoting_postgres cpu 136.80% mem 266.1MiB / 11.82GiB
+evoting_redis cpu 3.54% mem 25.21MiB / 11.82GiB
+evoting_bulletin cpu 2.63% mem 15.04MiB / 11.82GiB
+evoting_zookeeper cpu 1.35% mem 291.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 9 minutes ago
+== 16:18:22
+evoting_backend cpu 844.65% mem 1.258GiB / 11.82GiB
+evoting_integrity cpu 1.89% mem 39.43MiB / 11.82GiB
+evoting_ledger_worker cpu 3.64% mem 23.22MiB / 11.82GiB
+evoting_replica cpu 7.13% mem 36.87MiB / 11.82GiB
+evoting_pulsar cpu 18.05% mem 922.6MiB / 11.82GiB
+evoting_bookie2 cpu 2.08% mem 581.5MiB / 11.82GiB
+evoting_bookie4 cpu 4.39% mem 573MiB / 11.82GiB
+evoting_bookie1 cpu 4.51% mem 591.2MiB / 11.82GiB
+evoting_bookie3 cpu 4.68% mem 543.8MiB / 11.82GiB
+evoting_postgres cpu 132.64% mem 266.7MiB / 11.82GiB
+evoting_redis cpu 2.65% mem 24.43MiB / 11.82GiB
+evoting_bulletin cpu 1.75% mem 14.47MiB / 11.82GiB
+evoting_zookeeper cpu 1.17% mem 292MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 10 minutes ago
+== 16:18:35
+evoting_backend cpu 815.86% mem 1.262GiB / 11.82GiB
+evoting_integrity cpu 1.05% mem 40.53MiB / 11.82GiB
+evoting_ledger_worker cpu 4.07% mem 23.58MiB / 11.82GiB
+evoting_replica cpu 13.58% mem 36.86MiB / 11.82GiB
+evoting_pulsar cpu 8.14% mem 922.9MiB / 11.82GiB
+evoting_bookie2 cpu 3.31% mem 581.3MiB / 11.82GiB
+evoting_bookie4 cpu 6.96% mem 573.3MiB / 11.82GiB
+evoting_bookie1 cpu 5.64% mem 590.4MiB / 11.82GiB
+evoting_bookie3 cpu 4.33% mem 543.3MiB / 11.82GiB
+evoting_postgres cpu 130.48% mem 266.1MiB / 11.82GiB
+evoting_redis cpu 7.09% mem 25.03MiB / 11.82GiB
+evoting_bulletin cpu 1.79% mem 14.8MiB / 11.82GiB
+evoting_zookeeper cpu 2.99% mem 292.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 10 minutes ago
+== 16:18:48
+evoting_backend cpu 804.60% mem 1.263GiB / 11.82GiB
+evoting_integrity cpu 20.76% mem 41.61MiB / 11.82GiB
+evoting_ledger_worker cpu 3.77% mem 23.62MiB / 11.82GiB
+evoting_replica cpu 34.59% mem 37.44MiB / 11.82GiB
+evoting_pulsar cpu 10.98% mem 923.1MiB / 11.82GiB
+evoting_bookie2 cpu 3.11% mem 581.1MiB / 11.82GiB
+evoting_bookie4 cpu 8.31% mem 572.6MiB / 11.82GiB
+evoting_bookie1 cpu 6.68% mem 589MiB / 11.82GiB
+evoting_bookie3 cpu 4.05% mem 544.6MiB / 11.82GiB
+evoting_postgres cpu 116.60% mem 266.2MiB / 11.82GiB
+evoting_redis cpu 4.30% mem 24.73MiB / 11.82GiB
+evoting_bulletin cpu 1.51% mem 14.29MiB / 11.82GiB
+evoting_zookeeper cpu 16.92% mem 293.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 10 minutes ago
+== 16:19:01
+evoting_backend cpu 814.09% mem 1.277GiB / 11.82GiB
+evoting_integrity cpu 2.10% mem 40.82MiB / 11.82GiB
+evoting_ledger_worker cpu 2.90% mem 23.43MiB / 11.82GiB
+evoting_replica cpu 5.50% mem 37.33MiB / 11.82GiB
+evoting_pulsar cpu 12.08% mem 923.4MiB / 11.82GiB
+evoting_bookie2 cpu 2.68% mem 580.6MiB / 11.82GiB
+evoting_bookie4 cpu 8.76% mem 572.3MiB / 11.82GiB
+evoting_bookie1 cpu 5.87% mem 587.9MiB / 11.82GiB
+evoting_bookie3 cpu 4.19% mem 544MiB / 11.82GiB
+evoting_postgres cpu 144.46% mem 267.5MiB / 11.82GiB
+evoting_redis cpu 3.34% mem 25.73MiB / 11.82GiB
+evoting_bulletin cpu 3.66% mem 14.69MiB / 11.82GiB
+evoting_zookeeper cpu 8.74% mem 292.4MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 10 minutes ago
+== 16:19:14
+evoting_backend cpu 808.48% mem 1.279GiB / 11.82GiB
+evoting_integrity cpu 0.84% mem 42.23MiB / 11.82GiB
+evoting_ledger_worker cpu 5.08% mem 23.89MiB / 11.82GiB
+evoting_replica cpu 30.40% mem 38.11MiB / 11.82GiB
+evoting_pulsar cpu 12.85% mem 922.8MiB / 11.82GiB
+evoting_bookie2 cpu 3.22% mem 580.7MiB / 11.82GiB
+evoting_bookie4 cpu 8.88% mem 572.7MiB / 11.82GiB
+evoting_bookie1 cpu 4.69% mem 588.8MiB / 11.82GiB
+evoting_bookie3 cpu 4.83% mem 545.2MiB / 11.82GiB
+evoting_postgres cpu 134.31% mem 267.2MiB / 11.82GiB
+evoting_redis cpu 3.81% mem 25.38MiB / 11.82GiB
+evoting_bulletin cpu 1.97% mem 14.5MiB / 11.82GiB
+evoting_zookeeper cpu 3.00% mem 291.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 10 minutes ago
+== 16:19:26
+evoting_backend cpu 841.98% mem 1.281GiB / 11.82GiB
+evoting_integrity cpu 8.91% mem 42.39MiB / 11.82GiB
+evoting_ledger_worker cpu 3.87% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 8.68% mem 37.59MiB / 11.82GiB
+evoting_pulsar cpu 10.97% mem 923.3MiB / 11.82GiB
+evoting_bookie2 cpu 6.00% mem 581.2MiB / 11.82GiB
+evoting_bookie4 cpu 3.99% mem 573MiB / 11.82GiB
+evoting_bookie1 cpu 4.75% mem 589.6MiB / 11.82GiB
+evoting_bookie3 cpu 4.91% mem 545MiB / 11.82GiB
+evoting_postgres cpu 144.44% mem 268.1MiB / 11.82GiB
+evoting_redis cpu 4.01% mem 25.53MiB / 11.82GiB
+evoting_bulletin cpu 3.32% mem 14.27MiB / 11.82GiB
+evoting_zookeeper cpu 1.86% mem 291.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 11 minutes ago
+== 16:19:40
+evoting_backend cpu 867.36% mem 1.294GiB / 11.82GiB
+evoting_integrity cpu 1.29% mem 41.55MiB / 11.82GiB
+evoting_ledger_worker cpu 2.70% mem 23.62MiB / 11.82GiB
+evoting_replica cpu 2.73% mem 37.99MiB / 11.82GiB
+evoting_pulsar cpu 11.65% mem 923.1MiB / 11.82GiB
+evoting_bookie2 cpu 2.08% mem 581MiB / 11.82GiB
+evoting_bookie4 cpu 3.83% mem 572.7MiB / 11.82GiB
+evoting_bookie1 cpu 4.59% mem 588.3MiB / 11.82GiB
+evoting_bookie3 cpu 8.41% mem 545.3MiB / 11.82GiB
+evoting_postgres cpu 141.74% mem 267.3MiB / 11.82GiB
+evoting_redis cpu 12.84% mem 27.34MiB / 11.82GiB
+evoting_bulletin cpu 10.31% mem 14.29MiB / 11.82GiB
+evoting_zookeeper cpu 1.28% mem 291.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 11 minutes ago
+== 16:19:53
+evoting_backend cpu 799.93% mem 1.297GiB / 11.82GiB
+evoting_integrity cpu 45.29% mem 41.64MiB / 11.82GiB
+evoting_ledger_worker cpu 1.81% mem 23.6MiB / 11.82GiB
+evoting_replica cpu 51.48% mem 36.83MiB / 11.82GiB
+evoting_pulsar cpu 12.97% mem 923MiB / 11.82GiB
+evoting_bookie2 cpu 4.58% mem 580.2MiB / 11.82GiB
+evoting_bookie4 cpu 22.91% mem 573MiB / 11.82GiB
+evoting_bookie1 cpu 6.62% mem 589.1MiB / 11.82GiB
+evoting_bookie3 cpu 5.38% mem 545.8MiB / 11.82GiB
+evoting_postgres cpu 74.30% mem 268.7MiB / 11.82GiB
+evoting_redis cpu 2.55% mem 26.78MiB / 11.82GiB
+evoting_bulletin cpu 2.20% mem 14.36MiB / 11.82GiB
+evoting_zookeeper cpu 3.54% mem 291.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 11 minutes ago
+== 16:20:06
+evoting_backend cpu 825.37% mem 1.3GiB / 11.82GiB
+evoting_integrity cpu 31.48% mem 41.92MiB / 11.82GiB
+evoting_ledger_worker cpu 1.65% mem 23.07MiB / 11.82GiB
+evoting_replica cpu 41.39% mem 37.71MiB / 11.82GiB
+evoting_pulsar cpu 4.77% mem 923.1MiB / 11.82GiB
+evoting_bookie2 cpu 3.24% mem 579.9MiB / 11.82GiB
+evoting_bookie4 cpu 3.91% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 3.06% mem 587.9MiB / 11.82GiB
+evoting_bookie3 cpu 7.18% mem 546.1MiB / 11.82GiB
+evoting_postgres cpu 94.09% mem 268.8MiB / 11.82GiB
+evoting_redis cpu 2.68% mem 26.75MiB / 11.82GiB
+evoting_bulletin cpu 1.41% mem 14.31MiB / 11.82GiB
+evoting_zookeeper cpu 4.13% mem 291.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 11 minutes ago
+== 16:20:19
+evoting_backend cpu 769.00% mem 1.305GiB / 11.82GiB
+evoting_integrity cpu 11.24% mem 42.14MiB / 11.82GiB
+evoting_ledger_worker cpu 5.01% mem 23.62MiB / 11.82GiB
+evoting_replica cpu 4.13% mem 38.38MiB / 11.82GiB
+evoting_pulsar cpu 11.06% mem 922.8MiB / 11.82GiB
+evoting_bookie2 cpu 1.83% mem 579.5MiB / 11.82GiB
+evoting_bookie4 cpu 4.71% mem 573MiB / 11.82GiB
+evoting_bookie1 cpu 5.34% mem 588.5MiB / 11.82GiB
+evoting_bookie3 cpu 4.28% mem 545.4MiB / 11.82GiB
+evoting_postgres cpu 133.94% mem 269.3MiB / 11.82GiB
+evoting_redis cpu 3.15% mem 27.01MiB / 11.82GiB
+evoting_bulletin cpu 3.11% mem 14.43MiB / 11.82GiB
+evoting_zookeeper cpu 1.16% mem 291.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 12 minutes ago
+== 16:20:32
+evoting_backend cpu 812.06% mem 1.307GiB / 11.82GiB
+evoting_integrity cpu 1.71% mem 42.55MiB / 11.82GiB
+evoting_ledger_worker cpu 5.85% mem 23.7MiB / 11.82GiB
+evoting_replica cpu 6.78% mem 39.04MiB / 11.82GiB
+evoting_pulsar cpu 15.10% mem 923.2MiB / 11.82GiB
+evoting_bookie2 cpu 7.03% mem 579.8MiB / 11.82GiB
+evoting_bookie4 cpu 14.66% mem 573.2MiB / 11.82GiB
+evoting_bookie1 cpu 5.79% mem 588.1MiB / 11.82GiB
+evoting_bookie3 cpu 9.15% mem 545.6MiB / 11.82GiB
+evoting_postgres cpu 146.24% mem 272MiB / 11.82GiB
+evoting_redis cpu 7.82% mem 27.17MiB / 11.82GiB
+evoting_bulletin cpu 4.37% mem 14.34MiB / 11.82GiB
+evoting_zookeeper cpu 4.13% mem 291.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 12 minutes ago
+== 16:20:45
+evoting_backend cpu 797.20% mem 1.314GiB / 11.82GiB
+evoting_integrity cpu 1.85% mem 43.12MiB / 11.82GiB
+evoting_ledger_worker cpu 5.09% mem 23.2MiB / 11.82GiB
+evoting_replica cpu 4.05% mem 39.07MiB / 11.82GiB
+evoting_pulsar cpu 10.53% mem 923.4MiB / 11.82GiB
+evoting_bookie2 cpu 10.20% mem 579.7MiB / 11.82GiB
+evoting_bookie4 cpu 4.96% mem 572.8MiB / 11.82GiB
+evoting_bookie1 cpu 13.25% mem 588.9MiB / 11.82GiB
+evoting_bookie3 cpu 8.15% mem 545.4MiB / 11.82GiB
+evoting_postgres cpu 133.84% mem 270MiB / 11.82GiB
+evoting_redis cpu 3.98% mem 26.88MiB / 11.82GiB
+evoting_bulletin cpu 13.17% mem 14.66MiB / 11.82GiB
+evoting_zookeeper cpu 3.25% mem 292MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 12 minutes ago
+== 16:20:59
+evoting_backend cpu 796.20% mem 1.376GiB / 11.82GiB
+evoting_integrity cpu 1.08% mem 43.33MiB / 11.82GiB
+evoting_ledger_worker cpu 4.67% mem 23.53MiB / 11.82GiB
+evoting_replica cpu 9.60% mem 39.06MiB / 11.82GiB
+evoting_pulsar cpu 12.31% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 3.35% mem 578.9MiB / 11.82GiB
+evoting_bookie4 cpu 19.27% mem 572.5MiB / 11.82GiB
+evoting_bookie1 cpu 15.19% mem 588.5MiB / 11.82GiB
+evoting_bookie3 cpu 11.30% mem 545.7MiB / 11.82GiB
+evoting_postgres cpu 147.94% mem 270.1MiB / 11.82GiB
+evoting_redis cpu 5.21% mem 26.89MiB / 11.82GiB
+evoting_bulletin cpu 4.57% mem 14.82MiB / 11.82GiB
+evoting_zookeeper cpu 28.59% mem 293.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 12 minutes ago
+== 16:21:12
+evoting_backend cpu 841.46% mem 1.339GiB / 11.82GiB
+evoting_integrity cpu 0.88% mem 45.04MiB / 11.82GiB
+evoting_ledger_worker cpu 1.68% mem 23.68MiB / 11.82GiB
+evoting_replica cpu 7.84% mem 38.96MiB / 11.82GiB
+evoting_pulsar cpu 8.82% mem 923MiB / 11.82GiB
+evoting_bookie2 cpu 4.41% mem 578.8MiB / 11.82GiB
+evoting_bookie4 cpu 5.97% mem 573.6MiB / 11.82GiB
+evoting_bookie1 cpu 4.28% mem 588.9MiB / 11.82GiB
+evoting_bookie3 cpu 6.12% mem 546.4MiB / 11.82GiB
+evoting_postgres cpu 135.55% mem 270.3MiB / 11.82GiB
+evoting_redis cpu 8.14% mem 27.7MiB / 11.82GiB
+evoting_bulletin cpu 7.75% mem 14.38MiB / 11.82GiB
+evoting_zookeeper cpu 1.80% mem 291.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 12 minutes ago
+== 16:21:26
+evoting_backend cpu 774.03% mem 1.341GiB / 11.82GiB
+evoting_integrity cpu 0.68% mem 44.66MiB / 11.82GiB
+evoting_ledger_worker cpu 2.99% mem 23.47MiB / 11.82GiB
+evoting_replica cpu 5.76% mem 38.91MiB / 11.82GiB
+evoting_pulsar cpu 6.67% mem 923.2MiB / 11.82GiB
+evoting_bookie2 cpu 3.04% mem 579.3MiB / 11.82GiB
+evoting_bookie4 cpu 4.99% mem 573.9MiB / 11.82GiB
+evoting_bookie1 cpu 5.12% mem 588MiB / 11.82GiB
+evoting_bookie3 cpu 5.53% mem 546.1MiB / 11.82GiB
+evoting_postgres cpu 137.26% mem 270.8MiB / 11.82GiB
+evoting_redis cpu 3.81% mem 27.96MiB / 11.82GiB
+evoting_bulletin cpu 2.37% mem 14.98MiB / 11.82GiB
+evoting_zookeeper cpu 1.32% mem 291.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 13 minutes ago
+== 16:21:38
+evoting_backend cpu 840.44% mem 1.342GiB / 11.82GiB
+evoting_integrity cpu 1.59% mem 44.98MiB / 11.82GiB
+evoting_ledger_worker cpu 3.03% mem 23.61MiB / 11.82GiB
+evoting_replica cpu 5.53% mem 39.54MiB / 11.82GiB
+evoting_pulsar cpu 10.38% mem 922.9MiB / 11.82GiB
+evoting_bookie2 cpu 1.49% mem 578.5MiB / 11.82GiB
+evoting_bookie4 cpu 4.45% mem 573.2MiB / 11.82GiB
+evoting_bookie1 cpu 5.27% mem 588.1MiB / 11.82GiB
+evoting_bookie3 cpu 4.56% mem 546.1MiB / 11.82GiB
+evoting_postgres cpu 129.78% mem 271.7MiB / 11.82GiB
+evoting_redis cpu 2.75% mem 28.04MiB / 11.82GiB
+evoting_bulletin cpu 2.43% mem 15.18MiB / 11.82GiB
+evoting_zookeeper cpu 2.14% mem 291.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 13 minutes ago
+== 16:21:51
+evoting_backend cpu 800.78% mem 1.344GiB / 11.82GiB
+evoting_integrity cpu 1.47% mem 44.47MiB / 11.82GiB
+evoting_ledger_worker cpu 5.57% mem 23.78MiB / 11.82GiB
+evoting_replica cpu 10.67% mem 39.84MiB / 11.82GiB
+evoting_pulsar cpu 11.11% mem 923.4MiB / 11.82GiB
+evoting_bookie2 cpu 5.23% mem 578.1MiB / 11.82GiB
+evoting_bookie4 cpu 8.59% mem 573.9MiB / 11.82GiB
+evoting_bookie1 cpu 13.15% mem 587.4MiB / 11.82GiB
+evoting_bookie3 cpu 6.26% mem 546.8MiB / 11.82GiB
+evoting_postgres cpu 142.16% mem 271.7MiB / 11.82GiB
+evoting_redis cpu 2.88% mem 28.16MiB / 11.82GiB
+evoting_bulletin cpu 15.00% mem 15.1MiB / 11.82GiB
+evoting_zookeeper cpu 1.11% mem 291.9MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 13 minutes ago
+== 16:22:04
+evoting_backend cpu 814.22% mem 1.344GiB / 11.82GiB
+evoting_integrity cpu 25.32% mem 44.78MiB / 11.82GiB
+evoting_ledger_worker cpu 3.45% mem 23.52MiB / 11.82GiB
+evoting_replica cpu 3.82% mem 40.7MiB / 11.82GiB
+evoting_pulsar cpu 9.13% mem 922.9MiB / 11.82GiB
+evoting_bookie2 cpu 1.93% mem 577.6MiB / 11.82GiB
+evoting_bookie4 cpu 8.64% mem 573.9MiB / 11.82GiB
+evoting_bookie1 cpu 3.94% mem 587.6MiB / 11.82GiB
+evoting_bookie3 cpu 3.49% mem 547.2MiB / 11.82GiB
+evoting_postgres cpu 138.32% mem 272.8MiB / 11.82GiB
+evoting_redis cpu 3.63% mem 28.22MiB / 11.82GiB
+evoting_bulletin cpu 1.60% mem 15.08MiB / 11.82GiB
+evoting_zookeeper cpu 19.34% mem 292MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 13 minutes ago
+== 16:22:17
+evoting_backend cpu 862.00% mem 1.345GiB / 11.82GiB
+evoting_integrity cpu 1.26% mem 44.96MiB / 11.82GiB
+evoting_ledger_worker cpu 1.03% mem 22.82MiB / 11.82GiB
+evoting_replica cpu 30.23% mem 40.43MiB / 11.82GiB
+evoting_pulsar cpu 3.83% mem 923.1MiB / 11.82GiB
+evoting_bookie2 cpu 1.35% mem 577MiB / 11.82GiB
+evoting_bookie4 cpu 3.64% mem 573.3MiB / 11.82GiB
+evoting_bookie1 cpu 2.39% mem 588.2MiB / 11.82GiB
+evoting_bookie3 cpu 2.04% mem 548MiB / 11.82GiB
+evoting_postgres cpu 126.67% mem 273.1MiB / 11.82GiB
+evoting_redis cpu 0.99% mem 27.77MiB / 11.82GiB
+evoting_bulletin cpu 1.34% mem 14.36MiB / 11.82GiB
+evoting_zookeeper cpu 2.31% mem 291.8MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 14 minutes ago
+== 16:22:29
+evoting_backend cpu 823.19% mem 1.348GiB / 11.82GiB
+evoting_integrity cpu 1.69% mem 45.36MiB / 11.82GiB
+evoting_ledger_worker cpu 4.33% mem 23.22MiB / 11.82GiB
+evoting_replica cpu 4.28% mem 39.43MiB / 11.82GiB
+evoting_pulsar cpu 13.25% mem 923MiB / 11.82GiB
+evoting_bookie2 cpu 1.62% mem 576.8MiB / 11.82GiB
+evoting_bookie4 cpu 5.16% mem 572.2MiB / 11.82GiB
+evoting_bookie1 cpu 4.11% mem 588.4MiB / 11.82GiB
+evoting_bookie3 cpu 3.36% mem 548.1MiB / 11.82GiB
+evoting_postgres cpu 132.36% mem 274.8MiB / 11.82GiB
+evoting_redis cpu 3.11% mem 28.1MiB / 11.82GiB
+evoting_bulletin cpu 1.56% mem 14.38MiB / 11.82GiB
+evoting_zookeeper cpu 2.11% mem 291.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 14 minutes ago
+== 16:22:42
+evoting_backend cpu 763.58% mem 1.349GiB / 11.82GiB
+evoting_integrity cpu 1.54% mem 45.54MiB / 11.82GiB
+evoting_ledger_worker cpu 4.64% mem 23.55MiB / 11.82GiB
+evoting_replica cpu 7.08% mem 39.54MiB / 11.82GiB
+evoting_pulsar cpu 10.79% mem 923.1MiB / 11.82GiB
+evoting_bookie2 cpu 3.02% mem 575.8MiB / 11.82GiB
+evoting_bookie4 cpu 9.45% mem 572.6MiB / 11.82GiB
+evoting_bookie1 cpu 35.63% mem 589.7MiB / 11.82GiB
+evoting_bookie3 cpu 21.66% mem 548MiB / 11.82GiB
+evoting_postgres cpu 134.13% mem 274.9MiB / 11.82GiB
+evoting_redis cpu 3.33% mem 28.02MiB / 11.82GiB
+evoting_bulletin cpu 1.52% mem 14.95MiB / 11.82GiB
+evoting_zookeeper cpu 1.53% mem 291.7MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 14 minutes ago
+== 16:22:55
+evoting_backend cpu 795.54% mem 1.35GiB / 11.82GiB
+evoting_integrity cpu 0.98% mem 45.75MiB / 11.82GiB
+evoting_ledger_worker cpu 5.82% mem 23.43MiB / 11.82GiB
+evoting_replica cpu 8.50% mem 39.95MiB / 11.82GiB
+evoting_pulsar cpu 16.35% mem 923.4MiB / 11.82GiB
+evoting_bookie2 cpu 2.85% mem 575.7MiB / 11.82GiB
+evoting_bookie4 cpu 7.03% mem 574.6MiB / 11.82GiB
+evoting_bookie1 cpu 5.11% mem 589.5MiB / 11.82GiB
+evoting_bookie3 cpu 5.39% mem 546.6MiB / 11.82GiB
+evoting_postgres cpu 152.01% mem 275.5MiB / 11.82GiB
+evoting_redis cpu 3.42% mem 28.41MiB / 11.82GiB
+evoting_bulletin cpu 2.67% mem 15.27MiB / 11.82GiB
+evoting_zookeeper cpu 19.68% mem 292MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 14 minutes ago
+== 16:23:08
+evoting_backend cpu 857.64% mem 1.35GiB / 11.82GiB
+evoting_integrity cpu 0.92% mem 47.84MiB / 11.82GiB
+evoting_ledger_worker cpu 2.67% mem 23.65MiB / 11.82GiB
+evoting_replica cpu 7.20% mem 40.53MiB / 11.82GiB
+evoting_pulsar cpu 7.41% mem 923.5MiB / 11.82GiB
+evoting_bookie2 cpu 3.01% mem 574.8MiB / 11.82GiB
+evoting_bookie4 cpu 4.94% mem 574.7MiB / 11.82GiB
+evoting_bookie1 cpu 8.75% mem 589.3MiB / 11.82GiB
+evoting_bookie3 cpu 2.56% mem 546.3MiB / 11.82GiB
+evoting_postgres cpu 138.41% mem 276.5MiB / 11.82GiB
+evoting_redis cpu 2.22% mem 28.17MiB / 11.82GiB
+evoting_bulletin cpu 1.68% mem 15.09MiB / 11.82GiB
+evoting_zookeeper cpu 1.57% mem 291.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 14 minutes ago
+== 16:23:21
+evoting_backend cpu 834.87% mem 1.351GiB / 11.82GiB
+evoting_integrity cpu 0.71% mem 47.92MiB / 11.82GiB
+evoting_ledger_worker cpu 2.71% mem 23.82MiB / 11.82GiB
+evoting_replica cpu 50.20% mem 40.75MiB / 11.82GiB
+evoting_pulsar cpu 6.57% mem 923.1MiB / 11.82GiB
+evoting_bookie2 cpu 2.44% mem 575.4MiB / 11.82GiB
+evoting_bookie4 cpu 2.55% mem 572.3MiB / 11.82GiB
+evoting_bookie1 cpu 5.79% mem 587.9MiB / 11.82GiB
+evoting_bookie3 cpu 2.30% mem 547MiB / 11.82GiB
+evoting_postgres cpu 146.24% mem 277.1MiB / 11.82GiB
+evoting_redis cpu 1.85% mem 28.57MiB / 11.82GiB
+evoting_bulletin cpu 1.46% mem 15.55MiB / 11.82GiB
+evoting_zookeeper cpu 2.05% mem 292.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 15 minutes ago
+== 16:23:34
+evoting_backend cpu 827.75% mem 1.353GiB / 11.82GiB
+evoting_integrity cpu 1.03% mem 48.5MiB / 11.82GiB
+evoting_ledger_worker cpu 3.16% mem 24.5MiB / 11.82GiB
+evoting_replica cpu 51.58% mem 42.3MiB / 11.82GiB
+evoting_pulsar cpu 8.58% mem 923.3MiB / 11.82GiB
+evoting_bookie2 cpu 2.33% mem 575.1MiB / 11.82GiB
+evoting_bookie4 cpu 5.22% mem 573.5MiB / 11.82GiB
+evoting_bookie1 cpu 5.11% mem 588.9MiB / 11.82GiB
+evoting_bookie3 cpu 5.21% mem 546.8MiB / 11.82GiB
+evoting_postgres cpu 132.98% mem 280.1MiB / 11.82GiB
+evoting_redis cpu 2.43% mem 28.75MiB / 11.82GiB
+evoting_bulletin cpu 2.19% mem 14.79MiB / 11.82GiB
+evoting_zookeeper cpu 3.25% mem 291.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 15 minutes ago
+== 16:23:47
+evoting_backend cpu 767.27% mem 1.356GiB / 11.82GiB
+evoting_integrity cpu 10.94% mem 48.49MiB / 11.82GiB
+evoting_ledger_worker cpu 3.67% mem 23.51MiB / 11.82GiB
+evoting_replica cpu 41.27% mem 40.84MiB / 11.82GiB
+evoting_pulsar cpu 19.32% mem 923.3MiB / 11.82GiB
+evoting_bookie2 cpu 6.26% mem 574.2MiB / 11.82GiB
+evoting_bookie4 cpu 3.07% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 5.83% mem 589.5MiB / 11.82GiB
+evoting_bookie3 cpu 5.96% mem 546.9MiB / 11.82GiB
+evoting_postgres cpu 140.04% mem 279.9MiB / 11.82GiB
+evoting_redis cpu 3.00% mem 27.9MiB / 11.82GiB
+evoting_bulletin cpu 1.31% mem 15.18MiB / 11.82GiB
+evoting_zookeeper cpu 5.73% mem 292.9MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 15 minutes ago
+== 16:24:00
+evoting_backend cpu 18.60% mem 1.352GiB / 11.82GiB
+evoting_integrity cpu 14.68% mem 46.77MiB / 11.82GiB
+evoting_ledger_worker cpu 0.52% mem 23.32MiB / 11.82GiB
+evoting_replica cpu 0.49% mem 41.34MiB / 11.82GiB
+evoting_pulsar cpu 3.83% mem 923.1MiB / 11.82GiB
+evoting_bookie2 cpu 2.03% mem 574.2MiB / 11.82GiB
+evoting_bookie4 cpu 2.16% mem 573.6MiB / 11.82GiB
+evoting_bookie1 cpu 2.19% mem 589.3MiB / 11.82GiB
+evoting_bookie3 cpu 1.96% mem 547.4MiB / 11.82GiB
+evoting_postgres cpu 77.19% mem 280.8MiB / 11.82GiB
+evoting_redis cpu 0.85% mem 28.2MiB / 11.82GiB
+evoting_bulletin cpu 0.81% mem 15.09MiB / 11.82GiB
+evoting_zookeeper cpu 11.56% mem 292MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 15 minutes ago
+== 16:24:12
+evoting_backend cpu 2.01% mem 1.351GiB / 11.82GiB
+evoting_integrity cpu 5.19% mem 47.33MiB / 11.82GiB
+evoting_ledger_worker cpu 0.13% mem 23.59MiB / 11.82GiB
+evoting_replica cpu 0.26% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.50% mem 922.2MiB / 11.82GiB
+evoting_bookie2 cpu 1.08% mem 574.5MiB / 11.82GiB
+evoting_bookie4 cpu 1.25% mem 573.9MiB / 11.82GiB
+evoting_bookie1 cpu 0.98% mem 589.4MiB / 11.82GiB
+evoting_bookie3 cpu 1.08% mem 547.3MiB / 11.82GiB
+evoting_postgres cpu 98.06% mem 280.2MiB / 11.82GiB
+evoting_redis cpu 0.53% mem 27.42MiB / 11.82GiB
+evoting_bulletin cpu 0.49% mem 14.94MiB / 11.82GiB
+evoting_zookeeper cpu 1.18% mem 292.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 15 minutes ago
+== 16:24:25
+evoting_backend cpu 2.22% mem 1.351GiB / 11.82GiB
+evoting_integrity cpu 0.43% mem 47.43MiB / 11.82GiB
+evoting_ledger_worker cpu 0.10% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 40.42% mem 41.96MiB / 11.82GiB
+evoting_pulsar cpu 1.92% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.29% mem 573.7MiB / 11.82GiB
+evoting_bookie4 cpu 1.61% mem 573.9MiB / 11.82GiB
+evoting_bookie1 cpu 1.28% mem 588.9MiB / 11.82GiB
+evoting_bookie3 cpu 1.28% mem 546.8MiB / 11.82GiB
+evoting_postgres cpu 34.15% mem 280.4MiB / 11.82GiB
+evoting_redis cpu 0.62% mem 27.5MiB / 11.82GiB
+evoting_bulletin cpu 0.61% mem 13.84MiB / 11.82GiB
+evoting_zookeeper cpu 1.56% mem 292MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 16 minutes ago
+== 16:24:37
+evoting_backend cpu 2.01% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.75% mem 47.69MiB / 11.82GiB
+evoting_ledger_worker cpu 0.10% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 0.27% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.33% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 0.92% mem 574.5MiB / 11.82GiB
+evoting_bookie4 cpu 1.31% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 0.84% mem 589.1MiB / 11.82GiB
+evoting_bookie3 cpu 1.01% mem 547.5MiB / 11.82GiB
+evoting_postgres cpu 97.74% mem 280MiB / 11.82GiB
+evoting_redis cpu 0.48% mem 27.41MiB / 11.82GiB
+evoting_bulletin cpu 0.47% mem 13.89MiB / 11.82GiB
+evoting_zookeeper cpu 1.07% mem 292.1MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 16 minutes ago
+== 16:24:49
+evoting_backend cpu 1.93% mem 1.352GiB / 11.82GiB
+evoting_integrity cpu 11.78% mem 47.72MiB / 11.82GiB
+evoting_ledger_worker cpu 0.10% mem 23.59MiB / 11.82GiB
+evoting_replica cpu 30.06% mem 41.98MiB / 11.82GiB
+evoting_pulsar cpu 2.15% mem 922.5MiB / 11.82GiB
+evoting_bookie2 cpu 1.53% mem 573.8MiB / 11.82GiB
+evoting_bookie4 cpu 1.79% mem 573.6MiB / 11.82GiB
+evoting_bookie1 cpu 1.01% mem 589.4MiB / 11.82GiB
+evoting_bookie3 cpu 1.32% mem 547.3MiB / 11.82GiB
+evoting_postgres cpu 11.83% mem 280MiB / 11.82GiB
+evoting_redis cpu 0.60% mem 27.01MiB / 11.82GiB
+evoting_bulletin cpu 0.59% mem 13.83MiB / 11.82GiB
+evoting_zookeeper cpu 1.50% mem 292.1MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 16 minutes ago
+== 16:25:02
+evoting_backend cpu 2.10% mem 1.352GiB / 11.82GiB
+evoting_integrity cpu 0.77% mem 47.48MiB / 11.82GiB
+evoting_ledger_worker cpu 0.09% mem 23.84MiB / 11.82GiB
+evoting_replica cpu 0.27% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.34% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.03% mem 574.7MiB / 11.82GiB
+evoting_bookie4 cpu 1.13% mem 573.9MiB / 11.82GiB
+evoting_bookie1 cpu 1.38% mem 589.6MiB / 11.82GiB
+evoting_bookie3 cpu 0.95% mem 547.8MiB / 11.82GiB
+evoting_postgres cpu 97.11% mem 280MiB / 11.82GiB
+evoting_redis cpu 0.58% mem 26.23MiB / 11.82GiB
+evoting_bulletin cpu 0.49% mem 13.2MiB / 11.82GiB
+evoting_zookeeper cpu 1.12% mem 292.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 16 minutes ago
+== 16:25:14
+evoting_backend cpu 2.35% mem 1.353GiB / 11.82GiB
+evoting_integrity cpu 10.75% mem 47.29MiB / 11.82GiB
+evoting_ledger_worker cpu 0.12% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 36.64% mem 41.71MiB / 11.82GiB
+evoting_pulsar cpu 2.32% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 0.82% mem 574.5MiB / 11.82GiB
+evoting_bookie4 cpu 1.29% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 1.26% mem 589.7MiB / 11.82GiB
+evoting_bookie3 cpu 1.08% mem 547.2MiB / 11.82GiB
+evoting_postgres cpu 41.32% mem 280MiB / 11.82GiB
+evoting_redis cpu 0.49% mem 26.49MiB / 11.82GiB
+evoting_bulletin cpu 0.57% mem 14.15MiB / 11.82GiB
+evoting_zookeeper cpu 1.22% mem 292.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 16 minutes ago
+== 16:25:26
+evoting_backend cpu 1.86% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.73% mem 47.64MiB / 11.82GiB
+evoting_ledger_worker cpu 0.15% mem 23.59MiB / 11.82GiB
+evoting_replica cpu 0.23% mem 41.36MiB / 11.82GiB
+evoting_pulsar cpu 1.43% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.15% mem 574.3MiB / 11.82GiB
+evoting_bookie4 cpu 1.38% mem 573.9MiB / 11.82GiB
+evoting_bookie1 cpu 1.11% mem 589.4MiB / 11.82GiB
+evoting_bookie3 cpu 1.22% mem 547.5MiB / 11.82GiB
+evoting_postgres cpu 76.07% mem 280.1MiB / 11.82GiB
+evoting_redis cpu 0.50% mem 26.49MiB / 11.82GiB
+evoting_bulletin cpu 2.59% mem 13.85MiB / 11.82GiB
+evoting_zookeeper cpu 1.55% mem 292.4MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 17 minutes ago
+== 16:25:38
+evoting_backend cpu 2.22% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 10.08% mem 47.36MiB / 11.82GiB
+evoting_ledger_worker cpu 0.09% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 19.12% mem 41.83MiB / 11.82GiB
+evoting_pulsar cpu 2.31% mem 923.2MiB / 11.82GiB
+evoting_bookie2 cpu 1.27% mem 573.7MiB / 11.82GiB
+evoting_bookie4 cpu 1.64% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 0.99% mem 589.2MiB / 11.82GiB
+evoting_bookie3 cpu 1.31% mem 547.2MiB / 11.82GiB
+evoting_postgres cpu 24.30% mem 279.9MiB / 11.82GiB
+evoting_redis cpu 0.47% mem 25.95MiB / 11.82GiB
+evoting_bulletin cpu 0.55% mem 13.65MiB / 11.82GiB
+evoting_zookeeper cpu 1.91% mem 292.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 17 minutes ago
+== 16:25:51
+evoting_backend cpu 3.94% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.89% mem 47.96MiB / 11.82GiB
+evoting_ledger_worker cpu 0.19% mem 23.84MiB / 11.82GiB
+evoting_replica cpu 0.28% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.36% mem 922.5MiB / 11.82GiB
+evoting_bookie2 cpu 1.16% mem 574MiB / 11.82GiB
+evoting_bookie4 cpu 1.74% mem 573.8MiB / 11.82GiB
+evoting_bookie1 cpu 0.99% mem 589.4MiB / 11.82GiB
+evoting_bookie3 cpu 0.92% mem 547MiB / 11.82GiB
+evoting_postgres cpu 97.49% mem 280.2MiB / 11.82GiB
+evoting_redis cpu 0.50% mem 25.82MiB / 11.82GiB
+evoting_bulletin cpu 0.48% mem 13.65MiB / 11.82GiB
+evoting_zookeeper cpu 0.89% mem 292.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 17 minutes ago
+== 16:26:03
+evoting_backend cpu 1.99% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.74% mem 47.83MiB / 11.82GiB
+evoting_ledger_worker cpu 0.09% mem 23.59MiB / 11.82GiB
+evoting_replica cpu 3.36% mem 41.58MiB / 11.82GiB
+evoting_pulsar cpu 1.47% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 0.87% mem 574MiB / 11.82GiB
+evoting_bookie4 cpu 1.44% mem 573.6MiB / 11.82GiB
+evoting_bookie1 cpu 0.90% mem 589.7MiB / 11.82GiB
+evoting_bookie3 cpu 0.90% mem 547.5MiB / 11.82GiB
+evoting_postgres cpu 97.57% mem 279.8MiB / 11.82GiB
+evoting_redis cpu 0.53% mem 25.82MiB / 11.82GiB
+evoting_bulletin cpu 1.65% mem 13.35MiB / 11.82GiB
+evoting_zookeeper cpu 1.02% mem 292.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 17 minutes ago
+== 16:26:15
+evoting_backend cpu 2.46% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.95% mem 47.62MiB / 11.82GiB
+evoting_ledger_worker cpu 0.12% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 0.24% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.32% mem 922.2MiB / 11.82GiB
+evoting_bookie2 cpu 0.89% mem 574.2MiB / 11.82GiB
+evoting_bookie4 cpu 2.31% mem 573.6MiB / 11.82GiB
+evoting_bookie1 cpu 1.32% mem 589.2MiB / 11.82GiB
+evoting_bookie3 cpu 1.21% mem 548MiB / 11.82GiB
+evoting_postgres cpu 96.18% mem 279.8MiB / 11.82GiB
+evoting_redis cpu 1.88% mem 25.92MiB / 11.82GiB
+evoting_bulletin cpu 2.30% mem 13.49MiB / 11.82GiB
+evoting_zookeeper cpu 1.43% mem 292.1MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 17 minutes ago
+== 16:26:28
+evoting_backend cpu 2.74% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.72% mem 47.49MiB / 11.82GiB
+evoting_ledger_worker cpu 0.17% mem 23.84MiB / 11.82GiB
+evoting_replica cpu 0.27% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 13.70% mem 922.6MiB / 11.82GiB
+evoting_bookie2 cpu 1.06% mem 574.3MiB / 11.82GiB
+evoting_bookie4 cpu 1.43% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 1.03% mem 589.2MiB / 11.82GiB
+evoting_bookie3 cpu 1.09% mem 547.5MiB / 11.82GiB
+evoting_postgres cpu 99.90% mem 281.3MiB / 11.82GiB
+evoting_redis cpu 0.60% mem 25.75MiB / 11.82GiB
+evoting_bulletin cpu 0.56% mem 13.42MiB / 11.82GiB
+evoting_zookeeper cpu 1.19% mem 292.5MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 18 minutes ago
+== 16:26:40
+evoting_backend cpu 3.00% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.68% mem 47.43MiB / 11.82GiB
+evoting_ledger_worker cpu 0.12% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 0.28% mem 41.36MiB / 11.82GiB
+evoting_pulsar cpu 1.71% mem 922.2MiB / 11.82GiB
+evoting_bookie2 cpu 1.23% mem 574.5MiB / 11.82GiB
+evoting_bookie4 cpu 1.64% mem 573.9MiB / 11.82GiB
+evoting_bookie1 cpu 1.12% mem 589.9MiB / 11.82GiB
+evoting_bookie3 cpu 1.31% mem 547.3MiB / 11.82GiB
+evoting_postgres cpu 0.01% mem 279.8MiB / 11.82GiB
+evoting_redis cpu 0.67% mem 25.76MiB / 11.82GiB
+evoting_bulletin cpu 0.58% mem 13.63MiB / 11.82GiB
+evoting_zookeeper cpu 1.18% mem 292.8MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 18 minutes ago
+== 16:26:52
+evoting_backend cpu 1.88% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 2.12% mem 47.55MiB / 11.82GiB
+evoting_ledger_worker cpu 0.12% mem 23.84MiB / 11.82GiB
+evoting_replica cpu 0.23% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.33% mem 922.3MiB / 11.82GiB
+evoting_bookie2 cpu 0.87% mem 573.5MiB / 11.82GiB
+evoting_bookie4 cpu 1.19% mem 574.1MiB / 11.82GiB
+evoting_bookie1 cpu 0.98% mem 589.2MiB / 11.82GiB
+evoting_bookie3 cpu 0.98% mem 547.5MiB / 11.82GiB
+evoting_postgres cpu 96.81% mem 279.9MiB / 11.82GiB
+evoting_redis cpu 0.49% mem 25.75MiB / 11.82GiB
+evoting_bulletin cpu 0.47% mem 13.4MiB / 11.82GiB
+evoting_zookeeper cpu 0.98% mem 292.2MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 18 minutes ago
+== 16:27:05
+evoting_backend cpu 2.33% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.63% mem 47.5MiB / 11.82GiB
+evoting_ledger_worker cpu 0.17% mem 23.09MiB / 11.82GiB
+evoting_replica cpu 0.71% mem 41.48MiB / 11.82GiB
+evoting_pulsar cpu 2.33% mem 922.6MiB / 11.82GiB
+evoting_bookie2 cpu 1.46% mem 574.3MiB / 11.82GiB
+evoting_bookie4 cpu 1.99% mem 573.6MiB / 11.82GiB
+evoting_bookie1 cpu 1.52% mem 589.5MiB / 11.82GiB
+evoting_bookie3 cpu 0.95% mem 547MiB / 11.82GiB
+evoting_postgres cpu 23.91% mem 280.1MiB / 11.82GiB
+evoting_redis cpu 0.69% mem 25.76MiB / 11.82GiB
+evoting_bulletin cpu 0.71% mem 13.89MiB / 11.82GiB
+evoting_zookeeper cpu 1.13% mem 292.3MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 18 minutes ago
+== 16:27:17
+evoting_backend cpu 2.64% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.74% mem 47.89MiB / 11.82GiB
+evoting_ledger_worker cpu 0.19% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 0.32% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.57% mem 923.1MiB / 11.82GiB
+evoting_bookie2 cpu 1.17% mem 574.3MiB / 11.82GiB
+evoting_bookie4 cpu 1.42% mem 573.6MiB / 11.82GiB
+evoting_bookie1 cpu 1.08% mem 589.2MiB / 11.82GiB
+evoting_bookie3 cpu 1.22% mem 547MiB / 11.82GiB
+evoting_postgres cpu 98.48% mem 280.1MiB / 11.82GiB
+evoting_redis cpu 0.63% mem 25.95MiB / 11.82GiB
+evoting_bulletin cpu 0.55% mem 13.42MiB / 11.82GiB
+evoting_zookeeper cpu 1.48% mem 292.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 19 minutes ago
+== 16:27:29
+evoting_backend cpu 2.09% mem 1.355GiB / 11.82GiB
+evoting_integrity cpu 13.58% mem 47.44MiB / 11.82GiB
+evoting_ledger_worker cpu 0.11% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 1.30% mem 41.58MiB / 11.82GiB
+evoting_pulsar cpu 2.56% mem 922.9MiB / 11.82GiB
+evoting_bookie2 cpu 1.00% mem 574MiB / 11.82GiB
+evoting_bookie4 cpu 1.64% mem 573.6MiB / 11.82GiB
+evoting_bookie1 cpu 0.99% mem 589.4MiB / 11.82GiB
+evoting_bookie3 cpu 1.72% mem 547.5MiB / 11.82GiB
+evoting_postgres cpu 86.64% mem 280.2MiB / 11.82GiB
+evoting_redis cpu 0.52% mem 25.75MiB / 11.82GiB
+evoting_bulletin cpu 0.57% mem 13.64MiB / 11.82GiB
+evoting_zookeeper cpu 1.46% mem 292.8MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 19 minutes ago
+== 16:27:42
+evoting_backend cpu 2.07% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 0.85% mem 47.54MiB / 11.82GiB
+evoting_ledger_worker cpu 0.11% mem 23.84MiB / 11.82GiB
+evoting_replica cpu 0.28% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.69% mem 922.6MiB / 11.82GiB
+evoting_bookie2 cpu 1.00% mem 574.3MiB / 11.82GiB
+evoting_bookie4 cpu 1.65% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 1.08% mem 589.7MiB / 11.82GiB
+evoting_bookie3 cpu 16.76% mem 547.5MiB / 11.82GiB
+evoting_postgres cpu 98.02% mem 279.9MiB / 11.82GiB
+evoting_redis cpu 0.66% mem 26MiB / 11.82GiB
+evoting_bulletin cpu 0.47% mem 13.89MiB / 11.82GiB
+evoting_zookeeper cpu 1.01% mem 293.1MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 19 minutes ago
+== 16:27:54
+evoting_backend cpu 3.93% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 16.16% mem 47.34MiB / 11.82GiB
+evoting_ledger_worker cpu 0.11% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 0.38% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 2.91% mem 922.9MiB / 11.82GiB
+evoting_bookie2 cpu 1.11% mem 574MiB / 11.82GiB
+evoting_bookie4 cpu 1.64% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 1.14% mem 589.8MiB / 11.82GiB
+evoting_bookie3 cpu 1.25% mem 547.8MiB / 11.82GiB
+evoting_postgres cpu 7.78% mem 279.9MiB / 11.82GiB
+evoting_redis cpu 0.72% mem 25.76MiB / 11.82GiB
+evoting_bulletin cpu 0.75% mem 13.9MiB / 11.82GiB
+evoting_zookeeper cpu 1.59% mem 292.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 19 minutes ago
+== 16:28:06
+evoting_backend cpu 2.05% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 2.07% mem 47.32MiB / 11.82GiB
+evoting_ledger_worker cpu 0.09% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 0.24% mem 41.33MiB / 11.82GiB
+evoting_pulsar cpu 1.44% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 0.90% mem 574.5MiB / 11.82GiB
+evoting_bookie4 cpu 1.14% mem 573.2MiB / 11.82GiB
+evoting_bookie1 cpu 0.85% mem 589.8MiB / 11.82GiB
+evoting_bookie3 cpu 0.90% mem 547.4MiB / 11.82GiB
+evoting_postgres cpu 99.66% mem 280.1MiB / 11.82GiB
+evoting_redis cpu 2.24% mem 25.55MiB / 11.82GiB
+evoting_bulletin cpu 2.13% mem 13.46MiB / 11.82GiB
+evoting_zookeeper cpu 0.79% mem 292.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 19 minutes ago
+== 16:28:19
+evoting_backend cpu 1.96% mem 1.354GiB / 11.82GiB
+evoting_integrity cpu 15.42% mem 47.23MiB / 11.82GiB
+evoting_ledger_worker cpu 0.09% mem 23.34MiB / 11.82GiB
+evoting_replica cpu 20.55% mem 41.71MiB / 11.82GiB
+evoting_pulsar cpu 1.74% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.34% mem 574.3MiB / 11.82GiB
+evoting_bookie4 cpu 1.61% mem 574.1MiB / 11.82GiB
+evoting_bookie1 cpu 1.03% mem 589.3MiB / 11.82GiB
+evoting_bookie3 cpu 1.08% mem 547.1MiB / 11.82GiB
+evoting_postgres cpu 28.23% mem 280.7MiB / 11.82GiB
+evoting_redis cpu 0.49% mem 25.76MiB / 11.82GiB
+evoting_bulletin cpu 0.53% mem 13.64MiB / 11.82GiB
+evoting_zookeeper cpu 1.00% mem 292.6MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 20 minutes ago
+== 16:28:31
+evoting_backend cpu 2.30% mem 1.355GiB / 11.82GiB
+evoting_integrity cpu 0.81% mem 47.92MiB / 11.82GiB
+evoting_ledger_worker cpu 0.09% mem 23.59MiB / 11.82GiB
+evoting_replica cpu 0.27% mem 41.36MiB / 11.82GiB
+evoting_pulsar cpu 1.50% mem 922.7MiB / 11.82GiB
+evoting_bookie2 cpu 1.06% mem 574.2MiB / 11.82GiB
+evoting_bookie4 cpu 1.22% mem 573.4MiB / 11.82GiB
+evoting_bookie1 cpu 0.97% mem 589.5MiB / 11.82GiB
+evoting_bookie3 cpu 2.86% mem 547.4MiB / 11.82GiB
+evoting_postgres cpu 37.51% mem 280.3MiB / 11.82GiB
+evoting_redis cpu 0.71% mem 26MiB / 11.82GiB
+evoting_bulletin cpu 0.51% mem 13.64MiB / 11.82GiB
+evoting_zookeeper cpu 1.20% mem 292.1MiB / 11.82GiB
+NOT RUNNING: evoting_pulsar_init Exited (0) 20 minutes ago

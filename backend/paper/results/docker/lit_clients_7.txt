@@ -1,0 +1,3 @@
+
+  7 sequential client(s), 22,200 votes: 22,200 accepted, 54.2 votes/s, 0.1288 s per vote; 10 s windows peak 60.2 / worst 46.0 votes/s
+  saved /app/paper/results/docker/lit_clients_7.json

@@ -1,0 +1,15 @@
+  ElectionGuard verifier scenario: 6 contests x 3 options, 3-of-5 trustees, 8 processes
+       25 ballots: 1.693 ± 0.083 s  valid True  tally True
+       50 ballots: 2.921 ± 0.085 s  valid True  tally True
+      100 ballots: 4.908 ± 0.04 s  valid True  tally True
+      250 ballots: 10.606 ± 0.197 s  valid True  tally True
+      500 ballots: 19.695 ± 0.121 s  valid True  tally True
+      750 ballots: 28.76 ± 0.197 s  valid True  tally True
+     1000 ballots: 37.679 ± 0.162 s  valid True  tally True
+     1341 ballots: 51.17 ± 1.541 s  valid True  tally True
+  MERGE per-operation scenario (7 contests x 4 selections)
+    {'ballot_shape': '7 contests x 4 selections', 'ballots': 10, 'encrypt_and_prove_ms_per_ballot': 925.5, 'verify_ms_per_ballot': 192.4, 'homomorphic_tally_ms_per_encryption': 0.0064, 'tally_decryption_ms_per_encryption_3_trustees': 58.61}
+  STARK vector-commitment scenario (tally of 64 and 1,024 voters)
+    {'voters': 64, 'candidates': 4, 'tally_and_decrypt_wall_s': 0.2384, 'core_seconds': 0.2384, 'core_minutes': 0.00397, 'peak_rss_MB': 147.9, 'rss_before_tally_MB': 147.9, 'correct': True}
+    {'voters': 1024, 'candidates': 4, 'tally_and_decrypt_wall_s': 0.2616, 'core_seconds': 0.2616, 'core_minutes': 0.00436, 'peak_rss_MB': 149.6, 'rss_before_tally_MB': 149.6, 'correct': True}
+  saved /app/paper/results/docker/lit_crypto.json

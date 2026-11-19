@@ -1,0 +1,5 @@
+
+  EVEN    5,000 votes in a 60 s window (offered 83.3/s)
+    WRITE  accepted 5,000/5,000 (5,000 first try, 0 retries), 83.2 votes/s, done in 60.07 s; latency p50 72.6 / p99 307.1 ms
+    READ   ledger read-back 5,000 at 8495.7/s (matches 5,000); primary scan 5,000 at 15554.1/s; receipt lookups 4509.9/s (5,000 included); audit paths 19.4/s (p99 1610.5 ms, n=300); count 1.014 s, correct True
+  saved /app/paper/results/docker/lit_wr_even_5000.json
