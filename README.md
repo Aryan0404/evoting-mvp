@@ -12,7 +12,7 @@ Requires Docker (Docker Desktop on macOS/Windows) with about 8 GB of memory.
 ```bash
 git clone <this repository>
 cd evoting-mvp
-cp .env.example .env              # then set POSTGRES_USER, POSTGRES_PASSWORD, SECRET_KEY
+# .env is created automatically from .env.example on the first run (random secrets, never committed)
 ./run_paper_experiments.sh smoke  # 2-minute functional check
 ./run_paper_experiments.sh        # every experiment in Section 5 (~70–90 minutes)
 ```

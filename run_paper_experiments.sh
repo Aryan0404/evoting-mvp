@@ -38,6 +38,18 @@ has()   { case " $STEPS " in *" $1 "*) return 0 ;; *) return 1 ;; esac; }
 be()    { $C exec -T backend "$@"; }
 quiet() { grep --line-buffered -v -E '^[0-9-]+ [0-9:.]+ (INFO|WARN) |ClientConnection|ConnectionPool|HandlerBase|ProducerImpl|ConsumerImpl|BinaryProtoLookup|ClientImpl'; }
 
+# A fresh clone has no .env (it is never committed). Create one from the
+# template with new random secrets, so the stack starts on any machine, and
+# drop a database volume left over from an earlier .env (its password differs).
+if [ ! -f .env ]; then
+  cp .env.example .env
+  sed -i.bak -e "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$(openssl rand -hex 16)/" \
+             -e "s/^SECRET_KEY=.*/SECRET_KEY=$(openssl rand -hex 32)/" .env && rm -f .env.bak
+  $C down >/dev/null 2>&1 || true
+  docker volume rm -f "$(basename "$PWD" | tr '[:upper:]' '[:lower:]')_postgres_data" >/dev/null 2>&1 || true
+  echo "Created .env from .env.example with fresh random secrets (kept out of git)."
+fi
+
 run_step() {  # run_step <name> <output file> <command...>
   local name="$1" file="$2"; shift 2
   log "→ $name"
