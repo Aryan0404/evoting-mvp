@@ -38,6 +38,29 @@ has()   { case " $STEPS " in *" $1 "*) return 0 ;; *) return 1 ;; esac; }
 be()    { $C exec -T backend "$@"; }
 quiet() { grep --line-buffered -v -E '^[0-9-]+ [0-9:.]+ (INFO|WARN) |ClientConnection|ConnectionPool|HandlerBase|ProducerImpl|ConsumerImpl|BinaryProtoLookup|ClientImpl'; }
 
+# ── preflight: clear messages instead of a failed stack ─────────────────────
+if ! command -v docker >/dev/null 2>&1; then
+  for d in /Applications/Docker.app/Contents/Resources/bin /usr/local/bin; do [ -x "$d/docker" ] && PATH="$PATH:$d"; done
+fi
+if ! command -v docker >/dev/null 2>&1; then
+  echo "Docker is not installed (or not on PATH). Install Docker Desktop (https://www.docker.com/products/docker-desktop/), open it once, then rerun. See README → Troubleshooting."
+  exit 1
+fi
+if ! docker info >/dev/null 2>&1; then
+  echo "Docker is installed but not running. Start Docker Desktop, wait until it shows 'Engine running', then rerun."
+  exit 1
+fi
+if ! docker compose version >/dev/null 2>&1; then
+  echo "'docker compose' (Compose v2) is missing. Update Docker Desktop, or install the compose plugin on Linux."
+  exit 1
+fi
+DOCKER_MEM_GB=$(docker info --format '{{.MemTotal}}' 2>/dev/null | awk '{printf "%d", $1/1073741824}')
+DOCKER_CPUS=$(docker info --format '{{.NCPU}}' 2>/dev/null)
+if [ "${DOCKER_MEM_GB:-0}" -lt 11 ] || [ "${DOCKER_CPUS:-0}" -lt 8 ]; then
+  echo "!! Docker has ${DOCKER_CPUS:-?} CPUs and ${DOCKER_MEM_GB:-?} GB of memory; the paper's numbers used 8 CPUs and 12 GB"
+  echo "   (Docker Desktop → Settings → Resources). The experiments still run, but timings will differ."
+fi
+
 # A fresh clone has no .env (it is never committed). Create one from the
 # template with new random secrets, so the stack starts on any machine, and
 # drop a database volume left over from an earlier .env (its password differs).

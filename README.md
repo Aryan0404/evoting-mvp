@@ -7,15 +7,32 @@ Schnorr zero-knowledge proofs (NIST P-256) and Paillier homomorphic tallying.
 
 ## Reproduce every experiment in the paper
 
-Requires Docker (Docker Desktop on macOS/Windows) with about 8 GB of memory.
+### Requirements
+
+| | Needed | Used for the paper |
+|---|---|---|
+| OS | macOS or Linux (Windows: inside WSL 2) | macOS, Apple M2, 16 GB RAM |
+| Docker | Docker Desktop (or Docker Engine + Compose v2 on Linux) | Docker 29.9.3, Compose 5.7.0 |
+| Docker resources | at least 8 CPUs and 12 GB memory (Docker Desktop → Settings → Resources) | 8 CPUs, 11.8 GB |
+| Free disk | 15 GB (images about 3 GB, plus ledger data while the experiments run) | |
+| Free ports | 5432, 6379, 6380, 6650, 8000, 8080 | |
+
+Nothing else is installed on the host: every tool, including the load generators, runs inside the containers. Images are built from the Dockerfiles in this repository on the first run.
+
+### Run
 
 ```bash
-git clone <this repository>
+git clone https://github.com/Aryan0404/evoting-mvp.git
 cd evoting-mvp
-# .env is created automatically from .env.example on the first run (random secrets, never committed)
-./run_paper_experiments.sh smoke  # 2-minute functional check
-./run_paper_experiments.sh        # every experiment in Section 5 (~70–90 minutes)
+./run_paper_experiments.sh smoke   # about 5 minutes the first time (images build), then 2 minutes: functional check
+./run_paper_experiments.sh         # every experiment in Section 5, about 70–90 minutes
 ```
+
+* The first run creates `.env` from `.env.example` with fresh random secrets. It is never committed and never needs to be shared.
+* The script checks Docker, Compose, memory and disk first, and prints what to fix if something is missing.
+* Every run starts a fresh stack, so runs do not depend on each other. Run one invocation at a time.
+* Results go to `backend/paper/results/docker/`; `paper_results.md` there is the summary the paper's tables are taken from.
+* Timings depend on the machine. Let the computer rest for 15–20 minutes before a long run, keep it plugged in, and keep other heavy programs closed.
 
 The ledger runs as a real local cluster — Apache Pulsar with four BookKeeper
 storage nodes, ensemble 3, write quorum 2, ack quorum 2 (`docker-compose.cluster.yml`).
@@ -55,6 +72,19 @@ Results are written to `backend/paper/results/docker/`.
 | `lit-ledger` | Replicated ledger offered 1,000–8,000 ballot records/s, read back and compared byte for byte |
 | `lit-crypto` | Verifying election records of 25–1,341 ballots (6 contests), per-operation costs for a 7-contest ballot, tally of 64 and 1,024 voters |
 
+### Troubleshooting
+
+| Message | Cause | Fix |
+|---|---|---|
+| `docker: command not found` | Docker Desktop is not installed, or not on the shell's PATH | Install Docker Desktop and open it once. On macOS, if the install is blocked, allow Terminal under System Settings → Privacy & Security → App Management |
+| `Docker is installed but not running` | Docker Desktop is closed | Open Docker Desktop and wait for "Engine running" |
+| `container evoting_postgres is unhealthy` or a password error | a database volume made with an older `.env` | `docker compose -f docker-compose.yml -f docker-compose.cluster.yml down -v`, then run again |
+| `no space left on device` / Docker Desktop "Disk full" | ledger data and old images | `docker compose -f docker-compose.yml -f docker-compose.cluster.yml down -v` and `docker builder prune -f`; the stress steps skip themselves below their disk limit |
+| `port is already allocated` | another program uses one of the ports above | stop it (for example a local PostgreSQL or Redis) |
+| a step stays on `waiting for …` for minutes | the machine is short of memory | raise Docker's memory to 12 GB |
+
+When finished, free the machine with `docker compose -f docker-compose.yml -f docker-compose.cluster.yml down`.
+
 ### Architecture as deployed by `docker compose`
 
 * **Vote collectors** (`backend`): Algorithm 1 — timestamp, one-time ticket, ballot-validity ZKP, device signature, then an atomic Redis `GETDEL` and the ledger append.
@@ -74,7 +104,7 @@ The phone does all voter-side cryptography itself, in TypeScript (`mobile/src/cr
 * **Verification**: `/audit/proof/{receipt}` returns the Merkle path and the bundle root published by the replica; the phone recomputes the root from its own receipt.
 * **Device benchmark** (home screen link): times key generation, precomputation, proof completion, signing and the receipt check on the phone, for the paper.
 
-Run: `cd mobile && npm install && npx expo run:android` (a native rebuild is needed because the app now uses `expo-secure-store` and `react-native-get-random-values`). Set the server address in `app.json` → `extra.BASE_URL`.
+Run: `cd mobile && npm install && npx expo run:android` (a native rebuild is needed because the app now uses `expo-secure-store` and `react-native-get-random-values`). Set the server address in `app.json` → `extra.BASE_URL` to your computer's address on the local network (for example `http://192.168.1.20:8000`; find it with `ipconfig getifaddr en0` on macOS); the phone and the computer must be on the same Wi-Fi.
 
 Interop check against a running stack: `cd mobile && npx esbuild scripts/interop-check.ts --bundle --platform=node --outfile=/tmp/ic.js && node /tmp/ic.js`, which casts real ballots built by the app's code and expects 201, then 409 for a replay and 422 for a proof bound to another ticket.
 
