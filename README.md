@@ -32,7 +32,7 @@ cd evoting-mvp
 * The script checks Docker, Compose, memory and disk first, and prints what to fix if something is missing.
 * Every run starts a fresh stack, so runs do not depend on each other. Run one invocation at a time.
 * Results go to `backend/paper/results/docker/`; `paper_results.md` there is the summary the paper's tables are taken from.
-* Phone timings for Table 8: `./run_phone_benchmark.sh`, then open the printed address on an iPhone or Android phone (see [Phone benchmark](#phone-benchmark-table-8-on-iphone-or-android)).
+* Phone timings for Table 8: open <https://aryan0404.github.io/evoting-mvp/> on an iPhone or Android phone (see [Phone benchmark](#phone-benchmark-table-8-on-iphone-or-android)).
 * Timings depend on the machine. Let the computer rest for 15–20 minutes before a long run, keep it plugged in, and keep other heavy programs closed.
 
 The ledger runs as a real local cluster — Apache Pulsar with four BookKeeper
@@ -103,7 +103,7 @@ The phone does all voter-side cryptography itself, in TypeScript (`mobile/src/cr
 * **Registration**: after the liveness check, the phone creates an ECDSA P-256 key, keeps it in the OS keystore-backed secure storage, and sends only the public key with `/registration/verify-identity`; the returned one-time ticket is stored the same way.
 * **Ballot**: `GET /api/v1/election` gives the trustees' Paillier key and the candidate list. While the voter reads the ballot, the phone precomputes all full-size exponentiations; when they press *Submit* it finishes the one-hot encryption and ballot-validity proof, signs the package and sends it to `/vote/cast`. Transient failures are retried with a fresh timestamp; the ticket is deleted only after the server's receipt.
 * **Verification**: `/audit/proof/{receipt}` returns the Merkle path and the bundle root published by the replica; the phone recomputes the root from its own receipt.
-* **Device benchmark** (home screen link): times key generation, precomputation, proof completion, signing and the receipt check on the phone, for the paper.
+* **Device benchmark** (home screen link): times key generation, precomputation, proof completion, signing and the receipt check inside the app (Hermes engine). The browser version for anyone to run is under [Phone benchmark](#phone-benchmark-table-8-on-iphone-or-android).
 
 Run: `cd mobile && npm install && npx expo run:android` (Android Studio) or `npx expo run:ios` (Xcode). The app is built natively (Expo SDK 55); the Expo Go app from the stores only runs the newest SDK, so it cannot open this project. Set the server address in `app.json` → `extra.BASE_URL` to your computer's address on the local network (for example `http://192.168.1.20:8000`; find it with `ipconfig getifaddr en0` on macOS); the phone and the computer must be on the same Wi-Fi.
 
@@ -111,16 +111,20 @@ Interop check against a running stack: `cd mobile && npx esbuild scripts/interop
 
 ## Phone benchmark (Table 8), on iPhone or Android
 
-No app build needed: `mobile/benchmark/device-benchmark.html` runs the same voter-side cryptography as the app (2048-bit Paillier ballot, ballot-validity proof, ECDSA P-256 key and signature, receipt check) in the phone's browser, with the key size and ballot sizes of the paper. It needs no backend and works offline once loaded.
+The page runs the same voter-side cryptography as the app (2048-bit Paillier ballot, ballot-validity proof, ECDSA P-256 key and signature, receipt check) in the phone's browser, with the key size and ballot sizes of the paper. It needs no backend, no app build and no computer, and sends nothing anywhere.
 
-1. Put the phone on the same Wi-Fi as the computer (or connect the computer to the phone's hotspot).
-2. On the computer: `./run_phone_benchmark.sh`. It prints an address such as `http://192.168.1.20:8090/device-benchmark.html`. If macOS asks whether to allow incoming connections, choose Allow.
-3. On the phone, open that address: **Safari** on iPhone, **Chrome** on Android.
-4. Plug the phone in, close other apps, tap **Run benchmark** and keep the screen on with the page open for about two minutes.
-5. Tap **Copy results** (or long-press the results and copy) and note the phone model.
-6. Press Ctrl+C on the computer.
+**Open on the phone: <https://aryan0404.github.io/evoting-mvp/>** (or scan the code below). Safari on iPhone, Chrome on Android.
 
-The page reports mean ± SD over 5 ballots per size (20 key generations, 200 receipt checks) and prints the browser's user agent. It times the browser's JavaScript engine (JavaScriptCore on iPhone, V8 on Android); the native app's engine (Hermes) can differ, so label the figures "mobile browser".
+<img src="docs/qr.png" width="140" alt="QR code for the phone benchmark page">
+
+1. Plug the phone in and turn off Low Power Mode (iPhone) or Battery Saver (Android); both slow the processor down. Close other apps.
+2. Open the page, type the phone model, tap **Run benchmark**.
+3. Stay on the page until it says **Finished** (one to three minutes). The page keeps the screen on by itself. If it goes to the background anyway, the ballot being timed is discarded and repeated, and the count of repeats is printed with the results.
+4. Tap **Copy results** (or long-press the results box and copy).
+
+The results list mean ± SD over 5 ballots per size (20 key generations, 200 receipt checks), the phone model, the browser engine and user agent, and whether the screen stayed on. They time the browser's JavaScript engine (JavaScriptCore on iPhone, V8 in Chrome on Android); the native app's engine (Hermes) can differ, so label them "mobile browser".
+
+**Offline or without the website:** the page is the single file `docs/index.html`. Run `./run_phone_benchmark.sh` on a computer on the same Wi-Fi and open the address it prints. If the page does not load on the phone, the network blocks devices from reaching each other (common on university and office Wi-Fi): connect the computer to the phone's hotspot instead. On Linux, also allow the port through the firewall (`sudo ufw allow 8090/tcp`). Over plain local HTTP the browser does not offer the screen wake lock, so the page falls back to a silent 1-pixel video to keep the screen on.
 
 ## Author
 
