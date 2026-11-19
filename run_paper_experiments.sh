@@ -111,7 +111,17 @@ start_stack() {
   log "Starting a fresh replicated ledger (ZooKeeper + 4 bookies + broker) and the full stack"
   $C rm -sf bulletin zookeeper pulsar-init bookie1 bookie2 bookie3 bookie4 pulsar >/dev/null 2>&1 || true
   $C up -d --build --remove-orphans || { log "stack failed to start"; exit 1; }
-  wait_for "broker + storage nodes" 300 $C exec -T pulsar curl -sf http://localhost:8080/admin/v2/brokers/health || exit 1
+  if ! wait_for "broker + storage nodes" 300 $C exec -T pulsar curl -sf http://localhost:8080/admin/v2/brokers/health; then
+    local f="$OUT/startup_failure.txt" c
+    { echo "== $(date)"; $C ps -a; docker system df
+      for c in zookeeper bookie1 bookie2 bookie3 bookie4 pulsar; do
+        echo "== evoting_$c: $(docker inspect -f 'status={{.State.Status}} oom_killed={{.State.OOMKilled}} exit={{.State.ExitCode}}' "evoting_$c" 2>/dev/null)"
+        docker logs --tail 40 "evoting_$c" 2>&1 | grep -i -E "error|exception|fail|refus|cookie|space|memory|warn" | tail -15
+      done; } > "$f" 2>&1
+    log "!! the ledger did not become ready in 5 minutes; details in $f"
+    log "   usually fixed by quitting and reopening Docker Desktop, then running again"
+    exit 1
+  fi
   $C exec -T pulsar bin/pulsar-admin namespaces set-persistence public/default \
     --bookkeeper-ensemble 3 --bookkeeper-write-quorum 2 --bookkeeper-ack-quorum 2 --ml-mark-delete-max-rate 0
   # An election ledger is never trimmed: keep every ballot even after all
