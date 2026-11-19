@@ -4,7 +4,7 @@
 Section 5.5 — Fault tolerance under a live election (real, not simulated).
 ───────────────────────────────────────────────────────────────────────────────
 
-Driven by ./fault_tolerance.sh, which runs the ledger as a 4-bookie
+Driven by ./run_paper_experiments.sh fault, which runs the ledger as a 4-bookie
 BookKeeper cluster (Ensemble 3, Write quorum 2, Ack quorum 2) and injects
 faults on a schedule while this tool keeps voting:
 

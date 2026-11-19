@@ -9,7 +9,7 @@
 #
 #  Use together with the base file:
 #    docker compose -f docker-compose.yml -f docker-compose.cluster.yml up -d
-#  Used by ./fault_tolerance.sh (Section 5.5).
+#  Used by every experiment in ./run_paper_experiments.sh (Sections 5.3–5.12).
 # ─────────────────────────────────────────────────────────────────────────────
 
 x-bookie: &bookie

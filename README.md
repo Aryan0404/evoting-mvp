@@ -32,6 +32,7 @@ cd evoting-mvp
 * The script checks Docker, Compose, memory and disk first, and prints what to fix if something is missing.
 * Every run starts a fresh stack, so runs do not depend on each other. Run one invocation at a time.
 * Results go to `backend/paper/results/docker/`; `paper_results.md` there is the summary the paper's tables are taken from.
+* Phone timings for Table 8: `./run_phone_benchmark.sh`, then open the printed address on an iPhone or Android phone (see [Phone benchmark](#phone-benchmark-table-8-on-iphone-or-android)).
 * Timings depend on the machine. Let the computer rest for 15–20 minutes before a long run, keep it plugged in, and keep other heavy programs closed.
 
 The ledger runs as a real local cluster — Apache Pulsar with four BookKeeper
@@ -104,9 +105,22 @@ The phone does all voter-side cryptography itself, in TypeScript (`mobile/src/cr
 * **Verification**: `/audit/proof/{receipt}` returns the Merkle path and the bundle root published by the replica; the phone recomputes the root from its own receipt.
 * **Device benchmark** (home screen link): times key generation, precomputation, proof completion, signing and the receipt check on the phone, for the paper.
 
-Run: `cd mobile && npm install && npx expo run:android` (a native rebuild is needed because the app now uses `expo-secure-store` and `react-native-get-random-values`). Set the server address in `app.json` → `extra.BASE_URL` to your computer's address on the local network (for example `http://192.168.1.20:8000`; find it with `ipconfig getifaddr en0` on macOS); the phone and the computer must be on the same Wi-Fi.
+Run: `cd mobile && npm install && npx expo run:android` (Android Studio) or `npx expo run:ios` (Xcode). The app is built natively (Expo SDK 55); the Expo Go app from the stores only runs the newest SDK, so it cannot open this project. Set the server address in `app.json` → `extra.BASE_URL` to your computer's address on the local network (for example `http://192.168.1.20:8000`; find it with `ipconfig getifaddr en0` on macOS); the phone and the computer must be on the same Wi-Fi.
 
 Interop check against a running stack: `cd mobile && npx esbuild scripts/interop-check.ts --bundle --platform=node --outfile=/tmp/ic.js && node /tmp/ic.js`, which casts real ballots built by the app's code and expects 201, then 409 for a replay and 422 for a proof bound to another ticket.
+
+## Phone benchmark (Table 8), on iPhone or Android
+
+No app build needed: `mobile/benchmark/device-benchmark.html` runs the same voter-side cryptography as the app (2048-bit Paillier ballot, ballot-validity proof, ECDSA P-256 key and signature, receipt check) in the phone's browser, with the key size and ballot sizes of the paper. It needs no backend and works offline once loaded.
+
+1. Put the phone on the same Wi-Fi as the computer (or connect the computer to the phone's hotspot).
+2. On the computer: `./run_phone_benchmark.sh`. It prints an address such as `http://192.168.1.20:8090/device-benchmark.html`. If macOS asks whether to allow incoming connections, choose Allow.
+3. On the phone, open that address: **Safari** on iPhone, **Chrome** on Android.
+4. Plug the phone in, close other apps, tap **Run benchmark** and keep the screen on with the page open for about two minutes.
+5. Tap **Copy results** (or long-press the results and copy) and note the phone model.
+6. Press Ctrl+C on the computer.
+
+The page reports mean ± SD over 5 ballots per size (20 key generations, 200 receipt checks) and prints the browser's user agent. It times the browser's JavaScript engine (JavaScriptCore on iPhone, V8 on Android); the native app's engine (Hermes) can differ, so label the figures "mobile browser".
 
 ## Author
 
