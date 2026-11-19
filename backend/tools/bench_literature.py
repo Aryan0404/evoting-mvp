@@ -105,6 +105,22 @@ def http(conns, timeout=30.0):
                                  timeout=aiohttp.ClientTimeout(total=timeout))
 
 
+def http_queued(conns):
+    """Client for long open-loop runs: at most `conns` requests on the wire (the
+    collectors admit WORKERS x LIMIT_CONCURRENCY = 8 x 64 = 512 at once), the
+    rest wait their turn in arrival order. The time-out covers only connecting
+    and the server's reply, never the wait for a free connection. With a total
+    time-out instead, a backlog makes queued requests expire before they are
+    ever sent; each expiry is re-sent and closes a connection, and in the
+    15-minute run (first version) that retry storm stopped the load generator
+    delivering any request at all after about 7 minutes while the collectors sat
+    idle — a failure of the test client, not of the system under test."""
+    return aiohttp.ClientSession(base_url=BASE,
+                                 connector=aiohttp.TCPConnector(limit=conns, limit_per_host=conns,
+                                                                keepalive_timeout=4.0),
+                                 timeout=aiohttp.ClientTimeout(total=None, sock_connect=10, sock_read=60))
+
+
 # ── packages, generated ahead in worker processes ───────────────────────────
 def _chunk(args):
     """Build `count` valid packages in a worker process. Device keys travel as
@@ -206,7 +222,11 @@ ATTEMPT_CODES = Counter()     # every HTTP status seen, per attempt (0 = no repl
 ERROR_BODIES = {}             # first response body seen for each non-201 status, for diagnosis
 
 
-async def cast(c, pkg, v: Vote, retry=True, max_attempts=12):
+async def cast(c, pkg, v: Vote, retry=True, max_attempts=12, deadline_s=None):
+    """POST one ballot, retrying like the voter app: on no reply or 429/502/503/504,
+    back off and resend with a fresh timestamp. Stops after `max_attempts`, or,
+    when `deadline_s` is given, once that many seconds have passed since the
+    first attempt (the app keeps trying until the vote is in or time is up)."""
     v.t_first = time.perf_counter()
     while True:
         v.attempts += 1
@@ -235,7 +255,8 @@ async def cast(c, pkg, v: Vote, retry=True, max_attempts=12):
             # an earlier attempt was accepted but its reply was lost (time-out)
             v.code, v.t_done = "409-confirmed", time.perf_counter()
             return v
-        if not retry or code not in RETRY_CODES or v.attempts >= max_attempts:
+        out_of_time = (time.perf_counter() - v.t_first > deadline_s) if deadline_s else v.attempts >= max_attempts
+        if not retry or code not in RETRY_CODES or out_of_time:
             v.code, v.t_done = code, time.perf_counter()
             return v
         await asyncio.sleep(min(4.0, 0.25 * 2 ** (v.attempts - 1)) * (0.5 + random.random()))
@@ -480,7 +501,7 @@ async def run_window(mode, rate, minutes, tail_min, k, every_s, burst_s):
             await asyncio.sleep(1.0)
         await bb.aclose()
 
-    async with http(2000) as c:
+    async with http_queued(512) as c:
         buf = await stream.take()
         t0 = time.perf_counter()
         st = asyncio.create_task(sampler(t0))
@@ -499,7 +520,7 @@ async def run_window(mode, rate, minutes, tail_min, k, every_s, burst_s):
                 await asyncio.sleep(d)
             v = Vote(p.choice)
             vs.append(v)
-            tasks.append(asyncio.create_task(cast(c, p, v)))
+            tasks.append(asyncio.create_task(cast(c, p, v, deadline_s=600)))
         await asyncio.gather(*tasks)
         t_votes = time.perf_counter() - t0
         while time.perf_counter() - t0 < (minutes + tail_min) * 60:
@@ -1046,7 +1067,7 @@ def main():
     a.add_argument("--burst-seconds", type=float, default=5.0)
     b = sub.add_parser("window")
     b.add_argument("--mode", choices=["even", "burst"], required=True)
-    b.add_argument("--rate", type=float, default=100.0)
+    b.add_argument("--rate", type=float, default=80.0)    # ~85% of the measured capacity (lit-wr burst: 95-97 votes/s)
     b.add_argument("--minutes", type=float, default=15.0)
     b.add_argument("--tail-minutes", type=float, default=5.0)
     b.add_argument("--burst-every", type=float, default=10.0)
